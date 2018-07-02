@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_head"
+        android:orientation="horizontal">
+
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_bottom"
+        android:layout_marginTop="@dimen/y190">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x34"
+            android:layout_marginRight="@dimen/x34"
+
+            android:background="@drawable/shape_bg_20"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y66"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_one"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="购房资格审查需要准备以下文件：申购人身份证、申购人户口本原件、申购人家庭成员户口本原件、申购人家庭成员身份证原件或扫描件、结婚证原件或扫描件（已婚）。"
+                    android:textColor="@color/color_333333"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y56"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_two"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="成年人（年满18周岁）购房，家庭成员指未成年子女（未满18周岁）未成年人（未满18周岁）购房，家庭成员包括父母及其未成年兄弟姐妹（未满18周岁）。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y56"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_third"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text=" 购房资格审查信息提交后，需工作人员人工审核，审核周期为1个工作日。审核结果将推送至申请账号欣社区APP。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y66"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y56"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_four"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="本APP提供身份证、户口本、结婚证的OCR识别转化功能，如识别信息有误，请手动修改，务必保持提交信息与实际情况一致，否则将影响审查结果。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y42"
+        android:paddingTop="@dimen/y36">
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/btn_login"
+            android:layout_below="@+id/layout"
+
+            android:text="下一步"/>
+    </LinearLayout>
+</RelativeLayout>

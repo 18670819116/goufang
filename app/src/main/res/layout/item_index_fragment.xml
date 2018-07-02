@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20px"
+    android:layout_marginLeft="20px"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10px">
+
+        <TextView
+            android:id="@+id/tv_imgtext"
+            android:layout_width="180px"
+            android:layout_height="180px"
+            android:padding="20px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="抢"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_imgtext"
+            android:layout_marginLeft="30px"
+            android:layout_toRightOf="@id/tv_imgtext"
+            android:paddingTop="10px"
+            android:text="待抢单"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_imgtext"
+            android:layout_marginLeft="30px"
+            android:layout_toRightOf="@id/tv_imgtext"
+            android:paddingBottom="10px"
+            android:text="送至：凯姆国际A1栋12.4" />
+        <View
+            style="@style/line_hor"
+            android:layout_toRightOf="@id/tv_imgtext"
+            android:layout_below="@id/tv_content"
+            android:layout_alignLeft="@id/tv_content"
+             />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_imgtext"
+            android:layout_marginRight="20px"
+            android:text="2017-08-04 19:40:56"
+
+
+            />
+
+    </com.zhy.autolayout.AutoRelativeLayout>
+
+
+</com.zhy.autolayout.AutoLinearLayout>

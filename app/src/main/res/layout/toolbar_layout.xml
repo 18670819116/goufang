@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_autolayout"
+    android:background="@color/main_color"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarBusiness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_color"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="@mipmap/toolbar_back"
+        android:navigationIcon="@mipmap/toolbar_back"
+        android:paddingTop="@dimen/toolbar_padding_top"
+        android:titleTextColor="@color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看订单"
+            android:textSize="16sp"
+            android:layout_gravity="right"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/x45"
+            android:textColor="@color/white"
+            />
+        <!--android:fitsSystemWindows="true"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:minHeight="@dimen/actionbar_size"-->
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>
+

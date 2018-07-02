@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_loading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_loading_bg"
+    android:padding="@dimen/x20">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/x48"
+        android:layout_height="@dimen/y48"
+        android:layout_centerHorizontal="true"
+        android:indeterminateDrawable="@drawable/egg_duang"
+        />
+
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y10"
+        android:text="卖力加载中"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+</RelativeLayout>

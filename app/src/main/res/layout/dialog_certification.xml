@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+
+    >
+
+    <LinearLayout
+        android:layout_width="@dimen/x589"
+        android:layout_height="@dimen/y379"
+        android:background="@drawable/shape_round_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/x92"
+            android:layout_height="@dimen/y92"
+            android:src="@drawable/ic_boy"/>
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y15"
+            android:text="您的认证信息已提交"
+            android:textColor="#333333"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:text="我们将在一个工作日内反馈审核结果"
+            android:textColor="#333333"
+            android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="@dimen/x232"
+            android:layout_height="@dimen/y52"
+            android:layout_marginTop="@dimen/y40"
+            android:background="@drawable/shape_dialog_btn"
+            android:text="好的"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</LinearLayout>

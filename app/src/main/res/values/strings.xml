@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">购房</string>
+    <string name="login_account">请输入账号</string>
+    <string name="login_password">请输入密码</string>
+    <string name="login_login">登录</string>
+    <string name="msg_login_account">请输入账号</string>
+    <string name="msg_login_password">请输入密码</string>
+    <string name="nav_open">打开导航栏</string>
+    <string name="nav_close">关闭导航栏</string>
+</resources>

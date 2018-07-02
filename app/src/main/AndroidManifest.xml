@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.ljcs.cxwl">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera2.full"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <application
+        android:name="com.ljcs.cxwl.application.AppConfig"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme.Base"
+        tools:replace="android:icon,android:theme">
+
+        <!--闪屏页-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.SplashActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!--登录页-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.LoginActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--首页-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.MainActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--注册页-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.RegisterActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--忘记密码-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.ForgetPwdActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--实名认证-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationOneActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--实名认证-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--实名认证-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationThirdActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--实名认证-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationFourActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--实名认证-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationFiveActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!--添加配偶信息-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoOneActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoThirdActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoFourActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoFiveActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--购房资格审查说明-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.QualificationExaminationActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--添加申购人户口本信息-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--添加配偶信息-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwoActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--添加家庭成员-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterThirdActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--添加家庭成员-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyAddActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--核对并提交信息-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterFourActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.ShowImgActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/translucent"
+            />
+
+
+    </application>
+
+</manifest>

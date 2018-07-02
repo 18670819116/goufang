@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y40"
+        android:src="@mipmap/ic_cer_one"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/x257"
+        android:layout_height="@dimen/y269"
+        android:layout_below="@+id/img1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y205"
+        android:src="@mipmap/ic_idcard_zheng"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y40"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/color_333333"
+        android:text="请拿出本人身份证准备拍摄\n并保持网络良好"/>
+
+    <Button
+        android:id="@+id/button"
+        style="@style/btn_login"
+        android:layout_above="@+id/textView3"
+        android:text="开始拍摄"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/y35"
+        android:layout_marginBottom="@dimen/y35"
+        android:drawableLeft="@mipmap/ic_jiami"
+        android:drawablePadding="@dimen/x5"
+        android:text="信息已加密仅用于身份证验证"/>
+
+
+</RelativeLayout>
