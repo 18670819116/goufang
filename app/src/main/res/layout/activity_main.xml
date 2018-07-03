@@ -3,9 +3,176 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     >
 
-   
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/relayou_head"
+                android:layout_height="@dimen/y480"
+                android:background="@mipmap/ic_main_bg">
+
+                <ImageView
+                    android:id="@+id/img_head"
+                    android:layout_width="@dimen/x163"
+                    android:layout_height="@dimen/y54"
+                    android:layout_marginLeft="@dimen/x37"
+                    android:layout_marginTop="@dimen/y31"
+                    android:src="@mipmap/ic_main_head"/>
+
+                <ImageView
+                    android:id="@+id/img_right_menu"
+                    android:layout_width="@dimen/x58"
+                    android:layout_height="@dimen/y58"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x37"
+                    android:layout_marginTop="@dimen/y31"
+                    android:src="@mipmap/ic_main_person"/>
+
+                <ImageView
+                    android:layout_width="@dimen/x649"
+                    android:layout_height="@dimen/y374"
+                    android:layout_below="@+id/img_head"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/y33"
+                    android:background="@mipmap/ic_main_banner"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relayout_item1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y233"
+                android:layout_marginTop="@dimen/y32"
+                android:background="@mipmap/ic_main_item">
+
+                <ImageView
+                    android:id="@+id/img_item1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x71"
+                    android:src="@mipmap/ic_main_item1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x88"
+                    android:layout_toRightOf="@+id/img_item1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img_item1"
+                        android:text="实名认证"
+                        android:textColor="@color/color_333333"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y34"
+                        android:text="已提交，待审核"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relayout_item2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y233"
+                android:background="@mipmap/ic_main_item">
+
+                <ImageView
+                    android:id="@+id/img_item2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x71"
+                    android:src="@mipmap/ic_main_item2"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x88"
+                    android:layout_toRightOf="@+id/img_item2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img_item1"
+                        android:text="家庭成员"
+                        android:textColor="@color/color_333333"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y34"
+                        android:text="未添加任何家庭成员"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relayout_item3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y233"
+                android:background="@mipmap/ic_main_item">
+
+                <ImageView
+                    android:id="@+id/img_item3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x71"
+                    android:src="@mipmap/ic_main_item3"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x88"
+                    android:layout_toRightOf="@+id/img_item3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img_item3"
+                        android:text="购房资格申请"
+                        android:textColor="@color/color_333333"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y34"
+                        android:text="未申请"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

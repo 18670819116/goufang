@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         android:layout_above="@+id/layout_bottom">
 
         <LinearLayout
@@ -34,219 +35,32 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
-                android:layout_marginTop="@dimen/y30"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/x30"
-                android:paddingRight="@dimen/x30">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="*"
-                    android:textColor="#fd0101"/>
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="请逐项仔细核对下表信息，保证所填内容与证件信息相吻合否则将影响资格审查"/>
-            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/textView"-->
-            <!--android:layout_marginTop="@dimen/y30"-->
-            <!--android:background="@color/white"-->
-            <!--android:orientation="vertical"-->
-            <!--android:paddingLeft="@dimen/x30"-->
-            <!--android:paddingRight="@dimen/x30">-->
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/y94"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/layout_empty"
+                android:orientation="vertical">
 
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="姓名："/>-->
+                <ImageView
+                    android:layout_width="@dimen/x116"
+                    android:layout_height="@dimen/y99"
+                    android:src="@mipmap/ic_empty_zinv"/>
 
-            <!--<TextView-->
-            <!--android:id="@+id/tv_name"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:text="某某某"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"/>-->
-            <!--</LinearLayout>-->
-
-            <!--<View style="@style/line_hor"/>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/y94"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="性别："/>-->
-
-            <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="某某某"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"/>-->
-
-            <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/ic_rock_right"/>-->
-            <!--</LinearLayout>-->
-
-            <!--<View style="@style/line_hor"/>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/y94"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="户别："/>-->
-
-            <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="某某某"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"/>-->
-
-            <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/ic_rock_right"/>-->
-            <!--</LinearLayout>-->
-
-            <!--<View style="@style/line_hor"/>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/y94"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="婚姻状况："/>-->
-
-            <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="某某某"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"/>-->
-
-            <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/ic_rock_right"/>-->
-            <!--</LinearLayout>-->
-
-            <!--<View style="@style/line_hor"/>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/y94"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="身份证号码："/>-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/tv_idcard"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:text="430121199308047031"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"/>-->
-            <!--</LinearLayout>-->
-
-            <!--<View style="@style/line_hor"/>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/y94"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="与申请人关系："/>-->
-
-            <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/x30"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="某某某"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"/>-->
-
-            <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@mipmap/ic_rock_right"/>-->
-            <!--</LinearLayout>-->
-
-            <!--<View style="@style/line_hor"/>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:orientation="vertical">-->
-            <!--<ImageView-->
-            <!--android:id="@+id/imageView4"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="@dimen/y29"-->
-            <!--android:layout_marginTop="@dimen/y45"-->
-            <!--android:src="@mipmap/ic_add_hkb3"/>-->
-
-            <!--</LinearLayout>-->
-            <!--</LinearLayout>-->
-
-
+                <TextView
+                    android:layout_marginTop="@dimen/y24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="请添加您的未成年（未满18岁）子女信息\n如无子女或子女已成年可直接跳过"/>
+            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

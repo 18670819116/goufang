@@ -1,8 +1,8 @@
 package com.ljcs.cxwl.data.api;
 
-import com.ljcs.cxwl.entity.AppLogin;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.entity.Host;
+import com.ljcs.cxwl.entity.CommonBean;
+import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.util.MD5Util;
 import com.ljcs.cxwl.util.RSAUtil;
 import com.google.gson.JsonObject;
@@ -42,23 +42,44 @@ public class HttpAPIWrapper {
     public HttpAPIWrapper(HttpApi mHttpAPI) {
         this.mHttpAPI = mHttpAPI;
     }
-//登陆
-    public Observable<AppLogin> Login(Map data) {
+
+    //登陆
+    public Observable<RegisterBean> Login(Map data) {
         return wrapper(mHttpAPI.Login(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
-    //获取主机列表
-    public  Observable<Host> getHost(Map data){
 
-        return wrapper(mHttpAPI.getHost(addParams(data)).compose(SCHEDULERS_TRANSFORMER));
+    //验证码
+    public Observable<CommonBean> getCode(Map data) {
+        return wrapper(mHttpAPI.getCode(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
+    //注册
+    public Observable<RegisterBean> register(Map data) {
+        return wrapper(mHttpAPI.register(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //忘记密码
+    public Observable<CommonBean> forgetPwd(Map data) {
+        return wrapper(mHttpAPI.forgetPwd(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //退出登录
+    public Observable<CommonBean> loginOut(Map data) {
+        return wrapper(mHttpAPI.loginOut(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //修改密码
+    public Observable<RegisterBean> changePwd(Map data) {
+        return wrapper(mHttpAPI.changePwd(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
     /**
      * 给任何Http的Observable加上通用的线程调度器
      */
     private static final ObservableTransformer SCHEDULERS_TRANSFORMER = new ObservableTransformer() {
         @Override
         public ObservableSource apply(@NonNull Observable upstream) {
-            return upstream.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
+            return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
         }
     };
 
@@ -70,55 +91,43 @@ public class HttpAPIWrapper {
      * @return
      */
     private <T extends BaseEntity> Observable<T> wrapper(Observable<T> resourceObservable) {
-            return resourceObservable
-                    .flatMap(new Function<T, ObservableSource<? extends T>>() {
-                        @Override
-                        public ObservableSource<? extends T> apply(@NonNull final T baseResponse) throws Exception {
-                            return Observable.create(
-                                    new ObservableOnSubscribe<T>() {
-                                        @Override
-                                        public void subscribe(@NonNull ObservableEmitter<T> e) throws Exception {
-                                            if (baseResponse.getStatus() != 0) {
-                                                if (baseResponse.getStatus() == 99) {
-                                                    //99为登录失效，需要重新登录
-                                                    Logger.i(baseResponse.getMSG());
-                                               //     EventBus.getDefault().post(EventBusEntity.Entity.loginTimeOut);
-                                                } else {
-                                                    e.onNext(baseResponse);
-                                                }
-                                            } else {
-                                                e.onNext(baseResponse);
-                                            }
-                                        }
-                                    });
-                        }
-                    })
-                    .doOnError(new Consumer<Throwable>() {
-                        @Override
-                        public void accept(@NonNull Throwable e) throws Exception {
-                            e.printStackTrace();
-                            String errorText = "";
-                            if (e instanceof HttpException) {
-                                HttpException exception = (HttpException) e;
-                            } else if (e instanceof UnknownHostException) {
-                                Logger.i("请打开网络");
-                                errorText = "请打开网络";
-                            } else if (e instanceof SocketTimeoutException) {
-                                Logger.i("请求超时");
-                                errorText = "请求超时";
-                            } else if (e instanceof ConnectException) {
-                                Logger.i("连接失败");
-                                errorText = "连接失败";
-                            } else if (e instanceof HttpException) {
-                                Logger.i("请求超时");
-                                errorText = "请求超时";
-                            } else {
-                                Logger.i("请求失败");
-                                errorText = "请求失败";
-                            }
-                          //  ToastUtil.displayShortToast(errorText);
-                        }
-                    });
+        return resourceObservable.flatMap(new Function<T, ObservableSource<? extends T>>() {
+            @Override
+            public ObservableSource<? extends T> apply(@NonNull final T baseResponse) throws Exception {
+                return Observable.create(new ObservableOnSubscribe<T>() {
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<T> e) throws Exception {
+
+                        e.onNext(baseResponse);
+                    }
+                });
+            }
+        }).doOnError(new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable e) throws Exception {
+                e.printStackTrace();
+                String errorText = "";
+                if (e instanceof HttpException) {
+                    HttpException exception = (HttpException) e;
+                } else if (e instanceof UnknownHostException) {
+                    Logger.i("请打开网络");
+                    errorText = "请打开网络";
+                } else if (e instanceof SocketTimeoutException) {
+                    Logger.i("请求超时");
+                    errorText = "请求超时";
+                } else if (e instanceof ConnectException) {
+                    Logger.i("连接失败");
+                    errorText = "连接失败";
+                } else if (e instanceof HttpException) {
+                    Logger.i("请求超时");
+                    errorText = "请求超时";
+                } else {
+                    Logger.i("请求失败");
+                    errorText = "请求失败";
+                }
+                //  ToastUtil.displayShortToast(errorText);
+            }
+        });
     }
 
     /**
@@ -129,50 +138,47 @@ public class HttpAPIWrapper {
      * @return
      */
     private <T extends Object> Observable<T> wrapperObject(Observable<T> resourceObservable) {
-            return resourceObservable
-                    .flatMap(new Function<T, ObservableSource<? extends T>>() {
-                        @Override
-                        public ObservableSource<? extends T> apply(@NonNull final T baseResponse) throws Exception {
-                            return Observable.create(
-                                    new ObservableOnSubscribe<T>() {
-                                        @Override
-                                        public void subscribe(@NonNull ObservableEmitter<T> e) throws Exception {
-                                            if (baseResponse == null) {
+        return resourceObservable.flatMap(new Function<T, ObservableSource<? extends T>>() {
+            @Override
+            public ObservableSource<? extends T> apply(@NonNull final T baseResponse) throws Exception {
+                return Observable.create(new ObservableOnSubscribe<T>() {
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<T> e) throws Exception {
+                        if (baseResponse == null) {
 
-                                            } else {
-                                                //// TODO: 2017/6/8 没有做错误处理，因为现在后台返回的结果格式都不一样，等后台统一了返回再做处理
-                                                e.onNext(baseResponse);
-                                            }
-                                        }
-                                    });
+                        } else {
+                            //// TODO: 2017/6/8 没有做错误处理，因为现在后台返回的结果格式都不一样，等后台统一了返回再做处理
+                            e.onNext(baseResponse);
                         }
-                    })
-                    .doOnError(new Consumer<Throwable>() {
-                        @Override
-                        public void accept(@NonNull Throwable e) throws Exception {
-                            e.printStackTrace();
-                            String errorText = "";
-                            if (e instanceof HttpException) {
-                                HttpException exception = (HttpException) e;
-                            } else if (e instanceof UnknownHostException) {
-                                Logger.i("请打开网络");
-                                errorText = "请打开网络";
-                            } else if (e instanceof SocketTimeoutException) {
-                                Logger.i("请求超时");
-                                errorText = "请求超时";
-                            } else if (e instanceof ConnectException) {
-                                Logger.i("连接失败");
-                                errorText = "连接失败";
-                            } else if (e instanceof HttpException) {
-                                Logger.i("请求超时");
-                                errorText = "请求超时";
-                            } else {
-                                Logger.i("请求失败");
-                                errorText = "请求失败";
-                            }
-                         //   ToastUtil.displayShortToast(errorText);
-                        }
-                    });
+                    }
+                });
+            }
+        }).doOnError(new Consumer<Throwable>() {
+            @Override
+            public void accept(@NonNull Throwable e) throws Exception {
+                e.printStackTrace();
+                String errorText = "";
+                if (e instanceof HttpException) {
+                    HttpException exception = (HttpException) e;
+                } else if (e instanceof UnknownHostException) {
+                    Logger.i("请打开网络");
+                    errorText = "请打开网络";
+                } else if (e instanceof SocketTimeoutException) {
+                    Logger.i("请求超时");
+                    errorText = "请求超时";
+                } else if (e instanceof ConnectException) {
+                    Logger.i("连接失败");
+                    errorText = "连接失败";
+                } else if (e instanceof HttpException) {
+                    Logger.i("请求超时");
+                    errorText = "请求超时";
+                } else {
+                    Logger.i("请求失败");
+                    errorText = "请求失败";
+                }
+                //   ToastUtil.displayShortToast(errorText);
+            }
+        });
     }
 
     /**
@@ -182,8 +188,7 @@ public class HttpAPIWrapper {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
             }
         };
     }

@@ -14,6 +14,7 @@ import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationFive
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationFiveModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationFivePresenter;
+import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.CertificationDialog;
 
 import javax.inject.Inject;
@@ -121,6 +122,10 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
+                        AppManager.getInstance().finishActivity(CertificationOneActivity.class);
+                        AppManager.getInstance().finishActivity(CertificationTwoActivity.class);
+                        AppManager.getInstance().finishActivity(CertificationThirdActivity.class);
+                        AppManager.getInstance().finishActivity(CertificationFourActivity.class);
                         finish();
                     }
                 });

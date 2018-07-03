@@ -6,6 +6,11 @@ package com.ljcs.cxwl.contain;
  */
 
 public class ShareStatic {
-    public static final String APP_LOGIN_ACCOUNT="APP_LOGIN_ACCOUNT";
-    public static final String APP_LOGIN_PASSWORD = "APP_LOGIN_PASSWORD";
+
+    public static final String APP_LOGIN_SJHM = "sjhm";
+    public static final String APP_LOGIN_MM = "mm";
+    public static final String APP_LOGIN_ZT = "zt";
+    public static final String APP_LOGIN_BH = "bh";
+    public static final String APP_LOGIN_TOKEN = "token";
+
 }

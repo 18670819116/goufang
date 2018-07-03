@@ -1,7 +1,11 @@
 package com.ljcs.cxwl.ui.activity.main.contract;
 
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
+import java.util.Map;
+
 /**
  * @author xlei
  * @Package The contract for ForgetPwdActivity
@@ -19,12 +23,18 @@ public interface ForgetPwdContract {
          *
          */
         void closeProgressDialog();
+
+        void getCode(CommonBean baseEntity);
+
+        void forgetPwd(CommonBean baseEntity);
     }
 
     interface ForgetPwdContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+        void getCode(String phone);
+        void forgetPwd(Map map);
     }
 }

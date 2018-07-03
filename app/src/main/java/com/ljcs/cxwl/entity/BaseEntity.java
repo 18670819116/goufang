@@ -1,28 +1,71 @@
 package com.ljcs.cxwl.entity;
 
 public class BaseEntity{
+
     /**
-     * 状态码
+     * success : true
+     * code : 200
+     * msg : 操作成功
+     * error : null
+     * data : 888888
+     * rows : 888888
+     * total : null
+     * token : null
      */
-    public int status;
-    /**
-     * 详细信息
-     */
-    public String MSG;
 
-    public int getStatus() {
-        return status;
+    public boolean success;
+    public int code;
+    public String msg;
+    public String error;
+    public int total;
+    public String token;
+
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public String getMSG() {
-        return MSG;
+    public int getCode() {
+        return code;
     }
 
-    public void setMSG(String MSG) {
-        this.MSG = MSG;
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

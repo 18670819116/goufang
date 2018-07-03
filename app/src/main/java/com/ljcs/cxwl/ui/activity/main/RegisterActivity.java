@@ -15,6 +15,10 @@ import android.widget.TextView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CommonBean;
+import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerRegisterComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.RegisterContract;
 import com.ljcs.cxwl.ui.activity.main.module.RegisterModule;
@@ -22,8 +26,13 @@ import com.ljcs.cxwl.ui.activity.main.presenter.RegisterPresenter;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.vondear.rxtools.RxActivityTool;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxSPTool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -61,10 +70,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     CheckBox mCheckboxEye;
 
 
-
     private CountDownTimer countDownTimer;
+    private String code = "";
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -82,11 +92,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     protected void initData() {
-        countDownTimer=new CountDownTimer(60000,1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Logger.i("倒计时"+millisUntilFinished);
-                mTvGetYzm.setText("倒计时"+millisUntilFinished/1000+"s");
+                //  Logger.i("倒计时" + millisUntilFinished);
+                mTvGetYzm.setText("倒计时" + millisUntilFinished / 1000 + "s");
             }
 
             @Override
@@ -131,6 +141,42 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         progressDialog.hide();
     }
 
+    @Override
+    public void getCode(CommonBean baseEntity) {
+        if (baseEntity.getCode() == 200) {
+            if (baseEntity.getData() != null) {
+                code = baseEntity.getData();
+            } else {
+                onErrorMsg(0, baseEntity.getMsg());
+            }
+
+        }
+
+    }
+
+    @Override
+    public void register(RegisterBean baseEntity) {
+        if (baseEntity.getCode() == 200) {
+            if (baseEntity.token != null) {
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_TOKEN, baseEntity.token);
+            }
+            if (baseEntity.getData() != null) {
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_SJHM, baseEntity.getData().getSjhm());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, baseEntity.getData().getMm());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
+                RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
+                if (baseEntity.msg != null) {
+                    ToastUtil.showCenterShort(baseEntity.msg);
+                }
+                startActivty(MainActivity.class);
+                finish();
+            }
+        } else {
+            onErrorMsg(0, baseEntity.getMsg());
+        }
+
+    }
+
 
     @OnClick({R.id.tv_get_yzm, R.id.btn_register, R.id.tv_xieyi})
     public void onViewClicked(View view) {
@@ -144,10 +190,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }
-                ToastUtil.showCenterShort("请求接口获取验证码");
                 mTvGetYzm.setEnabled(false);
                 mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
                 countDownTimer.start();
+                mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
                 if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mEt1.getText().toString())) {
@@ -166,8 +212,15 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("密码最多16位");
                     return;
                 }
-                ToastUtil.showCenterShort("注册成功");
-                countDownTimer.cancel();
+                if (RxDataTool.isNullString(code) || !(mEt2.getText().toString().trim().equals(code))) {
+                    ToastUtil.showCenterShort("验证码错误");
+                    return;
+                }
+                Map<String, String> map = new HashMap<>();
+
+                map.put("sjhm", mEt1.getText().toString().trim());
+                map.put("mm", mEt3.getText().toString().trim());
+                mPresenter.register(map);
                 break;
             case R.id.tv_xieyi:
                 ToastUtil.showCenterShort("跳转至协议");

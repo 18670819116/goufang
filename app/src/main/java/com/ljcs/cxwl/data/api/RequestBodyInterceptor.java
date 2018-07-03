@@ -1,9 +1,6 @@
 package com.ljcs.cxwl.data.api;
 
 
-
-
-
 import com.ljcs.cxwl.util.MD5.MD5Util;
 
 import java.io.IOException;
@@ -39,9 +36,11 @@ public final class RequestBodyInterceptor implements Interceptor {
 
         Request orgRequest = chain.request();
 
-        Request.Builder orgRequestBuilder = orgRequest.newBuilder();
-        //请求定制：添加请求头
-//                .header("APIKEY", Constant.API_KEY);
+        Request.Builder orgRequestBuilder = orgRequest.newBuilder()
+                //请求定制：添加请求头
+                .addHeader("Accept", "*/*").addHeader
+                        ("content-type", "application/json;charset=UTF-8");
+
         if (orgRequest.body() == null) {
             return chain.proceed(orgRequest);
         }

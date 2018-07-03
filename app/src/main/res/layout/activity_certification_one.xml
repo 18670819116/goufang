@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/img1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/x625"
+        android:layout_height="@dimen/y87"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y40"
         android:src="@mipmap/ic_cer_one"/>

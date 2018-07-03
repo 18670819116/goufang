@@ -153,8 +153,8 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         Intent intent;
         switch (view.getId()) {
             case R.id.btn_login:
-//                startActivty(MatesInfoOneActivity.class);
-                startActivty(FamilyRegisterThirdActivity.class);
+                startActivty(MatesInfoOneActivity.class);
+//                startActivty(FamilyRegisterTwoActivity.class);
                 break;
             case R.id.img_upload:
                 if (imageView5.getVisibility()==View.INVISIBLE) {

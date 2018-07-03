@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.adapter.ZinvInfoAdapter;
@@ -39,8 +40,9 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
     FamilyRegisterThirdPresenter mPresenter;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.layout_empty)
+    LinearLayout layoutEmpty;
     private ZinvInfoAdapter mAdapter;
-    private List<CertificationInfo> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,7 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
 
     @Override
     protected void initData() {
-        mList = new ArrayList<>();
-        mAdapter = new ZinvInfoAdapter(mList);
+        mAdapter = new ZinvInfoAdapter(Contains.sCertificationInfoList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(mAdapter);
@@ -97,6 +98,7 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
                 startActivityForResult(intent, 101);
                 break;
             case R.id.next:
+                startActivty(FamilyRegisterFourActivity.class);
                 break;
             default:
                 break;
@@ -107,7 +109,14 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 101 && resultCode == 101) {
-            mAdapter.setNewData(Contains.sCertificationInfoList);
+            if (Contains.sCertificationInfoList.size() > 0) {
+                layoutEmpty.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                mAdapter.setNewData(Contains.sCertificationInfoList);
+            } else {
+                recyclerView.setVisibility(View.GONE);
+                layoutEmpty.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

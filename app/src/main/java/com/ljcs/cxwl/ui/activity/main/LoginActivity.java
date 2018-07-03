@@ -11,19 +11,23 @@ import android.widget.EditText;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
-import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.entity.AppLogin;
-import com.ljcs.cxwl.ui.activity.certification.CertificationOneActivity;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerLoginComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.LoginContract;
 import com.ljcs.cxwl.ui.activity.main.module.LoginModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.LoginPresenter;
-import com.ljcs.cxwl.ui.activity.other.QualificationExaminationActivity;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
+import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtools.RxTool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -58,7 +62,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private String mAccount;
     private String mPassWord;
     private ExplosionField explosionField;
-    private SharedPreferences mSharedPreferences;
+
 
     @Override
     protected void initView() {
@@ -66,15 +70,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        mSharedPreferences = this.getSharedPreferences("Login_Sp", MODE_PRIVATE);
-        //粒子爆炸效果
-        explosionField = ExplosionField.attach2Window(LoginActivity.this);
-        if (!"".equals(mSharedPreferences.getString(ShareStatic.APP_LOGIN_ACCOUNT, "")) && !"".equals
-                (mSharedPreferences.getString(ShareStatic.APP_LOGIN_PASSWORD, ""))) {
-            mLoginTel.setText(mSharedPreferences.getString(ShareStatic.APP_LOGIN_ACCOUNT, ""));
-            mLoginPwd.setText(mSharedPreferences.getString(ShareStatic.APP_LOGIN_PASSWORD, ""));
-            onViewClicked(mBtnLogin);
-        }
+
+
+    }
+
+    @Override
+    protected void initData() {
+        //设置密码可不可见
         mIvShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -87,13 +89,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 }
             }
         });
-
-
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     @Override
@@ -110,6 +105,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     public void showProgressDialog() {
         progressDialog.show();
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -117,14 +113,30 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         progressDialog.dismiss();
     }
 
+    /**
+     * 登录成功回调
+     * @param baseEntity
+     */
     @Override
-    public void loginSuccess(AppLogin appLogin) {
-        Contains.appLogin = appLogin;
-        SharedPreferences.Editor edit = mSharedPreferences.edit();
-        edit.putString(ShareStatic.APP_LOGIN_ACCOUNT, mAccount);
-        edit.putString(ShareStatic.APP_LOGIN_PASSWORD, mPassWord);
-        edit.apply();
-        explosionField.explode(mBtnLogin);
+    public void loginSuccess(RegisterBean baseEntity) {
+        if (baseEntity.getCode() == 200) {
+            if (baseEntity.token != null) {
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_TOKEN, baseEntity.token);
+            }
+            if (baseEntity.getData() != null) {
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_SJHM, baseEntity.getData().getSjhm());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, baseEntity.getData().getMm());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
+                RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
+                if (baseEntity.msg != null) {
+                    ToastUtil.showCenterShort(baseEntity.msg);
+                }
+                startActivty(MainActivity.class);
+                finish();
+            }
+        } else {
+            onErrorMsg(0, baseEntity.getMsg());
+        }
 
 
     }
@@ -133,13 +145,17 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_register:
-                startActivty(QualificationExaminationActivity.class);
-//                startActivty(RegisterActivity.class);
+//                startActivty(QualificationExaminationActivity.class);
+                startActivty(RegisterActivity.class);
                 break;
             case R.id.tv_forget_pwd:
                 startActivty(ForgetPwdActivity.class);
                 break;
             case R.id.btn_login:
+                if ( RxTool.isFastClick(500)){
+                    Logger.i("点击过快");
+                    return;
+                }
                 mAccount = mLoginTel.getText().toString().trim();
                 mPassWord = mLoginPwd.getText().toString().trim();
                 if (RxDataTool.isNullString(mAccount) || RxDataTool.isNullString(mPassWord)) {
@@ -158,43 +174,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     ToastUtil.showCenterShort("密码最多16位");
                     return;
                 }
-                startActivty(CertificationOneActivity.class);
-
-//                //queryShipperInfo();
-//                StringBuilder deviceId = new StringBuilder();
-//                // 渠道标志
-//                deviceId.append("a");
-//                try {
-//                    TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-//                    String imei = tm.getDeviceId();
-//                    if (!hasEmptyItem(imei)) {
-//                        deviceId.append("m");
-//                        deviceId.append(imei);
-//                    } else {
-//                        imei = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings
-//                                .Secure.ANDROID_ID);
-//                        deviceId.append("m");
-//                        deviceId.append(imei);
-//                    }
-//                    Logger.i("imei  --->" + imei);
-//
-//                    //序列号（sn）
-//                    String sn = tm.getSimSerialNumber();
-//                    if (!hasEmptyItem(sn)) {
-//                        deviceId.append("s");
-//                        deviceId.append(sn);
-//                        Log.e("geek : ", "序列号（sn）=" + deviceId.toString());
-//                    }
-//
-//                } catch (Exception e) {
-//                    Log.d("geek", "getDeviceId: e");
-//                    deviceId.append("e" + deviceId.toString());
-//                }
-//                Map<String, String> map = new HashMap<>(16);
-//                map.put("userName", mAccount);
-//                map.put("passWord", StringUitls.getMD5(mPassWord));
-//                map.put("macAddr", deviceId.toString());
-//                mPresenter.login(map);
+                Map<String, String> map = new HashMap<>();
+                map.put("sjhm", mAccount);
+                map.put("mm", mPassWord);
+                mPresenter.login(map);
                 break;
             default:
                 break;

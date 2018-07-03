@@ -9,6 +9,7 @@ import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterFourCompone
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterFourContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterFourModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterFourPresenter;
+import com.ljcs.cxwl.util.AppManager;
 
 import javax.inject.Inject;
 
@@ -69,6 +70,11 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
-        startActivty(FamilyRegisterFourActivity.class);
+        AppManager.getInstance().finishActivity(QualificationExaminationActivity.class);
+        AppManager.getInstance().finishActivity(FamilyRegisterActivity.class);
+        AppManager.getInstance().finishActivity(FamilyRegisterTwoActivity.class);
+        AppManager.getInstance().finishActivity(FamilyRegisterThirdActivity.class);
+        //startActivty(FamilyRegisterFourActivity.class);
+        finish();
     }
 }

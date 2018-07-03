@@ -113,6 +113,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         setContentView(R.layout.activity_family_add);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarTitle.setText("添加子女信息");
     }
 
     @Override
@@ -142,7 +143,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
     }
 
     @OnClick({R.id.layout_select1, R.id.layout_select2, R.id.layout_select3, R.id.layout_select4, R.id
-            .layout_select5, R.id.img_upload, R.id.imageView5, R.id.btn_login})
+            .layout_select5, R.id.img_upload, R.id.imageView5, R.id.next})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -178,7 +179,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
                 imageView5.setVisibility(View.INVISIBLE);
                 Glide.with(FamilyAddActivity.this).load(R.mipmap.ic_img4).into(imgUpload);
                 break;
-            case R.id.btn_login:
+            case R.id.next:
                 if (!RxDataTool.isNullString(tvName.getText().toString().trim())) {
                     Contains.sCertificationInfo.setName_zinv(tvName.getText().toString().trim());
                     certificationInfo.setName_zinv(tvName.getText().toString().trim());
@@ -265,7 +266,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         super.onActivityResult(requestCode, resultCode, data);
         // 识别成功回调，通用文字识别
         if (requestCode == REQUEST_CODE_GENERAL_BASIC && resultCode == Activity.RESULT_OK) {
-            final File tempImage = new File(FamilyAddActivity.this.getCacheDir(), "household");
+            final File tempImage = new File(FamilyAddActivity.this.getCacheDir(), "household_zinv_"+System.currentTimeMillis());
             ImageUtil.resize(new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath())
                     .getAbsolutePath(), tempImage.getAbsolutePath(), 1280, 1280);
             Logger.e(tempImage.getAbsolutePath() + "-----" + tempImage.length());

@@ -21,6 +21,7 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.vondear.rxtools.RxActivityTool;
+import com.vondear.rxtools.RxDataTool;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
@@ -33,7 +34,7 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 public abstract class BaseActivity extends AppCompatActivity implements BGASwipeBackHelper.Delegate {
     public Toolbar mToolbar;
     private RelativeLayout rootLayout;
-    private LinearLayout autolayout;
+    public LinearLayout autolayout;
     public boolean needFront = false;   //toolBar 是否需要显示在最上层的标识
     public ProgressDialog progressDialog;
     public TextView toolbarTitle;
@@ -209,6 +210,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
             return;
         }
         mSwipeBackHelper.backward();
+
+    }
+
+    public void onErrorMsg(int code, String msg) {
+        if (!RxDataTool.isNullString(msg)) {
+            ToastUtil.showCenterShort(msg);
+        }
 
     }
 }

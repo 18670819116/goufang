@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerForgetPwdComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.ForgetPwdContract;
 import com.ljcs.cxwl.ui.activity.main.module.ForgetPwdModule;
@@ -26,6 +27,9 @@ import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
 import com.vondear.rxtools.view.RxToast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -61,6 +65,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
     Button mBtnRegister;
 
     private CountDownTimer countDownTimer;
+    private String code = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +88,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
         countDownTimer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Logger.i("倒计时" + millisUntilFinished);
+              //  Logger.i("倒计时" + millisUntilFinished);
                 mTvGetYzm.setText("倒计时" + millisUntilFinished / 1000 + "s");
             }
 
@@ -106,6 +111,42 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                 }
             }
         });
+    }
+
+    /**
+     * 获取验证码返回
+     *
+     * @param baseEntity
+     */
+    @Override
+    public void getCode(CommonBean baseEntity) {
+        if (baseEntity.getCode() == 200) {
+            if (baseEntity.getData() != null) {
+                code = baseEntity.getData();
+            } else {
+                onErrorMsg(0, baseEntity.getMsg());
+            }
+
+        }
+
+    }
+
+    /**
+     * 重置密码返回
+     *
+     * @param baseEntity
+     */
+
+    @Override
+    public void forgetPwd(CommonBean baseEntity) {
+        if (baseEntity.getCode() == 200) {
+                ToastUtil.showCenterShort(baseEntity.msg);
+                finish();
+            } else {
+                onErrorMsg(0, baseEntity.msg);
+            }
+
+
     }
 
     @Override
@@ -141,10 +182,10 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }
-                ToastUtil.showCenterShort("请求接口获取验证码");
                 mTvGetYzm.setEnabled(false);
                 mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
                 countDownTimer.start();
+                mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
                 if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mEt1.getText().toString())) {
@@ -163,8 +204,15 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                     ToastUtil.showCenterShort("密码最多16位");
                     return;
                 }
-                ToastUtil.showCenterShort("重置成功");
-                countDownTimer.cancel();
+                if (RxDataTool.isNullString(code) || !mEt2.getText().toString().trim().equals(code)) {
+                    ToastUtil.showCenterShort("验证码错误");
+                    return;
+                }
+                Map<String, String> map = new HashMap<>();
+                map.put("sjhm", mEt1.getText().toString().trim());
+                map.put("newmm", mEt3.getText().toString().trim());
+                mPresenter.forgetPwd(map);
+
                 break;
             default:
                 break;

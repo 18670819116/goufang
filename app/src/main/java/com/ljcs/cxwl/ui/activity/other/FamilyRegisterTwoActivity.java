@@ -50,6 +50,7 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
 
     @Inject
     FamilyRegisterTwoPresenter mPresenter;
+    @BindView(R.id.tv_leixing1)
     TextView tvLeixing1;
     @BindView(R.id.tv_leixing2)
     TextView tvLeixing2;

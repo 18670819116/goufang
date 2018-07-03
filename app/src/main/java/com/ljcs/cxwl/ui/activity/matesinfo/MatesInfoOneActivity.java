@@ -228,13 +228,12 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
 
     @Override
     protected void onDestroy() {
-        Logger.e("onDestroy");
         // 释放本地质量控制模型
         if (IDcardQualityProcess.getInstance() != null) {
             CameraNativeHelper.release();
         }
         super.onDestroy();
         // 释放内存资源
-        OCR.getInstance(this).release();
+//        OCR.getInstance(this).release();
     }
 }

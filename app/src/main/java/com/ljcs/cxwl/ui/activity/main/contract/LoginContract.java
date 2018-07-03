@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.ui.activity.main.contract;
 
-import com.ljcs.cxwl.entity.AppLogin;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 
@@ -24,7 +25,7 @@ public interface LoginContract {
          */
         void closeProgressDialog();
 
-        void loginSuccess(AppLogin appLogin);
+        void loginSuccess(RegisterBean appLogin);
     }
 
     interface LoginContractPresenter extends BasePresenter {

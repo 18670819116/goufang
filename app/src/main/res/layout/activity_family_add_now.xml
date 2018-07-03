@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+    >
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv2"
+        android:layout_marginBottom="@dimen/y20"
+        android:gravity="center"
+        android:text="您还没有添加自己的户口信息"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_login"
+        android:layout_marginBottom="@dimen/y60"
+        android:gravity="center"
+        android:text="认证自己的户口信息后即可添加家庭成员"
+        />
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/btn_login"
+        android:layout_centerVertical="true"
+        android:text="马上添加户口信息"/>
+</RelativeLayout>

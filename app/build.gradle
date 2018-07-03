@@ -68,6 +68,9 @@ android {
 
         compile 'com.github.vondear:RxTools:v1.7.5.9'
         compile 'com.orhanobut:logger:1.15'
+
+        //七牛
+        compile 'com.qiniu:qiniu-android-sdk:7.3.+'
         //粒子爆炸效果
         compile 'tyrantgit:explosionfield:1.0.1'
         //滑动返回

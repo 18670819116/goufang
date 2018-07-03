@@ -1,10 +1,19 @@
 package com.ljcs.cxwl.ui.activity.main.presenter;
 import android.support.annotation.NonNull;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.contract.ForgetPwdContract;
 import com.ljcs.cxwl.ui.activity.main.ForgetPwdActivity;
+import com.orhanobut.logger.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
@@ -37,7 +46,55 @@ public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPr
              mCompositeDisposable.dispose();
         }
     }
+    @Override
+    public void getCode(String phone) {
+        Map<String, String> map = new HashMap<>();
+        map.put("sjhm", phone);
+        Disposable disposable = httpAPIWrapper.getCode(map).subscribe(new Consumer<CommonBean>() {
+            @Override
+            public void accept(CommonBean user) throws Exception {
+                Logger.i(user.toString());
+                mView.getCode(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //onError
+                throwable.printStackTrace();
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                //onComplete
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
 
+    @Override
+    public void forgetPwd(Map map) {
+        mView.showProgressDialog();
+        Disposable disposable = httpAPIWrapper.forgetPwd(map).subscribe(new Consumer<CommonBean>() {
+            @Override
+            public void accept(CommonBean user) throws Exception {
+                mView.closeProgressDialog();
+                mView.forgetPwd(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                mView.closeProgressDialog();
+                throwable.printStackTrace();
+                Logger.e("throwable="+throwable.toString());
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+               Logger.i("onComplete");
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
 //    @Override
 //    public void getUser(HashMap map) {
 //        //mView.showProgressDialog();

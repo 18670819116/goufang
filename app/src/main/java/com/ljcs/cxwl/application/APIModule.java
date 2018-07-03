@@ -41,14 +41,13 @@ public final class APIModule {
     public OkHttpClient provideOkHttpClient() {
         final OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(logging);
-            builder.addInterceptor(new ErrorHandlerInterceptor());
-       // }
-        builder.connectTimeout(API.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .readTimeout(API.IO_TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(new RequestBodyInterceptor());
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(logging);
+      //  builder.addInterceptor(new ErrorHandlerInterceptor());
+        // }
+        builder.connectTimeout(API.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS).readTimeout(API.IO_TIMEOUT, TimeUnit
+                .MILLISECONDS).addInterceptor(new RequestBodyInterceptor());
         return builder.build();
     }
 
@@ -58,10 +57,10 @@ public final class APIModule {
         Retrofit.Builder builder = new Retrofit.Builder();
 //        if (SpUtil.getBoolean(AppConfig.getInstance(), ContainValue.ENVIRONMENT, true)) {
 //            //线上环境
-            builder.client(okHttpClient)
-                    .baseUrl(API.BASE_URL)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create());
+        builder.client(okHttpClient).baseUrl(API.BASE_URL).addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create());
+
+
 //        } else {
 //            //开发环境
 //            builder.client(okHttpClient)
@@ -81,8 +80,8 @@ public final class APIModule {
     //这里是对外输出部分
     @Provides
     @Singleton
-   @Remote
-    public HttpAPIWrapper provideHttpAPIWrapper(HttpApi httpAPI){
+    @Remote
+    public HttpAPIWrapper provideHttpAPIWrapper(HttpApi httpAPI) {
         return new HttpAPIWrapper(httpAPI);
     }
 }

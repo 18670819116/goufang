@@ -15,6 +15,7 @@ import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoFourContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoFourModule;
 import com.ljcs.cxwl.ui.activity.matesinfo.presenter.MatesInfoFourPresenter;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwoActivity;
+import com.ljcs.cxwl.util.AppManager;
 
 import javax.inject.Inject;
 
@@ -95,6 +96,9 @@ public class MatesInfoFourActivity extends BaseActivity implements MatesInfoFour
                 Contains.sCertificationInfo.setIssueAuthority_peiou(tvIssueAuthority.getText().toString().trim());
                 Contains.sCertificationInfo.setSignDate_peiou(tvData1.getText().toString().trim());
                 Contains.sCertificationInfo.setExpiryDate_peiou(tvData2.getText().toString().trim());
+                AppManager.getInstance().finishActivity(MatesInfoOneActivity.class);
+                AppManager.getInstance().finishActivity(MatesInfoTwoActivity.class);
+                AppManager.getInstance().finishActivity(MatesInfoThirdActivity.class);
                 startActivty(FamilyRegisterTwoActivity.class);
                 finish();
 

@@ -6,22 +6,15 @@ package com.ljcs.cxwl.data.api;
  */
 
 public interface API {
-    /**
-     * 本地专用 本地120.25.79.232   120.24.163.177
-     */
-    String Periphery = "http://192.168.8.21:8080/cxwy_consumer_terminal";
-    String uploadImage = "http://192.168.8.22:8080/wygl/mall/upload_uploadAndroidFile";
 
-
- // String IP_PRODUCT = "http://192.168.8.20:8080/wygl";
-    String BASE_URL_2 = "http://192.168.8.20:8080/";
-    String IP_XUNGENG = "http://xungeng.hnchxwl.com/";     //
-    String IP_PRODUCT = "http://120.25.79.232/wygl";
+    String IP_PRODUCT = "http://192.168.8.130/api";
     String BASE_URL = IP_PRODUCT + "/";
     long CONNECT_TIMEOUT = 30 * 1000;
-
     long IO_TIMEOUT = 60 * 1000;
-    String URL_GET_ALL_LOGIN = "xzs/xzs_login";//登陆
-    //主机列表
-    String ZHUJI_LIEBIAO = "/wygl/paian/xinzhushou_findPaianZhujiList";
+    String URL_POST_LOGIN = "login/zjw/user/login";//登陆
+    String URL_POST_GET_CODE = "login/zjw/user/code";//验证码
+    String URL_POST_REGISTER = "login/zjw/user/register";//注册
+    String URL_POST_FORGETPWD = "login/zjw/user/back";//忘记密码
+    String URL_POST_LOGINOUT = "login/zjw/user/logout";//退出登录
+    String URL_POST_CHANGEPWD = "login/zjw/user/update";//原密码修改密码
 }

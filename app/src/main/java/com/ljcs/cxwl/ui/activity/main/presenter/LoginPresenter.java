@@ -3,10 +3,11 @@ package com.ljcs.cxwl.ui.activity.main.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.entity.AppLogin;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.LoginActivity;
 import com.ljcs.cxwl.ui.activity.main.contract.LoginContract;
-import com.ljcs.cxwl.util.ToastUtil;
+import com.orhanobut.logger.Logger;
 
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public class LoginPresenter implements LoginContract.LoginContractPresenter {
     private LoginActivity mActivity;
 
     @Inject
-    public LoginPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull LoginContract.View view, LoginActivity activity) {
+    public LoginPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull LoginContract.View view, LoginActivity
+            activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
@@ -53,28 +55,24 @@ public class LoginPresenter implements LoginContract.LoginContractPresenter {
     @Override
     public void login(Map<String, String> map) {
         mView.showProgressDialog();
-        Disposable disposable = httpAPIWrapper.Login(map)
-                .subscribe(new Consumer<AppLogin>() {
-                    @Override
-                    public void accept(@io.reactivex.annotations.NonNull AppLogin appLogin) throws Exception {
-                        mView.closeProgressDialog();
-                        if (appLogin.getStatus() != 0) {
-                            ToastUtil.show(mActivity, appLogin.getMSG());
-                        } else {
-                            mView.loginSuccess(appLogin);
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
-                        mView.closeProgressDialog();
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-
-                    }
-                });
+        Disposable disposable = httpAPIWrapper.Login(map).subscribe(new Consumer<RegisterBean>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull RegisterBean appLogin) throws Exception {
+                mView.closeProgressDialog();
+                Logger.i(appLogin.toString());
+                mView.loginSuccess(appLogin);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                mView.closeProgressDialog();
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                mView.closeProgressDialog();
+            }
+        });
         mCompositeDisposable.add(disposable);
 
     }
