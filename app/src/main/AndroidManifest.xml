@@ -116,7 +116,12 @@
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>
-
+        <!--实名认证状态详情-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationStatusInfoActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
         <!--添加配偶信息-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoOneActivity"

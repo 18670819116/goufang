@@ -18,5 +18,6 @@ public class Contains {
     public static final int REQUEST_CODE_CAMERA = 101;//身份证面
     public static final int REQUEST_CODE_CAMERA_FAN = 102;//身份反面
     public static final int REQUEST_SUCCESS = 200;//网络请求成功
+    public static final int FAST_CLICK = 1000;//网络请求成功
 
 }

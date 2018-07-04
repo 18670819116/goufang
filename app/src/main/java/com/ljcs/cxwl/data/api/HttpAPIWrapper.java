@@ -1,12 +1,16 @@
 package com.ljcs.cxwl.data.api;
 
 import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.CommonBean;
+import com.ljcs.cxwl.entity.HujiInfo;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.util.MD5Util;
 import com.ljcs.cxwl.util.RSAUtil;
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 
 import java.net.ConnectException;
@@ -73,6 +77,37 @@ public class HttpAPIWrapper {
         return wrapper(mHttpAPI.changePwd(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
 
+    //提交实名认证信息
+    public Observable<CerInfo> cerInfo(Map data) {
+        return wrapper(mHttpAPI.cerInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //提交实名认证信息最后一步
+    public Observable<BaseEntity> cerInfoLast(Map data) {
+        return wrapper(mHttpAPI.cerInfoLast(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //获取实名认证详情信息
+    public Observable<CerInfo> cerInfoDetail(Map data) {
+        return wrapper(mHttpAPI.cerInfoDetail(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //保存/修改配偶信息
+    public Observable<BaseEntity> matesInfo(Map data) {
+        return wrapper(mHttpAPI.matesInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+
+    //获取七牛token
+    public Observable<QiniuToken> getQiniuToken(Map data) {
+        return wrapper(mHttpAPI.getQiniuToken(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //获取七牛token
+    public Observable<HujiInfo> hukouInfo(Map data) {
+        return wrapper(mHttpAPI.hukouInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
     /**
      * 给任何Http的Observable加上通用的线程调度器
      */
@@ -125,7 +160,7 @@ public class HttpAPIWrapper {
                     Logger.i("请求失败");
                     errorText = "请求失败";
                 }
-                //  ToastUtil.displayShortToast(errorText);
+                ToastUtil.showCenterShort(errorText);
             }
         });
     }
@@ -176,7 +211,7 @@ public class HttpAPIWrapper {
                     Logger.i("请求失败");
                     errorText = "请求失败";
                 }
-                //   ToastUtil.displayShortToast(errorText);
+                ToastUtil.showCenterShort(errorText);
             }
         });
     }

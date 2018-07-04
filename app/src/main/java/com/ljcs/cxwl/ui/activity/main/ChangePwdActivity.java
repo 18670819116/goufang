@@ -149,7 +149,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
 
     @OnClick(R.id.btn_register)
     public void onViewClicked() {
-        if (RxTool.isFastClick(500)) {
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             Logger.i("点击过快");
             return;
         }

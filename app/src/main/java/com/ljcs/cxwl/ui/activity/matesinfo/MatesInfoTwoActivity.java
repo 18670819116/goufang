@@ -9,12 +9,24 @@ import android.widget.ImageView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.certification.CertificationThirdActivity;
+import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoTwoComponent;
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoTwoModule;
 import com.ljcs.cxwl.ui.activity.matesinfo.presenter.MatesInfoTwoPresenter;
+import com.ljcs.cxwl.util.QiniuUploadUtil;
+import com.qiniu.android.http.ResponseInfo;
+import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtools.RxTool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -47,6 +59,7 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
     EditText tvAdress;
     @BindView(R.id.tv_idcard)
     EditText tvIdcard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +105,42 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
         progressDialog.hide();
     }
 
+    @Override
+    public void matesInfoSuccess(BaseEntity baseEntity) {
+
+    }
+
+    @Override
+    public void getQiniuTokenSuccess(QiniuToken qiniuToken) {
+        if (qiniuToken.getUptoken() != null) {
+            showProgressDialog();
+            QiniuUploadUtil.uploadPic(Contains.sCertificationInfo.getPic_path_zheng_peiou(), qiniuToken.getUptoken(),
+                    new UploadCallback() {
+
+                @Override
+                public void sucess(String url) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("token", RxSPTool.getString(MatesInfoTwoActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                    map.put("sfzhm", Contains.sCertificationInfo.getIdcard_peiou());
+                    map.put("mz", Contains.sCertificationInfo.getEthnic_peiou());
+                    map.put("csrq", Contains.sCertificationInfo.getBirthday_peiou());
+                    map.put("xm", Contains.sCertificationInfo.getName_peiou());
+                    map.put("xb", Contains.sCertificationInfo.getSex_peiou());
+                    map.put("sfzzm", url);
+                    map.put("bh", Contains.sCertificationInfo.getBh_peiou() == 0 ? "" : Contains.sCertificationInfo
+                            .getBh_peiou() + "");
+                    map.put("dz", Contains.sCertificationInfo.getAddress_peiou());
+                    mPresenter.matesInfo(map);
+                }
+
+                @Override
+                public void fail(String key, ResponseInfo info) {
+                    closeProgressDialog();
+                }
+            });
+        }
+
+    }
 
     @OnClick({R.id.back, R.id.next})
     public void onViewClicked(View view) {
@@ -100,13 +149,16 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
                 finish();
                 break;
             case R.id.next:
+                if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+                    return;
+                }
                 Contains.sCertificationInfo.setName_peiou(tvName.getText().toString());
                 Contains.sCertificationInfo.setAddress_peiou(tvAdress.getText().toString());
                 Contains.sCertificationInfo.setIdcard_peiou(tvIdcard.getText().toString());
                 Contains.sCertificationInfo.setBirthday_peiou(tvBirthday.getText().toString());
                 Contains.sCertificationInfo.setEthnic_peiou(tvEthnic.getText().toString());
                 Contains.sCertificationInfo.setSex_peiou(tvSex.getText().toString());
-                startActivty(MatesInfoThirdActivity.class);
+                mPresenter.getQiniuToken();
                 break;
             default:
                 break;

@@ -9,12 +9,23 @@ import android.widget.ImageView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.CerInfo;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationFourComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFourContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationFourModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationFourPresenter;
+import com.ljcs.cxwl.util.QiniuUploadUtil;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.qiniu.android.http.ResponseInfo;
+import com.vondear.rxtools.RxSPTool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -97,10 +108,51 @@ public class CertificationFourActivity extends BaseActivity implements Certifica
                 Contains.sCertificationInfo.setSignDate(tvData1.getText().toString().trim());
                 Contains.sCertificationInfo.setExpiryDate(tvData2.getText().toString().trim());
                 Contains.sCertificationInfo.setIssueAuthority(tvIssueAuthority.getText().toString().trim());
-                startActivty(CertificationFiveActivity.class);
+                mPresenter.getQiniuToken();
                 break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void getQiniuTokenSuccess(QiniuToken qiniuToken) {
+        if (qiniuToken.getUptoken() != null) {
+            showProgressDialog();
+            QiniuUploadUtil.uploadPic(Contains.sCertificationInfo.getPic_path_zheng(), qiniuToken.getUptoken(), new
+                    UploadCallback() {
+
+                @Override
+                public void sucess(String url) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("token", RxSPTool.getString(CertificationFourActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                    map.put("qfjg", Contains.sCertificationInfo.getIssueAuthority());
+                    map.put("yxq", Contains.sCertificationInfo.getSignDate() + "-" + Contains.sCertificationInfo
+                            .getExpiryDate());
+                    map.put("sfzfm", url);
+                    map.put("bh", Contains.sCertificationInfo.getBh()==0?"":Contains.sCertificationInfo.getBh()+"");
+                    mPresenter.postInfo(map);
+                }
+
+                @Override
+                public void fail(String key, ResponseInfo info) {
+                    closeProgressDialog();
+                }
+            });
+        }
+
+    }
+
+    @Override
+    public void postInfoSuccess(CerInfo baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            ToastUtil.showCenterShort(baseEntity.msg);
+            Contains.sCertificationInfo.setBh(baseEntity.getData().getBh());
+            startActivty(CertificationFiveActivity.class);
+
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
+
     }
 }

@@ -10,12 +10,17 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationFiveComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationFiveModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationFivePresenter;
 import com.ljcs.cxwl.util.AppManager;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.view.CertificationDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -78,7 +83,7 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
         tvIdcard.setText(Contains.sCertificationInfo.getIdcard());
         imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_zheng()));
         tvIssueAuthority.setText(Contains.sCertificationInfo.getIssueAuthority());
-        tvData.setText(Contains.sCertificationInfo.getSignDate() + "-" +Contains.sCertificationInfo.getExpiryDate());
+        tvData.setText(Contains.sCertificationInfo.getSignDate() + "-" + Contains.sCertificationInfo.getExpiryDate());
         imageView1.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_fan()));
     }
 
@@ -97,11 +102,41 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
     @Override
     public void showProgressDialog() {
         progressDialog.show();
+        progressDialog.setCancelable(false);
     }
 
     @Override
     public void closeProgressDialog() {
         progressDialog.hide();
+    }
+
+    @Override
+    public void cerInfoLastSuccess(BaseEntity baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            //  ToastUtil.showCenterShort(baseEntity.msg);
+            final CertificationDialog dialog = new CertificationDialog(CertificationFiveActivity.this);
+            dialog.setCancelable(false);
+            if ("男".equals(Contains.sCertificationInfo.getSex())) {
+                dialog.getImageView().setImageResource(R.drawable.ic_boy);
+            } else {
+                dialog.getImageView().setImageResource(R.drawable.ic_girl);
+
+            }
+            dialog.getBtn().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    AppManager.getInstance().finishActivity(CertificationOneActivity.class);
+                    AppManager.getInstance().finishActivity(CertificationTwoActivity.class);
+                    AppManager.getInstance().finishActivity(CertificationThirdActivity.class);
+                    AppManager.getInstance().finishActivity(CertificationFourActivity.class);
+                    finish();
+                }
+            });
+            dialog.show();
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
     }
 
     @OnClick({R.id.back, R.id.next})
@@ -111,25 +146,10 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
                 finish();
                 break;
             case R.id.next:
-                final CertificationDialog dialog = new CertificationDialog(CertificationFiveActivity.this);
-                if ("男".equals(Contains.sCertificationInfo.getSex())) {
-                    dialog.getImageView().setImageResource(R.drawable.ic_boy);
-                } else {
-                    dialog.getImageView().setImageResource(R.drawable.ic_girl);
+                Map<String, String> map = new HashMap<>();
+                map.put("bh", Contains.sCertificationInfo.getBh()+"");
+                mPresenter.cerInfoLast(map);
 
-                }
-                dialog.getBtn().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        AppManager.getInstance().finishActivity(CertificationOneActivity.class);
-                        AppManager.getInstance().finishActivity(CertificationTwoActivity.class);
-                        AppManager.getInstance().finishActivity(CertificationThirdActivity.class);
-                        AppManager.getInstance().finishActivity(CertificationFourActivity.class);
-                        finish();
-                    }
-                });
-                dialog.show();
                 break;
             default:
                 break;

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,20 +20,33 @@ import com.bumptech.glide.Glide;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.HujiInfo;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
+import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoOneActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterPresenter;
 import com.ljcs.cxwl.util.FileUtil;
+import com.ljcs.cxwl.util.QiniuUploadUtil;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.qiniu.android.http.ResponseInfo;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtools.RxTool;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,6 +55,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_BASIC;
+import static com.ljcs.cxwl.contain.Contains.REQUEST_SUCCESS;
 
 /**
  * @author xlei
@@ -85,6 +100,8 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     ImageView imageViewFan;
     @BindView(R.id.imageView5)
     ImageView imageView5;
+    @BindView(R.id.et_suozaidi)
+    EditText etSuozaidi;
     private OptionsPickerView mOptionsPickerView;
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
@@ -140,11 +157,51 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     @Override
     public void showProgressDialog() {
         progressDialog.show();
+        progressDialog.setCancelable(false);
     }
 
     @Override
     public void closeProgressDialog() {
         progressDialog.hide();
+    }
+
+    @Override
+    public void getQiniuTokenSuccess(QiniuToken qiniuToken) {
+        if (qiniuToken.getUptoken() != null) {
+            showProgressDialog();
+            QiniuUploadUtil.uploadPic(Contains.sCertificationInfo.getPic_path_hk(), qiniuToken.getUptoken(), new
+                    UploadCallback() {
+
+                @Override
+                public void sucess(String url) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("hklx", tvLeixing1.getText().toString());
+                    map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                    map.put("hkxz", tvLeixing2.getText().toString());
+                    map.put("hyzt", tvLeixing3.getText().toString());
+                    map.put("hjszd", etSuozaidi.getText().toString());
+                    map.put("hkzp", url);
+                    mPresenter.hukouInfo(map);
+                }
+
+                @Override
+                public void fail(String key, ResponseInfo info) {
+                    closeProgressDialog();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void hukouInfoSuccess(HujiInfo baseEntity) {
+        if (baseEntity.code==REQUEST_SUCCESS){
+            ToastUtil.showCenterShort(baseEntity.msg);
+            startActivty(MatesInfoOneActivity.class);
+        }else {
+            onErrorMsg(baseEntity.code,baseEntity.msg);
+        }
+
+
     }
 
     @OnClick({R.id.btn_login, R.id.img_upload, R.id.imageView5, R.id.layout_select1, R.id.layout_select2, R.id
@@ -153,11 +210,33 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         Intent intent;
         switch (view.getId()) {
             case R.id.btn_login:
-                startActivty(MatesInfoOneActivity.class);
-//                startActivty(FamilyRegisterTwoActivity.class);
+                if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+                    return;
+                }
+                if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
+                    ToastUtil.showCenterShort("请选择户口类型");
+                    return;
+                }
+                if (RxDataTool.isNullString(etSuozaidi.getText().toString())) {
+                    ToastUtil.showCenterShort("请输入户籍所在地");
+                    return;
+                }
+                if (RxDataTool.isNullString(tvLeixing2.getText().toString())) {
+                    ToastUtil.showCenterShort("请选择户口性质");
+                    return;
+                }
+                if (RxDataTool.isNullString(tvLeixing3.getText().toString())) {
+                    ToastUtil.showCenterShort("请选择婚姻状况");
+                    return;
+                }
+                if (RxDataTool.isNullString(Contains.sCertificationInfo.getPic_path_hk())) {
+                    ToastUtil.showCenterShort("请上传户口本本人页面");
+                    return;
+                }
+                mPresenter.getQiniuToken();
                 break;
             case R.id.img_upload:
-                if (imageView5.getVisibility()==View.INVISIBLE) {
+                if (imageView5.getVisibility() == View.INVISIBLE) {
                     intent = new Intent(FamilyRegisterActivity.this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(getApplication())
                             .getAbsolutePath());
@@ -171,6 +250,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 break;
             case R.id.imageView5:
                 imageView5.setVisibility(View.INVISIBLE);
+                Contains.sCertificationInfo.setPic_path_hk("");
                 Glide.with(FamilyRegisterActivity.this).load(R.mipmap.ic_img1).into(imgUpload);
                 break;
             case R.id.layout_select1:

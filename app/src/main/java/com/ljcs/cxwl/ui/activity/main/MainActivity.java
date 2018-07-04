@@ -9,6 +9,7 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.ui.activity.certification.CertificationOneActivity;
+import com.ljcs.cxwl.ui.activity.certification.CertificationStatusInfoActivity;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerMainComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.MainContract;
 import com.ljcs.cxwl.ui.activity.main.module.MainModule;
@@ -90,7 +91,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 break;
             case R.id.relayout_item1:
                 //实名认证
-                startActivty(CertificationOneActivity.class);
+//                startActivty(CertificationOneActivity.class);
+                //实名认证详情
+                startActivty(CertificationStatusInfoActivity.class);
                 break;
             case R.id.relayout_item2:
                 //添加家庭成员

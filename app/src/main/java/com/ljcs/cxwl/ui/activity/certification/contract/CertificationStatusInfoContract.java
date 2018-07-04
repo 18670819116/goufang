@@ -2,7 +2,6 @@ package com.ljcs.cxwl.ui.activity.certification.contract;
 
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
-import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 
@@ -10,12 +9,12 @@ import java.util.Map;
 
 /**
  * @author xlei
- * @Package The contract for CertificationTwoActivity
+ * @Package The contract for CertificationStatusInfoActivity
  * @Description: $description
- * @date 2018/06/26 19:26:58
+ * @date 2018/07/03 21:25:58
  */
-public interface CertificationTwoContract {
-    interface View extends BaseView<CertificationTwoContractPresenter> {
+public interface CertificationStatusInfoContract {
+    interface View extends BaseView<CertificationStatusInfoContractPresenter> {
         /**
          *
          */
@@ -26,18 +25,15 @@ public interface CertificationTwoContract {
          */
         void closeProgressDialog();
 
-        void getQiniuTokenSuccess(QiniuToken qiniuToken);
-
-        void postInfoSuccess(CerInfo baseEntity);
+        void cerInfoDetailSuccess(CerInfo baseEntity);
     }
 
-    interface CertificationTwoContractPresenter extends BasePresenter {
-        //        /**
+    interface CertificationStatusInfoContractPresenter extends BasePresenter {
+//        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
-        void getQiniuToken();
 
-        void postInfo(Map map);
+        void cerInfoDetail(Map map);
     }
 }

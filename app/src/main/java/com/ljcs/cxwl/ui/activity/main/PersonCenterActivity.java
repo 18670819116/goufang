@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerPersonCenterComponent;
@@ -128,7 +129,7 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                 break;
             case R.id.btn_login_out:
                 //退出登录
-                if (RxTool.isFastClick(500)) {
+                if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     Logger.i("点击过快");
                     return;
                 }

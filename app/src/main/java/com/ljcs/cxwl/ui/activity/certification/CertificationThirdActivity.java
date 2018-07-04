@@ -21,7 +21,9 @@ import com.ljcs.cxwl.ui.activity.certification.contract.CertificationThirdContra
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationThirdModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationThirdPresenter;
 import com.ljcs.cxwl.util.FileUtil;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.vondear.rxtools.RxTool;
 import com.vondear.rxtools.view.RxToast;
 
 import java.io.File;
@@ -87,6 +89,10 @@ public class CertificationThirdActivity extends BaseActivity implements Certific
 
     @OnClick(R.id.button)
     public void onViewClicked() {
+        if (RxTool.isFastClick(Contains.FAST_CLICK)){
+            Logger.i("点击过快");
+            return;
+        }
         Intent intent = new Intent(CertificationThirdActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(getApplication()).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE, true);
@@ -150,7 +156,7 @@ public class CertificationThirdActivity extends BaseActivity implements Certific
                     startActivty(CertificationFourActivity.class);
 
                 } else {
-                    RxToast.normal("扫描识别失败 请重新扫描");
+                    ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
                 }
             }
 
@@ -158,7 +164,7 @@ public class CertificationThirdActivity extends BaseActivity implements Certific
             public void onError(OCRError error) {
                 closeProgressDialog();
                 Logger.e(error.getMessage());
-                RxToast.normal("扫描识别失败 请重新扫描");
+                ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
             }
         });
     }

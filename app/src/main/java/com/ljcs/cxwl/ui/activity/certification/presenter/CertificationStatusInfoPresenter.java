@@ -1,13 +1,13 @@
-package com.ljcs.cxwl.ui.activity.matesinfo.presenter;
+package com.ljcs.cxwl.ui.activity.certification.presenter;
 
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.entity.HujiInfo;
+import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
-import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.CertificationStatusInfoContract;
+import com.ljcs.cxwl.ui.activity.certification.CertificationStatusInfoActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
@@ -22,20 +22,21 @@ import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
- * @Package com.ljcs.cxwl.ui.activity.matesinfo
- * @Description: presenter of MatesInfoTwoActivity
- * @date 2018/06/27 16:33:03
+ * @Package com.ljcs.cxwl.ui.activity.certification
+ * @Description: presenter of CertificationStatusInfoActivity
+ * @date 2018/07/03 21:25:58
  */
-public class MatesInfoTwoPresenter implements MatesInfoTwoContract.MatesInfoTwoContractPresenter {
+public class CertificationStatusInfoPresenter implements CertificationStatusInfoContract
+        .CertificationStatusInfoContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
-    private final MatesInfoTwoContract.View mView;
+    private final CertificationStatusInfoContract.View mView;
     private CompositeDisposable mCompositeDisposable;
-    private MatesInfoTwoActivity mActivity;
+    private CertificationStatusInfoActivity mActivity;
 
     @Inject
-    public MatesInfoTwoPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MatesInfoTwoContract.View view,
-                                 MatesInfoTwoActivity activity) {
+    public CertificationStatusInfoPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull
+            CertificationStatusInfoContract.View view, CertificationStatusInfoActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
@@ -53,38 +54,22 @@ public class MatesInfoTwoPresenter implements MatesInfoTwoContract.MatesInfoTwoC
             mCompositeDisposable.dispose();
         }
     }
+
     @Override
-    public void getQiniuToken() {
-        Map<String, String> map = new HashMap<>();
-        Disposable disposable = httpAPIWrapper.getQiniuToken(map).subscribe(new Consumer<QiniuToken>() {
+    public void cerInfoDetail(Map map) {
+        mView.showProgressDialog();
+        Disposable disposable = httpAPIWrapper.cerInfoDetail(map).subscribe(new Consumer<CerInfo>() {
             @Override
-            public void accept(QiniuToken user) throws Exception {
-                mView.getQiniuTokenSuccess(user);
+            public void accept(CerInfo user) throws Exception {
+                mView.cerInfoDetailSuccess(user);
+                mView.closeProgressDialog();
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 Logger.e("onError" + throwable.toString());
                 throwable.printStackTrace();
-            }
-        });
-        mCompositeDisposable.add(disposable);
-    }
-    @Override
-    public void matesInfo(Map map) {
-//        mView.showProgressDialog();
-        Disposable disposable = httpAPIWrapper.matesInfo(map).subscribe(new Consumer<BaseEntity>() {
-            @Override
-            public void accept(BaseEntity user) throws Exception {
                 mView.closeProgressDialog();
-                mView.matesInfoSuccess(user);
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                Logger.e("onError" + throwable.toString());
-                mView.closeProgressDialog();
-                throwable.printStackTrace();
             }
         });
         mCompositeDisposable.add(disposable);

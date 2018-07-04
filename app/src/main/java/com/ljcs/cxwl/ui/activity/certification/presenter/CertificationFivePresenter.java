@@ -1,10 +1,21 @@
 package com.ljcs.cxwl.ui.activity.certification.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
 import com.ljcs.cxwl.ui.activity.certification.CertificationFiveActivity;
+import com.orhanobut.logger.Logger;
+
+import java.util.Map;
+
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
@@ -12,7 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of CertificationFiveActivity
  * @date 2018/06/26 19:29:05
  */
-public class CertificationFivePresenter implements CertificationFiveContract.CertificationFiveContractPresenter{
+public class CertificationFivePresenter implements CertificationFiveContract.CertificationFiveContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
     private final CertificationFiveContract.View mView;
@@ -20,12 +31,14 @@ public class CertificationFivePresenter implements CertificationFiveContract.Cer
     private CertificationFiveActivity mActivity;
 
     @Inject
-    public CertificationFivePresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull CertificationFiveContract.View view, CertificationFiveActivity activity) {
+    public CertificationFivePresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull CertificationFiveContract.View
+            view, CertificationFiveActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -34,10 +47,30 @@ public class CertificationFivePresenter implements CertificationFiveContract.Cer
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 
+    @Override
+    public void cerInfoLast(Map map) {
+        mView.showProgressDialog();
+        Disposable disposable = httpAPIWrapper.cerInfoLast(map).subscribe(new Consumer<BaseEntity>() {
+            @Override
+            public void accept(BaseEntity user) throws Exception {
+                mView.closeProgressDialog();
+                mView.cerInfoLastSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Logger.e("onError" + throwable.toString());
+                mView.closeProgressDialog();
+                throwable.printStackTrace();
+            }
+        });
+        mCompositeDisposable.add(disposable);
+
+    }
 //    @Override
 //    public void getUser(HashMap map) {
 //        //mView.showProgressDialog();

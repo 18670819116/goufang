@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.RegisterBean;
@@ -76,6 +77,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initData() {
+        mLoginTel.setText(RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
+        mLoginPwd.setText(RxSPTool.getString(this,ShareStatic.APP_LOGIN_MM));
         //设置密码可不可见
         mIvShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -152,7 +155,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 startActivty(ForgetPwdActivity.class);
                 break;
             case R.id.btn_login:
-                if ( RxTool.isFastClick(500)){
+                if ( RxTool.isFastClick(Contains.FAST_CLICK)){
                     Logger.i("点击过快");
                     return;
                 }

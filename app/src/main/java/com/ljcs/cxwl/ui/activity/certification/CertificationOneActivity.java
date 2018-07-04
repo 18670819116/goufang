@@ -20,12 +20,15 @@ import com.baidu.ocr.ui.camera.CameraView;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.R;
+import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationOneComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationOneContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationOneModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationOnePresenter;
 import com.ljcs.cxwl.util.FileUtil;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.vondear.rxtools.RxTool;
 import com.vondear.rxtools.view.RxToast;
 
 import java.io.File;
@@ -96,6 +99,10 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
 
     @OnClick(R.id.button)
     public void onViewClicked() {
+        if (RxTool.isFastClick(Contains.FAST_CLICK)){
+            Logger.i("点击过快");
+            return;
+        }
         if (!checkTokenStatus()) {
             return;
         }
@@ -183,12 +190,12 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
 //                        intent.putExtra("file_path", fileRealPath);
 //                        startActivity(intent);
 //                    } catch (Exception e) {
-//                        RxToast.normal("扫描识别失败 请重新扫描");
+//                        ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
 //                    }
 
 
                 } else {
-                    RxToast.normal("扫描识别失败 请重新扫描");
+                    ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
                 }
             }
 
@@ -196,7 +203,7 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
             public void onError(OCRError error) {
                 closeProgressDialog();
                 Logger.e(error.getMessage());
-                RxToast.normal("扫描识别失败 请重新扫描");
+                ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
             }
         });
     }

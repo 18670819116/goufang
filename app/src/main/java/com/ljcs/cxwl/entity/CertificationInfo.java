@@ -27,6 +27,7 @@ public class CertificationInfo {
     private String leixing1;//户籍类型
     private String leixing2;//户口类型
     private String leixing3;//婚姻状况
+    private int bh;//修改要穿编号
 
     /**
      * 配偶身份证信息
@@ -47,6 +48,7 @@ public class CertificationInfo {
     private String leixing1_peiou;//户籍类型
     private String leixing2_peiou;//户口类型
     private String leixing3_peiou;//婚姻状况
+    private int bh_peiou;//配偶编号
     /**
      * 子女信息
      */
@@ -62,6 +64,14 @@ public class CertificationInfo {
     private List<CertificationInfo> list_zinv;//子女集合
 
     public CertificationInfo() {
+    }
+
+    public int getBh() {
+        return bh;
+    }
+
+    public void setBh(int bh) {
+        this.bh = bh;
     }
 
     public String getName() {
@@ -382,5 +392,13 @@ public class CertificationInfo {
 
     public void setPic_path_hk_zinv(String pic_path_hk_zinv) {
         this.pic_path_hk_zinv = pic_path_hk_zinv;
+    }
+
+    public int getBh_peiou() {
+        return bh_peiou;
+    }
+
+    public void setBh_peiou(int bh_peiou) {
+        this.bh_peiou = bh_peiou;
     }
 }
