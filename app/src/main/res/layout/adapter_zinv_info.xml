@@ -17,30 +17,35 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="姓名："/>
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x30"
                 android:text="某某某"
-                android:textColor="@color/color_333333"
-                android:textSize="14sp"/>
+                android:textColor="@color/main_color"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/img_change"
+                android:layout_width="@dimen/x123"
+                android:layout_height="@dimen/y46"
+                android:src="@mipmap/ic_change_info"
+                />
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -65,11 +70,10 @@
                 android:src="@mipmap/ic_rock_right"/>
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -94,11 +98,10 @@
                 android:src="@mipmap/ic_rock_right"/>
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -123,12 +126,12 @@
                 android:src="@mipmap/ic_rock_right"/>
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -152,11 +155,10 @@
                 android:src="@mipmap/ic_rock_right"/>
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -175,11 +177,10 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y94"
+            android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -204,10 +205,9 @@
                 android:src="@mipmap/ic_rock_right"/>
         </LinearLayout>
 
-        <View style="@style/line_hor"/>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
 

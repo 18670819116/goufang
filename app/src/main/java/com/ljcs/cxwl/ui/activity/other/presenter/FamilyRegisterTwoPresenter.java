@@ -1,8 +1,15 @@
 package com.ljcs.cxwl.ui.activity.other.presenter;
 import android.support.annotation.NonNull;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.MatesInfo;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterTwoContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwoActivity;
+import com.orhanobut.logger.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -40,7 +47,42 @@ public class FamilyRegisterTwoPresenter implements FamilyRegisterTwoContract.Fam
              mCompositeDisposable.dispose();
         }
     }
-
+    @Override
+    public void getQiniuToken() {
+        Map<String, String> map = new HashMap<>();
+        Disposable disposable = httpAPIWrapper.getQiniuToken(map).subscribe(new Consumer<QiniuToken>() {
+            @Override
+            public void accept(QiniuToken user) throws Exception {
+                mView.getQiniuTokenSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Logger.e("onError" + throwable.toString());
+                throwable.printStackTrace();
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
+    @Override
+    public void matesInfo(Map map) {
+//        mView.showProgressDialog();
+        Disposable disposable = httpAPIWrapper.matesInfo(map).subscribe(new Consumer<MatesInfo>() {
+            @Override
+            public void accept(MatesInfo user) throws Exception {
+                mView.closeProgressDialog();
+                mView.matesInfoSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Logger.e("onError" + throwable.toString());
+                mView.closeProgressDialog();
+                throwable.printStackTrace();
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
 //    @Override
 //    public void getUser(HashMap map) {
 //        //mView.showProgressDialog();

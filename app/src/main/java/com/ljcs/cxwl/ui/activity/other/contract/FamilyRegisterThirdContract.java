@@ -1,7 +1,11 @@
 package com.ljcs.cxwl.ui.activity.other.contract;
 
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
+import java.util.Map;
+
 /**
  * @author xlei
  * @Package The contract for FamilyRegisterThirdActivity
@@ -19,6 +23,8 @@ public interface FamilyRegisterThirdContract {
          *
          */
         void closeProgressDialog();
+
+        void allInfoSuccess(AllInfo baseEntity);
     }
 
     interface FamilyRegisterThirdContractPresenter extends BasePresenter {
@@ -26,5 +32,6 @@ public interface FamilyRegisterThirdContract {
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+void allInfo(Map map);
     }
 }

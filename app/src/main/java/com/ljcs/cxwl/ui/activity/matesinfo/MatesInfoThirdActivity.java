@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.baidu.idcardquality.IDcardQualityProcess;
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
 import com.baidu.ocr.sdk.model.IDCardParams;
 import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
+import com.baidu.ocr.ui.camera.CameraNativeHelper;
+import com.baidu.ocr.ui.camera.CameraView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -22,7 +26,9 @@ import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoThirdCompone
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoThirdContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoThirdModule;
 import com.ljcs.cxwl.ui.activity.matesinfo.presenter.MatesInfoThirdPresenter;
+import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.FileUtil;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.view.RxToast;
 
@@ -33,6 +39,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.ENTERTYPE_CHANGE;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_CAMERA_FAN;
 
 /**
@@ -62,7 +69,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
 
     @Override
     protected void initData() {
-
+        initAccessTokenWithAkSk();
     }
 
     @Override
@@ -142,6 +149,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
             public void onResult(IDCardResult result) {
                 closeProgressDialog();
                 if (result != null) {
+                    Logger.e(Contains.sCertificationInfo.getPic_path_fan_peiou());
                     Logger.i(result.toString());
                     Contains.sCertificationInfo.setSignDate_peiou(result.getSignDate() == null ? "" : result.getSignDate()
                             .toString());
@@ -151,9 +159,12 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
                             .getIssueAuthority().toString());
                     Contains.sCertificationInfo.setPic_path_fan_peiou(fileRealPath);
                     startActivty(MatesInfoFourActivity.class);
-
+                    AppManager.getInstance().finishActivity(MatesInfoFourActivity.class);
+                    if (ENTERTYPE_CHANGE==1){
+                        finish();
+                    }
                 } else {
-                    RxToast.normal("扫描识别失败 请重新扫描");
+                    ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
                 }
             }
 
@@ -161,8 +172,55 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
             public void onError(OCRError error) {
                 closeProgressDialog();
                 Logger.e(error.getMessage());
-                RxToast.normal("扫描识别失败 请重新扫描");
+                ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
             }
         });
+    }
+    private void initAccessTokenWithAkSk() {
+        OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                String token = result.getAccessToken();
+                Logger.i("token" + token);
+                //hasGotToken = true;
+                CameraNativeHelper.init(MatesInfoThirdActivity.this, OCR.getInstance(MatesInfoThirdActivity.this)
+                        .getLicense(), new CameraNativeHelper.CameraNativeInitCallback() {
+                    @Override
+                    public void onError(int errorCode, Throwable e) {
+                        String msg;
+                        switch (errorCode) {
+                            case CameraView.NATIVE_SOLOAD_FAIL:
+                                msg = "加载so失败，请确保apk中存在ui部分的so";
+                                break;
+                            case CameraView.NATIVE_AUTH_FAIL:
+                                msg = "授权本地质量控制token获取失败";
+                                break;
+                            case CameraView.NATIVE_INIT_FAIL:
+                                msg = "本地质量控制";
+                                break;
+                            default:
+                                msg = String.valueOf(errorCode);
+                        }
+                        Logger.e("CameraNativeHelper.init" + msg);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                error.printStackTrace();
+                Logger.e("OCRtoken获取失败" + error.getMessage());
+            }
+        }, getApplicationContext(), "gPFYMZ1xIUMZP8C44xdPVbso", "O3ADFGC344Wvrc94gmX9d5gK779P1O9A");
+    }
+    @Override
+    protected void onDestroy() {
+        // 释放本地质量控制模型
+        if (IDcardQualityProcess.getInstance() != null) {
+            CameraNativeHelper.release();
+        }
+        super.onDestroy();
+        // 释放内存资源
+//        OCR.getInstance(this).release();
     }
 }

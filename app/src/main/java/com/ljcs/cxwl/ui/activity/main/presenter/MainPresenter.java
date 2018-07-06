@@ -1,9 +1,20 @@
 package com.ljcs.cxwl.ui.activity.main.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.AllInfo;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CerInfo;
+import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.contract.MainContract;
 import com.ljcs.cxwl.ui.activity.main.MainActivity;
+import com.orhanobut.logger.Logger;
+
+import java.util.Map;
+
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -15,7 +26,7 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of MainActivity
  * @date 2018/07/02 16:17:40
  */
-public class MainPresenter implements MainContract.MainContractPresenter{
+public class MainPresenter implements MainContract.MainContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
     private final MainContract.View mView;
@@ -23,12 +34,14 @@ public class MainPresenter implements MainContract.MainContractPresenter{
     private MainActivity mActivity;
 
     @Inject
-    public MainPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MainContract.View view, MainActivity activity) {
+    public MainPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MainContract.View view, MainActivity
+            activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -37,8 +50,44 @@ public class MainPresenter implements MainContract.MainContractPresenter{
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
+    }
+
+    @Override
+    public void allInfo(Map map) {
+        Disposable disposable = httpAPIWrapper.allInfo(map).subscribe(new Consumer<AllInfo>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull AllInfo appLogin) throws Exception {
+                mView.allInfoSuccess(appLogin);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void cerInfoDetail(Map map) {
+        Disposable disposable = httpAPIWrapper.cerInfoDetail(map).subscribe(new Consumer<CerInfo>() {
+            @Override
+            public void accept(CerInfo user) throws Exception {
+                mView.cerInfoDetailSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Logger.e("onError" + throwable.toString());
+                throwable.printStackTrace();
+            }
+        });
+        mCompositeDisposable.add(disposable);
     }
 
 //    @Override

@@ -5,6 +5,8 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +21,7 @@ import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.entity.RegisterBean;
+import com.ljcs.cxwl.ui.activity.AgreementActivity;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerRegisterComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.RegisterContract;
 import com.ljcs.cxwl.ui.activity.main.module.RegisterModule;
@@ -110,10 +113,13 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mEt3.setInputType(TYPE_CLASS_TEXT);
+                    mEt3.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+//                    mEt3.setInputType(TYPE_CLASS_TEXT);
                     mEt3.setSelection(mEt3.getText().length());
                 } else {
-                    mEt3.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                    mEt3.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    mEt3.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     mEt3.setSelection(mEt3.getText().length());
                 }
             }
@@ -223,7 +229,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 mPresenter.register(map);
                 break;
             case R.id.tv_xieyi:
-                ToastUtil.showCenterShort("跳转至协议");
+                //ToastUtil.showCenterShort("跳转至协议");
+                startActivty(AgreementActivity.class);
                 break;
             default:
                 break;

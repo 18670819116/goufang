@@ -8,6 +8,7 @@ import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.ui.activity.main.contract.SplashContract;
 import com.ljcs.cxwl.ui.activity.main.SplashActivity;
 import com.ljcs.cxwl.util.ToastUtil;
+import com.ljcs.cxwl.util.UpdateManager;
 import com.orhanobut.logger.Logger;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
@@ -63,8 +64,8 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
     }
 
     public void getPermission() {
-        AndPermission.with(mActivity).requestCode(101).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest
-                .permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA).rationale(new RationaleListener() {
+        AndPermission.with(mActivity).requestCode(101).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA).rationale(new RationaleListener() {
             @Override
             public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
                 AndPermission.rationaleDialog(mActivity, rationale).setNegativeButton("关闭", new DialogInterface
@@ -121,6 +122,27 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
             }
         }
     };
+
+    /**
+     * 控制更新版本弹框
+     */
+    private void alertUpdate() {
+        // 这里来检测版本是否需要更新
+        UpdateManager mUpdateManager = new UpdateManager(mActivity, "");
+        mUpdateManager.checkUpdateInfo("", "", 22);
+        mUpdateManager.setOnYiHouOnClickListener(new UpdateManager.OnYiHouOnClickListener() {
+            @Override
+            public void onYihouClick() {
+                if (jump == JUMPTOMAIN) {
+                    mView.loginSuccees();
+                } else if (jump == JUMPTOLOGIN) {
+                    mView.jumpToLogin();
+                } else {
+                    mView.jumpToGuest();
+                }
+            }
+        });
+    }
 
     public void jump() {
         timeOver = true;

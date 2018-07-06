@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -83,10 +85,13 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    et1.setInputType(TYPE_CLASS_TEXT);
+//                    et1.setInputType(TYPE_CLASS_TEXT);
+                    et1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
                     et1.setSelection(et1.getText().length());
                 } else {
-                    et1.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                    et1.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    et1.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     et1.setSelection(et1.getText().length());
                 }
             }
@@ -95,10 +100,13 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    et2.setInputType(TYPE_CLASS_TEXT);
+//                    et2.setInputType(TYPE_CLASS_TEXT);
+                    et2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
                     et2.setSelection(et1.getText().length());
                 } else {
-                    et2.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                    et2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    et2.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     et2.setSelection(et1.getText().length());
                 }
             }

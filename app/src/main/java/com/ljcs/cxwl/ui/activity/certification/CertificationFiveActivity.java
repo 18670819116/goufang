@@ -10,14 +10,17 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationFiveComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationFiveModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationFivePresenter;
 import com.ljcs.cxwl.util.AppManager;
-import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.view.CertificationDialog;
+import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtools.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -110,10 +113,48 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
         progressDialog.hide();
     }
 
+
+    @OnClick({R.id.back, R.id.next})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                finish();
+                break;
+            case R.id.next:
+                if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+                    return;
+                }
+                Map<String, String> map = new HashMap<>();
+                map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
+                        .sAllInfo.getData().getSmyz().getBh() != 0) {
+                    map.put("bh", Contains.sAllInfo.getData().getSmyz().getBh() + "");
+                } else {
+                    map.put("bh", "");
+                }
+                mPresenter.cerInfoLast(map);
+
+                break;
+            default:
+                break;
+        }
+    }
+
     @Override
     public void cerInfoLastSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            //  ToastUtil.showCenterShort(baseEntity.msg);
+            Map<String, String> map1 = new HashMap<>();
+            map1.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+            mPresenter.allInfo(map1);
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
+    }
+
+    @Override
+    public void allInfoSuccess(AllInfo baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            Contains.sAllInfo = baseEntity;
             final CertificationDialog dialog = new CertificationDialog(CertificationFiveActivity.this);
             dialog.setCancelable(false);
             if ("男".equals(Contains.sCertificationInfo.getSex())) {
@@ -136,23 +177,6 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
             dialog.show();
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
-        }
-    }
-
-    @OnClick({R.id.back, R.id.next})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
-            case R.id.next:
-                Map<String, String> map = new HashMap<>();
-                map.put("bh", Contains.sCertificationInfo.getBh()+"");
-                mPresenter.cerInfoLast(map);
-
-                break;
-            default:
-                break;
         }
     }
 }

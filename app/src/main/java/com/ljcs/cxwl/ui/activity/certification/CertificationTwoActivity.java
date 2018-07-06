@@ -2,6 +2,8 @@ package com.ljcs.cxwl.ui.activity.certification;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
@@ -20,13 +23,21 @@ import com.ljcs.cxwl.ui.activity.certification.contract.CertificationTwoContract
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationTwoModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationTwoPresenter;
 import com.ljcs.cxwl.util.QiniuUploadUtil;
+import com.ljcs.cxwl.util.StringUitl;
+import com.ljcs.cxwl.util.StringUitls;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.utils.StringUtils;
+import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxRegTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -72,8 +83,6 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarTitle.setText("实名认证");
-
-
     }
 
     @Override
@@ -127,9 +136,19 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
                     map.put("xm", Contains.sCertificationInfo.getName());
                     map.put("xb", Contains.sCertificationInfo.getSex());
                     map.put("sfzzm", url);
-                    map.put("bh", Contains.sCertificationInfo.getBh()==0?"":Contains.sCertificationInfo.getBh()+"");
+                    if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
+                            Contains.sAllInfo.getData().getSmyz().getBh() != 0) {
+                        map.put("bh", Contains.sAllInfo.getData().getSmyz().getBh() + "");
+                    } else {
+                        map.put("bh", "");
+                    }
                     map.put("dz", Contains.sCertificationInfo.getAddress());
                     mPresenter.postInfo(map);
+                }
+
+                @Override
+                public void sucess(List<String> url) {
+
                 }
 
                 @Override
@@ -144,14 +163,24 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
     @Override
     public void postInfoSuccess(CerInfo baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
-            Contains.sCertificationInfo.setBh(baseEntity.getData().getBh());
-            startActivty(CertificationThirdActivity.class);
-
+            Map<String, String> map = new HashMap<>();
+            map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+            mPresenter.allInfo(map);
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
         }
 
+    }
+
+    @Override
+    public void allInfoSuccess(AllInfo baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            Contains.sAllInfo = baseEntity;
+            ToastUtil.showCenterShort(baseEntity.msg);
+            startActivty(CertificationThirdActivity.class);
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
     }
 
     @OnClick({R.id.back, R.id.next})
@@ -161,21 +190,58 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
                 finish();
                 break;
             case R.id.next:
-                if (RxTool.isFastClick(Contains.FAST_CLICK)) {
-                    return;
+                if (checkText()) {
+                    Contains.sCertificationInfo.setName(tvName.getText().toString());
+                    Contains.sCertificationInfo.setAddress(tvAdress.getText().toString());
+                    Contains.sCertificationInfo.setIdcard(tvIdcard.getText().toString());
+                    Contains.sCertificationInfo.setBirthday(tvBirthday.getText().toString());
+                    Contains.sCertificationInfo.setEthnic(tvEthnic.getText().toString());
+                    Contains.sCertificationInfo.setSex(tvSex.getText().toString());
+                    // startActivty(CertificationThirdActivity.class);
+                    mPresenter.getQiniuToken();
                 }
-                Contains.sCertificationInfo.setName(tvName.getText().toString());
-                Contains.sCertificationInfo.setAddress(tvAdress.getText().toString());
-                Contains.sCertificationInfo.setIdcard(tvIdcard.getText().toString());
-                Contains.sCertificationInfo.setBirthday(tvBirthday.getText().toString());
-                Contains.sCertificationInfo.setEthnic(tvEthnic.getText().toString());
-                Contains.sCertificationInfo.setSex(tvSex.getText().toString());
-                // startActivty(CertificationThirdActivity.class);
-                mPresenter.getQiniuToken();
 
                 break;
             default:
                 break;
         }
+    }
+
+    private boolean checkText() {
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+            return false;
+        }
+        if (RxDataTool.isNullString(tvName.getText().toString())) {
+            ToastUtil.showCenterShort("姓名为空");
+            return false;
+        }
+
+        if (RxDataTool.isNullString(tvSex.getText().toString())||(!tvSex.getText().toString().equals("男")&&!tvSex.getText().toString().equals("女"))) {
+            ToastUtil.showCenterShort("性别格式不正确");
+            return false;
+        }
+
+        if (RxDataTool.isNullString(tvEthnic.getText().toString())) {
+            ToastUtil.showCenterShort("民族为空");
+            return false;
+        }
+        if (RxDataTool.isNullString(tvBirthday.getText().toString())) {
+            ToastUtil.showCenterShort("出生为空");
+            return false;
+        }
+
+        if (RxDataTool.isNullString(tvAdress.getText().toString())) {
+            ToastUtil.showCenterShort("住址为空");
+            return false;
+        }
+        if (RxDataTool.isNullString(tvIdcard.getText().toString())) {
+            ToastUtil.showCenterShort("身份证号码为空");
+            return false;
+        }
+        if (!RxRegTool.isIDCard18(tvIdcard.getText().toString())) {
+            ToastUtil.showCenterShort("身份证号码不合法");
+            return false;
+        }
+        return true;
     }
 }

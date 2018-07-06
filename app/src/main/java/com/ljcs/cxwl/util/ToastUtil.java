@@ -54,6 +54,7 @@ public class ToastUtil {
                     shortToast.cancel();
                 }
                 shortToast = Toast.makeText(AppConfig.instance, text, Toast.LENGTH_SHORT);
+                shortToast.setGravity(Gravity.CENTER,0,0);
                 shortToast.show();
                 Looper.loop();
             }

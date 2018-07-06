@@ -86,13 +86,14 @@
                         android:text="姓名："/>
 
                     <EditText
-                        android:background="@null"
                         android:id="@+id/tv_name"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
-                        android:text="某某某"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
+                        android:text=""
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -108,16 +109,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="姓别："/>
+                        android:text="性别："/>
 
                     <EditText
-                        android:background="@null"
                         android:id="@+id/tv_sex"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
-                        android:text="男"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:maxLength="1"
+                        android:singleLine="true"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
 
@@ -128,13 +130,15 @@
                         android:text="民族："/>
 
                     <EditText
-                        android:background="@null"
                         android:id="@+id/tv_ethnic"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:singleLine="true"
                         android:text="汉"
+
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -153,12 +157,15 @@
                         android:text="出生："/>
 
                     <EditText
-                        android:background="@null"
                         android:id="@+id/tv_birthday"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:maxLength="8"
+                        android:singleLine="true"
                         android:text="1976年06月06日"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
@@ -178,13 +185,14 @@
                         android:text="住址："/>
 
                     <EditText
-                        android:background="@null"
                         android:id="@+id/tv_adress"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:background="@null"
                         android:text="湖南省长沙市"
+
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -203,12 +211,14 @@
                         android:text="身份证号码："/>
 
                     <EditText
-                        android:background="@null"
                         android:id="@+id/tv_idcard"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:maxLength="18"
+                        android:singleLine="true"
                         android:text="430121199308047031"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
@@ -224,10 +234,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/y42"
-        android:paddingTop="@dimen/y36">
+        android:paddingBottom="@dimen/y20"
+        android:paddingTop="@dimen/y20">
 
         <TextView
             android:id="@+id/back"
@@ -241,11 +251,11 @@
             android:textColor="@color/white"/>
 
         <TextView
-            android:layout_marginRight="@dimen/x19"
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/x19"
             android:background="@mipmap/btn_next"
             android:gravity="center"
             android:text="下一步"

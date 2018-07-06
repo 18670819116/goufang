@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.base;
 
+import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.ProgressDialog;
 
@@ -22,6 +23,7 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.vondear.rxtools.RxActivityTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxSPTool;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
@@ -218,5 +220,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
             ToastUtil.showCenterShort(msg);
         }
 
+    }
+
+    public void clearRxSp() {
+        RxSPTool.remove(this, ShareStatic.APP_LOGIN_SJHM);
+        RxSPTool.remove(this, ShareStatic.APP_LOGIN_TOKEN);
+        RxSPTool.remove(this, ShareStatic.APP_LOGIN_MM);
+        RxSPTool.remove(this, ShareStatic.APP_LOGIN_BH);
+        RxSPTool.remove(this, ShareStatic.APP_LOGIN_ZT);
     }
 }

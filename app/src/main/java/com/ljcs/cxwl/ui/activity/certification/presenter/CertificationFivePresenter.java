@@ -3,6 +3,7 @@ package com.ljcs.cxwl.ui.activity.certification.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -43,7 +45,24 @@ public class CertificationFivePresenter implements CertificationFiveContract.Cer
     public void subscribe() {
 
     }
-
+    @Override
+    public void allInfo(Map map) {
+        Disposable disposable = httpAPIWrapper.allInfo(map).subscribe(new Consumer<AllInfo>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull AllInfo appLogin) throws Exception {
+                mView.allInfoSuccess(appLogin);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {

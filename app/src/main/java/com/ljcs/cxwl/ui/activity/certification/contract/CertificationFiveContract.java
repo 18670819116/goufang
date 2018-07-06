@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.ui.activity.certification.contract;
 
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
@@ -25,6 +26,9 @@ public interface CertificationFiveContract {
         void closeProgressDialog();
 
         void cerInfoLastSuccess(BaseEntity baseEntity);
+
+        void allInfoSuccess(AllInfo baseEntity);
+
     }
 
     interface CertificationFiveContractPresenter extends BasePresenter {
@@ -32,5 +36,8 @@ public interface CertificationFiveContract {
 //         *
 //         */
         void cerInfoLast(Map map);
+
+        void allInfo(Map map);
+
     }
 }

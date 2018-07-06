@@ -427,10 +427,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/y42"
-        android:paddingTop="@dimen/y36">
+        android:gravity="center"
+        android:paddingBottom="@dimen/y20"
+        android:paddingTop="@dimen/y20">
 
         <Button
             android:id="@+id/btn_login"

@@ -17,18 +17,32 @@ import com.bumptech.glide.Glide;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.data.api.API;
+import com.ljcs.cxwl.entity.MatesInfo;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterTwoComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterTwoContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterTwoModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterTwoPresenter;
 import com.ljcs.cxwl.util.FileUtil;
+import com.ljcs.cxwl.util.QiniuUploadUtil;
+import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.qiniu.android.http.ResponseInfo;
+import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxKeyboardTool;
+import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtools.RxTool;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -64,8 +78,6 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
     TextView tvSex;
     @BindView(R.id.tv_ethnic)
     TextView tvEthnic;
-    @BindView(R.id.tv_birthday)
-    TextView tvBirthday;
     @BindView(R.id.tv_adress)
     TextView tvAdress;
     @BindView(R.id.tv_idcard)
@@ -86,6 +98,8 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
     ImageView imageView5;
     @BindView(R.id.imageView6)
     ImageView imageView6;
+    @BindView(R.id.tv_birthday)
+    TextView tvBirthday;
 
 
     private String imgPath1;
@@ -94,6 +108,8 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private List<String> list3 = new ArrayList<>();
+    private boolean isHavePic1 = false;
+    private boolean isHavePic2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,20 +131,38 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
         list2.add("集体户口");
         list2.add("家庭户口");
         list3.add("已婚");
-        list3.add("未婚");
+//        list3.add("未婚");
         list3.add("离异");
         list3.add("丧偶");
-        tvName.setText(Contains.sCertificationInfo.getName_peiou());
-        tvSex.setText(Contains.sCertificationInfo.getSex_peiou());
-        tvEthnic.setText(Contains.sCertificationInfo.getEthnic_peiou());
-        tvBirthday.setText(Contains.sCertificationInfo.getBirthday_peiou());
-        tvAdress.setText(Contains.sCertificationInfo.getAddress_peiou());
-        tvIdcard.setText(Contains.sCertificationInfo.getIdcard_peiou());
-        imageViewZheng.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_zheng_peiou()));
-        tvIssueAuthority.setText(Contains.sCertificationInfo.getIssueAuthority_peiou());
-        tvData.setText(Contains.sCertificationInfo.getSignDate_peiou() + "-" + Contains.sCertificationInfo
-                .getExpiryDate_peiou());
-        imageViewFan.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_fan_peiou()));
+        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null) {
+            //身份证等信息
+            tvName.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+            tvSex.setText(Contains.sAllInfo.getData().getPoxx().getXb());
+            tvEthnic.setText(Contains.sAllInfo.getData().getPoxx().getMz());
+            tvBirthday.setText(Contains.sAllInfo.getData().getPoxx().getCsrq());
+            tvAdress.setText(Contains.sAllInfo.getData().getPoxx().getDz());
+            tvIdcard.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+            tvIssueAuthority.setText(Contains.sAllInfo.getData().getPoxx().getQfjg());
+            tvData.setText(Contains.sAllInfo.getData().getPoxx().getYxq());
+            //户籍等信息
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(imageViewZheng);
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(imageViewFan);
+            tvLeixing1.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+            tvLeixing2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
+            tvLeixing3.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+            //表示有图片 不需要七牛在上传了
+            if (!RxDataTool.isNullString(Contains.sAllInfo.getData().getPoxx().getHkzp())) {
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(imgUpload1);
+                imageView5.setVisibility(View.VISIBLE);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(imgUpload2);
+                imageView6.setVisibility(View.VISIBLE);
+                imgPath1 = API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp();
+                imgPath2 = API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp();
+                isHavePic1 = true;
+                isHavePic2 = true;
+            }
+
+        }
     }
 
     @Override
@@ -159,7 +193,20 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
         Intent intent;
         switch (view.getId()) {
             case R.id.btn_login:
-                startActivty(FamilyRegisterThirdActivity.class);
+                if (checkText()) {
+                    if (isHavePic1 && isHavePic2) {
+                        //表示两张照片都不需要上传
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("hklx", tvLeixing1.getText().toString());
+                        map.put("token", RxSPTool.getString(FamilyRegisterTwoActivity.this, ShareStatic
+                                .APP_LOGIN_TOKEN));
+                        map.put("hkxz", tvLeixing2.getText().toString());
+                        map.put("hyzt", tvLeixing3.getText().toString());
+                        mPresenter.matesInfo(map);
+                    } else {
+                        mPresenter.getQiniuToken();
+                    }
+                }
                 break;
             case R.id.img_upload1:
                 //户口本证件照
@@ -192,10 +239,14 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
                 break;
             case R.id.imageView5:
                 imageView5.setVisibility(View.INVISIBLE);
+                imgPath1 = "";
+                isHavePic1 = false;
                 Glide.with(FamilyRegisterTwoActivity.this).load(R.mipmap.ic_img2).into(imgUpload1);
                 break;
             case R.id.imageView6:
                 imageView6.setVisibility(View.INVISIBLE);
+                isHavePic2 = false;
+                imgPath2 = "";
                 Glide.with(FamilyRegisterTwoActivity.this).load(R.mipmap.ic_img3).into(imgUpload2);
                 break;
             case R.id.layout_select1:
@@ -211,6 +262,39 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
                 break;
         }
 
+    }
+
+    /**
+     * 检查字段
+     *
+     * @return
+     */
+    private boolean checkText() {
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+            return false;
+        }
+        if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
+            ToastUtil.showCenterShort("请选择户口类型");
+            return false;
+        }
+
+        if (RxDataTool.isNullString(tvLeixing2.getText().toString())) {
+            ToastUtil.showCenterShort("请选择户口性质");
+            return false;
+        }
+        if (RxDataTool.isNullString(tvLeixing3.getText().toString())) {
+            ToastUtil.showCenterShort("请选择婚姻状况");
+            return false;
+        }
+        if (RxDataTool.isNullString(imgPath1) && !isHavePic1) {
+            ToastUtil.showCenterShort("请上传户口本配偶页面");
+            return false;
+        }
+        if (RxDataTool.isNullString(imgPath2) && !isHavePic2) {
+            ToastUtil.showCenterShort("请上传结婚证内页");
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -242,6 +326,7 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
     }
 
     private void showSelectPickerView(final int flag, List<String> list) {
+        RxKeyboardTool.hideSoftInput(this);
         mOptionsPickerView = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -281,5 +366,63 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
         }
 
         mOptionsPickerView.show();
+    }
+
+    @Override
+    public void matesInfoSuccess(MatesInfo baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            ToastUtil.showCenterShort(baseEntity.msg);
+            startActivty(FamilyRegisterThirdActivity.class);
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
+    }
+
+    @Override
+    public void getQiniuTokenSuccess(QiniuToken qiniuToken) {
+        if (qiniuToken.getUptoken() != null) {
+            showProgressDialog();
+            List<String> list = new ArrayList<>();
+            if (!isHavePic1) {
+                list.add(imgPath1);
+            }
+            if (!isHavePic2) {
+                list.add(imgPath2);
+            }
+            QiniuUploadUtil.uploadPics(list, qiniuToken.getUptoken(), new UploadCallback() {
+
+                @Override
+                public void sucess(String url) {
+
+                }
+
+                @Override
+                public void sucess(List<String> url) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("hklx", tvLeixing1.getText().toString());
+                    map.put("token", RxSPTool.getString(FamilyRegisterTwoActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                    map.put("hkxz", tvLeixing2.getText().toString());
+                    map.put("hyzt", tvLeixing3.getText().toString());
+                    if (!isHavePic1 && isHavePic2) {
+                        map.put("hkzp", url.get(0));
+                    }
+                    if (isHavePic1 && !isHavePic2) {
+                        map.put("jhzzp", url.get(0));
+                    }
+                    if (url != null && url.size() > 1) {
+                        map.put("hkzp", url.get(0));
+                        map.put("jhzzp", url.get(1));
+                    }
+
+                    mPresenter.matesInfo(map);
+                }
+
+                @Override
+                public void fail(String key, ResponseInfo info) {
+                    closeProgressDialog();
+                }
+            });
+        }
+
     }
 }

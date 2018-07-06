@@ -1,18 +1,20 @@
 package com.ljcs.cxwl.ui.activity;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ljcs.cxwl.R;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author xlei
@@ -22,9 +24,10 @@ import butterknife.ButterKnife;
 public class ShowImgActivity extends AppCompatActivity {
 
 
-
     @BindView(R.id.layout)
     LinearLayout layout;
+    @BindView(R.id.imageView)
+    ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +38,13 @@ public class ShowImgActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         setContentView(R.layout.activity_showimg);
         ButterKnife.bind(this);
-        layout.setBackground(Drawable.createFromPath(getIntent().getStringExtra("img_path")));
+        Glide.with(this).load(getIntent().getStringExtra("img_path")).skipMemoryCache(true).diskCacheStrategy
+                (DiskCacheStrategy.NONE).into(imageView);
 
+    }
+
+    @OnClick(R.id.imageView)
+    public void onViewClicked() {
+        finish();
     }
 }

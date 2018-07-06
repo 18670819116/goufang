@@ -1,6 +1,8 @@
 package com.ljcs.cxwl.ui.activity.matesinfo.contract;
 
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
@@ -25,10 +27,11 @@ public interface MatesInfoTwoContract {
          */
         void closeProgressDialog();
 
-        void matesInfoSuccess(BaseEntity baseEntity);
+        void matesInfoSuccess(MatesInfo baseEntity);
 
         void getQiniuTokenSuccess(QiniuToken qiniuToken);
 
+        void allInfoSuccess(AllInfo baseEntity);
     }
 
     interface MatesInfoTwoContractPresenter extends BasePresenter {
@@ -39,5 +42,7 @@ public interface MatesInfoTwoContract {
         void getQiniuToken();
 
         void matesInfo(Map map);
+
+        void allInfo(Map map);
     }
 }

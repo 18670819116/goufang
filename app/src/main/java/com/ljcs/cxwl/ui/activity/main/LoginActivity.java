@@ -2,6 +2,9 @@ package com.ljcs.cxwl.ui.activity.main;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -78,16 +81,19 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     protected void initData() {
         mLoginTel.setText(RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
-        mLoginPwd.setText(RxSPTool.getString(this,ShareStatic.APP_LOGIN_MM));
+        mLoginPwd.setText(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM));
         //设置密码可不可见
         mIvShowPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mLoginPwd.setInputType(TYPE_CLASS_TEXT);
+//                    mLoginPwd.setInputType(TYPE_CLASS_TEXT);
+                    mLoginPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     mLoginPwd.setSelection(mLoginPwd.getText().length());
                 } else {
-                    mLoginPwd.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                    mLoginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+//                    mLoginPwd.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     mLoginPwd.setSelection(mLoginPwd.getText().length());
                 }
             }
@@ -118,6 +124,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     /**
      * 登录成功回调
+     *
      * @param baseEntity
      */
     @Override
@@ -131,9 +138,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, baseEntity.getData().getMm());
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
                 RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
-                if (baseEntity.msg != null) {
-                    ToastUtil.showCenterShort(baseEntity.msg);
-                }
+//                if (baseEntity.msg != null) {
+//                    ToastUtil.showCenterShort(baseEntity.msg);
+//                }
+                ToastUtil.showCenterShort("登录成功");
                 startActivty(MainActivity.class);
                 finish();
             }
@@ -155,7 +163,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 startActivty(ForgetPwdActivity.class);
                 break;
             case R.id.btn_login:
-                if ( RxTool.isFastClick(Contains.FAST_CLICK)){
+                if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     Logger.i("点击过快");
                     return;
                 }

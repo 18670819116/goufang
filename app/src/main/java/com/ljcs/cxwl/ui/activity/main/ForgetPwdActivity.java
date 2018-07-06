@@ -5,6 +5,8 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -103,11 +105,14 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mEt3.setInputType(TYPE_CLASS_TEXT);
+                    mEt3.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+//                    mEt3.setInputType(TYPE_CLASS_TEXT);
                     mEt3.setSelection(mEt3.getText().length());
                 } else {
-                    mEt3.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                    mEt3.setTransformationMethod(PasswordTransformationMethod.getInstance());
+//                    mEt3.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     mEt3.setSelection(mEt3.getText().length());
+
                 }
             }
         });

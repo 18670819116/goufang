@@ -1,9 +1,11 @@
 package com.ljcs.cxwl.data.api;
 
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.entity.HujiInfo;
+import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.util.MD5Util;
@@ -78,6 +80,11 @@ public class HttpAPIWrapper {
     }
 
     //提交实名认证信息
+    public Observable<AllInfo> allInfo(Map data) {
+        return wrapper(mHttpAPI.allInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //提交实名认证信息
     public Observable<CerInfo> cerInfo(Map data) {
         return wrapper(mHttpAPI.cerInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
@@ -93,10 +100,27 @@ public class HttpAPIWrapper {
     }
 
     //保存/修改配偶信息
-    public Observable<BaseEntity> matesInfo(Map data) {
+    public Observable<MatesInfo> matesInfo(Map data) {
         return wrapper(mHttpAPI.matesInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
 
+    //保存/修改家庭成员信息
+    public Observable<MatesInfo> matesInfoZinv(Map data) {
+        return wrapper(mHttpAPI.matesInfoZinv(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+    //删除家庭成员信息
+    public Observable<BaseEntity> matesInfoDelete(Map data) {
+        return wrapper(mHttpAPI.matesInfoDelete(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //提交家庭成员信息
+    public Observable<BaseEntity> matesInfoCommit(Map data) {
+        return wrapper(mHttpAPI.matesInfoCommit(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+    //保存家庭成员信息
+    public Observable<BaseEntity> matesInfoSave(Map data) {
+        return wrapper(mHttpAPI.matesInfoSave(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
 
     //获取七牛token
     public Observable<QiniuToken> getQiniuToken(Map data) {
@@ -141,7 +165,7 @@ public class HttpAPIWrapper {
             @Override
             public void accept(@NonNull Throwable e) throws Exception {
                 e.printStackTrace();
-                String errorText = "";
+                String errorText = "请求失败";
                 if (e instanceof HttpException) {
                     HttpException exception = (HttpException) e;
                 } else if (e instanceof UnknownHostException) {
@@ -160,7 +184,8 @@ public class HttpAPIWrapper {
                     Logger.i("请求失败");
                     errorText = "请求失败";
                 }
-                ToastUtil.showCenterShort(errorText);
+
+                ToastUtil.displayShortToast(errorText);
             }
         });
     }
@@ -211,7 +236,7 @@ public class HttpAPIWrapper {
                     Logger.i("请求失败");
                     errorText = "请求失败";
                 }
-                ToastUtil.showCenterShort(errorText);
+                ToastUtil.displayShortToast(errorText);
             }
         });
     }

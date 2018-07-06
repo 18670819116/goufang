@@ -1,7 +1,12 @@
 package com.ljcs.cxwl.ui.activity.other.contract;
 
+import com.ljcs.cxwl.entity.MatesInfo;
+import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
+import java.util.Map;
+
 /**
  * @author xlei
  * @Package The contract for FamilyRegisterTwoActivity
@@ -19,6 +24,9 @@ public interface FamilyRegisterTwoContract {
          *
          */
         void closeProgressDialog();
+        void matesInfoSuccess(MatesInfo baseEntity);
+
+        void getQiniuTokenSuccess(QiniuToken qiniuToken);
     }
 
     interface FamilyRegisterTwoContractPresenter extends BasePresenter {
@@ -26,5 +34,8 @@ public interface FamilyRegisterTwoContract {
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+void getQiniuToken();
+
+        void matesInfo(Map map);
     }
 }

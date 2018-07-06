@@ -3,8 +3,10 @@ package com.ljcs.cxwl.ui.activity.matesinfo.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.HujiInfo;
+import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
@@ -53,6 +55,7 @@ public class MatesInfoTwoPresenter implements MatesInfoTwoContract.MatesInfoTwoC
             mCompositeDisposable.dispose();
         }
     }
+
     @Override
     public void getQiniuToken() {
         Map<String, String> map = new HashMap<>();
@@ -70,12 +73,13 @@ public class MatesInfoTwoPresenter implements MatesInfoTwoContract.MatesInfoTwoC
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void matesInfo(Map map) {
 //        mView.showProgressDialog();
-        Disposable disposable = httpAPIWrapper.matesInfo(map).subscribe(new Consumer<BaseEntity>() {
+        Disposable disposable = httpAPIWrapper.matesInfo(map).subscribe(new Consumer<MatesInfo>() {
             @Override
-            public void accept(BaseEntity user) throws Exception {
+            public void accept(MatesInfo user) throws Exception {
                 mView.closeProgressDialog();
                 mView.matesInfoSuccess(user);
             }
@@ -90,6 +94,26 @@ public class MatesInfoTwoPresenter implements MatesInfoTwoContract.MatesInfoTwoC
         mCompositeDisposable.add(disposable);
     }
 
+    @Override
+    public void allInfo(Map map) {
+        Disposable disposable = httpAPIWrapper.allInfo(map).subscribe(new Consumer<AllInfo>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull AllInfo appLogin) throws Exception {
+                mView.closeProgressDialog();
+                mView.allInfoSuccess(appLogin);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                mView.closeProgressDialog();
+            }
+        }, new io.reactivex.functions.Action() {
+            @Override
+            public void run() throws Exception {
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
 //    @Override
 //    public void getUser(HashMap map) {
 //        //mView.showProgressDialog();

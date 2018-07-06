@@ -11,6 +11,8 @@ import com.qiniu.android.storage.UploadManager;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,11 +45,16 @@ public class QiniuUploadUtil {
             @Override
             public void complete(String key, ResponseInfo info, JSONObject response) {
                 if (info.isOK()) {
-
+                    //// TODO: 2018/7/5 y以后优化
+//                    File file = new File(path);
+//                    if (file.exists()){
+//                        file.delete();
+//                        Logger.i("文件删除成功");
+//                    }
                     Logger.i("单图上传成功");
                     callBack.sucess(curUrl);
                 } else {
-                    Logger.e("单图上传失败"+info.toString());
+                    Logger.e("单图上传失败" + info.toString());
                     callBack.fail(key, info);
                 }
             }
@@ -60,21 +67,30 @@ public class QiniuUploadUtil {
     public static void uploadPics(final List<String> list, String _uploadToken, final UploadCallback callBack) {
         UploadManager uploadManager = new UploadManager();
         curUploadImgIndex = 0;
+        final List<String> urlList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             final String curUrl = "android_zjw/" + System.currentTimeMillis();
             //put第二个参数设置文件名
+            urlList.add(curUrl);
             Logger.i("开始传第" + i + "张图--------" + curUrl);
+            final int finalI = i;
             uploadManager.put(list.get(i), curUrl, _uploadToken, new UpCompletionHandler() {
                 @Override
                 public void complete(String key, ResponseInfo info, JSONObject response) {
                     curUploadImgIndex++;
                     if (info.isOK()) {
+                        //// TODO: 2018/7/5 y以后优化
+//                        File file = new File(list.get(finalI));
+//                        if(file.exists()){
+//                            file.delete();
+//                            Logger.i("文件删除成功");
+//                        }
                         if ((curUploadImgIndex) == list.size()) {
                             Logger.i("多图上传成功");
-                            callBack.sucess(curUrl);
+                            callBack.sucess(urlList);
                         }
                     } else {
-                        Logger.e("多图上传失败"+info.toString());
+                        Logger.e("多图上传失败" + info.toString());
                         callBack.fail(key, info);
                     }
                 }

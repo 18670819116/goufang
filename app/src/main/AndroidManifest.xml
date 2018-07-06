@@ -184,19 +184,37 @@
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>
+        <!--申购提交申请状态-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterStatusActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--家庭成员提交申请状态-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyMatesStatusActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
         <!--核对并提交信息-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterFourActivity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>
+        <!--显示图片-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.ShowImgActivity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/translucent"
             />
-
+        <!--协议-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.AgreementActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait"
+            />
 
     </application>
 

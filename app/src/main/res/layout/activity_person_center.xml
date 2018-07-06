@@ -32,6 +32,7 @@
                 android:src="@mipmap/ic_person_phone"/>
 
             <TextView
+                android:id="@+id/tv_account"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x10"

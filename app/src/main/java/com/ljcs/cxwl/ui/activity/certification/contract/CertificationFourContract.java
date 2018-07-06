@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.ui.activity.certification.contract;
 
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
@@ -28,6 +29,8 @@ public interface CertificationFourContract {
         void getQiniuTokenSuccess(QiniuToken qiniuToken);
 
         void postInfoSuccess(CerInfo baseEntity);
+
+        void allInfoSuccess(AllInfo baseEntity);
     }
 
     interface CertificationFourContractPresenter extends BasePresenter {
@@ -38,5 +41,7 @@ public interface CertificationFourContract {
         void getQiniuToken();
 
         void postInfo(Map map);
+
+        void allInfo(Map map);
     }
 }

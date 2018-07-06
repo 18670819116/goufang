@@ -1,6 +1,9 @@
 package com.ljcs.cxwl.ui.activity.certification.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFourContract;
@@ -11,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -21,7 +25,7 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of CertificationFourActivity
  * @date 2018/06/26 19:28:19
  */
-public class CertificationFourPresenter implements CertificationFourContract.CertificationFourContractPresenter{
+public class CertificationFourPresenter implements CertificationFourContract.CertificationFourContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
     private final CertificationFourContract.View mView;
@@ -29,12 +33,14 @@ public class CertificationFourPresenter implements CertificationFourContract.Cer
     private CertificationFourActivity mActivity;
 
     @Inject
-    public CertificationFourPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull CertificationFourContract.View view, CertificationFourActivity activity) {
+    public CertificationFourPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull CertificationFourContract.View
+            view, CertificationFourActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -43,9 +49,10 @@ public class CertificationFourPresenter implements CertificationFourContract.Cer
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
+
     @Override
     public void getQiniuToken() {
         Map<String, String> map = new HashMap<>();
@@ -84,6 +91,26 @@ public class CertificationFourPresenter implements CertificationFourContract.Cer
 
     }
 
+    @Override
+    public void allInfo(Map map) {
+        Disposable disposable = httpAPIWrapper.allInfo(map).subscribe(new Consumer<AllInfo>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull AllInfo appLogin) throws Exception {
+                mView.closeProgressDialog();
+                mView.allInfoSuccess(appLogin);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                mView.closeProgressDialog();
+            }
+        }, new io.reactivex.functions.Action() {
+            @Override
+            public void run() throws Exception {
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
 //    @Override
 //    public void getUser(HashMap map) {
 //        //mView.showProgressDialog();

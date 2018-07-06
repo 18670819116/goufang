@@ -23,12 +23,15 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.data.api.API;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoOneActivity;
+import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterModule;
@@ -39,6 +42,7 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.qiniu.android.http.ResponseInfo;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxKeyboardTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
@@ -107,6 +111,9 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     private List<String> list2 = new ArrayList<>();
     private List<String> list3 = new ArrayList<>();
 
+
+    private boolean isHavePic = false;//七牛上是否存在图片
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,16 +138,30 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         list3.add("未婚");
         list3.add("离异");
         list3.add("丧偶");
-        tvName.setText(Contains.sCertificationInfo.getName());
-        tvSex.setText(Contains.sCertificationInfo.getSex());
-        tvEthnic.setText(Contains.sCertificationInfo.getEthnic());
-        tvBirthday.setText(Contains.sCertificationInfo.getBirthday());
-        tvAdress.setText(Contains.sCertificationInfo.getAddress());
-        tvIdcard.setText(Contains.sCertificationInfo.getIdcard());
-        imageViewZheng.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_zheng()));
-        tvIssueAuthority.setText(Contains.sCertificationInfo.getIssueAuthority());
-        tvData.setText(Contains.sCertificationInfo.getSignDate() + "-" + Contains.sCertificationInfo.getExpiryDate());
-        imageViewFan.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_fan()));
+        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
+            tvName.setText(Contains.sAllInfo.getData().getSmyz().getXm());
+            tvSex.setText(Contains.sAllInfo.getData().getSmyz().getXb());
+            tvEthnic.setText(Contains.sAllInfo.getData().getSmyz().getMz());
+            tvBirthday.setText(Contains.sAllInfo.getData().getSmyz().getCsrq());
+            tvAdress.setText(Contains.sAllInfo.getData().getSmyz().getDz());
+            tvIdcard.setText(Contains.sAllInfo.getData().getSmyz().getSfzhm());
+            tvIssueAuthority.setText(Contains.sAllInfo.getData().getSmyz().getQfjg());
+            tvData.setText(Contains.sAllInfo.getData().getSmyz().getYxq());
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(imageViewZheng);
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(imageViewFan);
+        }
+        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getHjxx() != null) {
+            tvLeixing1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
+            etSuozaidi.setText(Contains.sAllInfo.getData().getHjxx().getHjszd());
+            tvLeixing2.setText(Contains.sAllInfo.getData().getHjxx().getHkxz());
+            tvLeixing3.setText(Contains.sAllInfo.getData().getHjxx().getHyzt());
+            //表示有图片 不需要七牛在上传了
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(imgUpload);
+            imageView5.setVisibility(View.VISIBLE);
+            imgPath = API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp();
+            isHavePic = true;
+
+        }
     }
 
     @Override
@@ -165,12 +186,12 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         progressDialog.hide();
     }
 
+
     @Override
     public void getQiniuTokenSuccess(QiniuToken qiniuToken) {
         if (qiniuToken.getUptoken() != null) {
             showProgressDialog();
-            QiniuUploadUtil.uploadPic(Contains.sCertificationInfo.getPic_path_hk(), qiniuToken.getUptoken(), new
-                    UploadCallback() {
+            QiniuUploadUtil.uploadPic(imgPath, qiniuToken.getUptoken(), new UploadCallback() {
 
                 @Override
                 public void sucess(String url) {
@@ -185,6 +206,11 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 }
 
                 @Override
+                public void sucess(List<String> url) {
+
+                }
+
+                @Override
                 public void fail(String key, ResponseInfo info) {
                     closeProgressDialog();
                 }
@@ -194,14 +220,36 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
 
     @Override
     public void hukouInfoSuccess(HujiInfo baseEntity) {
-        if (baseEntity.code==REQUEST_SUCCESS){
-            ToastUtil.showCenterShort(baseEntity.msg);
-            startActivty(MatesInfoOneActivity.class);
-        }else {
-            onErrorMsg(baseEntity.code,baseEntity.msg);
+        if (baseEntity.code == REQUEST_SUCCESS) {
+
+            //提交数据成功 重新拉取数据赋值
+            Map<String, String> map1 = new HashMap<>();
+            map1.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+            mPresenter.allInfo(map1);
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
         }
 
 
+    }
+
+    @Override
+    public void allInfoSuccess(AllInfo baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            //重新赋值
+            Contains.sAllInfo = baseEntity;
+            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶")) {
+                startActivty(FamilyRegisterThirdActivity.class);
+            } else {
+                if (Contains.ENTERTYPE_CHANGE == 1) {
+                    startActivty(MatesInfoTwoActivity.class);
+                }else {
+                    startActivty(MatesInfoOneActivity.class);
+                }
+            }
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
     }
 
     @OnClick({R.id.btn_login, R.id.img_upload, R.id.imageView5, R.id.layout_select1, R.id.layout_select2, R.id
@@ -229,11 +277,24 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                     ToastUtil.showCenterShort("请选择婚姻状况");
                     return;
                 }
-                if (RxDataTool.isNullString(Contains.sCertificationInfo.getPic_path_hk())) {
+                if (RxDataTool.isNullString(imgPath) && !isHavePic) {
                     ToastUtil.showCenterShort("请上传户口本本人页面");
                     return;
                 }
-                mPresenter.getQiniuToken();
+                if (isHavePic) {
+                    //表示不需要上传图片了
+                    Map<String, String> map = new HashMap<>();
+                    map.put("hklx", tvLeixing1.getText().toString());
+                    map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                    map.put("hkxz", tvLeixing2.getText().toString());
+                    map.put("hyzt", tvLeixing3.getText().toString());
+                    map.put("hjszd", etSuozaidi.getText().toString());
+                    showProgressDialog();
+                    mPresenter.hukouInfo(map);
+                } else {
+                    mPresenter.getQiniuToken();
+                }
+
                 break;
             case R.id.img_upload:
                 if (imageView5.getVisibility() == View.INVISIBLE) {
@@ -249,8 +310,9 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 }
                 break;
             case R.id.imageView5:
+                isHavePic = false;
                 imageView5.setVisibility(View.INVISIBLE);
-                Contains.sCertificationInfo.setPic_path_hk("");
+                imgPath = "";
                 Glide.with(FamilyRegisterActivity.this).load(R.mipmap.ic_img1).into(imgUpload);
                 break;
             case R.id.layout_select1:
@@ -290,6 +352,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     }
 
     private void showSelectPickerView(final int flag, List<String> list) {
+        RxKeyboardTool.hideSoftInput(this);
         mOptionsPickerView = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
@@ -321,9 +384,9 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 .build();
         mOptionsPickerView.setPicker(list);
         if (flag == 1) {
-            mOptionsPickerView.setTitleText("户籍类型");
+            mOptionsPickerView.setTitleText("户口类型");
         } else if (flag == 2) {
-            mOptionsPickerView.setTitleText("家庭户口类型");
+            mOptionsPickerView.setTitleText("户口性质");
         } else {
             mOptionsPickerView.setTitleText("婚姻状况");
         }

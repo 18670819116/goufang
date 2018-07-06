@@ -16,23 +16,31 @@ android {
 
     signingConfigs {
         release {
-            keyAlias 'hncxwl'
-            keyPassword 'hncxwl'
-            storeFile file('D:/xinshequ.jks')
-            storePassword 'hncxwl'
+            storeFile file("../signapk/xlei.jks")
+            storePassword 'x123456'
+            keyAlias 'xlei'
+            keyPassword 'x123456'
+
         }
+//        debug {
+//            storeFile file("../signapk/xlei.jks")
+//            storePassword 'x123456'
+//            keyAlias 'xlei'
+//            keyPassword 'x123456'
+//
+//        }
     }
     buildTypes {
-        debug {
-            minifyEnabled false
-            signingConfig signingConfigs.release
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+//        debug {
+//            minifyEnabled false
+//           // signingConfig signingConfigs.release
+//            buildConfigField "boolean", "LOG_DEBUG", "true"
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
 
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
             buildConfigField "boolean", "LOG_DEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

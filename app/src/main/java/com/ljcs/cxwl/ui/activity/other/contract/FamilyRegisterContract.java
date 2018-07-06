@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.ui.activity.other.contract;
 
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
@@ -28,6 +29,7 @@ public interface FamilyRegisterContract {
         void getQiniuTokenSuccess(QiniuToken qiniuToken);
 
         void hukouInfoSuccess(HujiInfo baseEntity);
+        void allInfoSuccess(AllInfo baseEntity);
     }
 
     interface FamilyRegisterContractPresenter extends BasePresenter {
@@ -36,5 +38,6 @@ public interface FamilyRegisterContract {
 //         */
         void hukouInfo(Map map);
         void getQiniuToken();
+        void allInfo(Map map);
     }
 }

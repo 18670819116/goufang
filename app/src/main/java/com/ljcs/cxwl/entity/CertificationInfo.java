@@ -60,6 +60,7 @@ public class CertificationInfo {
     private String leixing3_zinv;//婚姻状况
     private String guangxi_zinv;//与申请人关系
     private String pic_path_hk_zinv;//户口面照路劲
+    private int bh_zinv;
 
     private List<CertificationInfo> list_zinv;//子女集合
 
@@ -400,5 +401,13 @@ public class CertificationInfo {
 
     public void setBh_peiou(int bh_peiou) {
         this.bh_peiou = bh_peiou;
+    }
+
+    public int getBh_zinv() {
+        return bh_zinv;
+    }
+
+    public void setBh_zinv(int bh_zinv) {
+        this.bh_zinv = bh_zinv;
     }
 }

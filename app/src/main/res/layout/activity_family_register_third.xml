@@ -40,7 +40,7 @@
                 android:id="@+id/recycler_view"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,10 +69,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/y42"
-        android:paddingTop="@dimen/y36">
+        android:gravity="center"
+        android:paddingBottom="@dimen/y20"
+        android:paddingTop="@dimen/y20">
 
         <TextView
             android:id="@+id/tv_add"

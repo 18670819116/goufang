@@ -7,19 +7,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.adapter.ZinvInfoAdapter;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.CertificationInfo;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterThirdComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterThirdContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterThirdModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterThirdPresenter;
+import com.vondear.rxtools.RxSPTool;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -43,6 +49,7 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
     @BindView(R.id.layout_empty)
     LinearLayout layoutEmpty;
     private ZinvInfoAdapter mAdapter;
+    private List<AllInfo.Data.JtcyBean> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +61,37 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
         setContentView(R.layout.activity_family_register_third);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setToolbarTitle("添加家庭成员");
+        setToolbarTitle("添加子女信息");
 
 
     }
 
     @Override
     protected void initData() {
-        mAdapter = new ZinvInfoAdapter(Contains.sCertificationInfoList);
+        list = new ArrayList<>();
+        mAdapter = new ZinvInfoAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setNestedScrollingEnabled(true);
         recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (view.getId() == R.id.img_change) {
+                    Intent intent = new Intent(FamilyRegisterThirdActivity.this, FamilyAddActivity.class);
+                    intent.putExtra("type", 2);
+                    intent.putExtra("position", position);
+                    startActivityForResult(intent, 101);
+                }
+            }
+        });
+
+        loadData();
+    }
+
+    private void loadData() {
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+        mPresenter.allInfo(map1);
     }
 
     @Override
@@ -95,6 +122,7 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
         switch (view.getId()) {
             case R.id.tv_add:
                 intent = new Intent(this, FamilyAddActivity.class);
+                intent.putExtra("type", 1);
                 startActivityForResult(intent, 101);
                 break;
             case R.id.next:
@@ -109,14 +137,26 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 101 && resultCode == 101) {
-            if (Contains.sCertificationInfoList.size() > 0) {
+            loadData();
+        }
+    }
+
+    @Override
+    public void allInfoSuccess(AllInfo baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            //购房资格申请
+            Contains.sAllInfo = baseEntity;
+            if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size()
+                    > 0) {
                 layoutEmpty.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                mAdapter.setNewData(Contains.sCertificationInfoList);
+                mAdapter.setNewData(Contains.sAllInfo.getData().getJtcyList());
             } else {
                 recyclerView.setVisibility(View.GONE);
                 layoutEmpty.setVisibility(View.VISIBLE);
             }
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
         }
     }
 }

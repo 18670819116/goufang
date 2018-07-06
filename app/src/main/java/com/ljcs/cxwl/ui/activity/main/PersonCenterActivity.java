@@ -3,6 +3,7 @@ package com.ljcs.cxwl.ui.activity.main;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
@@ -18,10 +19,10 @@ import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.orhanobut.logger.Logger;
+import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxRegTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
-import com.vondear.rxtools.view.dialog.RxDialog;
-import com.vondear.rxtools.view.dialog.RxDialogSure;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +48,8 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
     PersonCenterPresenter mPresenter;
     @BindView(R.id.layout_head)
     LinearLayout layoutHead;
+    @BindView(R.id.tv_account)
+    TextView tvAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
 
     @Override
     protected void initData() {
+
+        tvAccount.setText(RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
 
     }
 
@@ -92,9 +97,11 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
     @Override
     public void loginOutSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
+            ToastUtil.showCenterShort("退出登录");
+            clearRxSp();
             AppManager.getInstance().finishAllActivity();
             startActivty(LoginActivity.class);
+
 
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
@@ -120,12 +127,15 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                 break;
             case R.id.layout_item2:
                 //资格审查申诉
+                ToastUtil.showCenterShort("敬请期待");
                 break;
             case R.id.layout_item3:
                 //意见反馈
+                ToastUtil.showCenterShort("敬请期待");
                 break;
             case R.id.layout_item4:
                 //关于我们
+                ToastUtil.showCenterShort("敬请期待");
                 break;
             case R.id.btn_login_out:
                 //退出登录

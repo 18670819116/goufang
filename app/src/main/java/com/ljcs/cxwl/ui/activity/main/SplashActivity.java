@@ -1,6 +1,5 @@
 package com.ljcs.cxwl.ui.activity.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ImageView;
@@ -12,6 +11,7 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerSplashComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.SplashContract;
 import com.ljcs.cxwl.ui.activity.main.module.SplashModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.SplashPresenter;
+import com.ljcs.cxwl.util.UpdateManager;
 import com.orhanobut.logger.Logger;
 
 import javax.inject.Inject;
@@ -30,6 +30,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Inject
     SplashPresenter mPresenter;
+    public static int LOCATION_FINISH = 65;
     @BindView(R.id.img_bg)
     ImageView mImgBg;
     private CountDownTimer countDownTimer;
@@ -104,4 +105,5 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     public void jumpToGuest() {
 
     }
+
 }

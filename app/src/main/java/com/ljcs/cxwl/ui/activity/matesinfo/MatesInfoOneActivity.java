@@ -19,11 +19,13 @@ import com.baidu.ocr.ui.camera.CameraView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoOneComponent;
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoOneContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoOneModule;
 import com.ljcs.cxwl.ui.activity.matesinfo.presenter.MatesInfoOnePresenter;
+import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.FileUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.view.RxToast;
@@ -35,6 +37,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.ENTERTYPE_CHANGE;
 import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
 /**
@@ -165,7 +168,11 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
                     sCertificationInfo.setBirthday_peiou(result.getBirthday() == null ? "" : result.getBirthday().toString());
                     sCertificationInfo.setIdcard_peiou(result.getIdNumber() == null ? "" : result.getIdNumber().toString());
                     sCertificationInfo.setPic_path_zheng_peiou(fileRealPath);
+                    AppManager.getInstance().finishActivity(MatesInfoTwoActivity.class);
                     startActivty(MatesInfoTwoActivity.class);
+                    if (ENTERTYPE_CHANGE==1){
+                        finish();
+                    }
 
 
                 } else {
