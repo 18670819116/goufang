@@ -37,7 +37,7 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="请逐项仔细核对下表信息，保证所填内容与证件信息相吻合否则将影响资格审查"/>
+                    android:text="请逐项仔细核对下表信息，保证所填内容与证件信息相吻合，否则将影响资格审查结果"/>
             </LinearLayout>
 
             <LinearLayout
@@ -114,7 +114,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口类型："/>
+                        android:text="户籍类型："/>
 
                     <TextView
                         android:id="@+id/tv_leixing2"
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:hint="请选择户口类型"
+                        android:hint="请选择户籍类型"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
 
@@ -144,7 +144,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口性质："/>
+                        android:text="家庭户口类型："/>
 
                     <TextView
                         android:id="@+id/tv_leixing3"
@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:hint="请选择户口性质"
+                        android:hint="请选择家庭户口类型"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
 
@@ -193,7 +193,8 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"/>
+                <View style="@style/line_hor"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -287,6 +288,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="@color/white"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
 
@@ -299,7 +301,6 @@
             android:background="@mipmap/bg_btn_red"
             android:gravity="center"
             android:text="删除"
-
             android:textColor="@color/white"/>
 
         <TextView

@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.base;
 
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.ui.activity.main.LoginActivity;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.ProgressDialog;
 
@@ -218,6 +219,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
     public void onErrorMsg(int code, String msg) {
         if (!RxDataTool.isNullString(msg)) {
             ToastUtil.showCenterShort(msg);
+        }
+        if (code == 104) {
+            //token失效
+            AppManager.getInstance().finishAllActivity();
+            startActivty(LoginActivity.class);
         }
 
     }

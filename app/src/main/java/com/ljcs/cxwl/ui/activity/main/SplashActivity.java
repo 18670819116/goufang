@@ -65,8 +65,11 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
                 mPresenter.jump();
             }
         };
-        countDownTimer.start();
+//        countDownTimer.start();
+        mPresenter.jump();
+        mPresenter.queryShipperInfo();
         mPresenter.getPermission();
+        mPresenter.updataApp();
 
     }
 
@@ -93,6 +96,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void loginSuccees() {
+        startActivty(MainActivity.class);
+        finish();
     }
 
     @Override

@@ -18,7 +18,10 @@ import android.widget.TextView;
 
 
 import com.ljcs.cxwl.R;
+import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.ui.activity.main.SplashActivity;
+import com.vondear.rxtools.RxAppTool;
+import com.vondear.rxtools.RxDeviceTool;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -169,6 +172,7 @@ public class UpdateManager {
 				if(mhander != null){
 					mhander.sendEmptyMessage(SplashActivity.LOCATION_FINISH);
 				}
+				onYiHouOnClickListener.onYihouClick();
 			}
 		});
 		downloadDialog = builder.create();
@@ -243,11 +247,13 @@ public class UpdateManager {
 		if (!apkfile.exists()) {
 			return;
 		}
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		i.setDataAndType(Uri.parse("file://" + apkfile.toString()),
-				"application/vnd.android.package-archive");
-		mContext.startActivity(i);
+//		Intent i = new Intent(Intent.ACTION_VIEW);
+//		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//		i.setDataAndType(Uri.parse("file://" + apkfile.toString()),
+//				"application/vnd.android.package-archive");
+//		mContext.startActivity(i);
+//		RxAppTool.InstallAPK(mContext, apkfile.toString());
+		RxAppTool.installApp(mContext,apkfile);
 
 	}
 

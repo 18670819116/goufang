@@ -24,6 +24,7 @@ import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoTwoComponent
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoTwoModule;
 import com.ljcs.cxwl.ui.activity.matesinfo.presenter.MatesInfoTwoPresenter;
+import com.ljcs.cxwl.util.IDcardUtil;
 import com.ljcs.cxwl.util.QiniuUploadUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.qiniu.android.http.ResponseInfo;
@@ -91,8 +92,8 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
         tvBirthday.setText(Contains.sCertificationInfo.getBirthday_peiou());
         tvAdress.setText(Contains.sCertificationInfo.getAddress_peiou());
         tvIdcard.setText(Contains.sCertificationInfo.getIdcard_peiou());
-        Glide.with(this).load(Contains.sCertificationInfo.getPic_path_zheng_peiou()).skipMemoryCache(true).diskCacheStrategy
-                (DiskCacheStrategy.NONE).into(imageView);
+        Glide.with(this).load(Contains.sCertificationInfo.getPic_path_zheng_peiou()).skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
         //imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_zheng_peiou()));
     }
 
@@ -204,7 +205,8 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
                     Contains.sCertificationInfo.setBirthday_peiou(tvBirthday.getText().toString());
                     Contains.sCertificationInfo.setEthnic_peiou(tvEthnic.getText().toString());
                     Contains.sCertificationInfo.setSex_peiou(tvSex.getText().toString());
-                    if (ENTERTYPE_CHANGE == 1&& Contains.sCertificationInfo.getPic_path_zheng_peiou().startsWith("http")) {
+                    if (ENTERTYPE_CHANGE == 1 && Contains.sCertificationInfo.getPic_path_zheng_peiou().startsWith
+                            ("http")) {
                         //配偶修改直接跳过上传图片
                         Map<String, String> map = new HashMap<String, String>();
                         map.put("token", RxSPTool.getString(MatesInfoTwoActivity.this, ShareStatic.APP_LOGIN_TOKEN));
@@ -265,8 +267,17 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
             ToastUtil.showCenterShort("身份证号码为空");
             return false;
         }
-        if (!RxRegTool.isIDCard18(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证号码不合法");
+        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+            ToastUtil.showCenterShort("身份证不合法");
+            return false;
+        }
+        if (!tvIdcard.getText().toString().substring(6, 14).equals(tvBirthday.getText().toString())) {
+            ToastUtil.showCenterShort("出生日期和身份证的出生日期不一致");
+            return false;
+        }
+        if ((IDcardUtil.getAge(tvIdcard.getText().toString()) < 22 && tvSex.getText().toString().equals("男")) ||
+                (IDcardUtil.getAge(tvIdcard.getText().toString()) < 20 && tvSex.getText().toString().equals("女"))) {
+            ToastUtil.showCenterShort("年龄不合法");
             return false;
         }
         return true;

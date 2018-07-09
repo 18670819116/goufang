@@ -274,12 +274,12 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
             return false;
         }
         if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
-            ToastUtil.showCenterShort("请选择户口类型");
+            ToastUtil.showCenterShort("请选择户籍类型");
             return false;
         }
 
         if (RxDataTool.isNullString(tvLeixing2.getText().toString())) {
-            ToastUtil.showCenterShort("请选择户口性质");
+            ToastUtil.showCenterShort("请选择家庭户口类型");
             return false;
         }
         if (RxDataTool.isNullString(tvLeixing3.getText().toString())) {
@@ -358,11 +358,11 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
                 .build();
         mOptionsPickerView.setPicker(list);
         if (flag == 1) {
-            mOptionsPickerView.setTitleText("户籍类型");
+            mOptionsPickerView.setTitleText("请选择户籍类型");
         } else if (flag == 2) {
-            mOptionsPickerView.setTitleText("家庭户口类型");
+            mOptionsPickerView.setTitleText("请选择家庭户口类型");
         } else {
-            mOptionsPickerView.setTitleText("婚姻状况");
+            mOptionsPickerView.setTitleText("请选择婚姻状况");
         }
 
         mOptionsPickerView.show();

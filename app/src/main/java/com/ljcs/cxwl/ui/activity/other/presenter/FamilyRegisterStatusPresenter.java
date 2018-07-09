@@ -50,6 +50,7 @@ public class FamilyRegisterStatusPresenter implements FamilyRegisterStatusContra
             @Override
             public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
                 mView.closeProgressDialog();
+                mView.intiViews();
             }
         }, new Action() {
             @Override

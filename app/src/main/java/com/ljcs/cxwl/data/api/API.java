@@ -19,6 +19,7 @@ public interface API {
     String URL_POST_FORGETPWD = "login/zjw/user/back";//忘记密码
     String URL_POST_LOGINOUT = "login/zjw/user/logout";//退出登录
     String URL_POST_CHANGEPWD = "login/zjw/user/update";//原密码修改密码
+    String URL_GET_UPDATA_VERSION = "login/zjw/user/getversions";//更新
 
     String URL_POST_ALL_INFO = "family/jzw/user/applyMsg";//获取所有的家庭信息；
     String URL_POST_CERINFO = "certification/zjw/user/verify";//实名认证提交信息
@@ -34,6 +35,7 @@ public interface API {
 
     String URL_POST_HUKOU = "family/jzw/user/addregistered";//添加/修改户籍信息
     String URL_GET_QINIU_TOKEN = "http://wy.iot.xin/qiniu/qiniu_getQiniuToken.action";//获取七牛token
+
 
 
 }

@@ -97,6 +97,8 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     TextView tvHeadStutus1;
     @BindView(R.id.tv_head_stutus2)
     TextView tvHeadStutus2;
+    @BindView(R.id.tv_hjszd)
+    TextView tvHjszd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +118,11 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         Map<String, String> map1 = new HashMap<>();
         map1.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
         mPresenter.allInfo(map1);
+
     }
 
-    private void intiViews() {
+    @Override
+    public void intiViews() {
         if (Contains.sAllInfo.getData().getHjxx() != null) {
             if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
                 //审核中
@@ -143,6 +147,7 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         tvHklx1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
         tvHkxz1.setText(Contains.sAllInfo.getData().getHjxx().getHkxz());
         tvHyzk1.setText(Contains.sAllInfo.getData().getHjxx().getHyzt());
+        tvHjszd.setText(Contains.sAllInfo.getData().getHjxx().getHjszd());
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(img1);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(img2);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(img3);
@@ -163,6 +168,7 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         } else {
             layout3.setVisibility(View.GONE);
         }
+        layoutZinvContent.removeAllViews();
         if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
             for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
                 ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
@@ -224,15 +230,22 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
 
         if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
             //审核已通过
-            if (Contains.sAllInfo.getData().getGfzgyj()!=null){
+            if (Contains.sAllInfo.getData().getGfzgyj() != null) {
                 tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
+                tv2.setText("");
+            } else {
+                tv1.setText("社保已缴纳24个月");
+                tv2.setText("个税已缴纳24个月");
             }
-//            tv1.setText("社保已缴纳24个月");
-//            tv2.setText("个税已缴纳24个月");
+
             Glide.with(this).load(R.mipmap.ic_status_smile1).into(imageView);
         } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("4")) {
-            if (Contains.sAllInfo.getData().getGfzgyj()!=null){
+            if (Contains.sAllInfo.getData().getGfzgyj() != null) {
                 tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
+                tv2.setText("");
+            } else {
+                tv1.setText("原因未知");
+                tv2.setText("");
             }
             Glide.with(this).load(R.mipmap.ic_status_smile2).into(imageView);
         }

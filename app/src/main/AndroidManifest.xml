@@ -59,8 +59,27 @@
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>
+        <!--个人中心-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.main.PersonCenterActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--反馈意见-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.SuggestActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--资格审查修改申诉-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.ComplainActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--关于我们-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.main.AboutOurActivity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>
@@ -81,6 +100,27 @@
         <!--修改密码-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.main.ChangePwdActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--修改手机号码-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.changephone.ChangePhoneOneActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--修改手机号码-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.changephone.ChangePhoneTwoActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--修改手机号码-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.changephone.ChangePhoneThirdActivity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
 
@@ -215,7 +255,15 @@
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait"
             />
-
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="com.ljcs.cxwl.fileProvider"-->
+            <!--android:grantUriPermissions="true"-->
+            <!--android:exported="false">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/file_paths" />-->
+        <!--</provider>-->
     </application>
 
 </manifest>

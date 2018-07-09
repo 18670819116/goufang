@@ -25,6 +25,7 @@ public interface FamilyRegisterStatusContract {
         void closeProgressDialog();
 
         void allInfoSuccess(AllInfo baseEntity);
+        void intiViews();
 
     }
 

@@ -150,7 +150,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口类型："/>
+                        android:text="户籍类型："/>
 
                     <TextView
                         android:id="@+id/tv_hklx1"
@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口性质："/>
+                        android:text="家庭户口类型："/>
 
                     <TextView
                         android:id="@+id/tv_hkxz1"
@@ -211,7 +211,26 @@
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y70"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="户籍所在地："/>
+
+                    <TextView
+                        android:id="@+id/tv_hjszd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -399,7 +418,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口类型："/>
+                        android:text="户籍类型："/>
 
                     <TextView
                         android:id="@+id/tv_hklx2"
@@ -424,7 +443,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口性质："/>
+                        android:text="家庭户口类型："/>
 
                     <TextView
                         android:id="@+id/tv_hkxz2"

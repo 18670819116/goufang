@@ -26,9 +26,9 @@
                     android:id="@+id/imageView3"
                     android:layout_width="@dimen/x625"
                     android:layout_height="@dimen/y87"
+                    android:layout_marginBottom="@dimen/y42"
                     android:layout_marginTop="@dimen/y40"
-                    android:src="@mipmap/ic_cer_five"
-                    android:layout_marginBottom="@dimen/y42"/>
+                    android:src="@mipmap/ic_cer_five"/>
 
             </LinearLayout>
 
@@ -37,11 +37,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
-                android:paddingLeft="@dimen/x30"
-                android:paddingRight="@dimen/x30"
                 android:layout_marginTop="@dimen/y19"
                 android:background="@color/white"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x30"
+                android:paddingRight="@dimen/x30">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -255,8 +255,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:background="@color/white"
         android:gravity="center"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
 
@@ -272,11 +273,11 @@
             android:textColor="@color/white"/>
 
         <TextView
-            android:layout_marginRight="@dimen/x19"
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/x19"
             android:background="@mipmap/btn_next"
             android:gravity="center"
             android:text="确认提交"

@@ -53,7 +53,7 @@
         android:layout_marginBottom="@dimen/y35"
         android:drawableLeft="@mipmap/ic_jiami"
         android:drawablePadding="@dimen/x5"
-        android:text="信息已加密仅用于身份证验证"/>
+        android:text="信息已加密仅用于身份证认证"/>
 
 
 

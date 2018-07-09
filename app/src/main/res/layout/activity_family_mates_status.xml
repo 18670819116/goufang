@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/ic_family_status"
-                    android:text="fsf"/>
+                    android:text=""/>
 
                 <!--<TextView-->
                     <!--android:id="@+id/tv_head_stutus2"-->
@@ -154,7 +154,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口类型："/>
+                        android:text="户籍类型："/>
 
                     <TextView
                         android:id="@+id/tv_hklx2"
@@ -179,7 +179,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口性质："/>
+                        android:text="家庭户口类型："/>
 
                     <TextView
                         android:id="@+id/tv_hkxz2"

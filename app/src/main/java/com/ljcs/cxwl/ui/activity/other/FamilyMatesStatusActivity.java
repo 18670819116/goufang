@@ -93,10 +93,10 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
 
     @Override
     protected void initData() {
-//        intiViews();
-    }
 
-    private void intiViews() {
+    }
+    @Override
+    public void intiViews() {
         if (Contains.sAllInfo.getData().getHjxx() != null) {
             if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
                 //审核中
@@ -196,9 +196,9 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
             for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
                 ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
                         .get(i));
+                final int finalI = i;
                 if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
                     zinvInfoLayout.getTv_change().setVisibility(View.VISIBLE);
-                    final int finalI = i;
                     zinvInfoLayout.getTv_change().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -208,16 +208,16 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
                             startActivityForResult(intent, 101);
                         }
                     });
-                    zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
-                            intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getJtcyList().get(finalI)
-                                    .getHkzp());
-                            startActivity(intent);
-                        }
-                    });
                 }
+                zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
+                        intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getJtcyList().get(finalI)
+                                .getHkzp());
+                        startActivity(intent);
+                    }
+                });
                 layoutZinvContent.addView(zinvInfoLayout);
             }
 

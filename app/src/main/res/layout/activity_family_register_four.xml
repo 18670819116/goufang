@@ -241,7 +241,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口类型："/>
+                        android:text="户籍类型："/>
 
                     <TextView
                         android:id="@+id/tv_hklx1"
@@ -266,7 +266,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口性质："/>
+                        android:text="家庭户口类型："/>
 
                     <TextView
                         android:id="@+id/tv_hkxz1"
@@ -971,6 +971,8 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="@color/white"
+
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
 

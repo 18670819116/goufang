@@ -110,6 +110,7 @@ public class CertificationFourActivity extends BaseActivity implements Certifica
                 break;
             case R.id.next:
                 if (checkText()) {
+                    checkChange();
                     Contains.sCertificationInfo.setSignDate(tvData1.getText().toString().trim());
                     Contains.sCertificationInfo.setExpiryDate(tvData2.getText().toString().trim());
                     Contains.sCertificationInfo.setIssueAuthority(tvIssueAuthority.getText().toString().trim());
@@ -118,6 +119,21 @@ public class CertificationFourActivity extends BaseActivity implements Certifica
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 判断身份证反面是否被修改过
+     */
+    private void checkChange() {
+        if (Contains.sCertificationInfo.getSignDate().equals(tvData1.getText().toString().trim()) && Contains
+                .sCertificationInfo.getExpiryDate().equals(tvData2.getText().toString().trim()) && Contains
+                .sCertificationInfo.getIssueAuthority().equals(tvIssueAuthority.getText().toString().trim())) {
+            //表示反面信息没有被修改过
+            Contains.sCertificationInfo.setChangeFm(false);
+        } else {
+            //表示反面信息已被手动修改
+            Contains.sCertificationInfo.setChangeFm(true);
         }
     }
 
@@ -194,7 +210,7 @@ public class CertificationFourActivity extends BaseActivity implements Certifica
     public void allInfoSuccess(AllInfo baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             Contains.sAllInfo = baseEntity;
-            ToastUtil.showCenterShort(baseEntity.msg);
+//            ToastUtil.showCenterShort(baseEntity.msg);
             startActivty(CertificationFiveActivity.class);
 
         } else {

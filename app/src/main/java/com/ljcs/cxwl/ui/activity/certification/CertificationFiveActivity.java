@@ -19,6 +19,7 @@ import com.ljcs.cxwl.ui.activity.certification.module.CertificationFiveModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationFivePresenter;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.CertificationDialog;
+import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
@@ -123,6 +124,10 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
             case R.id.next:
                 if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     return;
+                }
+                if (Contains.sCertificationInfo.isChangeZm()||Contains.sCertificationInfo.isChangeFm()){
+                    //表示扫描的信息已被修改过
+                    Logger.i("身份证扫描信息已被手动修改");
                 }
                 Map<String, String> map = new HashMap<>();
                 map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));

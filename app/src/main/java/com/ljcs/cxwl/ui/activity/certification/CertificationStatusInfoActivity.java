@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.ui.activity.certification;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.CerInfo;
+import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationStatusInfoComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationStatusInfoContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationStatusInfoModule;
@@ -128,6 +130,22 @@ public class CertificationStatusInfoActivity extends BaseActivity implements Cer
             tvData.setText(Contains.sAllInfo.getData().getSmyz().getYxq());
             Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(imageView);
             Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(imageView1);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CertificationStatusInfoActivity.this, ShowImgActivity.class);
+                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm());
+                    startActivity(intent);
+                }
+            });
+            imageView1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CertificationStatusInfoActivity.this, ShowImgActivity.class);
+                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm());
+                    startActivity(intent);
+                }
+            });
         }
     }
 

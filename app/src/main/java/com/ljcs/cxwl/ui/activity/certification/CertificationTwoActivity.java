@@ -22,6 +22,8 @@ import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationTwoC
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationTwoContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationTwoModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationTwoPresenter;
+import com.ljcs.cxwl.util.IDcardUtil;
+import com.ljcs.cxwl.util.IDcardUtil2;
 import com.ljcs.cxwl.util.QiniuUploadUtil;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.StringUitls;
@@ -176,7 +178,7 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
     public void allInfoSuccess(AllInfo baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             Contains.sAllInfo = baseEntity;
-            ToastUtil.showCenterShort(baseEntity.msg);
+//            ToastUtil.showCenterShort(baseEntity.msg);
             startActivty(CertificationThirdActivity.class);
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
@@ -191,6 +193,8 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
                 break;
             case R.id.next:
                 if (checkText()) {
+
+                    checkChange();
                     Contains.sCertificationInfo.setName(tvName.getText().toString());
                     Contains.sCertificationInfo.setAddress(tvAdress.getText().toString());
                     Contains.sCertificationInfo.setIdcard(tvIdcard.getText().toString());
@@ -207,6 +211,23 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
         }
     }
 
+    /**
+     * 判断扫描出来的信息是否被修改过
+     */
+    private void checkChange() {
+        if (Contains.sCertificationInfo.getName().equals(tvName.getText().toString()) && Contains.sCertificationInfo
+                .getAddress().equals(tvAdress.getText().toString()) && Contains.sCertificationInfo.getIdcard().equals
+                (tvIdcard.getText().toString()) && Contains.sCertificationInfo.getBirthday().equals(tvBirthday
+                .getText().toString()) && Contains.sCertificationInfo.getEthnic().equals(tvEthnic.getText().toString
+                ()) && Contains.sCertificationInfo.getSex().equals(tvSex.getText().toString())) {
+            //表示没有修改
+                Contains.sCertificationInfo.setChangeZm(false);
+        }else {
+            //表示修改了
+            Contains.sCertificationInfo.setChangeZm(true);
+        }
+    }
+
     private boolean checkText() {
         if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             return false;
@@ -216,7 +237,8 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
             return false;
         }
 
-        if (RxDataTool.isNullString(tvSex.getText().toString())||(!tvSex.getText().toString().equals("男")&&!tvSex.getText().toString().equals("女"))) {
+        if (RxDataTool.isNullString(tvSex.getText().toString()) || (!tvSex.getText().toString().equals("男") && !tvSex
+                .getText().toString().equals("女"))) {
             ToastUtil.showCenterShort("性别格式不正确");
             return false;
         }
@@ -226,7 +248,7 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
             return false;
         }
         if (RxDataTool.isNullString(tvBirthday.getText().toString())) {
-            ToastUtil.showCenterShort("出生为空");
+            ToastUtil.showCenterShort("出生格式不正确");
             return false;
         }
 
@@ -234,12 +256,16 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
             ToastUtil.showCenterShort("住址为空");
             return false;
         }
-        if (RxDataTool.isNullString(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证号码为空");
+        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+            ToastUtil.showCenterShort("身份证不合法");
             return false;
         }
-        if (!RxRegTool.isIDCard18(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证号码不合法");
+        if (!tvIdcard.getText().toString().substring(6, 14).equals(tvBirthday.getText().toString())) {
+            ToastUtil.showCenterShort("出生日期和身份证的出生日期不一致");
+            return false;
+        }
+        if (IDcardUtil.getAge(tvIdcard.getText().toString()) < 22) {
+            ToastUtil.showCenterShort("根据政策规定，暂不支持对未成年人的实名认证");
             return false;
         }
         return true;

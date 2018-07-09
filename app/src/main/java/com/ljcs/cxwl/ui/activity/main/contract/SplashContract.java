@@ -2,6 +2,9 @@ package com.ljcs.cxwl.ui.activity.main.contract;
 
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
+import java.util.Map;
+
 /**
  * @author xlei
  * @Package The contract for SplashActivity
@@ -40,5 +43,17 @@ public interface SplashContract {
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+        /**
+         * 查询是否已经记录了用户信息
+         */
+        void queryShipperInfo();
+
+        /**
+         * 登录请求
+         * @param map
+         */
+        void login(Map map);
+
+        void updataApp();
     }
 }

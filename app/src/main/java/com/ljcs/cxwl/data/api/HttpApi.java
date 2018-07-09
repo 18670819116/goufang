@@ -2,6 +2,7 @@ package com.ljcs.cxwl.data.api;
 
 
 import com.ljcs.cxwl.entity.AllInfo;
+import com.ljcs.cxwl.entity.AppInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.CommonBean;
@@ -22,6 +23,7 @@ import retrofit2.http.QueryMap;
 
 import static com.ljcs.cxwl.data.api.API.URL_GET_CERINFO_DETAIL;
 import static com.ljcs.cxwl.data.api.API.URL_GET_QINIU_TOKEN;
+import static com.ljcs.cxwl.data.api.API.URL_GET_UPDATA_VERSION;
 import static com.ljcs.cxwl.data.api.API.URL_POST_ALL_INFO;
 import static com.ljcs.cxwl.data.api.API.URL_POST_CERINFO;
 import static com.ljcs.cxwl.data.api.API.URL_POST_CERINFO_LAST;
@@ -68,7 +70,8 @@ public interface HttpApi {
     @POST(URL_POST_CHANGEPWD)
     @FormUrlEncoded
     Observable<RegisterBean> changePwd(@FieldMap Map<String, RequestBody> params);
-
+    @GET(URL_GET_UPDATA_VERSION)
+    Observable<AppInfo> updataApp(@QueryMap Map<String, RequestBody> params);
     @POST(URL_POST_ALL_INFO)
     @FormUrlEncoded
     Observable<AllInfo> allInfo(@FieldMap Map<String, RequestBody> params);

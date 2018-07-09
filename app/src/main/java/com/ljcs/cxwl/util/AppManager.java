@@ -56,7 +56,19 @@ public class AppManager {
         Activity activity = activityStack.lastElement();
         finishActivity(activity);
     }
-
+    /**
+     * 结束所有Activity除了指定Activity外
+     */
+    public void finishAllActivityWithoutThis() {
+        Activity act = activityStack.lastElement();
+        for (int i = (activityStack.size() - 1); i >= 0; i--) {
+            if (null != activityStack.get(i)) {
+                activityStack.get(i).finish();
+            }
+        }
+        activityStack.clear();
+        activityStack.add(act);
+    }
     /**
      * 结束指定类名的Activity
      *

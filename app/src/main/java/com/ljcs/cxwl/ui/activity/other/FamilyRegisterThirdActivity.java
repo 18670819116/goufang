@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ljcs.cxwl.R;
@@ -15,7 +16,6 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.CertificationInfo;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterThirdComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterThirdContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterThirdModule;
@@ -48,6 +48,8 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
     RecyclerView recyclerView;
     @BindView(R.id.layout_empty)
     LinearLayout layoutEmpty;
+    @BindView(R.id.next)
+    TextView next;
     private ZinvInfoAdapter mAdapter;
     private List<AllInfo.Data.JtcyBean> list;
 
@@ -151,9 +153,11 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
                 layoutEmpty.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
                 mAdapter.setNewData(Contains.sAllInfo.getData().getJtcyList());
+                next.setText("下一步");
             } else {
                 recyclerView.setVisibility(View.GONE);
                 layoutEmpty.setVisibility(View.VISIBLE);
+                next.setText("跳过");
             }
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);

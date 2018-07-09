@@ -32,6 +32,7 @@ import com.ljcs.cxwl.ui.activity.other.contract.FamilyAddContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyAddModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyAddPresenter;
 import com.ljcs.cxwl.util.FileUtil;
+import com.ljcs.cxwl.util.IDcardUtil;
 import com.ljcs.cxwl.util.QiniuUploadUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
@@ -335,19 +336,23 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         }
 
         if (RxDataTool.isNullString(tvLeixing2.getText().toString())) {
-            ToastUtil.showCenterShort("请选择户口类型");
+            ToastUtil.showCenterShort("请选择户籍类型");
             return false;
         }
         if (RxDataTool.isNullString(tvLeixing3.getText().toString())) {
-            ToastUtil.showCenterShort("请选择户口性质");
+            ToastUtil.showCenterShort("请选择家庭户口类型");
             return false;
         }
         if (RxDataTool.isNullString(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("请输入身份证号码");
             return false;
         }
-        if (!RxRegTool.isIDCard18(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证号码不合法");
+        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+            ToastUtil.showCenterShort("身份证不合法");
+            return false;
+        }
+        if (IDcardUtil.getAge(tvIdcard.getText().toString()) >=18) {
+            ToastUtil.showCenterShort("子女年龄应小于18岁");
             return false;
         }
         if (RxDataTool.isNullString(tvLeixing5.getText().toString())) {
@@ -399,18 +404,18 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
                 .build();
         mOptionsPickerView.setPicker(list);
         if (flag == 1) {
-            mOptionsPickerView.setTitleText("性别");
+            mOptionsPickerView.setTitleText("请选择性别");
 
         } else if (flag == 2) {
-            mOptionsPickerView.setTitleText("户口类型");
+            mOptionsPickerView.setTitleText("请选择户籍类型");
 
         } else if (flag == 3) {
-            mOptionsPickerView.setTitleText("户口性质");
+            mOptionsPickerView.setTitleText("请选择家庭户口类型");
 
         } else if (flag == 4) {
-            mOptionsPickerView.setTitleText("婚姻状况");
+            mOptionsPickerView.setTitleText("请选择婚姻状况");
         } else {
-            mOptionsPickerView.setTitleText("与申请人关系");
+            mOptionsPickerView.setTitleText("请选择与申请人关系");
         }
         mOptionsPickerView.show();
     }

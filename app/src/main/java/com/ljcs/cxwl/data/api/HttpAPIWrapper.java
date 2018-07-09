@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.data.api;
 
 import com.ljcs.cxwl.entity.AllInfo;
+import com.ljcs.cxwl.entity.AppInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.CommonBean;
@@ -79,6 +80,11 @@ public class HttpAPIWrapper {
         return wrapper(mHttpAPI.changePwd(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
 
+    //修改密码
+    public Observable<AppInfo> updataApp(Map data) {
+        return wrapper(mHttpAPI.updataApp(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
     //提交实名认证信息
     public Observable<AllInfo> allInfo(Map data) {
         return wrapper(mHttpAPI.allInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
@@ -108,6 +114,7 @@ public class HttpAPIWrapper {
     public Observable<MatesInfo> matesInfoZinv(Map data) {
         return wrapper(mHttpAPI.matesInfoZinv(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     //删除家庭成员信息
     public Observable<BaseEntity> matesInfoDelete(Map data) {
         return wrapper(mHttpAPI.matesInfoDelete(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
@@ -117,6 +124,7 @@ public class HttpAPIWrapper {
     public Observable<BaseEntity> matesInfoCommit(Map data) {
         return wrapper(mHttpAPI.matesInfoCommit(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     //保存家庭成员信息
     public Observable<BaseEntity> matesInfoSave(Map data) {
         return wrapper(mHttpAPI.matesInfoSave(addParams(data))).compose(SCHEDULERS_TRANSFORMER);

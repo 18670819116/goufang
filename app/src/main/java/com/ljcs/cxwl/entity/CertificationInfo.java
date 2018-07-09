@@ -29,6 +29,8 @@ public class CertificationInfo {
     private String leixing3;//婚姻状况
     private int bh;//修改要穿编号
 
+    private boolean isChangeZm;//判断扫描出来的正面信息是否被手动修改过
+    private boolean isChangeFm;//判断扫描出来的反面信息是否被手动修改过
     /**
      * 配偶身份证信息
      */
@@ -409,5 +411,21 @@ public class CertificationInfo {
 
     public void setBh_zinv(int bh_zinv) {
         this.bh_zinv = bh_zinv;
+    }
+
+    public boolean isChangeZm() {
+        return isChangeZm;
+    }
+
+    public void setChangeZm(boolean changeZm) {
+        isChangeZm = changeZm;
+    }
+
+    public boolean isChangeFm() {
+        return isChangeFm;
+    }
+
+    public void setChangeFm(boolean changeFm) {
+        isChangeFm = changeFm;
     }
 }

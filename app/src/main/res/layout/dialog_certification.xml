@@ -38,7 +38,7 @@
             android:layout_marginTop="@dimen/y20"
             android:paddingLeft="@dimen/x22"
             android:paddingRight="@dimen/x22"
-            android:text=""
+            android:text="审核中,预计1个工作日内完成"
             android:textColor="#333333"
             android:textSize="12sp"/>
 

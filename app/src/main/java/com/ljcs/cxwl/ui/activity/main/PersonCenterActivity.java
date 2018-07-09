@@ -11,13 +11,16 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.ui.activity.changephone.ChangePhoneOneActivity;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerPersonCenterComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.PersonCenterContract;
 import com.ljcs.cxwl.ui.activity.main.module.PersonCenterModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.PersonCenterPresenter;
 import com.ljcs.cxwl.util.AppManager;
+import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
+import com.ljcs.cxwl.view.SureDialog;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxDataTool;
 import com.vondear.rxtools.RxRegTool;
@@ -69,7 +72,7 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
     @Override
     protected void initData() {
 
-        tvAccount.setText(RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
+        tvAccount.setText(StringUitl.settingphone(RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM)));
 
     }
 
@@ -99,8 +102,8 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
         if (baseEntity.code == REQUEST_SUCCESS) {
             ToastUtil.showCenterShort("退出登录");
             clearRxSp();
-            AppManager.getInstance().finishAllActivity();
             startActivty(LoginActivity.class);
+            AppManager.getInstance().finishAllActivity();
 
 
         } else {
@@ -120,6 +123,7 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
         switch (view.getId()) {
             case R.id.layout_head:
                 //头像点击
+                startActivty(ChangePhoneOneActivity.class);
                 break;
             case R.id.layout_item1:
                 //修改密码
@@ -127,15 +131,18 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                 break;
             case R.id.layout_item2:
                 //资格审查申诉
-                ToastUtil.showCenterShort("敬请期待");
+//                ToastUtil.showCenterShort("敬请期待");
+                startActivty(ComplainActivity.class);
                 break;
             case R.id.layout_item3:
                 //意见反馈
-                ToastUtil.showCenterShort("敬请期待");
+//                ToastUtil.showCenterShort("敬请期待");
+                startActivty(SuggestActivity.class);
                 break;
             case R.id.layout_item4:
                 //关于我们
-                ToastUtil.showCenterShort("敬请期待");
+//                ToastUtil.showCenterShort("敬请期待");
+                startActivty(AboutOurActivity.class);
                 break;
             case R.id.btn_login_out:
                 //退出登录
@@ -143,11 +150,26 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                     Logger.i("点击过快");
                     return;
                 }
-                Map<String, String> map = new HashMap<>();
-                map.put("sjhm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
-                map.put("mm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM));
-                map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
-                mPresenter.loginOut(map);
+                final SureDialog dialog = new SureDialog(this);
+                dialog.setCancelable(false);
+                dialog.setSureListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("sjhm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_SJHM));
+                        map.put("mm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_MM));
+                        map.put("token", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                        mPresenter.loginOut(map);
+                    }
+                });
+                dialog.setCancelListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
                 break;
             case R.id.img_tomain:
                 //去首页

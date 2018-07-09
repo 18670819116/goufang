@@ -103,7 +103,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text=" 购房资格审查信息提交后，需工作人员人工审核，审核周期为1个工作日。审核结果将推送至申请账号欣社区APP。"
+                    android:text=" 购房资格审查信息提交后，需工作人员人工审核，审核周期为1个工作日。审核结果将推送至申请账号APP。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>

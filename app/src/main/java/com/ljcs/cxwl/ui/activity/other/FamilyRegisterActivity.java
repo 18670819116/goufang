@@ -262,19 +262,20 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                     return;
                 }
                 if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
-                    ToastUtil.showCenterShort("请选择户口类型");
+                    ToastUtil.showCenterShort("请选择户籍类型");
                     return;
                 }
-                if (RxDataTool.isNullString(etSuozaidi.getText().toString())) {
-                    ToastUtil.showCenterShort("请输入户籍所在地");
-                    return;
-                }
+
                 if (RxDataTool.isNullString(tvLeixing2.getText().toString())) {
-                    ToastUtil.showCenterShort("请选择户口性质");
+                    ToastUtil.showCenterShort("请选择家庭户口类型");
                     return;
                 }
                 if (RxDataTool.isNullString(tvLeixing3.getText().toString())) {
                     ToastUtil.showCenterShort("请选择婚姻状况");
+                    return;
+                }
+                if (RxDataTool.isNullString(etSuozaidi.getText().toString())) {
+                    ToastUtil.showCenterShort("请输入户籍所在地");
                     return;
                 }
                 if (RxDataTool.isNullString(imgPath) && !isHavePic) {
@@ -384,11 +385,11 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 .build();
         mOptionsPickerView.setPicker(list);
         if (flag == 1) {
-            mOptionsPickerView.setTitleText("户口类型");
+            mOptionsPickerView.setTitleText("请选择户籍类型");
         } else if (flag == 2) {
-            mOptionsPickerView.setTitleText("户口性质");
+            mOptionsPickerView.setTitleText("请选择家庭户口类型");
         } else {
-            mOptionsPickerView.setTitleText("婚姻状况");
+            mOptionsPickerView.setTitleText("请选择婚姻状况");
         }
         mOptionsPickerView.show();
     }

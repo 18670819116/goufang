@@ -55,6 +55,7 @@ public class FamilyMatesStatusPresenter implements FamilyMatesStatusContract.Fam
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                mView.intiViews();
             }
         }, new Action() {
             @Override

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/x129"
+        android:layout_height="@dimen/y129"
+        android:layout_marginTop="@dimen/y40"
+        android:src="@mipmap/ic_about_our"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:text="GO房"
+        android:textColor="@color/main_color"
+        android:textSize="22sp"/>
+
+    <View
+        style="@style/line_hor"
+        android:layout_marginBottom="@dimen/y30"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:layout_marginTop="@dimen/y30"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/y15"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:text="GO房APP由长沙市住房和城乡建设委员会主导开发,旨在为购房者提供实名认证、购房资格审查等服务,
+购房资格审查结果可直接在购房过程中使用，以节省您在购房资格审查中花费的时间和精力。
+GO房APP中的实名认证及购房资格审查结果由长沙市住房和城乡建设委员会提供，与您在政府窗口办理的资格审查结果具有同等的有效性。"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y30"
+        android:text="长沙市住房和城乡建设委员会"
+        android:textColor="@color/color_999999"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y15"
+        android:text="地址：岳麓大道218号市政府二办公楼10楼"
+        android:textColor="@color/color_999999"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y15"
+        android:text="电话：0731-88665911"
+        android:textColor="@color/color_999999"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y15"
+        android:text="传真：0731-88665908"
+        android:textColor="@color/color_999999"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y15"
+        android:text="邮政编码：410013"
+        android:textColor="@color/color_999999"
+        android:textSize="16sp"/>
+</LinearLayout>
