@@ -27,6 +27,7 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxEncryptTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
@@ -87,13 +88,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-//                    mLoginPwd.setInputType(TYPE_CLASS_TEXT);
                     mLoginPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     mLoginPwd.setSelection(mLoginPwd.getText().length());
                 } else {
                     mLoginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-
-//                    mLoginPwd.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     mLoginPwd.setSelection(mLoginPwd.getText().length());
                 }
             }
@@ -135,12 +133,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
             }
             if (baseEntity.getData() != null) {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_SJHM, baseEntity.getData().getSjhm());
-                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, baseEntity.getData().getMm());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mPassWord);
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
                 RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
-//                if (baseEntity.msg != null) {
-//                    ToastUtil.showCenterShort(baseEntity.msg);
-//                }
                 ToastUtil.showCenterShort("登录成功");
                 startActivty(MainActivity.class);
                 finish();
@@ -191,7 +186,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 }
                 Map<String, String> map = new HashMap<>();
                 map.put("sjhm", mAccount);
-                map.put("mm", mPassWord);
+                map.put("mm", RxEncryptTool.encryptSHA1ToString(mPassWord+mAccount));
                 mPresenter.login(map);
                 break;
             default:

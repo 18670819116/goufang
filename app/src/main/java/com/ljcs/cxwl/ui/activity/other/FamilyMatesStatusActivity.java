@@ -88,7 +88,7 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarTitle.setText("家庭成员");
-        Contains.ENTERTYPE = 1;
+
     }
 
     @Override

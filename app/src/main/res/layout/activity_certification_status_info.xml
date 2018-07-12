@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x100"
-                        android:text="民　　　族："/>
+                        android:text="民族："/>
 
                     <TextView
                         android:id="@+id/tv_ethnic"

@@ -376,7 +376,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
             ToastUtil.showCenterShort("请输入身份证号码");
             return false;
         }
-        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+        if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }

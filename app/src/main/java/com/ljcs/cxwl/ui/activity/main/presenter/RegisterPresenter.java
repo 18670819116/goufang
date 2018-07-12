@@ -84,7 +84,6 @@ public class RegisterPresenter implements RegisterContract.RegisterContractPrese
         Disposable disposable = httpAPIWrapper.register(map).subscribe(new Consumer<RegisterBean>() {
             @Override
             public void accept(RegisterBean user) throws Exception {
-                Logger.i(user.toString());
                 mView.register(user);
             }
         }, new Consumer<Throwable>() {

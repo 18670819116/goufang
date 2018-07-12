@@ -271,9 +271,9 @@ public class HttpAPIWrapper {
     public static Map addParams(Map<String, String> data) {
         //添加统一的参数的地方
         //// TODO: 2018/7/11 打印传的参数
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-           Log.w("map","Key = " + entry.getKey() + ", Value = " + entry.getValue());
-        }
+//        for (Map.Entry<String, String> entry : data.entrySet()) {
+//           Log.w("map","Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//        }
         return data;
     }
 

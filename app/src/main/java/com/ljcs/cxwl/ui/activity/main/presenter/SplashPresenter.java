@@ -19,6 +19,7 @@ import com.ljcs.cxwl.util.UpdateManager;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxDataTool;
 import com.vondear.rxtools.RxDeviceTool;
+import com.vondear.rxtools.RxEncryptTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 import com.yanzhenjie.permission.AndPermission;
@@ -239,10 +240,10 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
 
             //读取手机信息
 //            AndPermission.with(mActivity).requestCode(100).permission(Manifest.permission.READ_PHONE_STATE).callback
-//                    (permissionListener).start();
+//                   (permissionListener).start();
             Map<String, String> map = new HashMap<>();
             map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
-            map.put("mm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM));
+            map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM)+ RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));
             login(map);
 
         }
@@ -281,10 +282,6 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
                     return;
                 }
                 RxSPTool.putString(mActivity, ShareStatic.APP_LOGIN_TOKEN, appLogin.token);
-                RxSPTool.putString(mActivity, ShareStatic.APP_LOGIN_SJHM, appLogin.getData().getSjhm());
-                RxSPTool.putString(mActivity, ShareStatic.APP_LOGIN_MM, appLogin.getData().getMm());
-                RxSPTool.putString(mActivity, ShareStatic.APP_LOGIN_ZT, appLogin.getData().getZt());
-                RxSPTool.putInt(mActivity, ShareStatic.APP_LOGIN_BH, appLogin.getData().getBh());
                 jump = JUMPTOMAIN;
 
             }

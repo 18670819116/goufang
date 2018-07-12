@@ -41,8 +41,8 @@ public class FamilyAddNowActivity extends BaseActivity implements FamilyAddNowCo
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarTitle.setText("添加家庭成员");
-        Contains.ENTERTYPE=1;
-        Contains.ENTERTYPE_CHANGE=2;
+//        Contains.ENTERTYPE=1;
+//        Contains.ENTERTYPE_CHANGE=2;
     }
 
     @Override

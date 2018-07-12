@@ -405,7 +405,7 @@ public class CertificationActivity extends BaseActivity implements Certification
             ToastUtil.showCenterShort("住址为空");
             return false;
         }
-        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+        if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }

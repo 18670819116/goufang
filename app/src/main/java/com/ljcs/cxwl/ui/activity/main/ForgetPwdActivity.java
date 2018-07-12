@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerForgetPwdComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.ForgetPwdContract;
@@ -28,6 +29,8 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxEncryptTool;
+import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.view.RxToast;
 
 import java.util.HashMap;
@@ -68,6 +71,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
 
     private CountDownTimer countDownTimer;
     private String code = "";
+    private String phone = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +94,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
         countDownTimer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-              //  Logger.i("倒计时" + millisUntilFinished);
+                //  Logger.i("倒计时" + millisUntilFinished);
                 mTvGetYzm.setText("倒计时" + millisUntilFinished / 1000 + "s");
             }
 
@@ -145,11 +149,13 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
     @Override
     public void forgetPwd(CommonBean baseEntity) {
         if (baseEntity.getCode() == 200) {
-                ToastUtil.showCenterShort(baseEntity.msg);
-                finish();
-            } else {
-                onErrorMsg(0, baseEntity.msg);
-            }
+            ToastUtil.showCenterShort(baseEntity.msg);
+            //保存新的密码
+            RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mEt3.getText().toString());
+            finish();
+        } else {
+            onErrorMsg(0, baseEntity.msg);
+        }
 
 
     }
@@ -180,10 +186,12 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
         switch (view.getId()) {
             case R.id.tv_get_yzm:
 
-                if (RxDataTool.isNullString(mEt1.getText().toString())||!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                if (RxDataTool.isNullString(mEt1.getText().toString()) || !StringUitl.isMatch(RxConstTool
+                        .REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
+                phone = mEt1.getText().toString();
                 mTvGetYzm.setEnabled(false);
                 mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
                 countDownTimer.start();
@@ -198,17 +206,24 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                     ToastUtil.showCenterShort("验证码至少6位");
                     return;
                 }
-                if (mEt3.getText().toString().length() < 6||mEt3.getText().toString().length() > 16) {
+                if (mEt3.getText().toString().length() < 6 || mEt3.getText().toString().length() > 16) {
                     ToastUtil.showCenterShort("密码长度应为6-16位字符");
+                    return;
+                }
+                if (!RxDataTool.isNullString(phone) && !phone.equals(mEt1.getText().toString())) {
+                    ToastUtil.showCenterShort("手机号码改变请重新获取验证码");
                     return;
                 }
                 if (RxDataTool.isNullString(code) || !mEt2.getText().toString().trim().equals(code)) {
                     ToastUtil.showCenterShort("短信验证码有误");
                     return;
                 }
+                Logger.e("加密---》 " + RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim() +
+                        mEt1.getText().toString().trim()));
                 Map<String, String> map = new HashMap<>();
                 map.put("sjhm", mEt1.getText().toString().trim());
-                map.put("newmm", mEt3.getText().toString().trim());
+                map.put("newmm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim() + mEt1.getText()
+                        .toString().trim()));
                 mPresenter.forgetPwd(map);
 
                 break;

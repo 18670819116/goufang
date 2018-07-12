@@ -42,32 +42,32 @@ public class QualificationExaminationActivity extends BaseActivity implements Qu
         setContentView(R.layout.activity_qualification_examination);
         ButterKnife.bind(this);
         toolbarTitle.setText("购房资格审查说明");
-        Contains.ENTERTYPE = 2;
-        if (Contains.sAllInfo.getData().getHjxx() != null && Contains.sAllInfo.getData().getHjxx().getZt().equals
-                ("5") && Contains.sAllInfo.getData().getPoxx() != null) {
-            Contains.sCertificationInfo.setName_peiou(Contains.sAllInfo.getData().getPoxx().getXm());
-            Contains.sCertificationInfo.setAddress_peiou(Contains.sAllInfo.getData().getPoxx().getDz());
-            Contains.sCertificationInfo.setIdcard_peiou(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-            Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq());
-            Contains.sCertificationInfo.setEthnic_peiou(Contains.sAllInfo.getData().getPoxx().getMz());
-            Contains.sCertificationInfo.setSex_peiou(Contains.sAllInfo.getData().getPoxx().getXb());
-            if (Contains.sAllInfo.getData().getPoxx().getYxq()!=null&&Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")) {
-                Contains.sCertificationInfo.setSignDate_peiou(Contains.sAllInfo.getData().getPoxx().getYxq().split
-                        ("-")[0]);
-                Contains.sCertificationInfo.setExpiryDate_peiou(Contains.sAllInfo.getData().getPoxx().getYxq().split
-                        ("-")[1]);
-            }
-            Contains.sCertificationInfo.setIssueAuthority_peiou(Contains.sAllInfo.getData().getPoxx().getQfjg());
-            Contains.sCertificationInfo.setPic_path_zheng_peiou(API.PIC + Contains.sAllInfo.getData().getPoxx()
-                    .getSfzzm());
-            Contains.sCertificationInfo.setPic_path_fan_peiou(API.PIC + Contains.sAllInfo.getData().getPoxx()
-                    .getSfzfm());
-            Contains.ENTERTYPE_CHANGE = 1;
-
-        } else {
-
-            Contains.ENTERTYPE_CHANGE = 2;
-        }
+//        Contains.ENTERTYPE = 2;
+//        if (Contains.sAllInfo.getData().getHjxx() != null && Contains.sAllInfo.getData().getHjxx().getZt().equals
+//                ("5") && Contains.sAllInfo.getData().getPoxx() != null) {
+//            Contains.sCertificationInfo.setName_peiou(Contains.sAllInfo.getData().getPoxx().getXm());
+//            Contains.sCertificationInfo.setAddress_peiou(Contains.sAllInfo.getData().getPoxx().getDz());
+//            Contains.sCertificationInfo.setIdcard_peiou(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+//            Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq());
+//            Contains.sCertificationInfo.setEthnic_peiou(Contains.sAllInfo.getData().getPoxx().getMz());
+//            Contains.sCertificationInfo.setSex_peiou(Contains.sAllInfo.getData().getPoxx().getXb());
+//            if (Contains.sAllInfo.getData().getPoxx().getYxq()!=null&&Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")) {
+//                Contains.sCertificationInfo.setSignDate_peiou(Contains.sAllInfo.getData().getPoxx().getYxq().split
+//                        ("-")[0]);
+//                Contains.sCertificationInfo.setExpiryDate_peiou(Contains.sAllInfo.getData().getPoxx().getYxq().split
+//                        ("-")[1]);
+//            }
+//            Contains.sCertificationInfo.setIssueAuthority_peiou(Contains.sAllInfo.getData().getPoxx().getQfjg());
+//            Contains.sCertificationInfo.setPic_path_zheng_peiou(API.PIC + Contains.sAllInfo.getData().getPoxx()
+//                    .getSfzzm());
+//            Contains.sCertificationInfo.setPic_path_fan_peiou(API.PIC + Contains.sAllInfo.getData().getPoxx()
+//                    .getSfzfm());
+//            Contains.ENTERTYPE_CHANGE = 1;
+//
+//        } else {
+//
+//            Contains.ENTERTYPE_CHANGE = 2;
+//        }
     }
 
     @Override

@@ -32,6 +32,7 @@ import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxActivityTool;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxEncryptTool;
 import com.vondear.rxtools.RxSPTool;
 
 import java.util.HashMap;
@@ -75,6 +76,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     private CountDownTimer countDownTimer;
     private String code = "";
+    private String phone = "";
 
     @Override
 
@@ -168,7 +170,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             }
             if (baseEntity.getData() != null) {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_SJHM, baseEntity.getData().getSjhm());
-                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, baseEntity.getData().getMm());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mEt3.getText().toString());
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
                 RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
                 if (baseEntity.msg != null) {
@@ -192,17 +194,18 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("手机号码不能为空");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mEt1.getText().toString())) {
+                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }
+                phone = mEt1.getText().toString();
                 mTvGetYzm.setEnabled(false);
                 mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
                 countDownTimer.start();
                 mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mEt1.getText().toString())) {
+                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }
@@ -210,19 +213,22 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("验证码至少6位");
                     return;
                 }
-                if (mEt3.getText().toString().length() < 6||mEt3.getText().toString().length() > 16) {
+                if (mEt3.getText().toString().length() < 6 || mEt3.getText().toString().length() > 16) {
                     ToastUtil.showCenterShort("密码长度应为6-16位字符");
                     return;
                 }
-
+                if (!RxDataTool.isNullString(phone) && !phone.equals(mEt1.getText().toString())) {
+                    ToastUtil.showCenterShort("手机号码改变请重新获取验证码");
+                    return;
+                }
                 if (RxDataTool.isNullString(code) || !(mEt2.getText().toString().trim().equals(code))) {
                     ToastUtil.showCenterShort("验证码错误");
                     return;
                 }
                 Map<String, String> map = new HashMap<>();
-
+                Logger.i( RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
                 map.put("sjhm", mEt1.getText().toString().trim());
-                map.put("mm", mEt3.getText().toString().trim());
+                map.put("mm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
                 mPresenter.register(map);
                 break;
             case R.id.tv_xieyi:

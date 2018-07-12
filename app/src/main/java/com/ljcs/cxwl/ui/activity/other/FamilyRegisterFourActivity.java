@@ -123,13 +123,8 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
         setContentView(R.layout.activity_family_register_four);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (Contains.ENTERTYPE == 1) {
-            setToolbarTitle("保存家庭成员信息");
-            btnLogin.setText("保存");
-        } else if (Contains.ENTERTYPE == 2) {
-            setToolbarTitle("核对并提交信息");
-            btnLogin.setText("确认提交");
-        }
+        setToolbarTitle("核对并提交信息");
+        btnLogin.setText("确认提交");
         intiViews();
 
     }
@@ -279,20 +274,8 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
         if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             return;
         }
-        if (Contains.ENTERTYPE == 1) {
-            //保存家庭成员状态值
-            if (Contains.sAllInfo.getData().getPoxx() == null && Contains.sAllInfo.getData().getJtcyList() == null) {
-                ToastUtil.showCenterShort("未添加任何家庭成员");
-                return;
-            }
-            Map<String, String> map = new HashMap<>();
-            map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
-            mPresenter.matesInfoSave(map);
-        } else {
             Map<String, String> map = new HashMap<>();
             map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
             mPresenter.commitInfo(map);
-        }
-
     }
 }

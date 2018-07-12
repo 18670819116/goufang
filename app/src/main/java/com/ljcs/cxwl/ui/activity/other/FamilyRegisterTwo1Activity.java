@@ -375,7 +375,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                 if (checkText()) {
                     showProgressDialog();
                     if (isHavePic1 && isHavePic2 && isHavePic3 && isHavePic4) {
-                            //表示不需要上传
+                        //表示不需要上传
                         map.put("token", RxSPTool.getString(FamilyRegisterTwo1Activity.this, ShareStatic
                                 .APP_LOGIN_TOKEN));
                         map.put("sfzhm", tvIdcard.getText().toString());
@@ -598,7 +598,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("住址为空");
             return false;
         }
-        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+        if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
@@ -606,8 +606,9 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("出生日期和身份证的出生日期不一致");
             return false;
         }
-        if (IDcardUtil.getAge(tvIdcard.getText().toString()) < 22) {
-            ToastUtil.showCenterShort("根据政策规定，暂不支持对未成年人的实名认证");
+        if ((IDcardUtil.getAge(tvIdcard.getText().toString()) < 22 && tvSex.getText().toString().equals("男"))||
+                (IDcardUtil.getAge(tvIdcard.getText().toString()) < 20 && tvSex.getText().toString().equals("女"))) {
+            ToastUtil.showCenterShort("非适婚年龄");
             return false;
         }
         if (RxDataTool.isNullString(tvIssueAuthority.getText().toString())) {

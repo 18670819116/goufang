@@ -27,6 +27,7 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtools.RxConstTool;
 import com.vondear.rxtools.RxDataTool;
+import com.vondear.rxtools.RxEncryptTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
@@ -141,10 +142,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_TOKEN, baseEntity.token);
             }
             if (baseEntity.getData() != null) {
-                RxSPTool.putString(this, ShareStatic.APP_LOGIN_SJHM, baseEntity.getData().getSjhm());
-                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, baseEntity.getData().getMm());
-                RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
-                RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
+                RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, et2.getText().toString());
                 if (baseEntity.msg != null) {
                     ToastUtil.showCenterShort(baseEntity.msg);
                 }
@@ -183,9 +181,11 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
         }
         Map<String, String> map = new HashMap<>();
         map.put("sjhm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
-        map.put("mm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM));
+        map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM) + RxSPTool
+                .getString(this, ShareStatic.APP_LOGIN_SJHM)));
         map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
-        map.put("newmm", et2.getText().toString().trim());
+        map.put("newmm", RxEncryptTool.encryptSHA1ToString(et2.getText().toString().trim() + RxSPTool.getString(this,
+                ShareStatic.APP_LOGIN_SJHM)));
         mPresenter.changePwd(map);
     }
 
