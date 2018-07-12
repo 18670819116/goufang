@@ -195,14 +195,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="姓名："/>
+                        android:text="姓　　　   名 ："/>
 
                     <TextView
                         android:id="@+id/tv_name1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -217,7 +217,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="性别："/>
+                        android:text="性　　　   别 ："/>
 
                     <TextView
                         android:id="@+id/tv_sex1"
@@ -225,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
 
@@ -241,7 +241,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户籍类型："/>
+                        android:text="户  籍  类  型  ："/>
 
                     <TextView
                         android:id="@+id/tv_hklx1"
@@ -249,7 +249,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
 
@@ -274,7 +274,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
 
@@ -291,18 +291,37 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="婚姻状况："/>
+                        android:text="婚  姻  状  况  ："/>
 
                     <TextView
                         android:id="@+id/tv_hyzk1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
-                        android:text="300121199308047031"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y70"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="户 籍 所 在 地："/>
+
+                    <TextView
+                        android:id="@+id/tv_hjszd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -313,7 +332,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="身份证号码："/>
+                        android:text="身 份 证 号 码："/>
 
                     <TextView
                         android:id="@+id/tv_card1"
@@ -321,7 +340,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -444,14 +463,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="姓名："/>
+                        android:text="姓　　　   名 ："/>
 
                     <TextView
                         android:id="@+id/tv_name2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -466,7 +485,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="性别："/>
+                        android:text="性　　　   别 ："/>
 
                     <TextView
                         android:id="@+id/tv_sex2"
@@ -474,7 +493,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
 
@@ -490,7 +509,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口类型："/>
+                        android:text="户  口  类  型  ："/>
 
                     <TextView
                         android:id="@+id/tv_hklx2"
@@ -498,7 +517,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
 
@@ -515,7 +534,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户口性质："/>
+                        android:text="户  口  性  质  ："/>
 
                     <TextView
                         android:id="@+id/tv_hkxz2"
@@ -523,7 +542,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
 
@@ -535,19 +554,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="婚姻状况："/>
+                        android:text="婚  姻  状  况  ："/>
 
                     <TextView
                         android:id="@+id/tv_hyzk2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
-                        android:text="300121199308047031"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -562,7 +582,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="身份证号码："/>
+                        android:text="身 份 证 号 码："/>
 
                     <TextView
                         android:id="@+id/tv_card2"
@@ -570,7 +590,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -593,7 +613,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
-                        android:text="某某某"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -684,6 +704,177 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/layout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:layout_marginLeft="@dimen/x25"
+                android:layout_marginRight="@dimen/x25"
+                android:layout_marginTop="@dimen/y26"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/y28"
+                android:paddingLeft="@dimen/x30"
+                android:paddingRight="@dimen/x30"
+                android:paddingTop="@dimen/y28">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y70"
+                    android:gravity="center_vertical"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_head_two"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:layout_weight="1"
+                        android:text="配偶信息"
+                        android:textColor="#1478ff"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/bg_btn_grenn2"
+                        android:visibility="gone"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y70"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="姓　　　   名 ："/>
+
+                    <TextView
+                        android:id="@+id/tv_name3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y70"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="离  异  时  间  ："/>
+
+                    <TextView
+                        android:id="@+id/tv_lysj"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y70"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="身 份 证 号 码："/>
+
+                    <TextView
+                        android:id="@+id/tv_card3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y29"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_rock_down1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y29"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/img5_peiou"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y183"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        />
+
+                    <ImageView
+                        android:id="@+id/img6_peiou"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y183"
+
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y29"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_rock_down2"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/layout_zinv_content"
                 android:layout_width="match_parent"

@@ -125,12 +125,17 @@ public class CertificationFiveActivity extends BaseActivity implements Certifica
                 if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     return;
                 }
-                if (Contains.sCertificationInfo.isChangeZm()||Contains.sCertificationInfo.isChangeFm()){
-                    //表示扫描的信息已被修改过
-                    Logger.i("身份证扫描信息已被手动修改");
-                }
+
                 Map<String, String> map = new HashMap<>();
                 map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+                if (Contains.sCertificationInfo.isChangeZm() || Contains.sCertificationInfo.isChangeFm()) {
+                    //表示扫描的信息已被修改过
+                    Logger.i("身份证扫描信息已被手动修改");
+                    //1是修改过，2是没修改的
+                    map.put("rgsh", "1");
+                } else {
+                    map.put("rgsh", "2");
+                }
                 if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
                         .sAllInfo.getData().getSmyz().getBh() != 0) {
                     map.put("bh", Contains.sAllInfo.getData().getSmyz().getBh() + "");

@@ -51,7 +51,7 @@ public class QualificationExaminationActivity extends BaseActivity implements Qu
             Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq());
             Contains.sCertificationInfo.setEthnic_peiou(Contains.sAllInfo.getData().getPoxx().getMz());
             Contains.sCertificationInfo.setSex_peiou(Contains.sAllInfo.getData().getPoxx().getXb());
-            if (Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")) {
+            if (Contains.sAllInfo.getData().getPoxx().getYxq()!=null&&Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")) {
                 Contains.sCertificationInfo.setSignDate_peiou(Contains.sAllInfo.getData().getPoxx().getYxq().split
                         ("-")[0]);
                 Contains.sCertificationInfo.setExpiryDate_peiou(Contains.sAllInfo.getData().getPoxx().getYxq().split

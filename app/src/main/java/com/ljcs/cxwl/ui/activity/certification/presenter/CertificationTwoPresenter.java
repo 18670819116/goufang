@@ -11,6 +11,7 @@ import com.ljcs.cxwl.ui.activity.certification.contract.CertificationTwoContract
 import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
 import com.orhanobut.logger.Logger;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,9 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import rx.functions.Action;
 
 /**
@@ -105,6 +109,29 @@ public class CertificationTwoPresenter implements CertificationTwoContract.Certi
             @Override
             public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
                 mView.closeProgressDialog();
+            }
+        }, new io.reactivex.functions.Action() {
+            @Override
+            public void run() throws Exception {
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void uploadFile(Map map,String file) {
+        RequestBody fileRequestBody=RequestBody.create(MediaType.parse("multipart/form-data"), new File(file));
+        MultipartBody.Part body = MultipartBody.Part.createFormData("uploadFile",  new File(file).getName(), fileRequestBody);
+        Disposable disposable = httpAPIWrapper.uploadFile(body).subscribe(new Consumer<BaseEntity>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull BaseEntity appLogin) throws Exception {
+                //mView.allInfoSuccess(appLogin);
+                Logger.e(appLogin.toString());
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
+                Logger.e(throwable.toString());
             }
         }, new io.reactivex.functions.Action() {
             @Override

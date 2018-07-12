@@ -2,6 +2,7 @@ package com.ljcs.cxwl.ui.activity.other.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
@@ -9,9 +10,11 @@ import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterActivity;
+import com.ljcs.cxwl.util.UploadUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -113,7 +116,10 @@ public class FamilyRegisterPresenter implements FamilyRegisterContract.FamilyReg
         });
         mCompositeDisposable.add(disposable);
     }
-
+    @Override
+    public void uploadPic(List<String> list, UploadFileCallBack callBack) {
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+    }
 //    @Override
 //    public void getUser(HashMap map) {
 //        //mView.showProgressDialog();

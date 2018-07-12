@@ -582,7 +582,7 @@ public class AllInfo extends BaseEntity {
             private String lxdh;
             private String jhzzp;
             private String zt;
-
+            private String lhrq;
             public int getBh() {
                 return bh;
             }
@@ -749,6 +749,14 @@ public class AllInfo extends BaseEntity {
 
             public void setZt(String zt) {
                 this.zt = zt;
+            }
+
+            public String getLhrq() {
+                return lhrq;
+            }
+
+            public void setLhrq(String lhrq) {
+                this.lhrq = lhrq;
             }
         }
     }

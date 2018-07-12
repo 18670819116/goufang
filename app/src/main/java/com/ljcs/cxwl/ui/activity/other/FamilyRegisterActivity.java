@@ -21,6 +21,7 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.callback.UploadCallback;
+import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
@@ -136,7 +137,8 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         list2.add("家庭户口");
         list3.add("已婚");
         list3.add("未婚");
-        list3.add("离异");
+        list3.add("离异（2年内有离异史）");
+        list3.add("离异（2年以上）");
         list3.add("丧偶");
         if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
             tvName.setText(Contains.sAllInfo.getData().getSmyz().getXm());
@@ -238,14 +240,18 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             //重新赋值
             Contains.sAllInfo = baseEntity;
-            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶")) {
+            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶") ||
+                    tvLeixing3.getText().toString().equals("离异（2年以上）")) {
                 startActivty(FamilyRegisterThirdActivity.class);
-            } else {
-                if (Contains.ENTERTYPE_CHANGE == 1) {
-                    startActivty(MatesInfoTwoActivity.class);
-                }else {
-                    startActivty(MatesInfoOneActivity.class);
-                }
+            } else if (tvLeixing3.getText().toString().equals("已婚")) {
+//                if (Contains.ENTERTYPE_CHANGE == 1) {
+//                    startActivty(MatesInfoTwoActivity.class);
+//                } else {
+//                    startActivty(MatesInfoOneActivity.class);
+//                }
+                startActivty(FamilyRegisterTwo1Activity.class);
+            } else if (tvLeixing3.getText().toString().equals("离异（2年内有离异史）")) {
+                startActivty(FamilyRegisterTwo2Activity.class);
             }
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
@@ -293,7 +299,26 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                     showProgressDialog();
                     mPresenter.hukouInfo(map);
                 } else {
-                    mPresenter.getQiniuToken();
+                    List<String> list = new ArrayList<>();
+                    list.add(imgPath);
+                    mPresenter.uploadPic(list, new UploadFileCallBack() {
+                        @Override
+                        public void sucess(List<String> url) {
+                            Map<String, String> map = new HashMap<>();
+                            map.put("hklx", tvLeixing1.getText().toString());
+                            map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                            map.put("hkxz", tvLeixing2.getText().toString());
+                            map.put("hyzt", tvLeixing3.getText().toString());
+                            map.put("hjszd", etSuozaidi.getText().toString());
+                            map.put("hkzp", url.get(0));
+                            mPresenter.hukouInfo(map);
+                        }
+
+                        @Override
+                        public void fail(String msg) {
+                            closeProgressDialog();
+                        }
+                    });
                 }
 
                 break;
@@ -338,7 +363,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         super.onActivityResult(requestCode, resultCode, data);
         // 识别成功回调，通用文字识别
         if (requestCode == REQUEST_CODE_GENERAL_BASIC && resultCode == Activity.RESULT_OK) {
-            final File tempImage = new File(FamilyRegisterActivity.this.getCacheDir(), "household");
+            final File tempImage = new File(FamilyRegisterActivity.this.getCacheDir(), "household.jpg");
             ImageUtil.resize(new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath())
                     .getAbsolutePath(), tempImage.getAbsolutePath(), 1280, 1280);
             Logger.e(tempImage.getAbsolutePath() + "-----" + tempImage.length());

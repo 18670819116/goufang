@@ -25,12 +25,12 @@
     <style name="line_hor">
         <item name="android:layout_height">@dimen/y1</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/color_B7B7B7</item>
+        <item name="android:background">@color/color_dddddd</item>
     </style>
     <style name="line_var">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">@dimen/x1</item>
-        <item name="android:background">@color/color_B7B7B7</item>
+        <item name="android:background">@color/color_dddddd</item>
     </style>
     <style name="btn_login">
         <item name="android:layout_width">match_parent</item>

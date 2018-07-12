@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_bottom"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/imageView_zheng"
+                    android:layout_width="@dimen/x630"
+                    android:layout_height="@dimen/y439"
+                    android:layout_marginLeft="@dimen/x60"
+                    android:layout_marginRight="@dimen/x60"
+                    android:layout_marginTop="@dimen/y40"
+                    android:src="@mipmap/ic_cer_zheng"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_chongpai1"
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="@dimen/y90"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/y56"
+                    android:layout_marginRight="@dimen/x60"
+                    android:src="@mipmap/ic_cer_chongpai1"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_content1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y90"
+                    android:layout_marginTop="@dimen/y56"
+                    android:background="@color/color_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="#fd0101"/>
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="请核对身份证正面信息，如有误可直接修改内容"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/x20"
+                    android:paddingRight="@dimen/x20">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="姓　　　名："/>
+
+                        <EditText
+                            android:id="@+id/tv_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/line_hor"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="性　　　别："/>
+
+                        <EditText
+                            android:id="@+id/tv_sex"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:maxLength="1"
+                            android:singleLine="true"
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x100"
+                            android:text="民　　　族："/>
+
+                        <EditText
+                            android:id="@+id/tv_ethnic"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:singleLine="true"
+                            android:text=""
+
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/line_hor"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="出　　　生："/>
+
+                        <EditText
+                            android:id="@+id/tv_birthday"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/line_hor"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="住　　　址："/>
+
+                        <EditText
+                            android:id="@+id/tv_adress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:text=""
+
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/line_hor"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="身份证号码："/>
+
+                        <EditText
+                            android:id="@+id/tv_idcard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:maxLength="18"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/line_hor"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageView_fan"
+                    android:layout_width="@dimen/x630"
+                    android:layout_height="@dimen/y439"
+                    android:layout_marginBottom="@dimen/y40"
+                    android:layout_marginLeft="@dimen/x60"
+                    android:layout_marginRight="@dimen/x60"
+                    android:layout_marginTop="@dimen/y40"
+                    android:src="@mipmap/ic_cer_fan"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_chongpai2"
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="@dimen/y90"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/y56"
+                    android:layout_marginRight="@dimen/x60"
+                    android:src="@mipmap/ic_cer_chongpai1"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_content2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y90"
+                    android:background="@color/color_background"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="*"
+                        android:textColor="#fd0101"/>
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="请核对身份证反面信息，如有误可直接修改内容"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/x20"
+                    android:paddingRight="@dimen/x30">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="签发机关："/>
+
+                        <EditText
+                            android:id="@+id/tv_issueAuthority"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:singleLine="true"
+
+                            android:text=""
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <View style="@style/line_hor"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y94"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="有效期限："/>
+
+                        <EditText
+                            android:id="@+id/tv_data1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:minWidth="@dimen/x100"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" - "/>
+
+                        <EditText
+                            android:id="@+id/tv_data2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:minWidth="@dimen/x100"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/color_333333"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/y20"
+        android:paddingTop="@dimen/y20"
+        >
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/btn_style"
+            android:layout_below="@+id/layout"
+            android:enabled="false"
+            android:text="确认提交"/>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_jiami"
+            android:drawablePadding="@dimen/x5"
+            android:text="信息已加密仅用于身份证认证"/>
+    </LinearLayout>
+</RelativeLayout>

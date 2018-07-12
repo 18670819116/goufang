@@ -179,12 +179,9 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_get_yzm:
-                if (RxDataTool.isNullString(mEt1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机号码不能为空");
-                    return;
-                }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mEt1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机号码不正确");
+
+                if (RxDataTool.isNullString(mEt1.getText().toString())||!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                    ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
                 mTvGetYzm.setEnabled(false);
@@ -193,24 +190,20 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                 mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mEt1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机号码不正确");
+                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                    ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
                 if (mEt2.getText().toString().length() != 6) {
                     ToastUtil.showCenterShort("验证码至少6位");
                     return;
                 }
-                if (mEt3.getText().toString().length() < 6) {
-                    ToastUtil.showCenterShort("密码最少6位");
-                    return;
-                }
-                if (mEt3.getText().toString().length() > 16) {
-                    ToastUtil.showCenterShort("密码最多16位");
+                if (mEt3.getText().toString().length() < 6||mEt3.getText().toString().length() > 16) {
+                    ToastUtil.showCenterShort("密码长度应为6-16位字符");
                     return;
                 }
                 if (RxDataTool.isNullString(code) || !mEt2.getText().toString().trim().equals(code)) {
-                    ToastUtil.showCenterShort("验证码错误");
+                    ToastUtil.showCenterShort("短信验证码有误");
                     return;
                 }
                 Map<String, String> map = new HashMap<>();

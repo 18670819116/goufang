@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y301"
+        android:background="@mipmap/bg_head"
+        android:orientation="horizontal">
+
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_bottom"
+        android:layout_marginTop="@dimen/y190">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x34"
+            android:layout_marginRight="@dimen/x34"
+
+            android:background="@drawable/shape_bg_20"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y66"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_one"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="每个账号仅能进行一次实名认证，且认证人须为账号持有人本人。"
+                    android:textColor="@color/color_333333"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_two"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="实名认证信息是进行购房资格审查等本APP其他应用功能的前提，请保证您认证信息的真实性，因信息不正确导致的后果将由您自行承担。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_third"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="我们将联合公安、民政等部门对您提交的实名认证信息进行审核，审核结果的最终解释权归长沙市住房和城乡建设委员会所有。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_four"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="识别过程中，OCR识别技术将帮助您输入您的信息，请您仔细核对识别后的信息，一旦识别信息错误请重新识别或手动修改。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_five"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="实名认证过程中，请按照系统提示进行操作，如自动识别到的信息有误，请重新对证件进行扫描，尽量避免手动修改信息，手动修改了信息的实名认证需要进行人工审查，其审核需要更长时间。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y66"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y40"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_six"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="请准备好申请人身份证，实名认证即将开始。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y20"
+        android:paddingTop="@dimen/y20">
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/btn_login"
+            android:layout_below="@+id/layout"
+
+            android:text="下一步"/>
+    </LinearLayout>
+</RelativeLayout>

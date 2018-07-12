@@ -371,7 +371,7 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
     @Override
     public void matesInfoSuccess(MatesInfo baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
+            //ToastUtil.showCenterShort(baseEntity.msg);
             startActivty(FamilyRegisterThirdActivity.class);
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);

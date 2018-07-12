@@ -15,12 +15,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <!--允许应用程序访问WIFI网卡的网络信息-->
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-feature android:name="android.hardware.camera2.full"/>
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
@@ -125,6 +125,12 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <!--关于实名认证-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
         <!--实名认证-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.certification.CertificationOneActivity"
@@ -153,6 +159,12 @@
         <!--实名认证-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.certification.CertificationFiveActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--实名认证总-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.certification.CertificationActivity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>
@@ -203,6 +215,18 @@
         <!--添加配偶信息-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwoActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--添加配偶信息-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwo1Activity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+        </activity>
+        <!--添加前配偶信息-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwo2Activity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
         </activity>

@@ -20,6 +20,7 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.callback.UploadCallback;
+import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
@@ -259,7 +260,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
                 showSelectPickerView(4, list4);
                 break;
             case R.id.layout_select5:
-                showSelectPickerView(5, list5);
+                // showSelectPickerView(5, list5);
                 break;
             case R.id.img_upload:
                 if (imageView5.getVisibility() == View.INVISIBLE) {
@@ -302,7 +303,35 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
                         }
                         mPresenter.matesInfoZinv(map);
                     } else {
-                        mPresenter.getQiniuToken();
+                        List<String> list = new ArrayList<>();
+                        list.add(imgPath);
+                        mPresenter.uploadPic(list, new UploadFileCallBack() {
+                            @Override
+                            public void sucess(List<String> url) {
+                                Map<String, String> map = new HashMap<>();
+                                map.put("hklx", tvLeixing2.getText().toString());
+                                map.put("token", RxSPTool.getString(FamilyAddActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                                map.put("hkxz", tvLeixing3.getText().toString());
+                                map.put("hyzt", tvLeixing4.getText().toString());
+                                map.put("xm", tvName.getText().toString());
+                                map.put("xb", tvLeixing1.getText().toString());
+                                map.put("gx", tvLeixing5.getText().toString());
+                                map.put("sfzhm", tvIdcard.getText().toString());
+                                map.put("hkzp", url.get(0));
+                                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getJtcyList() != null &&
+                                        position != -1 && Contains.sAllInfo.getData().getJtcyList().get(position).getBh() != 0) {
+                                    map.put("bh", Contains.sAllInfo.getData().getJtcyList().get(position).getBh() + "");
+                                } else {
+                                    map.put("bh", "");
+                                }
+                                mPresenter.matesInfoZinv(map);
+                            }
+
+                            @Override
+                            public void fail(String msg) {
+                                closeProgressDialog();
+                            }
+                        });
                     }
                 }
                 break;
@@ -348,10 +377,10 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
             return false;
         }
         if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证不合法");
+            ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
-        if (IDcardUtil.getAge(tvIdcard.getText().toString()) >=18) {
+        if (IDcardUtil.getAge(tvIdcard.getText().toString()) >= 18) {
             ToastUtil.showCenterShort("子女年龄应小于18岁");
             return false;
         }
@@ -376,6 +405,19 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
                     case 1:
                         //性别
                         tvLeixing1.setText(list1.get(options1));
+                        if (tvLeixing1.getText().equals("男") && Contains.sAllInfo.getData().getSmyz().getXb().equals
+                                ("男")) {
+                            tvLeixing5.setText("父子");
+                        } else if (tvLeixing1.getText().equals("男") && Contains.sAllInfo.getData().getSmyz().getXb()
+                                .equals("女")) {
+                            tvLeixing5.setText("母子");
+                        } else if (tvLeixing1.getText().equals("女") && Contains.sAllInfo.getData().getSmyz().getXb()
+                                .equals("女")) {
+                            tvLeixing5.setText("母女");
+                        } else if (tvLeixing1.getText().equals("女") && Contains.sAllInfo.getData().getSmyz().getXb()
+                                .equals("男")) {
+                            tvLeixing5.setText("父女");
+                        }
                         break;
                     case 2:
                         //户籍类型
@@ -426,7 +468,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         super.onActivityResult(requestCode, resultCode, data);
         // 识别成功回调，通用文字识别
         if (requestCode == REQUEST_CODE_GENERAL_BASIC && resultCode == Activity.RESULT_OK) {
-            final File tempImage = new File(FamilyAddActivity.this.getCacheDir(), "household_zinv");
+            final File tempImage = new File(FamilyAddActivity.this.getCacheDir(), "household_zinv.jpg");
             ImageUtil.resize(new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath())
                     .getAbsolutePath(), tempImage.getAbsolutePath(), 1280, 1280);
             Logger.e(tempImage.getAbsolutePath() + "-----" + tempImage.length());

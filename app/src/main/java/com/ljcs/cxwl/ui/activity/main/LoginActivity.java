@@ -169,11 +169,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 }
                 mAccount = mLoginTel.getText().toString().trim();
                 mPassWord = mLoginPwd.getText().toString().trim();
-                if (RxDataTool.isNullString(mAccount) || RxDataTool.isNullString(mPassWord)) {
-                    ToastUtil.showCenterShort("手机号码或密码不能为空");
+                if (RxDataTool.isNullString(mAccount)) {
+                    ToastUtil.showCenterShort("手机号码不能为空");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_SIMPLE, mAccount)) {
+                if ( RxDataTool.isNullString(mPassWord)) {
+                    ToastUtil.showCenterShort("密码不能为空");
+                    return;
+                }
+                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mAccount)) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }

@@ -69,9 +69,9 @@ public class ErrorHandlerInterceptor implements Interceptor {
                 //获取到response的body的string字符串
                 //do something .... <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                 String result = buffer.clone().readString(charset);
-                com.orhanobut.logger.Logger.i("拦截到的okhttp结果:" + result);
+//                com.orhanobut.logger.Logger.i("拦截到的okhttp结果:" + result);
                 result = "{\"data\": " + result + "}";
-//                com.orhanobut.logger.Logger..json(result);
+                com.orhanobut.logger.Logger.json(result);
             }
 //            com.orhanobut.logger.Logger..i("<-- END HTTP (" + buffer.size() + "-byte body)");
         }

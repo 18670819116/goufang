@@ -100,6 +100,18 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
     LinearLayout layout3;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.tv_hjszd)
+    TextView tvHjszd;
+    @BindView(R.id.tv_name3)
+    TextView tvName3;
+    @BindView(R.id.tv_lysj)
+    TextView tvLysj;
+    @BindView(R.id.tv_card3)
+    TextView tvCard3;
+    @BindView(R.id.img5_peiou)
+    ImageView img5Peiou;
+    @BindView(R.id.layout4)
+    LinearLayout layout4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +130,7 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
             setToolbarTitle("核对并提交信息");
             btnLogin.setText("确认提交");
         }
+        intiViews();
 
     }
 
@@ -135,25 +148,50 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
         tvHklx1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
         tvHkxz1.setText(Contains.sAllInfo.getData().getHjxx().getHkxz());
         tvHyzk1.setText(Contains.sAllInfo.getData().getHjxx().getHyzt());
+        tvHjszd.setText(Contains.sAllInfo.getData().getHjxx().getHjszd());
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(img1);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(img2);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(img3);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getJhzzp()).into(img4);
         if (Contains.sAllInfo.getData().getPoxx() != null) {
-            tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-            tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
-            tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-            tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
-            tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
-            tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
-            tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+            if (Contains.sAllInfo.getData().getHjxx().getHyzt().equals("已婚")) {
+                //表示已婚 现配偶
+                layout4.setVisibility(View.GONE);
+                layout3.setVisibility(View.VISIBLE);
+                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+                tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
+                tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+                tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+                tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
+                tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+                tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+
+            } else {
+                //表示离异 前配偶
+                layout4.setVisibility(View.VISIBLE);
+                layout3.setVisibility(View.GONE);
+                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+                tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getLhrq());
+                tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img5Peiou);
+            }
 
         } else {
             layout3.setVisibility(View.GONE);
+            layout4.setVisibility(View.GONE);
+        }
+        layoutZinvContent.removeAllViews();
+        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
+            for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
+                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
+                        .get(i));
+                layoutZinvContent.addView(zinvInfoLayout);
+            }
+
         }
     }
 
@@ -162,15 +200,7 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             //购房资格申请
             Contains.sAllInfo = baseEntity;
-            if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size()
-                    > 0) {
-                for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
-                    ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList
-                            ().get(i));
-                    layoutZinvContent.addView(zinvInfoLayout);
-                }
 
-            }
             intiViews();
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);

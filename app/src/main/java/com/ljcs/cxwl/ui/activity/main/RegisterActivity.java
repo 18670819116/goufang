@@ -210,14 +210,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("验证码至少6位");
                     return;
                 }
-                if (mEt3.getText().toString().length() < 6) {
-                    ToastUtil.showCenterShort("密码最少6位");
+                if (mEt3.getText().toString().length() < 6||mEt3.getText().toString().length() > 16) {
+                    ToastUtil.showCenterShort("密码长度应为6-16位字符");
                     return;
                 }
-                if (mEt3.getText().toString().length() > 16) {
-                    ToastUtil.showCenterShort("密码最多16位");
-                    return;
-                }
+
                 if (RxDataTool.isNullString(code) || !(mEt2.getText().toString().trim().equals(code))) {
                     ToastUtil.showCenterShort("验证码错误");
                     return;

@@ -160,6 +160,7 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                         map.put("mm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_MM));
                         map.put("token", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
                         mPresenter.loginOut(map);
+                        dialog.dismiss();
                     }
                 });
                 dialog.setCancelListener(new View.OnClickListener() {

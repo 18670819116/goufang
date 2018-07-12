@@ -100,9 +100,9 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
         if (Contains.sAllInfo.getData().getHjxx() != null) {
             if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
                 //审核中
-                Glide.with(this).load(R.mipmap.ic_mates_status2).into(icFamilyStatus);
+                Glide.with(this).load(R.mipmap.ic_mates_status1).into(icFamilyStatus);
                 tvHeadStutus1.setText("家庭成员信息已保存");
-                tvHeadStutus1.setTextColor(getResources().getColor(R.color.color_0ebc90));
+                tvHeadStutus1.setTextColor(getResources().getColor(R.color.main_color));
             } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
                 //审核中
                 Glide.with(this).load(R.mipmap.ic_mates_status1).into(icFamilyStatus);
@@ -114,9 +114,9 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
                 tvHeadStutus1.setText("家庭成员信息已保存");
                 tvHeadStutus1.setTextColor(getResources().getColor(R.color.main_color));
             } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
-                Glide.with(this).load(R.mipmap.ic_mates_status1).into(icFamilyStatus);
+                Glide.with(this).load(R.mipmap.ic_mates_status2).into(icFamilyStatus);
                 tvHeadStutus1.setText("家庭成员信息已添加");
-                tvHeadStutus1.setTextColor(getResources().getColor(R.color.main_color));
+                tvHeadStutus1.setTextColor(getResources().getColor(R.color.color_0ebc90));
             }
         }
 

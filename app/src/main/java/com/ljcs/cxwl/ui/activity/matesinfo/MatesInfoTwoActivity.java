@@ -268,7 +268,7 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
             return false;
         }
         if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证不合法");
+            ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
         if (!tvIdcard.getText().toString().substring(6, 14).equals(tvBirthday.getText().toString())) {

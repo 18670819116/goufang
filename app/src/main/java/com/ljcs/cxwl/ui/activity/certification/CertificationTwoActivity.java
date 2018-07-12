@@ -2,12 +2,14 @@ package com.ljcs.cxwl.ui.activity.certification;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -28,6 +30,7 @@ import com.ljcs.cxwl.util.QiniuUploadUtil;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.StringUitls;
 import com.ljcs.cxwl.util.ToastUtil;
+import com.orhanobut.logger.Logger;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.utils.StringUtils;
 import com.vondear.rxtools.RxDataTool;
@@ -35,6 +38,7 @@ import com.vondear.rxtools.RxRegTool;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -189,6 +193,17 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
+                // TODO: 2018/7/10 测试文件上传
+//                Map<String, String> map = new HashMap<>();
+//                Environment.getExternalStorageDirectory().getPath();
+//                Logger.e(Environment.getExternalStorageDirectory().getPath());
+//
+//                File file = new File(Environment.getExternalStorageDirectory().getPath() + "/temp.jpg");
+//                if (file.exists()){
+//                    Logger.e("文件存在"+file.length());
+//                    Glide.with(this).load(file).into(imageView);
+//                }
+//                mPresenter.uploadFile(map,Environment.getExternalStorageDirectory().getPath()+"/temp.jpg");
                 finish();
                 break;
             case R.id.next:
@@ -257,7 +272,7 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
             return false;
         }
         if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("身份证不合法");
+            ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
         if (!tvIdcard.getText().toString().substring(6, 14).equals(tvBirthday.getText().toString())) {

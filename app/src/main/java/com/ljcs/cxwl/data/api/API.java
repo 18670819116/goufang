@@ -6,9 +6,10 @@ package com.ljcs.cxwl.data.api;
  */
 
 public interface API {
-    String PIC = "http://img0.hnchxwl.com/";
-//    String IP_PRODUCT = "http://192.168.8.25/api";
+    String PIC = "http://218.77.54.125:11000/img?path=";
+//    String IP_PRODUCT = "http://192.168.8.199/api";
     String IP_PRODUCT = "http://218.77.54.125:11001/api";
+    String IP_PRODUCT1 = "http://218.77.54.125:11000";
 
     String BASE_URL = IP_PRODUCT + "/";
     long CONNECT_TIMEOUT = 30 * 1000;
@@ -35,6 +36,7 @@ public interface API {
 
     String URL_POST_HUKOU = "family/jzw/user/addregistered";//添加/修改户籍信息
     String URL_GET_QINIU_TOKEN = "http://wy.iot.xin/qiniu/qiniu_getQiniuToken.action";//获取七牛token
+    String URL_GET_UPLOADFILE= IP_PRODUCT1+"/upload";//ftp文件上传
 
 
 

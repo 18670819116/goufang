@@ -1,5 +1,7 @@
 package com.ljcs.cxwl.data.api;
 
+import android.util.Log;
+
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.AppInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
@@ -35,6 +37,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 
 /**
  * @author hu
@@ -139,7 +142,10 @@ public class HttpAPIWrapper {
     public Observable<HujiInfo> hukouInfo(Map data) {
         return wrapper(mHttpAPI.hukouInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
-
+    //获取七牛token
+    public Observable<CommonBean> uploadFile(MultipartBody.Part file) {
+        return wrapper(mHttpAPI.uploadFile(file)).compose(SCHEDULERS_TRANSFORMER);
+    }
     /**
      * 给任何Http的Observable加上通用的线程调度器
      */
@@ -264,6 +270,10 @@ public class HttpAPIWrapper {
     //需要额外的添加其他的参数进去，所以把原有的参数和额外的参数通过这个方法一起添加进去.
     public static Map addParams(Map<String, String> data) {
         //添加统一的参数的地方
+        //// TODO: 2018/7/11 打印传的参数
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+           Log.w("map","Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
         return data;
     }
 

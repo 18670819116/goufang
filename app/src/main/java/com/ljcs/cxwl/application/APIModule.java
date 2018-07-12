@@ -43,11 +43,11 @@ public final class APIModule {
         //if (BuildConfig.DEBUG) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        builder.addInterceptor(logging);
-      //  builder.addInterceptor(new ErrorHandlerInterceptor());
+       // builder.addInterceptor(logging);
+        builder.addInterceptor(new ErrorHandlerInterceptor());
         // }
         builder.connectTimeout(API.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS).readTimeout(API.IO_TIMEOUT, TimeUnit
-                .MILLISECONDS).addInterceptor(new RequestBodyInterceptor());
+                .MILLISECONDS);//.addInterceptor(new RequestBodyInterceptor());
         return builder.build();
     }
 

@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="性别："/>
+                android:text="性　　　   别 ："/>
 
             <TextView
                 android:id="@+id/tv_leixing1"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_weight="1"
-                android:text="某某某"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
@@ -80,7 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="户籍类型："/>
+                android:text="户  籍  类  型  ："/>
 
             <TextView
                 android:id="@+id/tv_leixing2"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_weight="1"
-                android:text="某某某"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_weight="1"
-                android:text="某某某"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
@@ -165,14 +165,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="身份证号码："/>
+                android:text="身 份 证 号 码："/>
 
             <TextView
                 android:id="@+id/tv_idcard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
-                android:text="430121199308047031"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -195,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
                 android:layout_weight="1"
-                android:text="某某某"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 

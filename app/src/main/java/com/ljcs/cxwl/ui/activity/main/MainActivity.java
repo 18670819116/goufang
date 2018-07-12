@@ -14,6 +14,7 @@ import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.CerInfo;
+import com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity;
 import com.ljcs.cxwl.ui.activity.certification.CertificationOneActivity;
 import com.ljcs.cxwl.ui.activity.certification.CertificationStatusInfoActivity;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerMainComponent;
@@ -27,6 +28,7 @@ import com.ljcs.cxwl.ui.activity.other.QualificationExaminationActivity;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
+import com.ljcs.cxwl.view.SureDialog;
 import com.vondear.rxtools.RxSPTool;
 import com.vondear.rxtools.RxTool;
 
@@ -54,8 +56,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     RelativeLayout relayouHead;
     @BindView(R.id.tv1)
     TextView tv1;
-    @BindView(R.id.tv2)
-    TextView tv2;
+    //    @BindView(R.id.tv2)
+//    TextView tv2;
     @BindView(R.id.tv3)
     TextView tv3;
 
@@ -132,26 +134,26 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
                 if (Contains.sAllInfo.getData().getHjxx() == null) {
                     tv3.setText("待申请");
-                    tv2.setText("未添加");
+                    // tv2.setText("未添加");
                 } else {
                     if (Contains.sAllInfo.getData().getHjxx().getZt().equals("1")) {
                         tv3.setText("待申请");
-                        tv2.setText("未添加");
+                        //   tv2.setText("未添加");
                     }
                     if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
                         tv3.setText("待审核");
-                        tv2.setText("已保存");
+                        //  tv2.setText("已保存");
                     }
                     if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
                         tv3.setText("审核通过");
-                        tv2.setText("已保存");
+                        // tv2.setText("已保存");
                     }
                     if (Contains.sAllInfo.getData().getHjxx().getZt().equals("4")) {
                         tv3.setText("审核未通过");
-                        tv2.setText("已保存");
+                        //  tv2.setText("已保存");
                     }
                     if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
-                        tv2.setText("已添加");
+                        //   tv2.setText("已添加");
                         tv3.setText("待申请");
                     }
 
@@ -180,7 +182,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
                 if (Contains.sAllInfo.getData().getSmyz() == null || Contains.sAllInfo.getData().getSmyz().getZt()
                         .equals("1")) {
-                    startActivty(CertificationOneActivity.class);
+                    startActivty(AboutCertificationActivity.class);
 
                 } else {
                     startActivty(CertificationStatusInfoActivity.class);
@@ -191,24 +193,26 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     return;
                 }
-                if (Contains.sAllInfo.getData() == null) {
-                    return;
-                }
-                //添加家庭成员
-                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
-                        .sAllInfo.getData().getSmyz().getZt().equals("3")) {
-                    if (Contains.sAllInfo.getData().getHjxx() == null || Contains.sAllInfo.getData().getHjxx().getZt
-                            ().equals("1")) {
-                        startActivty(FamilyAddNowActivity.class);
-                    } else {
-                        //已提交
-//                        ToastUtil.showCenterShort("跳详情");
-                        startActivty(FamilyMatesStatusActivity.class);
-                    }
-
-                } else {
-                    ToastUtil.showCenterShort("请先进行实名认证");
-                }
+                //购房政策
+//                if (Contains.sAllInfo.getData() == null) {
+//                    return;
+//                }
+//                //添加家庭成员
+//                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
+//                        .sAllInfo.getData().getSmyz().getZt().equals("3")) {
+//                    if (Contains.sAllInfo.getData().getHjxx() == null || Contains.sAllInfo.getData().getHjxx().getZt
+//                            ().equals("1")) {
+//                        startActivty(FamilyAddNowActivity.class);
+//                    } else {
+//                        //已提交
+////                        ToastUtil.showCenterShort("跳详情");
+//                        startActivty(FamilyMatesStatusActivity.class);
+//                    }
+//
+//                } else {
+////                    ToastUtil.showCenterShort("请先进行实名认证");
+//                    showDialog();
+//                }
 
                 break;
             case R.id.relayout_item3:
@@ -222,8 +226,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         .sAllInfo.getData().getSmyz().getZt().equals("3")) {
 //                    startActivty(FamilyRegisterThirdActivity.class);
                     if (Contains.sAllInfo.getData().getHjxx() == null || Contains.sAllInfo.getData().getHjxx().getZt
-                            ().equals("1")|| Contains.sAllInfo.getData().getHjxx().getZt
-                            ().equals("5")) {
+                            ().equals("1") || Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
                         startActivty(QualificationExaminationActivity.class);
                     } else {
                         //提交了 查看详情
@@ -233,7 +236,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     }
 
                 } else {
-                    ToastUtil.showCenterShort("请先进行实名认证");
+//                    ToastUtil.showCenterShort("请先进行实名认证");
+                    showDialog();
                 }
                 break;
             default:
@@ -279,5 +283,32 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         }
 
+    }
+
+    private void showDialog() {
+        final SureDialog dialog = new SureDialog(this);
+        dialog.getContentView().setText("您还没有实名认证，请先实名认证");
+        dialog.setCancelListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setSureListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Contains.sAllInfo.getData() == null) {
+                    return;
+                }
+                if (Contains.sAllInfo.getData().getSmyz() == null || Contains.sAllInfo.getData().getSmyz().getZt()
+                        .equals("1")) {
+                    startActivty(AboutCertificationActivity.class);
+                }else {
+                    startActivty(CertificationStatusInfoActivity.class);
+                }
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

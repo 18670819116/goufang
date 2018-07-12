@@ -2,6 +2,7 @@ package com.ljcs.cxwl.application;
 
 import android.app.Application;
 
+import com.tencent.bugly.crashreport.CrashReport;
 import com.vondear.rxtools.RxTool;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
@@ -33,6 +34,8 @@ public class AppConfig extends Application {
         RxTool.init(this);
         //滑动返回
         BGASwipeBackHelper.init(this, null);
+        //bugly
+        CrashReport.initCrashReport(this, "cada4dc780", true);
 
     }
 

@@ -99,6 +99,16 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     TextView tvHeadStutus2;
     @BindView(R.id.tv_hjszd)
     TextView tvHjszd;
+    @BindView(R.id.tv_name3)
+    TextView tvName3;
+    @BindView(R.id.tv_lysj)
+    TextView tvLysj;
+    @BindView(R.id.tv_card3)
+    TextView tvCard3;
+    @BindView(R.id.img5_peiou)
+    ImageView img5Peiou;
+    @BindView(R.id.layout4)
+    LinearLayout layout4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,20 +163,33 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(img3);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getJhzzp()).into(img4);
         if (Contains.sAllInfo.getData().getPoxx() != null) {
-            tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-            tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
-            tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-            tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
-            tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
-            tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
-            tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
-
+            if (Contains.sAllInfo.getData().getHjxx().getHyzt().equals("已婚")) {
+                //表示已婚 现配偶
+                layout4.setVisibility(View.GONE);
+                layout3.setVisibility(View.VISIBLE);
+                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+                tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
+                tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+                tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+                tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
+                tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+                tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+            } else {
+                //表示离异 前配偶
+                layout4.setVisibility(View.VISIBLE);
+                layout3.setVisibility(View.GONE);
+                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+                tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getLhrq());
+                tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img5Peiou);
+            }
         } else {
             layout3.setVisibility(View.GONE);
+            layout4.setVisibility(View.GONE);
         }
         layoutZinvContent.removeAllViews();
         if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {

@@ -2,15 +2,18 @@ package com.ljcs.cxwl.ui.activity.other.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyAddContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyAddActivity;
+import com.ljcs.cxwl.util.UploadUtil;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -71,7 +74,10 @@ public class FamilyAddPresenter implements FamilyAddContract.FamilyAddContractPr
         });
         mCompositeDisposable.add(disposable);
     }
-
+    @Override
+    public void uploadPic(List<String> list, UploadFileCallBack callBack) {
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+    }
     @Override
     public void matesInfoZinv(Map map) {
         Disposable disposable = httpAPIWrapper.matesInfoZinv(map).subscribe(new Consumer<MatesInfo>() {

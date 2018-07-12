@@ -48,16 +48,60 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relayout_item1"
+                android:id="@+id/relayout_item2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y233"
                 android:layout_marginTop="@dimen/y32"
+                android:background="@mipmap/ic_main_item_bg">
+
+                <ImageView
+                    android:id="@+id/img_item2"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/y66"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x71"
+                    android:src="@mipmap/ic_main_item2"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x88"
+                    android:layout_toRightOf="@+id/img_item2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/img_item1"
+                        android:text="政策解读"
+                        android:textColor="@color/color_333333"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y34"
+                        android:text="关于长沙购买首套刚需房政策"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/y8"
+                android:id="@+id/relayout_item1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y233"
                 android:background="@mipmap/ic_main_item">
 
                 <ImageView
                     android:id="@+id/img_item1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/y66"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x71"
                     android:src="@mipmap/ic_main_item1"
@@ -91,48 +135,6 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/relayout_item2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/y233"
-                android:background="@mipmap/ic_main_item">
-
-                <ImageView
-                    android:id="@+id/img_item2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x71"
-                    android:src="@mipmap/ic_main_item2"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x88"
-                    android:layout_toRightOf="@+id/img_item2"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/img_item1"
-                        android:text="家庭成员"
-                        android:textColor="@color/color_333333"
-                        android:textSize="18sp"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/y34"
-                        android:text=""
-                        />
-                </LinearLayout>
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/relayout_item3"
@@ -142,8 +144,8 @@
 
                 <ImageView
                     android:id="@+id/img_item3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/y66"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x71"
                     android:src="@mipmap/ic_main_item3"

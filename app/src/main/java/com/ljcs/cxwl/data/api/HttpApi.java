@@ -14,16 +14,21 @@ import com.ljcs.cxwl.entity.RegisterBean;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 
 import static com.ljcs.cxwl.data.api.API.URL_GET_CERINFO_DETAIL;
 import static com.ljcs.cxwl.data.api.API.URL_GET_QINIU_TOKEN;
 import static com.ljcs.cxwl.data.api.API.URL_GET_UPDATA_VERSION;
+import static com.ljcs.cxwl.data.api.API.URL_GET_UPLOADFILE;
 import static com.ljcs.cxwl.data.api.API.URL_POST_ALL_INFO;
 import static com.ljcs.cxwl.data.api.API.URL_POST_CERINFO;
 import static com.ljcs.cxwl.data.api.API.URL_POST_CERINFO_LAST;
@@ -112,4 +117,8 @@ public interface HttpApi {
     @POST(URL_POST_HUKOU)
     @FormUrlEncoded
     Observable<HujiInfo> hukouInfo(@FieldMap Map<String, RequestBody> params);
+
+    @Multipart
+    @POST(URL_GET_UPLOADFILE)
+    Observable<CommonBean> uploadFile(@Part MultipartBody.Part file);
 }

@@ -1,5 +1,7 @@
 package com.ljcs.cxwl.ui.activity.other.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -22,7 +25,7 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of FamilyRegisterTwoActivity
  * @date 2018/06/27 19:05:45
  */
-public class FamilyRegisterTwoPresenter implements FamilyRegisterTwoContract.FamilyRegisterTwoContractPresenter{
+public class FamilyRegisterTwoPresenter implements FamilyRegisterTwoContract.FamilyRegisterTwoContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterTwoContract.View mView;
@@ -30,12 +33,14 @@ public class FamilyRegisterTwoPresenter implements FamilyRegisterTwoContract.Fam
     private FamilyRegisterTwoActivity mActivity;
 
     @Inject
-    public FamilyRegisterTwoPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterTwoContract.View view, FamilyRegisterTwoActivity activity) {
+    public FamilyRegisterTwoPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterTwoContract.View
+            view, FamilyRegisterTwoActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -44,9 +49,10 @@ public class FamilyRegisterTwoPresenter implements FamilyRegisterTwoContract.Fam
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
+
     @Override
     public void getQiniuToken() {
         Map<String, String> map = new HashMap<>();
@@ -64,6 +70,7 @@ public class FamilyRegisterTwoPresenter implements FamilyRegisterTwoContract.Fam
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void matesInfo(Map map) {
 //        mView.showProgressDialog();
