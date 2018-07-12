@@ -100,7 +100,7 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
     @Override
     public void loginOutSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort("退出登录");
+
             clearRxSp();
             startActivty(LoginActivity.class);
             AppManager.getInstance().finishAllActivity();

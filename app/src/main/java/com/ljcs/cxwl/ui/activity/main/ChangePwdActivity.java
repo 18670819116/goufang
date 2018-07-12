@@ -86,13 +86,10 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-//                    et1.setInputType(TYPE_CLASS_TEXT);
                     et1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-
                     et1.setSelection(et1.getText().length());
                 } else {
                     et1.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    et1.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     et1.setSelection(et1.getText().length());
                 }
             }
@@ -101,13 +98,10 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-//                    et2.setInputType(TYPE_CLASS_TEXT);
                     et2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-
                     et2.setSelection(et1.getText().length());
                 } else {
                     et2.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    et2.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     et2.setSelection(et1.getText().length());
                 }
             }
@@ -143,9 +137,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             }
             if (baseEntity.getData() != null) {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, et2.getText().toString());
-                if (baseEntity.msg != null) {
-                    ToastUtil.showCenterShort(baseEntity.msg);
-                }
+                ToastUtil.showCenterShort("修改成功");
                 finish();
             }
         } else {
@@ -159,24 +151,12 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             Logger.i("点击过快");
             return;
         }
-        if (et1.getText().toString().length() < 6) {
-            ToastUtil.showCenterShort("原密码最少6位");
-            return;
-        }
-        if (et1.getText().toString().length() > 16) {
-            ToastUtil.showCenterShort("密码最多16位");
-            return;
-        }
-        if (et2.getText().toString().length() < 6) {
-            ToastUtil.showCenterShort("新密码最少6位");
-            return;
-        }
-        if (et2.getText().toString().length() > 16) {
-            ToastUtil.showCenterShort("新密码最多16位");
+        if (et2.getText().toString().length() < 6 || et2.getText().toString().length() > 16) {
+            ToastUtil.showCenterShort("新密码长度应为6-16位字符");
             return;
         }
         if (!et1.getText().toString().trim().equals(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM))) {
-            ToastUtil.showCenterShort("原密码验证失败");
+            ToastUtil.showCenterShort("原密码错误");
             return;
         }
         Map<String, String> map = new HashMap<>();

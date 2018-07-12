@@ -137,8 +137,8 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         list2.add("家庭户口");
         list3.add("已婚");
         list3.add("未婚");
-        list3.add("离异（2年内有离异史）");
-        list3.add("离异（2年以上）");
+        list3.add("离异(2年内有离异史)");
+        list3.add("离异(2年以上)");
         list3.add("丧偶");
         if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
             tvName.setText(Contains.sAllInfo.getData().getSmyz().getXm());
@@ -151,6 +151,20 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
             tvData.setText(Contains.sAllInfo.getData().getSmyz().getYxq());
             Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(imageViewZheng);
             Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(imageViewFan);
+            imageViewZheng.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startToImgActivity(FamilyRegisterActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
+                            .getSfzzm());
+                }
+            });
+            imageViewFan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startToImgActivity(FamilyRegisterActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
+                            .getSfzfm());
+                }
+            });
         }
         if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getHjxx() != null) {
             tvLeixing1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
@@ -241,7 +255,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
             //重新赋值
             Contains.sAllInfo = baseEntity;
             if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶") ||
-                    tvLeixing3.getText().toString().equals("离异（2年以上）")) {
+                    tvLeixing3.getText().toString().equals("离异(2年以上)")) {
                 startActivty(FamilyRegisterThirdActivity.class);
             } else if (tvLeixing3.getText().toString().equals("已婚")) {
 //                if (Contains.ENTERTYPE_CHANGE == 1) {
@@ -250,7 +264,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
 //                    startActivty(MatesInfoOneActivity.class);
 //                }
                 startActivty(FamilyRegisterTwo1Activity.class);
-            } else if (tvLeixing3.getText().toString().equals("离异（2年内有离异史）")) {
+            } else if (tvLeixing3.getText().toString().equals("离异(2年内有离异史)")) {
                 startActivty(FamilyRegisterTwo2Activity.class);
             }
         } else {

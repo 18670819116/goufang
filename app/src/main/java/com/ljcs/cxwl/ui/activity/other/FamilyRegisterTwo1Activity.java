@@ -255,6 +255,9 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                 if (!checkTokenStatus()) {
                     return;
                 }
+                if (RxTool.isFastClick(Contains.FAST_CLICK)){
+                    return;
+                }
                 if (imgChongpai1.getVisibility() == View.INVISIBLE) {
                     intent = new Intent(this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(AppConfig.getInstance()
@@ -278,6 +281,9 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                 if (!checkTokenStatus()) {
                     return;
                 }
+                if (RxTool.isFastClick(Contains.FAST_CLICK)){
+                    return;
+                }
                 if (imgChongpai2.getVisibility() == View.INVISIBLE) {
                     intent = new Intent(this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(getApplication())
@@ -297,6 +303,9 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                 }
                 break;
             case R.id.img_chongpai1:
+                if (RxTool.isFastClick(Contains.FAST_CLICK)){
+                    return;
+                }
                 if (imgChongpai1.getVisibility() == View.VISIBLE) {
                     intent = new Intent(this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(AppConfig.getInstance()
@@ -311,6 +320,9 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                 }
                 break;
             case R.id.img_chongpai2:
+                if (RxTool.isFastClick(Contains.FAST_CLICK)){
+                    return;
+                }
                 if (imgChongpai1.getVisibility() == View.VISIBLE) {
                     intent = new Intent(this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(getApplication())
@@ -431,6 +443,9 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
     }
 
     private void checkMap() {
+
+
+
         Logger.e("time3" + System.currentTimeMillis());
         if (!isHavePic1 && !isHavePic2 && !isHavePic3 && !isHavePic4) {
 

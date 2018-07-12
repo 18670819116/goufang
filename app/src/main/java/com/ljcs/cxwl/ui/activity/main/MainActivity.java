@@ -25,6 +25,7 @@ import com.ljcs.cxwl.ui.activity.other.FamilyAddNowActivity;
 import com.ljcs.cxwl.ui.activity.other.FamilyMatesStatusActivity;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterStatusActivity;
 import com.ljcs.cxwl.ui.activity.other.QualificationExaminationActivity;
+import com.ljcs.cxwl.ui.activity.web.WebSatisficingActivity;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
@@ -193,6 +194,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     return;
                 }
+                Intent intent = new Intent(this, WebSatisficingActivity.class);
+                intent.putExtra("name", "详情");
+                intent.putExtra("address", "http://zjt.hunan.gov.cn/");
+                startActivity(intent);
                 //购房政策
 //                if (Contains.sAllInfo.getData() == null) {
 //                    return;

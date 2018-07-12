@@ -176,7 +176,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="签发机关　："/>
+                        android:text="签 发 机 关 ："/>
 
                     <TextView
                         android:id="@+id/tv_issueAuthority"
@@ -198,7 +198,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="有效期限　："/>
+                        android:text="有 效 期 限 ："/>
 
                     <TextView
                         android:id="@+id/tv_data"

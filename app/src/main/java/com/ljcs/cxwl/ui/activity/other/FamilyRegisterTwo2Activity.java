@@ -29,6 +29,7 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.callback.UploadCallback;
+import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
@@ -179,12 +180,17 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("请输入身份证号码");
             return false;
         }
-        if (!IDcardUtil.is18IdCard(tvIdcard.getText().toString())) {
+        if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
         if (RxDataTool.isNullString(imgPath1) && !isHavePic1) {
             ToastUtil.showCenterShort("请上传离婚证");
+            return false;
+        }
+        if ((IDcardUtil.getAge(tvIdcard.getText().toString()) < 22 && IDcardUtil.getSex(tvIdcard.getText().toString()).equals("男"))||
+                (IDcardUtil.getAge(tvIdcard.getText().toString()) < 20 && IDcardUtil.getSex(tvIdcard.getText().toString()).equals("女"))) {
+            ToastUtil.showCenterShort("非适婚年龄");
             return false;
         }
         return true;
@@ -250,7 +256,8 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
             public void onTimeSelectChanged(Date date) {
                 Log.i("pvTime", "onTimeSelectChanged");
             }
-        }).setType(new boolean[]{true, true, true, false, false, false}).isDialog(true).setRangDate(startDate,endDate).setDate(endDate).build();
+        }).setType(new boolean[]{true, true, true, false, false, false}).isDialog(true).setRangDate(startDate,
+                endDate).setDate(endDate).build();
 
         Dialog mDialog = pvTime.getDialog();
         if (mDialog != null) {
@@ -306,20 +313,39 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
                 pvTime.show();
                 break;
             case R.id.btn_login:
-                    if (checkText()) {
-                        if (isHavePic1) {
-                            //表示两张照片都不需要上传
-                            Map<String, String> map = new HashMap<String, String>();
-                            map.put("xm", etName.getText().toString());
-                            map.put("token", RxSPTool.getString(FamilyRegisterTwo2Activity.this, ShareStatic
-                                    .APP_LOGIN_TOKEN));
-                            map.put("lhrq", tvLeixing2.getText().toString());
-                            map.put("sfzhm", tvIdcard.getText().toString());
-                            mPresenter.matesInfo(map);
-                        } else {
-                            mPresenter.getQiniuToken();
-                        }
+                if (checkText()) {
+                    if (isHavePic1) {
+                        //表示两张照片都不需要上传
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("xm", etName.getText().toString());
+                        map.put("token", RxSPTool.getString(FamilyRegisterTwo2Activity.this, ShareStatic
+                                .APP_LOGIN_TOKEN));
+                        map.put("lhrq", tvLeixing2.getText().toString());
+                        map.put("sfzhm", tvIdcard.getText().toString());
+                        mPresenter.matesInfo(map);
+                    } else {
+                        List<String> list = new ArrayList<>();
+                        list.add(imgPath1);
+                        mPresenter.uploadPic(list, new UploadFileCallBack() {
+                            @Override
+                            public void sucess(List<String> url) {
+                                Map<String, String> map = new HashMap<String, String>();
+                                map.put("xm", etName.getText().toString());
+                                map.put("token", RxSPTool.getString(FamilyRegisterTwo2Activity.this, ShareStatic.APP_LOGIN_TOKEN));
+                                map.put("lhrq", tvLeixing2.getText().toString());
+                                map.put("sfzhm", tvIdcard.getText().toString());
+                                map.put("jhzzp", url.get(0));
+                                mPresenter.matesInfo(map);
+                            }
+
+                            @Override
+                            public void fail(String msg) {
+                                closeProgressDialog();
+                                Logger.e(msg);
+                            }
+                        });
                     }
+                }
                 break;
             default:
                 break;
@@ -331,7 +357,7 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
         super.onActivityResult(requestCode, resultCode, data);
         // 识别成功回调，通用文字识别
         if (requestCode == REQUEST_CODE_GENERAL_LHZ && resultCode == Activity.RESULT_OK) {
-            final File tempImage = new File(FamilyRegisterTwo2Activity.this.getCacheDir(), "household_lhz");
+            final File tempImage = new File(FamilyRegisterTwo2Activity.this.getCacheDir(), "household_lhz.jpg");
             ImageUtil.resize(new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath())
                     .getAbsolutePath(), tempImage.getAbsolutePath(), 1280, 1280);
             Logger.e(tempImage.getAbsolutePath() + "-----" + tempImage.length());

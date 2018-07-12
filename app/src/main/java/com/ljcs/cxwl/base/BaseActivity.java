@@ -1,10 +1,12 @@
 package com.ljcs.cxwl.base;
 
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.main.LoginActivity;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.ProgressDialog;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -226,6 +228,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
             startActivty(LoginActivity.class);
         }
 
+    }
+
+    public void startToImgActivity(Context context, String path) {
+        Intent intent = new Intent(context, ShowImgActivity.class);
+        intent.putExtra("img_path", path);
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+//            ToastUtil.show(this, "敬请期待！");
+        }
     }
 
     public void clearRxSp() {

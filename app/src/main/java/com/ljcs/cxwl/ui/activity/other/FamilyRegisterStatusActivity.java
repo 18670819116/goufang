@@ -162,6 +162,28 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(img2);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(img3);
         Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getJhzzp()).into(img4);
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
+                        .getSfzzm());
+            }
+        });
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
+                        .getSfzfm());
+            }
+        });
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getHjxx()
+                        .getHkzp());
+            }
+        });
+
         if (Contains.sAllInfo.getData().getPoxx() != null) {
             if (Contains.sAllInfo.getData().getHjxx().getHyzt().equals("已婚")) {
                 //表示已婚 现配偶
@@ -178,14 +200,49 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                 Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
                 Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
                 Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+                img1Peiou.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getPoxx().getSfzzm());
+                    }
+                });
+                img2Peiou.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getPoxx().getSfzfm());
+                    }
+                });
+                img3Peiou.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getPoxx().getHkzp());
+                    }
+                });
+                img4Peiou.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getPoxx().getJhzzp());
+                    }
+                });
             } else {
                 //表示离异 前配偶
                 layout4.setVisibility(View.VISIBLE);
                 layout3.setVisibility(View.GONE);
-                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+                tvName3.setText(Contains.sAllInfo.getData().getPoxx().getXm());
                 tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getLhrq());
                 tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
                 Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img5Peiou);
+                img5Peiou.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getPoxx().getJhzzp());
+                    }
+                });
             }
         } else {
             layout3.setVisibility(View.GONE);
@@ -196,6 +253,14 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
             for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
                 ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
                         .get(i));
+                final int finalI = i;
+                zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterStatusActivity.this,  API.PIC+Contains.sAllInfo.getData().getJtcyList
+                                ().get(finalI).getHkzp());
+                    }
+                });
                 layoutZinvContent.addView(zinvInfoLayout);
             }
 

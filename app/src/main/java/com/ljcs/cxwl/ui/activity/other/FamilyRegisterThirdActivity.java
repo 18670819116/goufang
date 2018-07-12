@@ -15,6 +15,7 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterThirdComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterThirdContract;
@@ -78,11 +79,14 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                AllInfo.Data.JtcyBean bean = (AllInfo.Data.JtcyBean) adapter.getData().get(position);
                 if (view.getId() == R.id.img_change) {
                     Intent intent = new Intent(FamilyRegisterThirdActivity.this, FamilyAddActivity.class);
                     intent.putExtra("type", 2);
                     intent.putExtra("position", position);
                     startActivityForResult(intent, 101);
+                } else if (view.getId() == R.id.img_upload) {
+                    startToImgActivity(FamilyRegisterThirdActivity.this, API.PIC + bean.getHkzp());
                 }
             }
         });

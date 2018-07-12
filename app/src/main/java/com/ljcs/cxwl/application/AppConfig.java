@@ -31,9 +31,9 @@ public class AppConfig extends Application {
         super.onCreate();
         setupApplicationComponent();
         instance=this;
-        RxTool.init(this);
         //滑动返回
         BGASwipeBackHelper.init(this, null);
+        RxTool.init(this);
         //bugly
         CrashReport.initCrashReport(this, "cada4dc780", true);
 

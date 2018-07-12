@@ -51,8 +51,10 @@ public class IDcardUtil {
         }
         return isValidate18IdCard(idCard);
     }
+
     /**
      * 功能：判断字符串是否为数字
+     *
      * @param str
      * @return
      */
@@ -68,6 +70,7 @@ public class IDcardUtil {
 
     /**
      * 功能：设置地区编码
+     *
      * @return Hashtable 对象
      */
     private static Hashtable GetAreaCode() {
@@ -110,42 +113,49 @@ public class IDcardUtil {
         return hashtable;
     }
 
-    /**验证日期字符串是否是YYYY-MM-DD格式
+    /**
+     * 验证日期字符串是否是YYYY-MM-DD格式
+     *
      * @param str
      * @return
      */
-    public static boolean isDataFormat(String str){
-        boolean flag=false;
+    public static boolean isDataFormat(String str) {
+        boolean flag = false;
         //String regxStr="[1-9][0-9]{3}-[0-1][0-2]-((0[1-9])|([12][0-9])|(3[01]))";
-        String regxStr="^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s(((0?[0-9])|([1-2][0-3]))\\:([0-5]?[0-9])((\\s)|(\\:([0-5]?[0-9])))))?$";
-        Pattern pattern1=Pattern.compile(regxStr);
-        Matcher isNo=pattern1.matcher(str);
-        if(isNo.matches()){
-            flag=true;
+        String regxStr = "^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?(" +
+                "(0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|" + "" +
+                "(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))" +
+                "[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))"
+                + "[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s(" +
+                "(" + "(0?[0-9])|([1-2][0-3]))\\:([0-5]?[0-9])((\\s)|(\\:([0-5]?[0-9])))))?$";
+        Pattern pattern1 = Pattern.compile(regxStr);
+        Matcher isNo = pattern1.matcher(str);
+        if (isNo.matches()) {
+            flag = true;
         }
         return flag;
     }
 
     //身份证号码验证：end
     //身份证号码验证：start
+
     /**
      * 功能：身份证的有效验证
+     *
      * @param IDStr 身份证号
      * @return 有效：返回"" 无效：返回String信息
      * @throws ParseException
      */
     public static boolean IDCardValidate(String IDStr) {
         String errorInfo = "";// 记录错误信息
-        boolean isYouxiao=true;
-        String[] ValCodeArr = { "1", "0", "x", "9", "8", "7", "6", "5", "4",
-                "3", "2" };
-        String[] Wi = { "7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7",
-                "9", "10", "5", "8", "4", "2" };
+        boolean isYouxiao = true;
+        String[] ValCodeArr = {"1", "0", "x", "9", "8", "7", "6", "5", "4", "3", "2"};
+        String[] Wi = {"7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2"};
         String Ai = "";
         // ================ 号码的长度 15位或18位 ================
         if (IDStr.length() != 15 && IDStr.length() != 18) {
             errorInfo = "身份证号码长度应该为15位或18位。";
-            isYouxiao=false;
+            isYouxiao = false;
             return isYouxiao;
         }
         // =======================(end)========================
@@ -158,7 +168,7 @@ public class IDcardUtil {
         }
         if (isNumeric(Ai) == false) {
             errorInfo = "身份证15位号码都应为数字 ; 18位号码除最后一位外，都应为数字。";
-            isYouxiao=false;
+            isYouxiao = false;
             return isYouxiao;
         }
         // =======================(end)========================
@@ -169,16 +179,16 @@ public class IDcardUtil {
         String strDay = Ai.substring(12, 14);// 月份
         if (isDataFormat(strYear + "-" + strMonth + "-" + strDay) == false) {
             errorInfo = "身份证生日无效。";
-            isYouxiao=false;
+            isYouxiao = false;
             return isYouxiao;
         }
         GregorianCalendar gc = new GregorianCalendar();
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150
-                    || (gc.getTime().getTime() - s.parse(strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
+            if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150 || (gc.getTime().getTime() - s.parse
+                    (strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
                 errorInfo = "身份证生日不在有效范围。";
-                isYouxiao=false;
+                isYouxiao = false;
                 return isYouxiao;
             }
         } catch (ParseException e) {
@@ -186,12 +196,12 @@ public class IDcardUtil {
         }
         if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
             errorInfo = "身份证月份无效";
-            isYouxiao=false;
+            isYouxiao = false;
             return isYouxiao;
         }
         if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
             errorInfo = "身份证日期无效";
-            isYouxiao=false;
+            isYouxiao = false;
             return isYouxiao;
         }
         // =====================(end)=====================
@@ -200,7 +210,7 @@ public class IDcardUtil {
         Hashtable h = GetAreaCode();
         if (h.get(Ai.substring(0, 2)) == null) {
             errorInfo = "身份证地区编码错误。";
-            isYouxiao=false;
+            isYouxiao = false;
             return isYouxiao;
         }
         // ==============================================
@@ -208,18 +218,24 @@ public class IDcardUtil {
         // ================ 判断最后一位的值 ================
         int TotalmulAiWi = 0;
         for (int i = 0; i < 17; i++) {
-            TotalmulAiWi = TotalmulAiWi
-                    + Integer.parseInt(String.valueOf(Ai.charAt(i)))
-                    * Integer.parseInt(Wi[i]);
+            TotalmulAiWi = TotalmulAiWi + Integer.parseInt(String.valueOf(Ai.charAt(i))) * Integer.parseInt(Wi[i]);
         }
         int modValue = TotalmulAiWi % 11;
         String strVerifyCode = ValCodeArr[modValue];
         Ai = Ai + strVerifyCode;
 
+
         if (IDStr.length() == 18) {
-            if (Ai.equals(IDStr) == false) {
+            if (Ai.contains("x")) {
+                if (!Ai.equals(IDStr) && !(Ai.replace("x", "X")).equals(IDStr)) {
+                    errorInfo = "身份证无效，不是合法的身份证号码";
+                    isYouxiao = false;
+                    return isYouxiao;
+                }
+
+            } else if (!Ai.equals(IDStr)) {
                 errorInfo = "身份证无效，不是合法的身份证号码";
-                isYouxiao=false;
+                isYouxiao = false;
                 return isYouxiao;
             }
         } else {
@@ -228,6 +244,7 @@ public class IDcardUtil {
         // =====================(end)=====================
         return isYouxiao;
     }
+
     /**
      * 验证str是否为正确的身份证格式
      *
@@ -244,7 +261,8 @@ public class IDcardUtil {
          * 51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",
          * 63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外" }
          */
-        String provinces = "11,12,13,14,15,21,22,23,31,32,33,34,35,36,37,41,42,43,44,45,46,50,51,52,53,54,61,62,63,64,65,71,81,82,91";
+        String provinces = "11,12,13,14,15,21,22,23,31,32,33,34,35,36,37,41,42,43,44,45,46,50,51,52,53,54,61,62,63,"
+                + "64,65,71,81,82,91";
 
         Pattern pattern = Pattern.compile("^[1-9]\\d{14}");
         Matcher matcher = pattern.matcher(licenc);
@@ -261,9 +279,8 @@ public class IDcardUtil {
 
             // 判断出生日期
             if (licenc.length() == 15) {
-                String birth = "19" + licenc.substring(6, 8) + "-"
-                        + licenc.substring(8, 10) + "-"
-                        + licenc.substring(10, 12);
+                String birth = "19" + licenc.substring(6, 8) + "-" + licenc.substring(8, 10) + "-" + licenc.substring
+                        (10, 12);
                 try {
                     Date birthday = sdf.parse(birth);
                     if (!sdf.format(birthday).equals(birth)) {
@@ -276,9 +293,8 @@ public class IDcardUtil {
                     flag = false;
                 }
             } else if (licenc.length() == 18) {
-                String birth = licenc.substring(6, 10) + "-"
-                        + licenc.substring(10, 12) + "-"
-                        + licenc.substring(12, 14);
+                String birth = licenc.substring(6, 10) + "-" + licenc.substring(10, 12) + "-" + licenc.substring(12,
+                        14);
                 try {
                     Date birthday = sdf.parse(birth);
                     if (!sdf.format(birthday).equals(birth)) {
@@ -297,6 +313,7 @@ public class IDcardUtil {
 
         return flag;
     }
+
     /**
      * <p>
      * 判断18位身份证的合法性
@@ -659,5 +676,27 @@ public class IDcardUtil {
         String year1 = simpleDateFormat.format(new Date());
         age = Integer.parseInt(year1) - year;
         return age;
+    }
+
+    public static boolean ifGrown_up(String num) {
+        int year = Integer.parseInt(num.substring(6, 10));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Date update = null;
+        try {
+            update = sdf.parse(String.valueOf(year + 18) + num.substring(10, 14));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date today = new Date();
+        return today.after(update);
+    }
+
+    public static String getSex(String idCard) {
+        String id17 = idCard.substring(16, 17);
+        if (Integer.parseInt(id17) % 2 != 0) {
+            return "男";
+        } else {
+            return "女";
+        }
     }
 }

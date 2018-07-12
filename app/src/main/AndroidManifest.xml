@@ -53,6 +53,13 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <!--加载网页-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.web.WebSatisficingActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
         <!--首页-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.main.MainActivity"

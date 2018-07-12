@@ -201,7 +201,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
     @Override
     public void matesInfoDeleteSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
+           // ToastUtil.showCenterShort(baseEntity.msg);
             setResult(101);
             finish();
         } else {
@@ -233,7 +233,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
     @Override
     public void matesInfoZinvSuccess(MatesInfo baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
+            //ToastUtil.showCenterShort(baseEntity.msg);
             setResult(101);
             finish();
         } else {
@@ -380,7 +380,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
-        if (IDcardUtil.getAge(tvIdcard.getText().toString()) >= 18) {
+        if (IDcardUtil.ifGrown_up(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("子女年龄应小于18岁");
             return false;
         }
