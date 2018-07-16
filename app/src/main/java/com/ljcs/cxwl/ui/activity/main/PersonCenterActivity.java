@@ -130,6 +130,7 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                 //资格审查申诉
 //                ToastUtil.showCenterShort("敬请期待");
                 startActivty(ComplainActivity.class);
+
                 break;
             case R.id.layout_item3:
                 //意见反馈

@@ -168,9 +168,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mEt3.getText().toString());
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
                 RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
-                if (baseEntity.msg != null) {
-                    ToastUtil.showCenterShort(baseEntity.msg);
-                }
                 startActivty(MainActivity.class);
                 finish();
             }

@@ -29,8 +29,7 @@ public class ZinvInfoAdapter extends BaseQuickAdapter<AllInfo.Data.JtcyBean, Bas
                 item.getHklx()).setText(R.id.tv_leixing3, item.getHkxz()).setText(R.id.tv_leixing4, item.getHyzt())
                 .setText(R.id.tv_leixing5, item.getGx()).setText(R.id.tv_idcard, item.getSfzhm()).addOnClickListener(R.id.img_change).addOnClickListener(R.id.img_upload);
         ImageView view = helper.getView(R.id.img_upload);
-        Glide.with(mContext).load(API.PIC + item.getHkzp()).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy
-                .NONE).into(view);
+        Glide.with(mContext).load(API.PIC + item.getHkzp()).into(view);
 
     }
 }

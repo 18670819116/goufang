@@ -13,6 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class GlideUtils {
     public static void loadImgNoCach(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
+        Glide.with(context).load(path).into(imageView);
     }
 }

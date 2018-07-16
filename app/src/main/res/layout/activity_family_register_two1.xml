@@ -102,7 +102,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y90"
-                    android:layout_marginTop="@dimen/y56"
                     android:background="@color/color_background"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -110,10 +109,10 @@
 
                     <TextView
                         android:id="@+id/textView"
-                        android:drawableLeft="@mipmap/ic_tishi"
-                        android:drawablePadding="@dimen/x5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/ic_tishi"
+                        android:drawablePadding="@dimen/x5"
                         android:text="请确认以下信息，如有误请重新拍摄或修改"/>
                 </LinearLayout>
 
@@ -188,7 +187,6 @@
                             android:background="@null"
                             android:singleLine="true"
                             android:text=""
-
                             android:textColor="@color/color_333333"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -283,8 +281,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:visibility="gone"
                 android:orientation="vertical"
+                android:visibility="gone"
                 >
 
                 <LinearLayout

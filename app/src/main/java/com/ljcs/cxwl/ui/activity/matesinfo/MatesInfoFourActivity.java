@@ -79,8 +79,7 @@ public class MatesInfoFourActivity extends BaseActivity implements MatesInfoFour
         tvIssueAuthority.setText(Contains.sCertificationInfo.getIssueAuthority_peiou());
         tvData1.setText(Contains.sCertificationInfo.getSignDate_peiou());
         tvData2.setText(Contains.sCertificationInfo.getExpiryDate_peiou());
-        Glide.with(this).load(Contains.sCertificationInfo.getPic_path_fan_peiou()).skipMemoryCache(true).diskCacheStrategy
-                (DiskCacheStrategy.NONE).into(imageView);
+        Glide.with(this).load(Contains.sCertificationInfo.getPic_path_fan_peiou()).into(imageView);
         //imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_fan_peiou()));
     }
 

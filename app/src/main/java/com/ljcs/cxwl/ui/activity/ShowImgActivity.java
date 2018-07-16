@@ -38,8 +38,7 @@ public class ShowImgActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         setContentView(R.layout.activity_showimg);
         ButterKnife.bind(this);
-        Glide.with(this).load(getIntent().getStringExtra("img_path")).skipMemoryCache(true).diskCacheStrategy
-                (DiskCacheStrategy.NONE).into(imageView);
+        Glide.with(this).load(getIntent().getStringExtra("img_path")).into(imageView);
 
     }
 

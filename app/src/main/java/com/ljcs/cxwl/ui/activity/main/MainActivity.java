@@ -225,22 +225,26 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (Contains.sAllInfo.getData() == null) {
                     return;
                 }
+                //实名认证状态1没认证2审核中3通过4未通过
                 if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
                         .sAllInfo.getData().getSmyz().getZt().equals("3")) {
-//                    startActivty(FamilyRegisterThirdActivity.class);
                     if (Contains.sAllInfo.getData().getHjxx() == null || Contains.sAllInfo.getData().getHjxx().getZt
                             ().equals("1") || Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
                         startActivty(QualificationExaminationActivity.class);
                     } else {
-                        //提交了 查看详情
-//                        ToastUtil.showCenterShort("跳详情");
                         startActivty(FamilyRegisterStatusActivity.class);
 
                     }
 
-                } else {
-//                    ToastUtil.showCenterShort("请先进行实名认证");
+                } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
+                        Contains.sAllInfo.getData().getSmyz().getZt().equals("1")) {
                     showDialog();
+                } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
+                        Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
+                    ToastUtil.showCenterShort("实名认证信息审核中，请耐心等待");
+                } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
+                        Contains.sAllInfo.getData().getSmyz().getZt().equals("4")) {
+                    ToastUtil.showCenterShort("实名认证未通过审核");
                 }
                 break;
             default:
@@ -306,8 +310,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (Contains.sAllInfo.getData().getSmyz() == null || Contains.sAllInfo.getData().getSmyz().getZt()
                         .equals("1")) {
                     startActivty(AboutCertificationActivity.class);
-                }else {
-                    startActivty(CertificationStatusInfoActivity.class);
                 }
                 dialog.dismiss();
             }

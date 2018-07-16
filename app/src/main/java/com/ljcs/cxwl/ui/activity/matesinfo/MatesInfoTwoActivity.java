@@ -87,8 +87,7 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
         tvBirthday.setText(Contains.sCertificationInfo.getBirthday_peiou());
         tvAdress.setText(Contains.sCertificationInfo.getAddress_peiou());
         tvIdcard.setText(Contains.sCertificationInfo.getIdcard_peiou());
-        Glide.with(this).load(Contains.sCertificationInfo.getPic_path_zheng_peiou()).skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
+        Glide.with(this).load(Contains.sCertificationInfo.getPic_path_zheng_peiou()).into(imageView);
         //imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo.getPic_path_zheng_peiou()));
     }
 

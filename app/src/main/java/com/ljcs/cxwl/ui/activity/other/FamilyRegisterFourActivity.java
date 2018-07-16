@@ -282,7 +282,7 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
                 }
             });
             dialog.getTv1().setText("购房资格信息已提交");
-            dialog.getTv2().setText("审查中，预计一个工作日完成审查");
+            dialog.getTv2().setText("审查中，预计1个工作日完成审核");
             dialog.show();
 
         } else {
