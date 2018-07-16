@@ -286,6 +286,12 @@
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait"
             />
+        <!--扫码-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.scan.ScanActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait"
+            />
         <!--<provider-->
             <!--android:name="android.support.v4.content.FileProvider"-->
             <!--android:authorities="com.ljcs.cxwl.fileProvider"-->

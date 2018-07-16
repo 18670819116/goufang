@@ -3,7 +3,8 @@ package com.ljcs.cxwl.application;
 import android.app.Application;
 
 import com.tencent.bugly.crashreport.CrashReport;
-import com.vondear.rxtools.RxTool;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+import com.vondear.rxtool.RxTool;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
@@ -36,6 +37,8 @@ public class AppConfig extends Application {
         RxTool.init(this);
         //bugly
         CrashReport.initCrashReport(this, "cada4dc780", true);
+        //扫码
+        ZXingLibrary.initDisplayOpinion(this);
 
     }
 

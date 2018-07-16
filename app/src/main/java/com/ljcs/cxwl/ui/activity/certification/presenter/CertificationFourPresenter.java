@@ -6,8 +6,8 @@ import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFourContract;
 import com.ljcs.cxwl.ui.activity.certification.CertificationFourActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFourContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;

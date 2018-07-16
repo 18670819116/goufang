@@ -5,11 +5,10 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterActivity;
+import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterContract;
 import com.ljcs.cxwl.util.UploadUtil;
 import com.orhanobut.logger.Logger;
 

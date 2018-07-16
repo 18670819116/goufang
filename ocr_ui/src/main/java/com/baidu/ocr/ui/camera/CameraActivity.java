@@ -63,6 +63,7 @@ public class CameraActivity extends Activity {
     private OCRCameraLayout confirmResultContainer;
     private ImageView lightButton;
     private CameraView cameraView;
+    private ImageView album_button;
     private ImageView displayImageView;
     private CropView cropView;
     private FrameOverlayView overlayView;
@@ -93,7 +94,8 @@ public class CameraActivity extends Activity {
         lightButton = (ImageView) findViewById(R.id.light_button);
         lightButton.setOnClickListener(lightButtonOnClickListener);
         takePhotoBtn = (ImageView) findViewById(R.id.take_photo_button);
-        findViewById(R.id.album_button).setOnClickListener(albumButtonOnClickListener);
+        album_button = (ImageView) findViewById(R.id.album_button);
+        album_button.setOnClickListener(albumButtonOnClickListener);
         takePhotoBtn.setOnClickListener(takeButtonOnClickListener);
 
         // confirm result;
@@ -185,6 +187,7 @@ public class CameraActivity extends Activity {
             default:
                 maskType = MaskView.MASK_TYPE_NONE;
                 cropMaskView.setVisibility(View.INVISIBLE);
+                album_button.setVisibility(View.VISIBLE);
                 break;
         }
 

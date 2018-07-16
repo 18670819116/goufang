@@ -1,20 +1,22 @@
 package com.ljcs.cxwl.ui.activity.matesinfo.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoFourContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoFourActivity;
+import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoFourContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**

@@ -18,14 +18,11 @@ import com.ljcs.cxwl.ui.activity.main.module.PersonCenterModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.PersonCenterPresenter;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.StringUitl;
-import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.ljcs.cxwl.view.SureDialog;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxRegTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;

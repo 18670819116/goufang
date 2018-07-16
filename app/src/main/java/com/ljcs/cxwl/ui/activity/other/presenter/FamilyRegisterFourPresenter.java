@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterFourContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterFourActivity;
+import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterFourContract;
 
 import java.util.Map;
 

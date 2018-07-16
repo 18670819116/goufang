@@ -735,7 +735,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x15"
                         android:layout_weight="1"
-                        android:text="配偶信息"
+                        android:text="前配偶信息"
                         android:textColor="#1478ff"/>
 
 

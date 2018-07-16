@@ -1,15 +1,18 @@
 package com.ljcs.cxwl.ui.activity.main.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.CommonBean;
-import com.ljcs.cxwl.ui.activity.main.contract.ForgetPwdContract;
 import com.ljcs.cxwl.ui.activity.main.ForgetPwdActivity;
+import com.ljcs.cxwl.ui.activity.main.contract.ForgetPwdContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;

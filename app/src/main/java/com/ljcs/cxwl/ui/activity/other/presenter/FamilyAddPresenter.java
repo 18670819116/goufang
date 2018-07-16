@@ -7,8 +7,8 @@ import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.other.contract.FamilyAddContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyAddActivity;
+import com.ljcs.cxwl.ui.activity.other.contract.FamilyAddContract;
 import com.ljcs.cxwl.util.UploadUtil;
 import com.orhanobut.logger.Logger;
 
@@ -20,7 +20,6 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**

@@ -7,8 +7,8 @@ import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.certification.contract.CertificationTwoContract;
 import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.CertificationTwoContract;
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
@@ -23,7 +23,6 @@ import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import rx.functions.Action;
 
 /**
  * @author xlei

@@ -51,7 +51,6 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginBottom="@dimen/y30"
                         android:layout_marginTop="@dimen/y30"
-                        android:scaleType="fitXY"
                         android:src="@mipmap/ic_peiou_zheng"
                         />
 
@@ -77,7 +76,6 @@
                         android:layout_marginBottom="@dimen/y30"
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_marginTop="@dimen/y30"
-                        android:scaleType="fitXY"
                         android:src="@mipmap/ic_peiou_fan"
                         />
 

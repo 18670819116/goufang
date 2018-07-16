@@ -5,14 +5,10 @@ import android.os.Bundle;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
-import com.ljcs.cxwl.contain.Contains;
-import com.ljcs.cxwl.data.api.API;
-import com.ljcs.cxwl.ui.activity.main.LoginActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerQualificationExaminationComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.QualificationExaminationContract;
 import com.ljcs.cxwl.ui.activity.other.module.QualificationExaminationModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.QualificationExaminationPresenter;
-import com.vondear.rxtools.RxActivityTool;
 
 import javax.inject.Inject;
 

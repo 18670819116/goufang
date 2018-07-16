@@ -23,15 +23,13 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerForgetPwdComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.ForgetPwdContract;
 import com.ljcs.cxwl.ui.activity.main.module.ForgetPwdModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.ForgetPwdPresenter;
-import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxConstTool;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxEncryptTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.view.RxToast;
+import com.vondear.rxtool.RxConstTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxEncryptTool;
+import com.vondear.rxtool.RxSPTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,9 +39,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
 /**
  * @author xlei

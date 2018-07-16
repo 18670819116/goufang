@@ -11,7 +11,6 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
-import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
@@ -19,13 +18,7 @@ import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationStat
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationStatusInfoContract;
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationStatusInfoModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationStatusInfoPresenter;
-import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.CerstatusDialog;
-import com.ljcs.cxwl.view.CertificationDialog;
-import com.vondear.rxtools.RxSPTool;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 

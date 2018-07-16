@@ -4,11 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
-import com.ljcs.cxwl.entity.RegisterBean;
-import com.ljcs.cxwl.ui.activity.main.contract.MainContract;
 import com.ljcs.cxwl.ui.activity.main.MainActivity;
+import com.ljcs.cxwl.ui.activity.main.contract.MainContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.Map;

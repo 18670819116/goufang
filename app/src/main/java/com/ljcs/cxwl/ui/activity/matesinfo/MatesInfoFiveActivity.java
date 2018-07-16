@@ -10,13 +10,11 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
-import com.ljcs.cxwl.ui.activity.certification.CertificationFiveActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoFiveComponent;
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoFiveContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoFiveModule;
 import com.ljcs.cxwl.ui.activity.matesinfo.presenter.MatesInfoFivePresenter;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterTwoActivity;
-import com.ljcs.cxwl.view.CertificationDialog;
 
 import javax.inject.Inject;
 

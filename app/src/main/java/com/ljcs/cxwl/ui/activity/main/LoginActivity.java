@@ -1,8 +1,6 @@
 package com.ljcs.cxwl.ui.activity.main;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -16,7 +14,6 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerLoginComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.LoginContract;
@@ -25,11 +22,11 @@ import com.ljcs.cxwl.ui.activity.main.presenter.LoginPresenter;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxConstTool;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxEncryptTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxConstTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxEncryptTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +37,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tyrantgit.explosionfield.ExplosionField;
-
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
 /**
  * @author xlei
@@ -136,7 +130,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mPassWord);
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
                 RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
-                ToastUtil.showCenterShort("登录成功");
+             //   ToastUtil.showCenterShort("登录成功");
                 startActivty(MainActivity.class);
                 finish();
             }
@@ -168,7 +162,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     ToastUtil.showCenterShort("手机号码不能为空");
                     return;
                 }
-                if ( RxDataTool.isNullString(mPassWord)) {
+                if (RxDataTool.isNullString(mPassWord)) {
                     ToastUtil.showCenterShort("密码不能为空");
                     return;
                 }
@@ -176,17 +170,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }
-                if (mPassWord.length() < 6) {
-                    ToastUtil.showCenterShort("密码最少6位");
-                    return;
-                }
-                if (mPassWord.length() > 16) {
-                    ToastUtil.showCenterShort("密码最多16位");
+                if (mPassWord.length() < 6 || mPassWord.length() > 16) {
+                    ToastUtil.showCenterShort("密码错误");
                     return;
                 }
                 Map<String, String> map = new HashMap<>();
                 map.put("sjhm", mAccount);
-                map.put("mm", RxEncryptTool.encryptSHA1ToString(mPassWord+mAccount));
+                map.put("mm", RxEncryptTool.encryptSHA1ToString(mPassWord + mAccount));
                 mPresenter.login(map);
                 break;
             default:

@@ -39,22 +39,14 @@ GO房APP中的实名认证及购房资格审查结果由长沙市住房和城乡
         android:textColor="@color/color_333333"
         android:textSize="16sp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/x30"
-        android:paddingRight="@dimen/x30"
-        android:paddingTop="@dimen/y30"
-        android:text="长沙市住房和城乡建设委员会"
-        android:textColor="@color/color_999999"
-        android:textSize="16sp"/>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/x30"
         android:paddingRight="@dimen/x30"
-        android:paddingTop="@dimen/y15"
+        android:paddingTop="@dimen/y30"
         android:text="地址：岳麓大道218号市政府二办公楼10楼"
         android:textColor="@color/color_999999"
         android:textSize="16sp"/>
@@ -86,6 +78,16 @@ GO房APP中的实名认证及购房资格审查结果由长沙市住房和城乡
         android:paddingRight="@dimen/x30"
         android:paddingTop="@dimen/y15"
         android:text="邮政编码：410013"
+        android:textColor="@color/color_999999"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:paddingTop="@dimen/y15"
+        android:gravity="right"
+        android:text="长沙市住房和城乡建设委员会"
         android:textColor="@color/color_999999"
         android:textSize="16sp"/>
 </LinearLayout>

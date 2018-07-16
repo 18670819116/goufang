@@ -34,9 +34,6 @@ import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
-import com.ljcs.cxwl.ui.activity.certification.CertificationActivity;
-import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoFourActivity;
-import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterTwo1Component;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterTwo1Contract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterTwo1Module;
@@ -46,10 +43,10 @@ import com.ljcs.cxwl.util.GlideUtils;
 import com.ljcs.cxwl.util.IDcardUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxKeyboardTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxKeyboardTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -222,6 +219,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
     @Override
     public void showProgressDialog() {
         progressDialog.show();
+        progressDialog.setCancelable(false);
     }
 
     @Override
@@ -593,8 +591,11 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("姓名为空");
             return false;
         }
-
-        if (RxDataTool.isNullString(tvSex.getText().toString()) || (!tvSex.getText().toString().equals("男") && !tvSex
+        if (RxDataTool.isNullString(tvSex.getText().toString())) {
+            ToastUtil.showCenterShort("性别为空");
+            return false;
+        }
+        if ((!tvSex.getText().toString().equals("男") && !tvSex
                 .getText().toString().equals("女"))) {
             ToastUtil.showCenterShort("性别格式不正确");
             return false;

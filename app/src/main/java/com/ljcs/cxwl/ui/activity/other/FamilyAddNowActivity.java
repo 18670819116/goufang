@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
-import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyAddNowComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyAddNowContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyAddNowModule;
@@ -15,8 +14,6 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.ljcs.cxwl.contain.Contains.ENTERTYPE_CHANGE;
 
 /**
  * @author xlei

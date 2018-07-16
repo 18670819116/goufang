@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.ui.activity.changephone;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
@@ -13,6 +14,7 @@ import com.ljcs.cxwl.ui.activity.changephone.presenter.ChangePhoneTwoPresenter;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author xlei
@@ -45,13 +47,10 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
 
     @Override
     protected void setupActivityComponent() {
-       DaggerChangePhoneTwoComponent
-               .builder()
-               .appComponent(((AppConfig) getApplication()).getApplicationComponent())
-               .changePhoneTwoModule(new ChangePhoneTwoModule(this))
-               .build()
-               .inject(this);
+        DaggerChangePhoneTwoComponent.builder().appComponent(((AppConfig) getApplication()).getApplicationComponent()
+        ).changePhoneTwoModule(new ChangePhoneTwoModule(this)).build().inject(this);
     }
+
     @Override
     public void setPresenter(ChangePhoneTwoContract.ChangePhoneTwoContractPresenter presenter) {
         mPresenter = (ChangePhoneTwoPresenter) presenter;
@@ -67,4 +66,14 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
         progressDialog.hide();
     }
 
+    @OnClick({R.id.btn_login, R.id.tv_sfz})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_login:
+                break;
+            case R.id.tv_sfz:
+
+                break;
+        }
+    }
 }

@@ -5,7 +5,6 @@ import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Toast;
 
-
 import com.ljcs.cxwl.application.AppConfig;
 
 import javax.inject.Singleton;

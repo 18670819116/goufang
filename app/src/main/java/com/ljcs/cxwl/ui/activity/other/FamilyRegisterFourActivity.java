@@ -23,9 +23,10 @@ import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterFourModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterFourPresenter;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ToastUtil;
+import com.ljcs.cxwl.view.CertificationDialog;
 import com.ljcs.cxwl.view.ZinvInfoLayout;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -245,8 +246,8 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
                 zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startToImgActivity(FamilyRegisterFourActivity.this, API.PIC+Contains.sAllInfo.getData().getJtcyList()
-                                .get(finalI).getHkzp());
+                        startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getJtcyList().get(finalI).getHkzp());
                     }
                 });
                 layoutZinvContent.addView(zinvInfoLayout);
@@ -260,7 +261,6 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             //购房资格申请
             Contains.sAllInfo = baseEntity;
-
             intiViews();
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
@@ -270,20 +270,21 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
     @Override
     public void commitInfoSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
-//            AppManager.getInstance().finishActivity(QualificationExaminationActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyAddActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoFourActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoThirdActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoTwoActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoOneActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyRegisterActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyRegisterTwoActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyRegisterThirdActivity.class);
-//            //startActivty(FamilyRegisterFourActivity.class);
-//            finish();
-            AppManager.getInstance().finishAllActivity();
-            startActivty(MainActivity.class);
+            final CertificationDialog dialog = new CertificationDialog(this);
+            dialog.setCancelable(false);
+            dialog.getImageView().setImageResource(R.mipmap.ic_tijiao_shq);
+            dialog.getBtn().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    startActivty(MainActivity.class);
+                    AppManager.getInstance().finishAllActivity();
+                }
+            });
+            dialog.getTv1().setText("购房资格信息已提交");
+            dialog.getTv2().setText("审查中，预计一个工作日完成审查");
+            dialog.show();
+
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
         }
@@ -294,17 +295,6 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
 
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             ToastUtil.showCenterShort("保存成功");
-//            AppManager.getInstance().finishActivity(QualificationExaminationActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyAddActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoFourActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoThirdActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoTwoActivity.class);
-//            AppManager.getInstance().finishActivity(MatesInfoOneActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyRegisterActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyRegisterTwoActivity.class);
-//            AppManager.getInstance().finishActivity(FamilyRegisterThirdActivity.class);
-//            //startActivty(FamilyRegisterFourActivity.class);
-//            finish();
             AppManager.getInstance().finishAllActivity();
             startActivty(MainActivity.class);
         } else {

@@ -1,7 +1,7 @@
 package com.ljcs.cxwl.data.api;
 
-import android.util.Log;
-
+import com.google.gson.JsonObject;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.AppInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
@@ -13,8 +13,6 @@ import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.util.MD5Util;
 import com.ljcs.cxwl.util.RSAUtil;
-import com.google.gson.JsonObject;
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 

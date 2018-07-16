@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <com.uuzuche.lib_zxing.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        app:inner_corner_color="@color/main_color"
+        app:inner_corner_length="@dimen/x30"
+        app:inner_corner_width="@dimen/x5"
+        app:inner_height="@dimen/y500"
+        app:inner_scan_speed="10"
+        app:inner_scan_iscircle="false"
+        app:inner_width="@dimen/x500"
+        />
+
+</RelativeLayout>

@@ -5,9 +5,8 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.entity.CerInfo;
-import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
 import com.ljcs.cxwl.ui.activity.certification.CertificationFiveActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.CertificationFiveContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.Map;

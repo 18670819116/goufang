@@ -3,10 +3,9 @@ package com.ljcs.cxwl.ui.activity.main.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.RegisterBean;
-import com.ljcs.cxwl.ui.activity.main.contract.ChangePwdContract;
 import com.ljcs.cxwl.ui.activity.main.ChangePwdActivity;
+import com.ljcs.cxwl.ui.activity.main.contract.ChangePwdContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.Map;

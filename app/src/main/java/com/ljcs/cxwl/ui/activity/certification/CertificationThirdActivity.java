@@ -12,9 +12,9 @@ import com.baidu.ocr.sdk.model.IDCardParams;
 import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
+import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
-import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationThirdComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationThirdContract;
@@ -23,8 +23,7 @@ import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationThirdPrese
 import com.ljcs.cxwl.util.FileUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxTool;
-import com.vondear.rxtools.view.RxToast;
+import com.vondear.rxtool.RxTool;
 
 import java.io.File;
 

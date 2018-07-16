@@ -2,13 +2,11 @@ package com.ljcs.cxwl.application;
 
 import android.app.Application;
 
-
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.data.api.HttpApi;
-import com.ljcs.cxwl.data.api.RequestBodyInterceptor;
 import com.ljcs.cxwl.data.api.support.ErrorHandlerInterceptor;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 

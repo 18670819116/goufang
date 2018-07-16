@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
-import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.AllInfo;
@@ -20,8 +20,8 @@ import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationFivePresen
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.view.CertificationDialog;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-       >
+        >
 
 
         <LinearLayout
@@ -46,6 +46,7 @@
                 android:src="@mipmap/eye_off"
                 />
         </LinearLayout>
+
         <View
             style="@style/line_hor"
             android:layout_marginLeft="@dimen/x55"
@@ -123,13 +124,24 @@
         android:text="确认修改"
         />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/tv_tishi"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/y40"
-        android:text="忘记登录密码?试试校验"/>
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="忘记登录密码?试试校验"/>
 
+        <TextView
+            android:id="@+id/tv_sfz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证更换手机"
+            android:textColor="@color/main_color"/>
+    </LinearLayout>
 </RelativeLayout>

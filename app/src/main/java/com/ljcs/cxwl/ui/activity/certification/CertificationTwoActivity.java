@@ -2,14 +2,10 @@ package com.ljcs.cxwl.ui.activity.certification;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -17,7 +13,6 @@ import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationTwoComponent;
@@ -25,25 +20,16 @@ import com.ljcs.cxwl.ui.activity.certification.contract.CertificationTwoContract
 import com.ljcs.cxwl.ui.activity.certification.module.CertificationTwoModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationTwoPresenter;
 import com.ljcs.cxwl.util.IDcardUtil;
-import com.ljcs.cxwl.util.IDcardUtil2;
 import com.ljcs.cxwl.util.QiniuUploadUtil;
-import com.ljcs.cxwl.util.StringUitl;
-import com.ljcs.cxwl.util.StringUitls;
 import com.ljcs.cxwl.util.ToastUtil;
-import com.orhanobut.logger.Logger;
 import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.utils.StringUtils;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxRegTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 

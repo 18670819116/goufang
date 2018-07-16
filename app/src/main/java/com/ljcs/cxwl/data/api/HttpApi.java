@@ -22,7 +22,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 
 import static com.ljcs.cxwl.data.api.API.URL_GET_CERINFO_DETAIL;

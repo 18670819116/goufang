@@ -16,14 +16,13 @@ import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
-import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoOneActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyMatesStatusComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyMatesStatusContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyMatesStatusModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyMatesStatusPresenter;
 import com.ljcs.cxwl.view.ZinvInfoLayout;
-import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtool.RxSPTool;
 
 import java.util.HashMap;
 import java.util.Map;

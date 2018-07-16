@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.ui.activity.main.contract.PersonCenterContract;
 import com.ljcs.cxwl.ui.activity.main.PersonCenterActivity;
+import com.ljcs.cxwl.ui.activity.main.contract.PersonCenterContract;
 
 import java.util.Map;
 

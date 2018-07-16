@@ -4,12 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
+import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
@@ -19,7 +17,6 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**

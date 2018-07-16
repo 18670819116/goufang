@@ -1,9 +1,12 @@
 package com.ljcs.cxwl.ui.activity.other;
 
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,10 +21,12 @@ import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterStatusCompo
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterStatusContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterStatusModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterStatusPresenter;
+import com.ljcs.cxwl.ui.activity.scan.ScanActivity;
 import com.ljcs.cxwl.view.CertificationDialog;
 import com.ljcs.cxwl.view.ZinvInfoLayout;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.orhanobut.logger.Logger;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,12 +96,6 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     ImageView img4Peiou;
     @BindView(R.id.layout3)
     LinearLayout layout3;
-    @BindView(R.id.ic_family_status)
-    ImageView icFamilyStatus;
-    @BindView(R.id.tv_head_stutus1)
-    TextView tvHeadStutus1;
-    @BindView(R.id.tv_head_stutus2)
-    TextView tvHeadStutus2;
     @BindView(R.id.tv_hjszd)
     TextView tvHjszd;
     @BindView(R.id.tv_name3)
@@ -109,6 +108,23 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     ImageView img5Peiou;
     @BindView(R.id.layout4)
     LinearLayout layout4;
+    @BindView(R.id.bg_head1)
+    LinearLayout bgHead1;
+    @BindView(R.id.tv_yuanyin)
+    TextView tvYuanyin;
+    @BindView(R.id.bg_head2)
+    LinearLayout bgHead2;
+    @BindView(R.id.tv_fankui)
+    TextView tvFankui;
+    @BindView(R.id.tv_tijiaozige)
+    TextView tvTijiaozige;
+    @BindView(R.id.bg_head3)
+    LinearLayout bgHead3;
+    @BindView(R.id.bg_head)
+    RelativeLayout bgHead;
+    @BindView(R.id.scrollView)
+    NestedScrollView scrollView;
+    private CertificationDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,10 +133,11 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
 
     @Override
     protected void initView() {
+        needFront = true;
         setContentView(R.layout.activity_family_register_status);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarTitle.setText("购房资格审查");
+
     }
 
     @Override
@@ -128,7 +145,38 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         Map<String, String> map1 = new HashMap<>();
         map1.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
         mPresenter.allInfo(map1);
+        initDialog();
+        final int height = 63;
+        Logger.e("height"+height);
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // 将透明度声明成局部变量用于判断
+                int alpha = 0;
+                int count = 0;
+                float scale = 0;
+                Logger.e("scrollY"+scrollY+"oldScrollY"+oldScrollY);
+                if (scrollY >= height) {
+                    scale = (float) scrollY / height;
+                    alpha = (int) (255 * scale);
+                    // 随着滑动距离改变透明度
+                    // Log.e("al=","="+alpha);
+                    toolbarTitle.setText("购房资格审核");
+                    mToolbar.setBackgroundColor(getResources().getColor(R.color.main_color));
+                    autolayout.setBackgroundColor(getResources().getColor(R.color.main_color));
+                } else {
+                    if (alpha < 255) {
+                        Log.e("执行次数", "=" + (++count));
+                        // 防止频繁重复设置相同的值影响性能
+                        toolbarTitle.setText("");
+                        autolayout.setBackgroundColor(getResources().getColor(R.color.color_00000000));
+                        mToolbar.setBackgroundColor(getResources().getColor(R.color.color_00000000));
 
+                    }
+                }
+
+            }
+        });
     }
 
     @Override
@@ -136,19 +184,20 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         if (Contains.sAllInfo.getData().getHjxx() != null) {
             if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
                 //审核中
-                Glide.with(this).load(R.mipmap.ic_family_status1).into(icFamilyStatus);
-                tvHeadStutus1.setText("您的购房资格审查信息已提交\n正在审查中");
-                tvHeadStutus2.setVisibility(View.GONE);
+                bgHead1.setVisibility(View.VISIBLE);
+                bgHead2.setVisibility(View.GONE);
+                bgHead3.setVisibility(View.GONE);
             } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
-                //审核中
-                Glide.with(this).load(R.mipmap.ic_family_status2).into(icFamilyStatus);
-                tvHeadStutus1.setText("已审核通过");
-                tvHeadStutus2.setText("查看审核反馈");
-
+                //审完成
+                bgHead1.setVisibility(View.GONE);
+                bgHead2.setVisibility(View.GONE);
+                bgHead3.setVisibility(View.VISIBLE);
             } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("4")) {
-                Glide.with(this).load(R.mipmap.ic_family_status3).into(icFamilyStatus);
-                tvHeadStutus1.setText("审核未通过！");
-                tvHeadStutus2.setText("查看原因");
+                //未通过
+                bgHead1.setVisibility(View.GONE);
+                bgHead2.setVisibility(View.VISIBLE);
+                bgHead3.setVisibility(View.GONE);
+
             }
         }
         tvName1.setText(Contains.sAllInfo.getData().getSmyz().getXm());
@@ -257,8 +306,8 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                 zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startToImgActivity(FamilyRegisterStatusActivity.this,  API.PIC+Contains.sAllInfo.getData().getJtcyList
-                                ().get(finalI).getHkzp());
+                        startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
+                                .getJtcyList().get(finalI).getHkzp());
                     }
                 });
                 layoutZinvContent.addView(zinvInfoLayout);
@@ -301,48 +350,60 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         progressDialog.hide();
     }
 
-    @OnClick(R.id.tv_head_stutus2)
-    public void onViewClicked() {
+
+    @OnClick({R.id.tv_yuanyin, R.id.tv_fankui, R.id.tv_tijiaozige})
+    public void onViewClicked(View view) {
         if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             return;
-
         }
-        final CertificationDialog dialog = new CertificationDialog(this);
-        dialog.setCancelable(false);
         ImageView imageView = dialog.getImageView();
         TextView tv1 = dialog.getTv1();
 
         tv1.setTextSize(14);
         TextView tv2 = dialog.getTv2();
         tv2.setTextSize(14);
+        switch (view.getId()) {
+            case R.id.tv_yuanyin:
+                if (Contains.sAllInfo.getData().getGfzgyj() != null) {
+                    tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
+                    tv2.setText("");
+                } else {
+                    tv1.setText("原因未知");
+                    tv2.setText("");
+                }
+                Glide.with(this).load(R.mipmap.ic_status_smile2).into(imageView);
+                dialog.show();
+                break;
+            case R.id.tv_fankui:
+                //审核已通过
+                if (Contains.sAllInfo.getData().getGfzgyj() != null) {
+                    tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
+                    tv2.setText("");
+                } else {
+                    tv1.setText("社保已缴纳24个月");
+                    tv2.setText("个税已缴纳24个月");
+                }
 
-        if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
-            //审核已通过
-            if (Contains.sAllInfo.getData().getGfzgyj() != null) {
-                tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
-                tv2.setText("");
-            } else {
-                tv1.setText("社保已缴纳24个月");
-                tv2.setText("个税已缴纳24个月");
-            }
-
-            Glide.with(this).load(R.mipmap.ic_status_smile1).into(imageView);
-        } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("4")) {
-            if (Contains.sAllInfo.getData().getGfzgyj() != null) {
-                tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
-                tv2.setText("");
-            } else {
-                tv1.setText("原因未知");
-                tv2.setText("");
-            }
-            Glide.with(this).load(R.mipmap.ic_status_smile2).into(imageView);
+                Glide.with(this).load(R.mipmap.ic_status_smile1).into(imageView);
+                dialog.show();
+                break;
+            case R.id.tv_tijiaozige:
+                startActivty(ScanActivity.class);
+                break;
         }
+    }
+
+    public void initDialog() {
+
+        dialog = new CertificationDialog(this);
+        dialog.setCancelable(false);
         dialog.getBtn().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        dialog.show();
+
+
     }
 }

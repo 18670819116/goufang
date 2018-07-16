@@ -17,7 +17,6 @@ package com.ljcs.cxwl.application;
 
 import android.content.Context;
 
-
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 
 import javax.inject.Singleton;

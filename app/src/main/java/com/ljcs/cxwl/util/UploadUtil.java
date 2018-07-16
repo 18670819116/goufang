@@ -1,6 +1,5 @@
 package com.ljcs.cxwl.util;
 
-import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;

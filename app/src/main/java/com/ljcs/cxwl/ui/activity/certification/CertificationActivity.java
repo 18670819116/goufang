@@ -39,9 +39,9 @@ import com.ljcs.cxwl.util.IDcardUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.view.CertificationDialog;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -413,7 +413,7 @@ public class CertificationActivity extends BaseActivity implements Certification
             ToastUtil.showCenterShort("出生日期和身份证的出生日期不一致");
             return false;
         }
-        if (IDcardUtil.getAge(tvIdcard.getText().toString()) < 22) {
+        if (!IDcardUtil.ifGrown_up(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("根据政策规定，暂不支持对未成年人的实名认证");
             return false;
         }

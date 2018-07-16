@@ -197,7 +197,7 @@
         style="@style/btn_login"
 
         android:layout_marginTop="@dimen/y67"
-        android:text="退 出 登 录"/>
+        android:text="退出登录"/>
 
     <View
         android:layout_width="match_parent"

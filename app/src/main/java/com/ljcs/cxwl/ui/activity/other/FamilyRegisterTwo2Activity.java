@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
@@ -46,10 +45,10 @@ import com.ljcs.cxwl.util.QiniuUploadUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.qiniu.android.http.ResponseInfo;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxKeyboardTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxKeyboardTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -66,8 +65,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_BASIC;
-import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_JHZ;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_LHZ;
 
 /**

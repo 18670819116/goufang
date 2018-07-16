@@ -6,8 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -16,12 +14,9 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
 import com.ljcs.cxwl.R;
-import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.ui.activity.main.SplashActivity;
-import com.vondear.rxtools.RxAppTool;
-import com.vondear.rxtools.RxDeviceTool;
+import com.vondear.rxtool.RxAppTool;
 
 import java.io.File;
 import java.io.FileOutputStream;

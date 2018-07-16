@@ -18,7 +18,6 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.AgreementActivity;
@@ -29,11 +28,10 @@ import com.ljcs.cxwl.ui.activity.main.presenter.RegisterPresenter;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxActivityTool;
-import com.vondear.rxtools.RxConstTool;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxEncryptTool;
-import com.vondear.rxtools.RxSPTool;
+import com.vondear.rxtool.RxConstTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxEncryptTool;
+import com.vondear.rxtool.RxSPTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,9 +41,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
 /**
  * @author xlei

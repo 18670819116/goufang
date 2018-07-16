@@ -11,7 +11,6 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerSplashComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.SplashContract;
 import com.ljcs.cxwl.ui.activity.main.module.SplashModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.SplashPresenter;
-import com.ljcs.cxwl.util.UpdateManager;
 import com.orhanobut.logger.Logger;
 
 import javax.inject.Inject;

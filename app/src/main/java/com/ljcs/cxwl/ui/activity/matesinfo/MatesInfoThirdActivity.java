@@ -20,8 +20,6 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
-import com.ljcs.cxwl.ui.activity.certification.CertificationFourActivity;
-import com.ljcs.cxwl.ui.activity.certification.CertificationThirdActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoThirdComponent;
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoThirdContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoThirdModule;
@@ -30,7 +28,6 @@ import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.FileUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.view.RxToast;
 
 import java.io.File;
 

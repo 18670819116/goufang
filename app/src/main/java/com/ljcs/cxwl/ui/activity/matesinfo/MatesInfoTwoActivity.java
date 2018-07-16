@@ -1,6 +1,5 @@
 package com.ljcs.cxwl.ui.activity.matesinfo;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,11 +14,8 @@ import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
-import com.ljcs.cxwl.ui.activity.certification.CertificationThirdActivity;
-import com.ljcs.cxwl.ui.activity.certification.CertificationTwoActivity;
 import com.ljcs.cxwl.ui.activity.matesinfo.component.DaggerMatesInfoTwoComponent;
 import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoTwoContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.module.MatesInfoTwoModule;
@@ -28,10 +24,9 @@ import com.ljcs.cxwl.util.IDcardUtil;
 import com.ljcs.cxwl.util.QiniuUploadUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.qiniu.android.http.ResponseInfo;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxRegTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.List;

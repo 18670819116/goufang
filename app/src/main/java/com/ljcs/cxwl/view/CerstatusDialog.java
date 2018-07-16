@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.view;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
-import com.vondear.rxtools.view.dialog.RxDialog;
 
 
 /**
@@ -17,7 +17,7 @@ import com.vondear.rxtools.view.dialog.RxDialog;
  * @Date 2018/6/27.
  */
 
-public class CerstatusDialog extends RxDialog {
+public class CerstatusDialog extends Dialog {
     ImageView imageView;
     TextView tv1;
     TextView tv2;
@@ -39,10 +39,7 @@ public class CerstatusDialog extends RxDialog {
         initView();
     }
 
-    public CerstatusDialog(Context context, float alpha, int gravity) {
-        super(context, alpha, gravity);
-        initView();
-    }
+
 
     public CerstatusDialog(Activity context) {
         super(context);
@@ -82,7 +79,7 @@ public class CerstatusDialog extends RxDialog {
     }
 
     private void initView() {
-        View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_cerstatus, null);
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_cerstatus, null);
         btn = (Button) dialogView.findViewById(R.id.btn);
         tv1 = (TextView) dialogView.findViewById(R.id.tv1);
         tv2 = (TextView) dialogView.findViewById(R.id.tv2);

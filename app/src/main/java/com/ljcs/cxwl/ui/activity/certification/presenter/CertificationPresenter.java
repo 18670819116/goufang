@@ -4,15 +4,12 @@ import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
-import com.ljcs.cxwl.entity.CommonBean;
-import com.ljcs.cxwl.ui.activity.certification.contract.CertificationContract;
 import com.ljcs.cxwl.ui.activity.certification.CertificationActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.CertificationContract;
 import com.ljcs.cxwl.util.UploadUtil;
 import com.orhanobut.logger.Logger;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +17,7 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * @author xlei

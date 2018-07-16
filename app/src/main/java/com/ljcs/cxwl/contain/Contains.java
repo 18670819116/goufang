@@ -1,11 +1,7 @@
 package com.ljcs.cxwl.contain;
 
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.entity.CertificationInfo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Yuan.Y.Q

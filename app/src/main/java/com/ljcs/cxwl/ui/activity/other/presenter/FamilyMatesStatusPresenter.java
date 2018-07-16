@@ -1,13 +1,16 @@
 package com.ljcs.cxwl.ui.activity.other.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.ui.activity.other.contract.FamilyMatesStatusContract;
 import com.ljcs.cxwl.ui.activity.other.FamilyMatesStatusActivity;
+import com.ljcs.cxwl.ui.activity.other.contract.FamilyMatesStatusContract;
 
 import java.util.Map;
 
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;

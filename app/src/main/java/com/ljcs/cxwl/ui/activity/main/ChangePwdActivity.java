@@ -16,20 +16,16 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerChangePwdComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.ChangePwdContract;
 import com.ljcs.cxwl.ui.activity.main.module.ChangePwdModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.ChangePwdPresenter;
-import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxConstTool;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxEncryptTool;
-import com.vondear.rxtools.RxSPTool;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxEncryptTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,9 +35,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
 
 /**
  * @author xlei

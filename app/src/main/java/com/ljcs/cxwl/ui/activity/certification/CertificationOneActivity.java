@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.baidu.idcardquality.IDcardQualityProcess;
 import com.baidu.ocr.sdk.OCR;
@@ -17,9 +16,9 @@ import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
+import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
-import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.ui.activity.certification.component.DaggerCertificationOneComponent;
 import com.ljcs.cxwl.ui.activity.certification.contract.CertificationOneContract;
@@ -28,14 +27,12 @@ import com.ljcs.cxwl.ui.activity.certification.presenter.CertificationOnePresent
 import com.ljcs.cxwl.util.FileUtil;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtools.RxTool;
-import com.vondear.rxtools.view.RxToast;
+import com.vondear.rxtool.RxTool;
 
 import java.io.File;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

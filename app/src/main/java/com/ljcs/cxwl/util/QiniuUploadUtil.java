@@ -1,11 +1,6 @@
 package com.ljcs.cxwl.util;
 
-import android.util.Log;
-
 import com.ljcs.cxwl.callback.UploadCallback;
-import com.ljcs.cxwl.contain.Contains;
-import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.entity.CommonBean;
 import com.orhanobut.logger.Logger;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.Configuration;
@@ -14,15 +9,8 @@ import com.qiniu.android.storage.UploadManager;
 
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * @author xlei

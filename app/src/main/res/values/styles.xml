@@ -12,7 +12,6 @@
         <item name="colorPrimary">@color/main_color</item>
         <item name="colorPrimaryDark">@color/main_color</item>
         <item name="colorAccent">@color/main_color</item>
-
     </style>
     <style name="SplashTheme" parent="AppTheme.Base">
         <item name="android:windowNoTitle">true</item>

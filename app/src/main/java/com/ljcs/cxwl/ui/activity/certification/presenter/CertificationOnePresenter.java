@@ -1,9 +1,13 @@
 package com.ljcs.cxwl.ui.activity.certification.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.ui.activity.certification.contract.CertificationOneContract;
 import com.ljcs.cxwl.ui.activity.certification.CertificationOneActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.CertificationOneContract;
+
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 /**

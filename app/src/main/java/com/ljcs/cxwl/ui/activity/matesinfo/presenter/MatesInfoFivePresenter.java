@@ -1,13 +1,14 @@
 package com.ljcs.cxwl.ui.activity.matesinfo.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoFiveContract;
 import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoFiveActivity;
+import com.ljcs.cxwl.ui.activity.matesinfo.contract.MatesInfoFiveContract;
+
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei

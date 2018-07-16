@@ -1,9 +1,7 @@
 package com.ljcs.cxwl.ui.activity.certification.contract;
 
 import com.ljcs.cxwl.callback.UploadFileCallBack;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CerInfo;
-import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 

@@ -1,13 +1,14 @@
 package com.ljcs.cxwl.ui.activity.certification.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.ui.activity.certification.contract.AboutCertificationContract;
 import com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity;
+import com.ljcs.cxwl.ui.activity.certification.contract.AboutCertificationContract;
+
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei

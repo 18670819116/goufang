@@ -10,7 +10,7 @@ import com.ljcs.cxwl.ui.activity.certification.component.DaggerAboutCertificatio
 import com.ljcs.cxwl.ui.activity.certification.contract.AboutCertificationContract;
 import com.ljcs.cxwl.ui.activity.certification.module.AboutCertificationModule;
 import com.ljcs.cxwl.ui.activity.certification.presenter.AboutCertificationPresenter;
-import com.vondear.rxtools.RxTool;
+import com.vondear.rxtool.RxTool;
 
 import javax.inject.Inject;
 

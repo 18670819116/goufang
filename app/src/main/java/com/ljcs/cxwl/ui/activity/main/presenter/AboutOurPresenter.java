@@ -1,13 +1,14 @@
 package com.ljcs.cxwl.ui.activity.main.presenter;
+
 import android.support.annotation.NonNull;
+
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.ui.activity.main.contract.AboutOurContract;
 import com.ljcs.cxwl.ui.activity.main.AboutOurActivity;
+import com.ljcs.cxwl.ui.activity.main.contract.AboutOurContract;
+
 import javax.inject.Inject;
+
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei

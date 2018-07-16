@@ -1,13 +1,8 @@
 package com.ljcs.cxwl.base;
 
-import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.ui.activity.ShowImgActivity;
-import com.ljcs.cxwl.ui.activity.main.LoginActivity;
-import com.ljcs.cxwl.util.AppManager;
-import com.ljcs.cxwl.view.ProgressDialog;
-
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,17 +11,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.ui.activity.ShowImgActivity;
+import com.ljcs.cxwl.ui.activity.main.LoginActivity;
+import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
-import com.vondear.rxtools.RxActivityTool;
-import com.vondear.rxtools.RxDataTool;
-import com.vondear.rxtools.RxSPTool;
+import com.ljcs.cxwl.view.ProgressDialog;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxSPTool;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
@@ -51,12 +51,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         // 在 super.onCreate(savedInstanceState) 之前调用该方法
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
+        initWindows();
         super.setContentView(R.layout.activity_base);
         // 经测试在代码里直接声明透明状态栏更有效
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+//
+//        }
         AppManager.getInstance().addActivity(this);
         progressDialog = new ProgressDialog(this);
         initToolbar();
@@ -64,7 +66,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         initView();
         initData();
     }
-
+    private void initWindows() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.BLACK);
+        }
+    }
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbarBusiness);
         autolayout = (LinearLayout) findViewById(R.id.toolbar_autolayout);
