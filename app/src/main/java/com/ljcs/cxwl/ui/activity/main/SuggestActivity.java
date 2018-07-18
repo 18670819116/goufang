@@ -1,6 +1,10 @@
 package com.ljcs.cxwl.ui.activity.main;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
@@ -9,10 +13,13 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerSuggestComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.SuggestContract;
 import com.ljcs.cxwl.ui.activity.main.module.SuggestModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.SuggestPresenter;
+import com.ljcs.cxwl.util.ToastUtil;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author xlei
@@ -25,6 +32,10 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
 
     @Inject
     SuggestPresenter mPresenter;
+    @BindView(R.id.et_content)
+    EditText etContent;
+    @BindView(R.id.tv_count)
+    TextView tvCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +48,25 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarTitle.setText("意见反馈");
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvCount.setText(s.length()+"/200");
+                if (s.length()>=200){
+                    ToastUtil.showCenterShort("最多输入200个字符");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//            s.toString();
+            }
+        });
     }
 
     @Override
@@ -65,4 +95,7 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
         progressDialog.hide();
     }
 
+    @OnClick(R.id.btn_login)
+    public void onViewClicked() {
+    }
 }

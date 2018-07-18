@@ -355,7 +355,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
             return false;
         }
         if (RxDataTool.isNullString(tvName.getText().toString())) {
-            ToastUtil.showCenterShort("请输入姓名");
+            ToastUtil.showCenterShort("姓名不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
@@ -371,10 +371,10 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
             ToastUtil.showCenterShort("请选择家庭户口类型");
             return false;
         }
-        if (RxDataTool.isNullString(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("请输入身份证号码");
-            return false;
-        }
+//        if (RxDataTool.isNullString(tvIdcard.getText().toString())) {
+//            ToastUtil.showCenterShort("请输入身份证号码");
+//            return false;
+//        }
         if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;

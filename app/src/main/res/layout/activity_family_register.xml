@@ -135,6 +135,7 @@
                 <View style="@style/line_hor"/>
 
                 <LinearLayout
+                    android:id="@+id/layout_select4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
                     android:gravity="center_vertical"
@@ -145,17 +146,20 @@
                         android:layout_height="wrap_content"
                         android:text="户 籍 所 在 地："/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/et_suozaidi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_marginLeft="@dimen/x20"
                         android:layout_weight="1"
-                        android:background="@null"
                         android:hint="请输入户籍所在地"
-                        android:singleLine="true"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
                 <View style="@style/line_hor"/>
@@ -427,8 +431,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">

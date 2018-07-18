@@ -20,10 +20,10 @@
         app:inner_corner_color="@color/main_color"
         app:inner_corner_length="@dimen/x30"
         app:inner_corner_width="@dimen/x5"
-        app:inner_height="@dimen/y500"
-        app:inner_scan_speed="10"
+        app:inner_height="230dp"
+        app:inner_scan_speed="12"
         app:inner_scan_iscircle="false"
-        app:inner_width="@dimen/x500"
+        app:inner_width="230dp"
         />
 
 </RelativeLayout>

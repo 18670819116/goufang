@@ -56,7 +56,6 @@ public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPr
         Disposable disposable = httpAPIWrapper.getCode(map).subscribe(new Consumer<CommonBean>() {
             @Override
             public void accept(CommonBean user) throws Exception {
-                Logger.i(user.toString());
                 mView.getCode(user);
             }
         }, new Consumer<Throwable>() {

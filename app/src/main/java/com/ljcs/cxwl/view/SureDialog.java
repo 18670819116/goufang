@@ -30,7 +30,7 @@ public class SureDialog extends Dialog {
     }
 
     public SureDialog(Context context) {
-        super(context);
+        super(context,R.style.BaseDialog);
         initView();
     }
 

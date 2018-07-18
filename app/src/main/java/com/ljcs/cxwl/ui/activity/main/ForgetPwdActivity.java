@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerForgetPwdComponent;
@@ -90,7 +91,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
             @Override
             public void onTick(long millisUntilFinished) {
                 //  Logger.i("倒计时" + millisUntilFinished);
-                mTvGetYzm.setText("倒计时" + millisUntilFinished / 1000 + "s");
+                mTvGetYzm.setText(millisUntilFinished / 1000 + "s");
             }
 
             @Override
@@ -124,15 +125,15 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
      */
     @Override
     public void getCode(CommonBean baseEntity) {
-        if (baseEntity.getCode() == 200) {
+        if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
             if (baseEntity.getData() != null) {
                 code = baseEntity.getData();
-            } else {
-                onErrorMsg(0, baseEntity.getMsg());
             }
 
         }
-
+        else {
+            onErrorMsg(baseEntity.code, baseEntity.getMsg());
+        }
     }
 
     /**
@@ -143,13 +144,13 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
 
     @Override
     public void forgetPwd(CommonBean baseEntity) {
-        if (baseEntity.getCode() == 200) {
+        if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
             ToastUtil.showCenterShort(baseEntity.msg);
             //保存新的密码
             RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mEt3.getText().toString());
             finish();
         } else {
-            onErrorMsg(0, baseEntity.msg);
+            onErrorMsg(baseEntity.code, baseEntity.msg);
         }
 
 

@@ -83,8 +83,8 @@
         <activity
             android:name="com.ljcs.cxwl.ui.activity.main.ComplainActivity"
             android:configChanges="screenLayout|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
         </activity>
         <!--关于我们-->
         <activity
@@ -294,15 +294,29 @@
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait"
             />
-        <!--<provider-->
-        <!--android:name="android.support.v4.content.FileProvider"-->
-        <!--android:authorities="com.ljcs.cxwl.fileProvider"-->
-        <!--android:grantUriPermissions="true"-->
-        <!--android:exported="false">-->
-        <!--<meta-data-->
-        <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-        <!--android:resource="@xml/file_paths" />-->
-        <!--</provider>-->
+        <!-- 阿里推送服务 -->
+
+        <!--消息接收监听器-->
+        <receiver
+            android:name="com.ljcs.cxwl.receiver.AlMessageReceiver"
+            android:exported="false"> <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <!-- 阿里推送服务 -->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="24971184"/> <!-- 请填写你自己的- appKey -->
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="29b6a63bfc876fcb77b84dabf304fa76"/> <!-- 请填写你自己的appSecret -->
     </application>
 
 </manifest>

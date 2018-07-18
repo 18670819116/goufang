@@ -64,10 +64,10 @@
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_rock_right"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@mipmap/ic_rock_right"/>-->
         </LinearLayout>
 
 
@@ -92,10 +92,10 @@
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_rock_right"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@mipmap/ic_rock_right"/>-->
         </LinearLayout>
 
 
@@ -120,10 +120,10 @@
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_rock_right"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@mipmap/ic_rock_right"/>-->
         </LinearLayout>
 
 
@@ -199,10 +199,10 @@
                 android:textColor="@color/color_333333"
                 android:textSize="14sp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_rock_right"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@mipmap/ic_rock_right"/>-->
         </LinearLayout>
 
 

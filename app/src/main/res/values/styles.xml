@@ -56,4 +56,9 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/shape_bg_20</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>

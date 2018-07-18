@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="请添加您的未成年（未满18岁）子女信息\n如无子女或子女已成年可直接跳过"/>
+                    android:text="请添加您的未成年（未满18岁）子女信息\n如无子女或子女已成年请直接跳过"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

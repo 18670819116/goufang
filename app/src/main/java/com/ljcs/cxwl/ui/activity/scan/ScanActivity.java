@@ -45,12 +45,12 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
 
     @Override
     protected void initView() {
-        needFront = true;
+        needFront=true;
         setContentView(R.layout.activity_scan);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbarTitle.setText("扫码");
-
+        toolbarTitle.setText("扫一扫");
+        autolayout.setBackgroundColor(getResources().getColor(R.color.main_color));
         captureFragment = new CaptureFragment();
         // 为二维码扫描界面设置定制化界面
         CodeUtils.setFragmentArgs(captureFragment, R.layout.my_camera);

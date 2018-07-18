@@ -239,7 +239,8 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
 //                   (permissionListener).start();
             Map<String, String> map = new HashMap<>();
             map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
-            map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM)+ RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));
+            map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM) +
+                    RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));
             login(map);
 
         }

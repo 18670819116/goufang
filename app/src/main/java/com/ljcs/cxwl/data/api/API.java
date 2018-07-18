@@ -6,16 +6,25 @@ package com.ljcs.cxwl.data.api;
  */
 
 public interface API {
-    String PIC = "http://218.77.54.125:11000/img?path=";
-//    String IP_PRODUCT = "http://192.168.8.199/api";
-    String IP_PRODUCT = "http://218.77.54.125:11001/api";
-    String IP_PRODUCT1 = "http://218.77.54.125:11000";
+//    String PIC = "http://218.77.54.125:11000/img?path=";
+//    String IP_PRODUCT = "http://218.77.54.125:11001/api";
+//    String IP_PRODUCT1 = "http://218.77.54.125:11000";
+
+    String PIC = "http://app.cszjw.net:11000/img?path=";
+    String IP_PRODUCT = "http://app.cszjw.net:11001/api";
+    String IP_PRODUCT1 = "http://app.cszjw.net:11000";
+
+
+
+
+    String URL_ZJW_INDEX = "http://szjw.changsha.gov.cn";//住建委网站链接
 
     String BASE_URL = IP_PRODUCT + "/";
     long CONNECT_TIMEOUT = 30 * 1000;
     long IO_TIMEOUT = 60 * 1000;
     String URL_POST_LOGIN = "login/zjw/user/login";//登陆
-    String URL_POST_GET_CODE = "login/zjw/user/code";//验证码
+    String URL_POST_GET_CODE = "login/back/code";//找回密码验证码
+    String URL_POST_GET_REGISTER_CODE = "login/registe/code";//注册验证码
     String URL_POST_REGISTER = "login/zjw/user/register";//注册
     String URL_POST_FORGETPWD = "login/zjw/user/back";//忘记密码
     String URL_POST_LOGINOUT = "login/zjw/user/logout";//退出登录

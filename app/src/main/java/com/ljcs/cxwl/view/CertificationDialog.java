@@ -42,7 +42,7 @@ public class CertificationDialog extends Dialog {
 
 
     public CertificationDialog(Activity context) {
-        super(context);
+        super(context,R.style.BaseDialog);
         initView();
     }
 

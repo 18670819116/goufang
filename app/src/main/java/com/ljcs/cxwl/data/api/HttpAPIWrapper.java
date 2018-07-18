@@ -60,6 +60,10 @@ public class HttpAPIWrapper {
     public Observable<CommonBean> getCode(Map data) {
         return wrapper(mHttpAPI.getCode(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+    //验证码
+    public Observable<CommonBean> getRegisterCode(Map data) {
+        return wrapper(mHttpAPI.getRegisterCode(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
 
     //注册
     public Observable<RegisterBean> register(Map data) {

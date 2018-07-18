@@ -42,7 +42,7 @@ public class CerstatusDialog extends Dialog {
 
 
     public CerstatusDialog(Activity context) {
-        super(context);
+        super(context, R.style.BaseDialog);
         initView();
     }
 

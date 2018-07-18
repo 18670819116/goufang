@@ -358,18 +358,15 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         }
         ImageView imageView = dialog.getImageView();
         TextView tv1 = dialog.getTv1();
-
-        tv1.setTextSize(14);
         TextView tv2 = dialog.getTv2();
-        tv2.setTextSize(14);
         switch (view.getId()) {
             case R.id.tv_yuanyin:
                 if (Contains.sAllInfo.getData().getGfzgyj() != null) {
                     tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
                     tv2.setText("");
                 } else {
-                    tv1.setText("原因未知");
-                    tv2.setText("");
+                    tv1.setText("未通过审核");
+                    tv2.setText("提交的信息未满足购房资格");
                 }
                 Glide.with(this).load(R.mipmap.ic_status_smile2).into(imageView);
                 dialog.show();
@@ -380,8 +377,8 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                     tv1.setText(Contains.sAllInfo.getData().getGfzgyj());
                     tv2.setText("");
                 } else {
-                    tv1.setText("社保已缴纳24个月");
-                    tv2.setText("个税已缴纳24个月");
+                    tv1.setText("恭喜您通过审核");
+                    tv2.setText("所有信息已满足购房资格");
                 }
 
                 Glide.with(this).load(R.mipmap.ic_status_smile1).into(imageView);

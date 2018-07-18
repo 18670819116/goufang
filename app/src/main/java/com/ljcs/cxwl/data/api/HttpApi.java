@@ -34,6 +34,7 @@ import static com.ljcs.cxwl.data.api.API.URL_POST_CERINFO_LAST;
 import static com.ljcs.cxwl.data.api.API.URL_POST_CHANGEPWD;
 import static com.ljcs.cxwl.data.api.API.URL_POST_FORGETPWD;
 import static com.ljcs.cxwl.data.api.API.URL_POST_GET_CODE;
+import static com.ljcs.cxwl.data.api.API.URL_POST_GET_REGISTER_CODE;
 import static com.ljcs.cxwl.data.api.API.URL_POST_HUKOU;
 import static com.ljcs.cxwl.data.api.API.URL_POST_LOGIN;
 import static com.ljcs.cxwl.data.api.API.URL_POST_LOGINOUT;
@@ -58,6 +59,10 @@ public interface HttpApi {
     @POST(URL_POST_GET_CODE)
     @FormUrlEncoded
     Observable<CommonBean> getCode(@FieldMap Map<String, RequestBody> params);
+
+    @POST(URL_POST_GET_REGISTER_CODE)
+    @FormUrlEncoded
+    Observable<CommonBean> getRegisterCode(@FieldMap Map<String, RequestBody> params);
 
     @POST(URL_POST_REGISTER)
     @FormUrlEncoded

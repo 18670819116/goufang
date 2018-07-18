@@ -7,6 +7,8 @@ package com.ljcs.cxwl.data.api.support;
 
 
 
+import com.orhanobut.logger.Logger;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -71,6 +73,7 @@ public class ErrorHandlerInterceptor implements Interceptor {
                 String result = buffer.clone().readString(charset);
 //                com.orhanobut.logger.Logger.i("拦截到的okhttp结果:" + result);
                 result = "{\"data\": " + result + "}";
+                Logger.i(result);
                 com.orhanobut.logger.Logger.json(result);
             }
 //            com.orhanobut.logger.Logger..i("<-- END HTTP (" + buffer.size() + "-byte body)");

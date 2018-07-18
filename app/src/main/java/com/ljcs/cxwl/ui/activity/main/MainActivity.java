@@ -12,6 +12,7 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.CerInfo;
 import com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity;
@@ -59,6 +60,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 //    TextView tv2;
     @BindView(R.id.tv3)
     TextView tv3;
+
+    private boolean isFirst;//登录进来未实名认证
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +120,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             if (Contains.sAllInfo.getData() != null) {
                 if (Contains.sAllInfo.getData().getSmyz() == null) {
                     tv1.setText("未进行实名认证");
+                    if (!isFirst) {
+                        showDialog();
+                        isFirst=true;
+                    }
                 } else {
                     if (Contains.sAllInfo.getData().getSmyz().getZt().equals("1")) {
                         tv1.setText("未进行实名认证");
+                        if (!isFirst) {
+                            showDialog();
+                            isFirst=true;
+                        }
                     }
                     if (Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
                         tv1.setText("已提交，待审核");
@@ -194,7 +205,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 }
                 Intent intent = new Intent(this, WebSatisficingActivity.class);
                 intent.putExtra("name", "详情");
-                intent.putExtra("address", "http://zjt.hunan.gov.cn/");
+                intent.putExtra("address", API.URL_ZJW_INDEX);
                 startActivity(intent);
                 //购房政策
 //                if (Contains.sAllInfo.getData() == null) {
@@ -236,8 +247,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
                     }
 
-                } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
-                        Contains.sAllInfo.getData().getSmyz().getZt().equals("1")) {
+                } else if (Contains.sAllInfo.getData().getSmyz() == null || Contains.sAllInfo.getData() != null &&
+                        Contains.sAllInfo.getData().getSmyz() != null && Contains.sAllInfo.getData().getSmyz().getZt
+                        ().equals("1")) {
                     showDialog();
                 } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
                         Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
@@ -294,7 +306,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private void showDialog() {
         final SureDialog dialog = new SureDialog(this);
-        dialog.getContentView().setText("您还没有实名认证，请先实名认证");
+        dialog.getContentView().setText("您尚未进行实名认证，请先认证");
+        dialog.getCancelView().setText("稍后认证");
+        dialog.getCancelView().setTextColor(getResources().getColor(R.color.color_333333));
+        dialog.getSureView().setText("去认证");
         dialog.setCancelListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

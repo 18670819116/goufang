@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.entity.RegisterBean;
@@ -96,7 +97,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             @Override
             public void onTick(long millisUntilFinished) {
                 //  Logger.i("倒计时" + millisUntilFinished);
-                mTvGetYzm.setText("倒计时" + millisUntilFinished / 1000 + "s");
+                mTvGetYzm.setText( millisUntilFinished / 1000 + "s");
             }
 
             @Override
@@ -146,20 +147,20 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void getCode(CommonBean baseEntity) {
-        if (baseEntity.getCode() == 200) {
+        if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
             if (baseEntity.getData() != null) {
                 code = baseEntity.getData();
-            } else {
-                onErrorMsg(0, baseEntity.getMsg());
             }
 
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.getMsg());
         }
 
     }
 
     @Override
     public void register(RegisterBean baseEntity) {
-        if (baseEntity.getCode() == 200) {
+        if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
             if (baseEntity.token != null) {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_TOKEN, baseEntity.token);
             }
@@ -172,7 +173,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 finish();
             }
         } else {
-            onErrorMsg(0, baseEntity.getMsg());
+            onErrorMsg(baseEntity.code, baseEntity.getMsg());
         }
 
     }
@@ -183,11 +184,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         switch (view.getId()) {
             case R.id.tv_get_yzm:
                 if (RxDataTool.isNullString(mEt1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机号码不能为空");
+                    ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
                 if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机号码不正确");
+                    ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
                 phone = mEt1.getText().toString();

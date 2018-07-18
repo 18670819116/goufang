@@ -12,14 +12,17 @@
         android:background="@drawable/shape_bg_20">
 
         <EditText
+            android:id="@+id/et_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:maxLength="200"
             android:hint="欢迎您提出宝贵的意见或建议"
             android:padding="@dimen/x15"
             android:textSize="14sp"/>
 
         <TextView
+            android:id="@+id/tv_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

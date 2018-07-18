@@ -78,6 +78,8 @@ public class UpdateManager {
 				totalProgress.setText(progress+"/100");
 				break;
 			case DOWN_OVER:
+				curProgress.setText("100%");
+				totalProgress.setText("100/100");
 				installApk();
 				break;
 			default:

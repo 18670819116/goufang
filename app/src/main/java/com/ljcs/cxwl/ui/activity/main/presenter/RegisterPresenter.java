@@ -57,7 +57,7 @@ public class RegisterPresenter implements RegisterContract.RegisterContractPrese
     public void getCode(String phone) {
         Map<String, String> map = new HashMap<>();
         map.put("sjhm", phone);
-        Disposable disposable = httpAPIWrapper.getCode(map).subscribe(new Consumer<CommonBean>() {
+        Disposable disposable = httpAPIWrapper.getRegisterCode(map).subscribe(new Consumer<CommonBean>() {
             @Override
             public void accept(CommonBean user) throws Exception {
                 Logger.i(user.toString());

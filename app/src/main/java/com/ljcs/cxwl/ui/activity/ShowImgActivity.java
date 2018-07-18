@@ -8,9 +8,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.ljcs.cxwl.R;
+import com.ljcs.cxwl.util.GlideUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +39,7 @@ public class ShowImgActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         setContentView(R.layout.activity_showimg);
         ButterKnife.bind(this);
-        Glide.with(this).load(getIntent().getStringExtra("img_path")).into(imageView);
+        GlideUtils.loadImgNoCach(this,getIntent().getStringExtra("img_path"), imageView,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE));
 
     }
 

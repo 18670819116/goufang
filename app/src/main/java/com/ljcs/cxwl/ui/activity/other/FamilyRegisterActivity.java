@@ -2,14 +2,17 @@ package com.ljcs.cxwl.ui.activity.other;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
@@ -17,6 +20,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -27,6 +31,7 @@ import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
 import com.ljcs.cxwl.entity.HujiInfo;
+import com.ljcs.cxwl.entity.ProvinceBean;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterComponent;
@@ -43,7 +48,12 @@ import com.vondear.rxtool.RxKeyboardTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
 
+import org.json.JSONArray;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -102,13 +112,15 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     @BindView(R.id.imageView5)
     ImageView imageView5;
     @BindView(R.id.et_suozaidi)
-    EditText etSuozaidi;
+    TextView etSuozaidi;
     private OptionsPickerView mOptionsPickerView;
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private List<String> list3 = new ArrayList<>();
 
-
+    private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private boolean isHavePic = false;//七牛上是否存在图片
 
     @Override
@@ -136,6 +148,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         list3.add("离异(2年内有离异史)");
         list3.add("离异(2年以上)");
         list3.add("丧偶");
+        initJsonData();
         if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
             tvName.setText(Contains.sAllInfo.getData().getSmyz().getXm());
             tvSex.setText(Contains.sAllInfo.getData().getSmyz().getXb());
@@ -269,7 +282,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     }
 
     @OnClick({R.id.btn_login, R.id.img_upload, R.id.imageView5, R.id.layout_select1, R.id.layout_select2, R.id
-            .layout_select3})
+            .layout_select3, R.id.layout_select4})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -291,7 +304,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                     return;
                 }
                 if (RxDataTool.isNullString(etSuozaidi.getText().toString())) {
-                    ToastUtil.showCenterShort("请输入户籍所在地");
+                    ToastUtil.showCenterShort("请选择户籍所在地");
                     return;
                 }
                 if (RxDataTool.isNullString(imgPath) && !isHavePic) {
@@ -316,7 +329,8 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                         public void sucess(List<String> url) {
                             Map<String, String> map = new HashMap<>();
                             map.put("hklx", tvLeixing1.getText().toString());
-                            map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                            map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic
+                                    .APP_LOGIN_TOKEN));
                             map.put("hkxz", tvLeixing2.getText().toString());
                             map.put("hyzt", tvLeixing3.getText().toString());
                             map.put("hjszd", etSuozaidi.getText().toString());
@@ -361,6 +375,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 showSelectPickerView(3, list3);
                 break;
             default:
+                showPickerView();
                 break;
         }
 
@@ -427,6 +442,112 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
             mOptionsPickerView.setTitleText("请选择婚姻状况");
         }
         mOptionsPickerView.show();
+    }
+
+    private int opt1, opt2, opt3;
+
+    private void showPickerView() {// 弹出选择器
+
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                opt1=options1;
+                opt2=options2;
+                opt3=options3;
+                String tx = options1Items.get(options1).getPickerViewText() + options2Items.get(options1).get
+                        (options2) + options3Items.get(options1).get(options2).get(options3);
+                etSuozaidi.setText(tx);
+            }
+        }).setSelectOptions(opt1, opt2, opt3).setTitleText("请选择户籍所在地").build();
+
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
+    }
+
+    private void initJsonData() {//解析数据
+
+        /**
+         * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
+         * 关键逻辑在于循环体
+         *
+         * */
+        String wuyeString = "";
+        AssetManager assetManager = AppConfig.getInstance().getAssets();
+        try {
+            InputStream is = assetManager.open("province.json");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            StringBuffer stringBuffer = new StringBuffer();
+            wuyeString = null;
+            while ((wuyeString = br.readLine()) != null) {
+                stringBuffer.append(wuyeString);
+            }
+            wuyeString = stringBuffer.toString();
+            if (wuyeString != null) {
+                Logger.i(wuyeString);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ArrayList<ProvinceBean> jsonBean = parseData(wuyeString);//用Gson 转成实体
+
+        /**
+         * 添加省份数据
+         *
+         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
+         * PickerView会通过getPickerViewText方法获取字符串显示出来。
+         */
+        options1Items = jsonBean;
+
+        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
+            ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
+            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
+
+            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
+                String CityName = jsonBean.get(i).getCityList().get(c).getName();
+                CityList.add(CityName);//添加城市
+                ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
+
+                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                if (jsonBean.get(i).getCityList().get(c).getArea() == null || jsonBean.get(i).getCityList().get(c)
+                        .getArea().size() == 0) {
+                    City_AreaList.add("");
+                } else {
+                    City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                }
+                Province_AreaList.add(City_AreaList);//添加该省所有地区数据
+            }
+
+            /**
+             * 添加城市数据
+             */
+            options2Items.add(CityList);
+
+            /**
+             * 添加地区数据
+             */
+            options3Items.add(Province_AreaList);
+        }
+
+
+    }
+
+
+    public ArrayList<ProvinceBean> parseData(String result) {//Gson 解析
+        ArrayList<ProvinceBean> detail = new ArrayList<>();
+        try {
+            JSONArray data = new JSONArray(result);
+            Gson gson = new Gson();
+            for (int i = 0; i < data.length(); i++) {
+                ProvinceBean entity = gson.fromJson(data.optJSONObject(i).toString(), ProvinceBean.class);
+                detail.add(entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return detail;
     }
 
 }

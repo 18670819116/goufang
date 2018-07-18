@@ -509,7 +509,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户  口  类  型  ："/>
+                        android:text="户  籍  类  型  ："/>
 
                     <TextView
                         android:id="@+id/tv_hklx2"
@@ -534,7 +534,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="户  口  性  质  ："/>
+                        android:text="家庭户口类型："/>
 
                     <TextView
                         android:id="@+id/tv_hkxz2"

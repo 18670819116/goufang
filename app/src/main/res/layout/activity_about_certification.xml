@@ -201,6 +201,6 @@
             style="@style/btn_login"
             android:layout_below="@+id/layout"
 
-            android:text="下一步"/>
+            android:text="阅读完毕，开始认证"/>
     </LinearLayout>
 </RelativeLayout>

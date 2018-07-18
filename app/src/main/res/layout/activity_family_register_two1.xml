@@ -96,7 +96,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:visibility="gone"
                 >
 
                 <LinearLayout
@@ -175,7 +174,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x100"
                             android:text="民　　　族："/>
 
                         <EditText
@@ -185,8 +183,9 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:layout_weight="1"
                             android:background="@null"
+                            android:maxLength="5"
                             android:singleLine="true"
-                            android:text=""
+                            android:text="防守打法反倒是收到发送到"
                             android:textColor="@color/color_333333"
                             android:textSize="14sp"/>
                     </LinearLayout>

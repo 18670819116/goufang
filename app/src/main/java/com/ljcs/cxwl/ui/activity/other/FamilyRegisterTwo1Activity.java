@@ -25,6 +25,8 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -588,21 +590,21 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             return false;
         }
         if (RxDataTool.isNullString(tvName.getText().toString())) {
-            ToastUtil.showCenterShort("姓名为空");
+            ToastUtil.showCenterShort("姓名不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvSex.getText().toString())) {
-            ToastUtil.showCenterShort("性别为空");
+            ToastUtil.showCenterShort("性别不能为空");
             return false;
         }
         if ((!tvSex.getText().toString().equals("男") && !tvSex
                 .getText().toString().equals("女"))) {
-            ToastUtil.showCenterShort("性别格式不正确");
+            ToastUtil.showCenterShort("请输入正确的性别");
             return false;
         }
 
         if (RxDataTool.isNullString(tvEthnic.getText().toString())) {
-            ToastUtil.showCenterShort("民族为空");
+            ToastUtil.showCenterShort("民族不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvBirthday.getText().toString())) {
@@ -611,7 +613,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
         }
 
         if (RxDataTool.isNullString(tvAdress.getText().toString())) {
-            ToastUtil.showCenterShort("住址为空");
+            ToastUtil.showCenterShort("住址不能为空");
             return false;
         }
         if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
@@ -628,15 +630,15 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             return false;
         }
         if (RxDataTool.isNullString(tvIssueAuthority.getText().toString())) {
-            ToastUtil.showCenterShort("签发机关为空");
+            ToastUtil.showCenterShort("签发机关不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvData1.getText().toString())) {
-            ToastUtil.showCenterShort("有效期为空");
+            ToastUtil.showCenterShort("有效期限不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvData2.getText().toString())) {
-            ToastUtil.showCenterShort("有效期为空");
+            ToastUtil.showCenterShort("有效期限不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
@@ -804,7 +806,8 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                         tvAdress.setText(Contains.sCertificationInfo.getAddress());
                         tvIdcard.setText(Contains.sCertificationInfo.getIdcard());
                         GlideUtils.loadImgNoCach(FamilyRegisterTwo1Activity.this, Contains.sCertificationInfo
-                                .getPic_path_zheng(), imageViewZheng);
+                                .getPic_path_zheng(), imageViewZheng,new RequestOptions().diskCacheStrategy
+                                (DiskCacheStrategy.NONE));
                         // imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo
                         // .getPic_path_zheng()));
                     } else if (idCardSide.equals(IDCardParams.ID_CARD_SIDE_BACK)) {
@@ -826,7 +829,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                         tvData1.setText(Contains.sCertificationInfo.getSignDate());
                         tvData2.setText(Contains.sCertificationInfo.getExpiryDate());
                         GlideUtils.loadImgNoCach(FamilyRegisterTwo1Activity.this, Contains.sCertificationInfo
-                                .getPic_path_fan(), imageViewFan);
+                                .getPic_path_fan(), imageViewFan,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE));
                     }
                 } else {
                     ToastUtil.showCenterShort("扫描识别失败 请重新扫描");

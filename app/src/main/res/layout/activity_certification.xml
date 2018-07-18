@@ -133,7 +133,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x100"
-                            android:text="民　　　族："/>
+                            android:text="民族："/>
 
                         <EditText
                             android:id="@+id/tv_ethnic"
@@ -141,6 +141,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
+                            android:maxLength="5"
                             android:background="@null"
                             android:singleLine="true"
                             android:text=""

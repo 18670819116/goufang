@@ -21,6 +21,8 @@ import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -359,7 +361,7 @@ public class CertificationActivity extends BaseActivity implements Certification
                 if (RxTool.isFastClick(FAST_CLICK)) {
                     return;
                 }
-                if (imgChongpai1.getVisibility() == View.VISIBLE) {
+                if (imgChongpai2.getVisibility() == View.VISIBLE) {
                     intent = new Intent(this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(getApplication())
                             .getAbsolutePath());
@@ -382,18 +384,18 @@ public class CertificationActivity extends BaseActivity implements Certification
             return false;
         }
         if (RxDataTool.isNullString(tvName.getText().toString())) {
-            ToastUtil.showCenterShort("姓名为空");
+            ToastUtil.showCenterShort("姓名不能为空");
             return false;
         }
 
         if (RxDataTool.isNullString(tvSex.getText().toString()) || (!tvSex.getText().toString().equals("男") && !tvSex
                 .getText().toString().equals("女"))) {
-            ToastUtil.showCenterShort("性别格式不正确");
+            ToastUtil.showCenterShort("请输入正确的性别");
             return false;
         }
 
         if (RxDataTool.isNullString(tvEthnic.getText().toString())) {
-            ToastUtil.showCenterShort("民族为空");
+            ToastUtil.showCenterShort("民族不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvBirthday.getText().toString())) {
@@ -402,7 +404,7 @@ public class CertificationActivity extends BaseActivity implements Certification
         }
 
         if (RxDataTool.isNullString(tvAdress.getText().toString())) {
-            ToastUtil.showCenterShort("住址为空");
+            ToastUtil.showCenterShort("住址不能为空");
             return false;
         }
         if (!IDcardUtil.IDCardValidate(tvIdcard.getText().toString())) {
@@ -414,19 +416,19 @@ public class CertificationActivity extends BaseActivity implements Certification
             return false;
         }
         if (!IDcardUtil.ifGrown_up(tvIdcard.getText().toString())) {
-            ToastUtil.showCenterShort("根据政策规定，暂不支持对未成年人的实名认证");
+            ToastUtil.showCenterShort("根据政策规定，暂不支持未成年人的实名认证");
             return false;
         }
         if (RxDataTool.isNullString(tvIssueAuthority.getText().toString())) {
-            ToastUtil.showCenterShort("签发机关为空");
+            ToastUtil.showCenterShort("签发机关不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvData1.getText().toString())) {
-            ToastUtil.showCenterShort("有效期为空");
+            ToastUtil.showCenterShort("有效期限不能为空");
             return false;
         }
         if (RxDataTool.isNullString(tvData2.getText().toString())) {
-            ToastUtil.showCenterShort("有效期为空");
+            ToastUtil.showCenterShort("有效期限不能为空");
             return false;
         }
         return true;
@@ -538,7 +540,7 @@ public class CertificationActivity extends BaseActivity implements Certification
                         tvAdress.setText(Contains.sCertificationInfo.getAddress());
                         tvIdcard.setText(Contains.sCertificationInfo.getIdcard());
                         GlideUtils.loadImgNoCach(CertificationActivity.this, Contains.sCertificationInfo
-                                .getPic_path_zheng(), imageViewZheng);
+                                .getPic_path_zheng(), imageViewZheng,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true));
                         // imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo
                         // .getPic_path_zheng()));
                     } else if (idCardSide.equals(IDCardParams.ID_CARD_SIDE_BACK)) {
@@ -560,7 +562,7 @@ public class CertificationActivity extends BaseActivity implements Certification
                         tvData1.setText(Contains.sCertificationInfo.getSignDate());
                         tvData2.setText(Contains.sCertificationInfo.getExpiryDate());
                         GlideUtils.loadImgNoCach(CertificationActivity.this, Contains.sCertificationInfo
-                                .getPic_path_fan(), imageViewFan);
+                                .getPic_path_fan(), imageViewFan,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true));
                     }
                 } else {
                     ToastUtil.showCenterShort("扫描识别失败 请重新扫描");
