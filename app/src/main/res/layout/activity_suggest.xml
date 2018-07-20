@@ -7,18 +7,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y523"
+        android:layout_height="@dimen/y570"
         android:layout_margin="@dimen/x25"
         android:background="@drawable/shape_bg_20">
 
         <EditText
             android:id="@+id/et_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@null"
-            android:maxLength="200"
+            android:maxLength="300"
+            android:gravity="left|top"
             android:hint="欢迎您提出宝贵的意见或建议"
-            android:padding="@dimen/x15"
+            android:padding="@dimen/x10"
+            android:layout_above="@+id/tv_count"
             android:textSize="14sp"/>
 
         <TextView
@@ -27,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="0/200"/>
+            android:text="0/300"/>
 
     </RelativeLayout>
 

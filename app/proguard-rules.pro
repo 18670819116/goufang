@@ -63,3 +63,15 @@
      -dontwarn anetwork.**
      -dontwarn com.ut.**
      -dontwarn com.ta.**
+#友盟推送
+    -keep class com.umeng.** {*;}
+    -keepclassmembers class * {
+       public <init> (org.json.JSONObject);
+    }
+    -keepclassmembers enum * {
+        public static **[] values();
+        public static ** valueOf(java.lang.String);
+    }
+        -keep public class com.ljcs.cxwl.R$*{
+        public static final int *;
+        }

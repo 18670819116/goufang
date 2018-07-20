@@ -29,6 +29,8 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.ljcs.cxwl.view.ProgressDialog;
 import com.orhanobut.logger.Logger;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.vondear.rxtool.RxDataTool;
 import com.vondear.rxtool.RxSPTool;
 
@@ -70,6 +72,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         setupActivityComponent();
         initView();
         initData();
+
+
     }
 
     private void initWindows() {
@@ -243,10 +247,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         if (!RxDataTool.isNullString(msg)) {
             ToastUtil.showCenterShort(msg);
         }
-        if (code == 104) {
+        if (code == 103 || code == 104) {
             //token失效
             ClearUtils.clearRxSp(this);
-            startActivty(LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
             AppManager.getInstance().finishAllActivity();
         }
 
@@ -262,4 +268,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

@@ -6,6 +6,7 @@
 
 
     <LinearLayout
+        android:layout_marginTop="@dimen/y15"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y103"
         android:background="@color/white"

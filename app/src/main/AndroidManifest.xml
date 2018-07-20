@@ -327,6 +327,14 @@
         <meta-data
             android:name="com.alibaba.app.appsecret"
             android:value="29b6a63bfc876fcb77b84dabf304fa76"/> <!-- 请填写你自己的appSecret -->
+        <!-- 友盟推送 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5b513c48f43e483e4d00006d"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="gfUmeng"/>
+        <!-- 友盟推送 -->
     </application>
 
 </manifest>

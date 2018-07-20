@@ -87,9 +87,9 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tvCount.setText(s.length() + "/200");
-                if (s.length() >= 200) {
-                    ToastUtil.showCenterShort("最多输入200个字符");
+                tvCount.setText(s.length() + "/300");
+                if (s.length() >=300) {
+                    ToastUtil.showCenterShort("申诉内容不能超过300个字符");
                 }
             }
 
@@ -130,7 +130,7 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
     @Override
     public void commitShSuggestSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort("申诉提交成功");
+            ToastUtil.showCenterShort(baseEntity.msg);
             finish();
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
@@ -195,7 +195,7 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
         if (RxDataTool.isNullString(etContent.getText().toString())) {
-            ToastUtil.showCenterShort("请输入意见");
+            ToastUtil.showCenterShort("申诉内容不能为空");
             return;
         }
         if (mPhotosSnpl == null || mPhotosSnpl.getData() == null || mPhotosSnpl.getData().size() < 1) {

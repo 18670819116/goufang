@@ -164,22 +164,27 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
         }
         switch (view.getId()) {
             case R.id.btn_login:
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机号码不正确");
-                    return;
-                }
-                if (et2.getText().toString().length() != 6) {
-                    ToastUtil.showCenterShort("验证码至少6位");
-                    return;
-                }
-                if (et3.getText().toString().length() < 6 || et3.getText().toString().length() > 16) {
-                    ToastUtil.showCenterShort("密码长度应为6-16位字符");
-                    return;
-                }
+               if (RxDataTool.isNullString(et3.getText().toString())){
+                   ToastUtil.showCenterShort("登录密码不能为空");
+                   return;
+               }
                 if (!et3.getText().toString().equals(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM))) {
                     ToastUtil.showCenterShort("登录密码错误");
                     return;
                 }
+                if (RxDataTool.isNullString(et1.getText().toString())) {
+                    ToastUtil.showCenterShort("手机号码不能为空");
+                    return;
+                }
+                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
+                    ToastUtil.showCenterShort("手机号码不正确");
+                    return;
+                }
+                if (RxDataTool.isNullString(et2.getText().toString())) {
+                    ToastUtil.showCenterShort("验证码不能为空");
+                    return;
+                }
+
                 if (!RxDataTool.isNullString(phone) && !phone.equals(et1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码改变请重新获取验证码");
                     return;
@@ -199,11 +204,11 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
                 break;
             case R.id.tv_get_yzm:
                 if (RxDataTool.isNullString(et1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机格式错误");
+                    ToastUtil.showCenterShort("手机号码不能为空");
                     return;
                 }
                 if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
-                    ToastUtil.showCenterShort("手机格式错误");
+                    ToastUtil.showCenterShort("手机号码格式错误");
                     return;
                 }
 

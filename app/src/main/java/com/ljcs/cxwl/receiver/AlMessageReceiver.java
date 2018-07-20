@@ -13,6 +13,7 @@ import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
+import com.vondear.rxtool.RxDataTool;
 
 import org.json.JSONObject;
 
@@ -58,8 +59,11 @@ public class AlMessageReceiver extends MessageReceiver {
             ClearUtils.clearRxSp(context);
             intent.setClass(context, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            ToastUtil.showCenterShort("您的账号在另一台设备上登录，如非本人操作，请及时修改密码");
-            context.startActivity(intent);
+            if (!RxDataTool.isNullString(summary)) {
+                ToastUtil.showCenterShort(summary);
+//            ToastUtil.showCenterShort("您的账号在另一台设备上登录，如非本人操作，请及时修改密码");
+                context.startActivity(intent);
+            }
             AppManager.getInstance().finishAllActivity();
         } else if (customs != null && "smrzsh".equals(customs)) {
 
@@ -77,7 +81,7 @@ public class AlMessageReceiver extends MessageReceiver {
         Log.e("MyMessageReceiver", "onNotificationOpened, title: " + title + ", summary: " + summary + ", extraMap:"
                 + extraMap);
         Log.d("geek", "openNotification: extras" + extraMap.toString());
-        String customs ="";
+        String customs = "";
         Intent intent = new Intent();
         try {
             JSONObject extrasJson = new JSONObject(extraMap);
@@ -85,7 +89,7 @@ public class AlMessageReceiver extends MessageReceiver {
         } catch (Exception e) {
             return;
         }
-        if ( "smrzsh".equals(customs)) {
+        if ("smrzsh".equals(customs)) {
             intent.setClass(context, CertificationStatusInfoActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
@@ -93,7 +97,7 @@ public class AlMessageReceiver extends MessageReceiver {
             intent.setClass(context, FamilyRegisterStatusActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
-        } else if ( "smrzss".equals(customs)) {
+        } else if ("smrzss".equals(customs)) {
 //            intent.setClass(context, ComplainListActivity.class);
 //            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            context.startActivity(intent);

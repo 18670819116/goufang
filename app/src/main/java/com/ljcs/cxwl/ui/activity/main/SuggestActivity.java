@@ -65,9 +65,9 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tvCount.setText(s.length() + "/200");
-                if (s.length() >= 200) {
-                    ToastUtil.showCenterShort("最多输入200个字符");
+                tvCount.setText(s.length() + "/300");
+                if (s.length() >=300) {
+                    ToastUtil.showCenterShort("反馈信息不能超过300个字符");
                 }
             }
 
@@ -106,7 +106,7 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
     @Override
     public void commitSuggestSuccess(CommonBean commonBean) {
         if (commonBean.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort("提交意见成功");
+            ToastUtil.showCenterShort(commonBean.msg);
             finish();
         } else {
             onErrorMsg(commonBean.code, commonBean.msg);
@@ -117,7 +117,7 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
         if (RxDataTool.isNullString(etContent.getText().toString())) {
-            ToastUtil.showCenterShort("请输入意见");
+            ToastUtil.showCenterShort("反馈信息不能为空");
             return;
         }
         if (RxTool.isFastClick(Contains.FAST_CLICK)) {

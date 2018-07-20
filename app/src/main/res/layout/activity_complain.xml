@@ -15,12 +15,12 @@
         <EditText
             android:id="@+id/et_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y523"
+            android:layout_height="@dimen/y560"
             android:background="@null"
             android:gravity="left|top"
-            android:hint="如果您的购房资格审核信息有变动，您可以通过申诉联系我们，我们将根据申述原因决定是否重新开放您的购房资格审查，那么请在这里输入您的申诉原因吧"
-            android:maxLength="200"
-            android:padding="@dimen/x15"
+            android:hint="如果您的购房资格审核信息有变动，您可以通过申诉联系我们，我们将根据申诉原因决定是否重新开放您的购房资格审查，那么请在这里输入您的申诉原因"
+            android:maxLength="300"
+            android:padding="@dimen/x10"
             android:textSize="14sp"/>
 
         <TextView
@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/y523"
-            android:text="0/200"/>
+            android:layout_marginTop="@dimen/y560"
+            android:text="0/300"/>
 
         <View
             android:id="@+id/v_line"
@@ -44,10 +44,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/v_line"
-            android:layout_marginBottom="@dimen/y35"
+            android:layout_marginBottom="@dimen/y25"
             android:layout_marginLeft="@dimen/x25"
             android:layout_marginRight="@dimen/x25"
-            android:layout_marginTop="@dimen/y15"
             android:background="@color/white"
             app:bga_snpl_deleteDrawable="@mipmap/bga_pp_ic_delete"
             app:bga_snpl_deleteDrawableOverlapQuarter="true"
