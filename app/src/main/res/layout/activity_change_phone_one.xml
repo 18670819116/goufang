@@ -45,5 +45,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/y40"
-        android:text="温馨提示:一个手机号码只能作为账号的登录名"/>
+        android:text="温馨提示:一个手机号码只能作为一个用户登录名"/>
 </RelativeLayout>

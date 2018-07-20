@@ -7,6 +7,7 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.changephone.component.DaggerChangePhoneOneComponent;
 import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneOneContract;
 import com.ljcs.cxwl.ui.activity.changephone.module.ChangePhoneOneModule;
@@ -44,6 +45,7 @@ public class ChangePhoneOneActivity extends BaseActivity implements ChangePhoneO
         setContentView(R.layout.activity_change_phone_one);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbarTitle.setText("更换手机号码");
     }
 
     @Override
@@ -72,6 +74,7 @@ public class ChangePhoneOneActivity extends BaseActivity implements ChangePhoneO
     public void closeProgressDialog() {
         progressDialog.hide();
     }
+
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {

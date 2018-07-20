@@ -128,6 +128,10 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
         if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
             if (baseEntity.getData() != null) {
                 code = baseEntity.getData();
+                phone = mEt1.getText().toString();
+                mTvGetYzm.setEnabled(false);
+                mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
+                countDownTimer.start();
             }
 
         }
@@ -145,7 +149,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
     @Override
     public void forgetPwd(CommonBean baseEntity) {
         if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
+            ToastUtil.showCenterShort("密码修改成功");
             //保存新的密码
             RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mEt3.getText().toString());
             finish();
@@ -187,10 +191,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
-                phone = mEt1.getText().toString();
-                mTvGetYzm.setEnabled(false);
-                mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
-                countDownTimer.start();
+
                 mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:

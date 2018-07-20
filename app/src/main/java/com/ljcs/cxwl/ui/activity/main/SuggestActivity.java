@@ -9,11 +9,20 @@ import android.widget.TextView;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerSuggestComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.SuggestContract;
 import com.ljcs.cxwl.ui.activity.main.module.SuggestModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.SuggestPresenter;
 import com.ljcs.cxwl.util.ToastUtil;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -56,15 +65,14 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tvCount.setText(s.length()+"/200");
-                if (s.length()>=200){
+                tvCount.setText(s.length() + "/200");
+                if (s.length() >= 200) {
                     ToastUtil.showCenterShort("最多输入200个字符");
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-//            s.toString();
             }
         });
     }
@@ -95,7 +103,29 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
         progressDialog.hide();
     }
 
+    @Override
+    public void commitSuggestSuccess(CommonBean commonBean) {
+        if (commonBean.code == Contains.REQUEST_SUCCESS) {
+            ToastUtil.showCenterShort("提交意见成功");
+            finish();
+        } else {
+            onErrorMsg(commonBean.code, commonBean.msg);
+        }
+
+    }
+
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
+        if (RxDataTool.isNullString(etContent.getText().toString())) {
+            ToastUtil.showCenterShort("请输入意见");
+            return;
+        }
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+            return;
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
+        map.put("yjnr", etContent.getText().toString());
+        mPresenter.commitSuggest(map);
     }
 }

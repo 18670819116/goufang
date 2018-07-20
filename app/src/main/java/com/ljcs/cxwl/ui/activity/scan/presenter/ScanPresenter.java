@@ -3,12 +3,18 @@ package com.ljcs.cxwl.ui.activity.scan.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.scan.ScanActivity;
 import com.ljcs.cxwl.ui.activity.scan.contract.ScanContract;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
@@ -16,7 +22,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of ScanActivity
  * @date 2018/07/13 11:32:30
  */
-public class ScanPresenter implements ScanContract.ScanContractPresenter{
+public class ScanPresenter implements ScanContract.ScanContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
     private final ScanContract.View mView;
@@ -24,12 +30,14 @@ public class ScanPresenter implements ScanContract.ScanContractPresenter{
     private ScanActivity mActivity;
 
     @Inject
-    public ScanPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ScanContract.View view, ScanActivity activity) {
+    public ScanPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ScanContract.View view, ScanActivity
+            activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,8 +46,33 @@ public class ScanPresenter implements ScanContract.ScanContractPresenter{
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
+    }
+
+    @Override
+    public void scan(Map map) {
+        mView.showProgressDialog();
+        Disposable disposable = httpAPIWrapper.scan(map).subscribe(new Consumer<BaseEntity>() {
+            @Override
+            public void accept(BaseEntity user) throws Exception {
+                mView.closeProgressDialog();
+                mView.scanSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                mView.closeProgressDialog();
+                //onError
+                throwable.printStackTrace();
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                //onComplete
+            }
+        });
+        mCompositeDisposable.add(disposable);
     }
 
 //    @Override

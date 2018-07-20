@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerAboutOurComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.AboutOurContract;
 import com.ljcs.cxwl.ui.activity.main.module.AboutOurModule;
@@ -41,7 +42,7 @@ public class AboutOurActivity extends BaseActivity implements AboutOurContract.V
 
     @Override
     protected void initData() {
-
+        mPresenter.aboutMe();
     }
 
     @Override
@@ -63,6 +64,11 @@ public class AboutOurActivity extends BaseActivity implements AboutOurContract.V
     @Override
     public void closeProgressDialog() {
         progressDialog.hide();
+    }
+
+    @Override
+    public void aboutMeSuccess(CommonBean commonBean) {
+
     }
 
 }

@@ -262,6 +262,9 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
                 // showSelectPickerView(5, list5);
                 break;
             case R.id.img_upload:
+                if (RxTool.isFastClick(Contains.FAST_CLICK)){
+                    return;
+                }
                 if (imageView5.getVisibility() == View.INVISIBLE) {
                     intent = new Intent(FamilyAddActivity.this, CameraActivity.class);
                     intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtil.getSaveFile(getApplication())

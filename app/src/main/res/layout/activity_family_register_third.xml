@@ -49,7 +49,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/x116"
+                    android:layout_width="@dimen/x123"
                     android:layout_height="@dimen/y99"
                     android:src="@mipmap/ic_empty_zinv"/>
 
@@ -82,7 +82,7 @@
             android:layout_alignParentBottom="true"
             android:background="@mipmap/btn_back"
             android:gravity="center"
-            android:text="+ 添加"
+            android:text="添加子女"
 
             android:textColor="@color/white"/>
 
@@ -91,7 +91,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/x19"
             android:background="@mipmap/btn_next"
             android:gravity="center"
             android:text="下一步"

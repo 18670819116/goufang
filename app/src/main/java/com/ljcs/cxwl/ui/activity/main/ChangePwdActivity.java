@@ -22,6 +22,7 @@ import com.ljcs.cxwl.ui.activity.main.contract.ChangePwdContract;
 import com.ljcs.cxwl.ui.activity.main.module.ChangePwdModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.ChangePwdPresenter;
 import com.ljcs.cxwl.util.AppManager;
+import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxEncryptTool;
@@ -126,7 +127,7 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
     @Override
     public void changePwdSuccess(RegisterBean baseEntity) {
         if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
-            clearRxSp();
+            ClearUtils.clearRxSp(this);
             ToastUtil.showCenterShort("密码修改成功");
             startActivty(LoginActivity.class);
             AppManager.getInstance().finishAllActivity();

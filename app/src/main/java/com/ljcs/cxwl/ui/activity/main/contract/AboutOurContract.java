@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.ui.activity.main.contract;
 
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 /**
@@ -19,6 +20,8 @@ public interface AboutOurContract {
          *
          */
         void closeProgressDialog();
+
+        void aboutMeSuccess(CommonBean commonBean);
     }
 
     interface AboutOurContractPresenter extends BasePresenter {
@@ -26,5 +29,7 @@ public interface AboutOurContract {
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+
+        void  aboutMe();
     }
 }

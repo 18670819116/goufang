@@ -9,12 +9,12 @@ import java.util.Map;
 
 /**
  * @author xlei
- * @Package The contract for ChangePhoneTwoActivity
+ * @Package The contract for ChangePhoneFourActivity
  * @Description: $description
- * @date 2018/07/09 16:39:17
+ * @date 2018/07/19 20:33:44
  */
-public interface ChangePhoneTwoContract {
-    interface View extends BaseView<ChangePhoneTwoContractPresenter> {
+public interface ChangePhoneFourContract {
+    interface View extends BaseView<ChangePhoneFourContractPresenter> {
         /**
          *
          */
@@ -24,18 +24,17 @@ public interface ChangePhoneTwoContract {
          *
          */
         void closeProgressDialog();
-
         void getChangeCodeSuccess(CommonBean commonBean);
 
         void changePhoneSuccess(BaseEntity baseEntity);
     }
 
-    interface ChangePhoneTwoContractPresenter extends BasePresenter {
-        //        /**
+    interface ChangePhoneFourContractPresenter extends BasePresenter {
+//        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
-        void getChangeCode(String phone);
+void getChangeCode(String phone);
 
         void changePhone(Map map);
     }

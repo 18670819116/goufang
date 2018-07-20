@@ -26,6 +26,7 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerRegisterComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.RegisterContract;
 import com.ljcs.cxwl.ui.activity.main.module.RegisterModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.RegisterPresenter;
+import com.ljcs.cxwl.util.PhoneUtils;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
@@ -113,11 +114,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 if (isChecked) {
                     mEt3.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
-//                    mEt3.setInputType(TYPE_CLASS_TEXT);
                     mEt3.setSelection(mEt3.getText().length());
                 } else {
                     mEt3.setTransformationMethod(PasswordTransformationMethod.getInstance());
-//                    mEt3.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
                     mEt3.setSelection(mEt3.getText().length());
                 }
             }
@@ -150,6 +149,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         if (baseEntity.getCode() == Contains.REQUEST_SUCCESS) {
             if (baseEntity.getData() != null) {
                 code = baseEntity.getData();
+                phone = mEt1.getText().toString();
+                mTvGetYzm.setEnabled(false);
+                mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
+                countDownTimer.start();
             }
 
         } else {
@@ -191,10 +194,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
-                phone = mEt1.getText().toString();
-                mTvGetYzm.setEnabled(false);
-                mTvGetYzm.setTextColor(getResources().getColor(R.color.color_939393));
-                countDownTimer.start();
+
                 mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
@@ -219,6 +219,13 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     return;
                 }
                 Map<String, String> map = new HashMap<>();
+                map.put("sjxh", PhoneUtils.getDeviceBrand() + PhoneUtils.getSystemModel());//手机型号
+                map.put("czxtbb", PhoneUtils.getSystemVersion());//操作系统版本
+                map.put("scwl", PhoneUtils.getCurrentNetType(this));//所处网络
+                map.put("jzxx", PhoneUtils.getjizhaninfo(this));//基站信息
+                map.put("uuid", PhoneUtils.getDeviceId(this));//手机唯一标识
+                map.put("yys", PhoneUtils.getOperators(this));//移动运营商
+                map.put("gps", PhoneUtils.getLngAndLat(this));//GPS
                 Logger.i( RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
                 map.put("sjhm", mEt1.getText().toString().trim());
                 map.put("mm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));

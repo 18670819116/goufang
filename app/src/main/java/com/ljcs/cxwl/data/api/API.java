@@ -13,8 +13,9 @@ public interface API {
     String PIC = "http://app.cszjw.net:11000/img?path=";
     String IP_PRODUCT = "http://app.cszjw.net:11001/api";
     String IP_PRODUCT1 = "http://app.cszjw.net:11000";
-
-
+// String PIC = "http://192.168.8.130/img?path=";
+//    String IP_PRODUCT = "http://192.168.8.130/api";
+//    String IP_PRODUCT1 = "http://192.168.8.130";
 
 
     String URL_ZJW_INDEX = "http://szjw.changsha.gov.cn";//住建委网站链接
@@ -25,6 +26,7 @@ public interface API {
     String URL_POST_LOGIN = "login/zjw/user/login";//登陆
     String URL_POST_GET_CODE = "login/back/code";//找回密码验证码
     String URL_POST_GET_REGISTER_CODE = "login/registe/code";//注册验证码
+    String URL_POST_GET_CHANGE_CODE = "login/updsj/code";//修改手机号码验证码
     String URL_POST_REGISTER = "login/zjw/user/register";//注册
     String URL_POST_FORGETPWD = "login/zjw/user/back";//忘记密码
     String URL_POST_LOGINOUT = "login/zjw/user/logout";//退出登录
@@ -45,8 +47,13 @@ public interface API {
 
     String URL_POST_HUKOU = "family/jzw/user/addregistered";//添加/修改户籍信息
     String URL_GET_QINIU_TOKEN = "http://wy.iot.xin/qiniu/qiniu_getQiniuToken.action";//获取七牛token
-    String URL_GET_UPLOADFILE= IP_PRODUCT1+"/upload";//ftp文件上传
+    String URL_GET_UPLOADFILE = IP_PRODUCT1 + "/upload";//ftp文件上传
 
 
+    String URL_POST_ABOUTME = "login/zjw/user/abountme";//关于我们
+    String URL_POST_COMMIT_SUGGEST = "login/zjw/user/addfeedback";//提交意见
+    String URL_POST_COMMIT_SHSUGGEST = "login/zjw/user/addappeals";//提交审核意见
+    String URL_POST_SCAN = "login//zjw/scan/save";//提交二维码扫描信息
+    String URL_POST_CHANGE_PHONE = "login/zjw/user/updsjhm";//修改手机号码
 
 }

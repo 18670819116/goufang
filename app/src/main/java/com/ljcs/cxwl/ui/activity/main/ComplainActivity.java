@@ -3,26 +3,42 @@ package com.ljcs.cxwl.ui.activity.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.callback.UploadFileCallBack;
+import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerComplainComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.ComplainContract;
 import com.ljcs.cxwl.ui.activity.main.module.ComplainModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.ComplainPresenter;
-import com.vondear.rxtool.RxKeyboardTool;
+import com.ljcs.cxwl.util.ToastUtil;
+import com.orhanobut.logger.Logger;
+import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxSPTool;
+import com.vondear.rxtool.RxTool;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.bingoogolapple.photopicker.activity.BGAPhotoPickerActivity;
 import cn.bingoogolapple.photopicker.activity.BGAPhotoPickerPreviewActivity;
 import cn.bingoogolapple.photopicker.widget.BGASortableNinePhotoLayout;
@@ -46,6 +62,8 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
     private static final int RC_PHOTO_PREVIEW = 2;
     @BindView(R.id.et_content)
     EditText etContent;
+    @BindView(R.id.tv_count)
+    TextView tvCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +76,28 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarTitle.setText("资格审查修改申诉");
+//        toolbarMenu.setVisibility(View.VISIBLE);
+//        toolbarMenu.setText("申诉历史");
         mPhotosSnpl.setDelegate(this);
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvCount.setText(s.length() + "/200");
+                if (s.length() >= 200) {
+                    ToastUtil.showCenterShort("最多输入200个字符");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//            s.toString();
+            }
+        });
     }
 
     @Override
@@ -80,11 +119,23 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
     @Override
     public void showProgressDialog() {
         progressDialog.show();
+        progressDialog.setCancelable(false);
     }
 
     @Override
     public void closeProgressDialog() {
         progressDialog.hide();
+    }
+
+    @Override
+    public void commitShSuggestSuccess(BaseEntity baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            ToastUtil.showCenterShort("申诉提交成功");
+            finish();
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
+
     }
 
     private void choicePhotoWrapper() {
@@ -137,6 +188,51 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
             mPhotosSnpl.addMoreData(BGAPhotoPickerActivity.getSelectedPhotos(data));
         } else if (requestCode == RC_PHOTO_PREVIEW) {
             mPhotosSnpl.setData(BGAPhotoPickerPreviewActivity.getSelectedPhotos(data));
+
         }
+    }
+
+    @OnClick(R.id.btn_login)
+    public void onViewClicked() {
+        if (RxDataTool.isNullString(etContent.getText().toString())) {
+            ToastUtil.showCenterShort("请输入意见");
+            return;
+        }
+        if (mPhotosSnpl == null || mPhotosSnpl.getData() == null || mPhotosSnpl.getData().size() < 1) {
+            ToastUtil.showCenterShort("至少上传一张图片");
+            return;
+        }
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
+            return;
+        }
+        showProgressDialog();
+        mPresenter.uploadPic(mPhotosSnpl.getData(), new UploadFileCallBack() {
+            @Override
+            public void sucess(List<String> url) {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", RxSPTool.getString(ComplainActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                map.put("xgyy", etContent.getText().toString());
+                map.put("xglx", "2");
+                if (mPhotosSnpl.getData().size() == 1) {
+                    map.put("img1", url.get(0));
+                } else if (mPhotosSnpl.getData().size() == 2) {
+                    map.put("img1", url.get(0));
+                    map.put("img2", url.get(1));
+                } else if (mPhotosSnpl.getData().size() == 3) {
+                    map.put("img1", url.get(0));
+                    map.put("img2", url.get(1));
+                    map.put("img3", url.get(2));
+                }
+
+                mPresenter.commitShSuggest(map);
+            }
+
+            @Override
+            public void fail(String msg) {
+                closeProgressDialog();
+            }
+        });
+//
+
     }
 }

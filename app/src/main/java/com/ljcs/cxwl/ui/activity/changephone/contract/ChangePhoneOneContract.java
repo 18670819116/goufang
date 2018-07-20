@@ -1,7 +1,9 @@
 package com.ljcs.cxwl.ui.activity.changephone.contract;
 
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
 /**
  * @author xlei
  * @Package The contract for ChangePhoneOneActivity
@@ -19,12 +21,15 @@ public interface ChangePhoneOneContract {
          *
          */
         void closeProgressDialog();
+
+
     }
 
     interface ChangePhoneOneContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+
     }
 }

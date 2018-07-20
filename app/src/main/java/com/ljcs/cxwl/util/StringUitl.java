@@ -29,7 +29,8 @@ import java.util.regex.Pattern;
  * @date 2015年7月22日 下午3:03:36
  */
 public class StringUitl {
-    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
+            'E', 'F'};
 
     /**
      * 正则：身份证号码15位
@@ -38,7 +39,8 @@ public class StringUitl {
     /**
      * 正则：身份证号码18位
      */
-    public static final String REGEX_ID_CARD18 = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9Xx])$";
+    public static final String REGEX_ID_CARD18 = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])" +
+            "\\d{3}" + "([0-9Xx])$";
 
     /**
      * @param str
@@ -65,8 +67,7 @@ public class StringUitl {
      * @Title: hasEmptyItem
      * @Description: 判断输入框EditText是否不为空和空串
      */
-    public static boolean isNotEmpty(Context context, EditText edittext,
-                                     String isEmptyStr) {
+    public static boolean isNotEmpty(Context context, EditText edittext, String isEmptyStr) {
         if (edittext.getText() == null) {
             if (isEmptyStr != null) {
                 Toast.makeText(context, isEmptyStr, Toast.LENGTH_LONG).show();
@@ -90,8 +91,7 @@ public class StringUitl {
      * @Title: hasEmptyItem
      * @Description: 判断输入框EditText是否不为空和空串
      */
-    public static boolean isNotEmpty(Context context, String text,
-                                     String isEmptyStr) {
+    public static boolean isNotEmpty(Context context, String text, String isEmptyStr) {
         if (text == null) {
             if (isEmptyStr != null) {
                 Toast.makeText(context, isEmptyStr, Toast.LENGTH_LONG).show();
@@ -115,8 +115,7 @@ public class StringUitl {
      */
     public static String intToIp(int i) {
 
-        return (i & 0xFF) + "." + ((i >> 8) & 0xFF) + "." + ((i >> 16) & 0xFF)
-                + "." + (i >> 24 & 0xFF);
+        return (i & 0xFF) + "." + ((i >> 8) & 0xFF) + "." + ((i >> 16) & 0xFF) + "." + (i >> 24 & 0xFF);
     }
 
     /**
@@ -240,10 +239,8 @@ public class StringUitl {
             StringBuffer buf = new StringBuffer("");
             for (int offset = 0; offset < b.length; offset++) {
                 i = b[offset];
-                if (i < 0)
-                    i += 256;
-                if (i < 16)
-                    buf.append("0");
+                if (i < 0) i += 256;
+                if (i < 16) buf.append("0");
                 buf.append(Integer.toHexString(i));
             }
             result = buf.toString(); //md5 32bit
@@ -323,61 +320,6 @@ public class StringUitl {
         return new String(ret);
     }
 
-
-//	/**
-//	 * deviceID的组成为：渠道标志+识别符来源标志+hash后的终端识别符
-//	 *
-//	 * 渠道标志为：
-//	 * 1，andriod（a）
-//	 *
-//	 * 识别符来源标志：
-//	 * 1， wifi mac地址（wifi）；
-//	 * 2， IMEI（imei）；
-//	 * 3， 序列号（sn）；
-//	 * 4， id：随机码。若前面的都取不到时，则随机生成一个随机码，需要缓存。
-//	 * @param context
-//	 * @return
-//	 */
-//	public static String getDeviceId(Context context) {
-//
-//		StringBuilder deviceId = new StringBuilder();
-//// 渠道标志
-//		deviceId.append("a");
-//		try {
-////wifi mac地址
-//			WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-//			WifiInfo info = wifi.getConnectionInfo();
-//			String wifiMac = info.getMacAddress();
-//			if (!hasEmptyItem(wifiMac)) {
-//				deviceId.append("wifi");
-//				deviceId.append(wifiMac);
-//				Log.e("geek : ", "wifi mac=" + deviceId.toString());
-//				return deviceId.toString().replace(":","");
-//			}
-////IMEI（imei）
-//			TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-//			String imei = tm.getDeviceId();
-//			if (!hasEmptyItem(imei)) {
-//				deviceId.append("imei");
-//				deviceId.append(imei);
-//				Log.e("geek : ", "IMEI（imei）=" + deviceId.toString());
-//				return deviceId.toString();
-//			}
-//
-////序列号（sn）
-//			String sn = tm.getSimSerialNumber();
-//			if (!hasEmptyItem(sn)) {
-//				deviceId.append("sn");
-//				deviceId.append(sn);
-//				Log.e("geek : ", "序列号（sn）=" + deviceId.toString());
-//				return deviceId.toString();
-//			}
-//		} catch (Exception e) {
-//			Log.d("geek", "getDeviceId: e");
-//		}
-//		return "";
-//	}
-
     /**
      * deviceID的组成为：渠道标志+识别符来源标志+hash后的终端识别符
      * <p>
@@ -399,14 +341,6 @@ public class StringUitl {
         // 渠道标志
         deviceId.append("a");
         try {
-//            //wifi mac地址
-//            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-//            WifiInfo info = wifi.getConnectionInfo();
-//            String wifiMac = info.getMacAddress();
-//            if (!hasEmptyItem(wifiMac)) {
-//                deviceId.append("wifi");
-//                deviceId.append(wifiMac);
-//            }
             //IMEI（imei）
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String imei = tm.getDeviceId();
@@ -426,7 +360,7 @@ public class StringUitl {
             return deviceId.toString();
         } catch (Exception e) {
             Log.d("geek", "getDeviceId: e");
-			deviceId.append("e"+deviceId.toString());
+            deviceId.append("e" + deviceId.toString());
         }
         return deviceId.toString();
     }
@@ -499,7 +433,9 @@ public class StringUitl {
     public static void setEditTextInhibitInputSpeChat(EditText editText) {
 
         InputFilter filter = new InputFilter() {
-            Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】  <>《》]|[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】  " +
+                    "<>《》]|[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern
+                    .UNICODE_CASE | Pattern.CASE_INSENSITIVE);
 
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -518,7 +454,9 @@ public class StringUitl {
      */
     public static void setEditTextInhibitInputSpeOnlyChnese50(EditText editText) {
         InputFilter filter = new InputFilter() {
-            Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】  <>《》]|[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】  " +
+                    "<>《》]|[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern
+                    .UNICODE_CASE | Pattern.CASE_INSENSITIVE);
 
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -533,11 +471,14 @@ public class StringUitl {
 
     /**
      * 只限输入中文和英文 10个字
+     *
      * @param editText
      */
     public static void setInputName(EditText editText) {
         InputFilter filter = new InputFilter() {
-            Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】  <>《》]|[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】  " +
+                    "<>《》]|[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern
+                    .UNICODE_CASE | Pattern.CASE_INSENSITIVE);
 
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -558,11 +499,13 @@ public class StringUitl {
 
     /**
      * 测试用的
+     *
      * @param editText
      */
     public static void setMyInput(EditText editText) {
         InputFilter filter = new InputFilter() {
-            Pattern pattern = Pattern.compile("![\\u4e00-\\u9fa5]+&![a-zA-Z /]+ &![0-9]*&![，。？！；、‘“’”：]", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+            Pattern pattern = Pattern.compile("![\\u4e00-\\u9fa5]+&![a-zA-Z /]+ &![0-9]*&![，。？！；、‘“’”：]", Pattern
+                    .UNICODE_CASE | Pattern.CASE_INSENSITIVE);
 
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -650,9 +593,7 @@ public class StringUitl {
         String phone = "^((13[0-9])|(17[0-9])|(14[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
         String phone2 = "\\+\\d{2}((13[0-9])|(17[0-9])|(14[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}";
         String tel = "0\\d+-*\\d+";
-        if (num.matches(phone) ||
-                num.matches(tel)
-                || num.matches(phone2)) {
+        if (num.matches(phone) || num.matches(tel) || num.matches(phone2)) {
             return true;
         }
 
@@ -663,8 +604,7 @@ public class StringUitl {
      * 检查模块是否安装
      *
      * @param context
-     * @param packageName
-     *            需要检查的包名称
+     * @param packageName 需要检查的包名称
      * @return
      */
     public static boolean isAppInstalled(Context context, String packageName) {

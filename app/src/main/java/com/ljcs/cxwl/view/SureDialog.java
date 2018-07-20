@@ -18,6 +18,7 @@ public class SureDialog extends Dialog {
     private TextView mTvSure;
     private TextView mTvCancel;
     private TextView mTvTitle;
+    private View line;
 
     public SureDialog(Context context, int themeResId) {
         super(context, themeResId);
@@ -35,6 +36,13 @@ public class SureDialog extends Dialog {
     }
 
 
+    public View getLine() {
+        return line;
+    }
+
+    public void setLine(View line) {
+        this.line = line;
+    }
 
     public void setTitle(String title) {
         mTvTitle.setText(title);
@@ -84,6 +92,7 @@ public class SureDialog extends Dialog {
         mTvContent = (TextView) dialog_view.findViewById(R.id.tv_content);
         mTvContent.setTextIsSelectable(true);
         mTvTitle = (TextView) dialog_view.findViewById(R.id.tv_title);
+        line = (View) dialog_view.findViewById(R.id.line);
         setContentView(dialog_view);
     }
 }

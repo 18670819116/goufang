@@ -29,7 +29,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y360"
         android:gravity="center"
-        android:text="请将二维码放入扫码框内"
+        android:text="将二维码放入框内,即可自动扫描"
         android:textColor="@color/white"/>
 
     <TextView

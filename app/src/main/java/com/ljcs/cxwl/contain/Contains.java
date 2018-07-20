@@ -20,7 +20,7 @@ public class Contains {
     public static final int REQUEST_CODE_CAMERA_FAN = 102;//身份反面
     public static final int REQUEST_SUCCESS = 200;//网络请求成功
     public static final int FAST_CLICK = 1000;//防止点击过快的毫秒数
-    public static final String OCR_AK = "gPFYMZ1xIUMZP8C44xdPVbso";//OCR AK
-    public static final String OCR_SK = "O3ADFGC344Wvrc94gmX9d5gK779P1O9A";//OCR SK
+    public static final String OCR_AK = "GFGaFccpziGPV9RTlVdwGrGv";//OCR AK
+    public static final String OCR_SK = "kZiEoEO7PIwR0T0YVEQ4PZdcTOKV7L0y";//OCR SK
 
 }

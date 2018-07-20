@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar_autolayout"
-    android:background="@color/main_color"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/main_color">
 
 
     <android.support.v7.widget.Toolbar
@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:background="@color/main_color"
         android:minHeight="?attr/actionBarSize"
-        app:navigationIcon="@mipmap/toolbar_back"
         android:navigationIcon="@mipmap/toolbar_back"
         android:paddingTop="@dimen/toolbar_padding_top"
         android:titleTextColor="@color/white"
+        app:navigationIcon="@mipmap/toolbar_back"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -29,16 +29,17 @@
             android:text=""
             android:textColor="@color/white"
             android:textSize="16sp"/>
+
         <TextView
             android:id="@+id/tv_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查看订单"
-            android:textSize="16sp"
             android:layout_gravity="right"
-            android:visibility="gone"
-            android:layout_marginRight="@dimen/x45"
+            android:layout_marginRight="@dimen/x30"
+            android:text=""
             android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone"
             />
         <!--android:fitsSystemWindows="true"-->
         <!--android:minHeight="?attr/actionBarSize"-->

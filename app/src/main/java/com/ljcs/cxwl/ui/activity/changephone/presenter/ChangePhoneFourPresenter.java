@@ -1,11 +1,12 @@
-package com.ljcs.cxwl.ui.activity.main.presenter;
+package com.ljcs.cxwl.ui.activity.changephone.presenter;
 
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CommonBean;
-import com.ljcs.cxwl.ui.activity.main.SuggestActivity;
-import com.ljcs.cxwl.ui.activity.main.contract.SuggestContract;
+import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneFourContract;
+import com.ljcs.cxwl.ui.activity.changephone.ChangePhoneFourActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
@@ -20,24 +21,26 @@ import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
- * @Package com.ljcs.cxwl.ui.activity.main
- * @Description: presenter of SuggestActivity
- * @date 2018/07/06 15:46:33
+ * @Package com.ljcs.cxwl.ui.activity.changephone
+ * @Description: presenter of ChangePhoneFourActivity
+ * @date 2018/07/19 20:33:44
  */
-public class SuggestPresenter implements SuggestContract.SuggestContractPresenter{
+public class ChangePhoneFourPresenter implements ChangePhoneFourContract.ChangePhoneFourContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
-    private final SuggestContract.View mView;
+    private final ChangePhoneFourContract.View mView;
     private CompositeDisposable mCompositeDisposable;
-    private SuggestActivity mActivity;
+    private ChangePhoneFourActivity mActivity;
 
     @Inject
-    public SuggestPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull SuggestContract.View view, SuggestActivity activity) {
+    public ChangePhoneFourPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ChangePhoneFourContract.View
+            view, ChangePhoneFourActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -46,16 +49,19 @@ public class SuggestPresenter implements SuggestContract.SuggestContractPresente
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 
     @Override
-    public void commitSuggest(Map map) {
-        Disposable disposable = httpAPIWrapper.commitSuggest(map).subscribe(new Consumer<CommonBean>() {
+    public void getChangeCode(String phone) {
+        Map<String, String> map = new HashMap<>();
+        map.put("sjhm", phone);
+        Disposable disposable = httpAPIWrapper.getChangeCode(map).subscribe(new Consumer<CommonBean>() {
             @Override
             public void accept(CommonBean user) throws Exception {
-                mView.commitSuggestSuccess(user);
+                Logger.i(user.toString());
+                mView.getChangeCodeSuccess(user);
             }
         }, new Consumer<Throwable>() {
             @Override
@@ -70,6 +76,33 @@ public class SuggestPresenter implements SuggestContract.SuggestContractPresente
             }
         });
         mCompositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void changePhone(Map map) {
+        mView.showProgressDialog();
+        Disposable disposable = httpAPIWrapper.changePhone(map).subscribe(new Consumer<BaseEntity>() {
+            @Override
+            public void accept(BaseEntity user) throws Exception {
+                Logger.i(user.toString());
+                mView.closeProgressDialog();
+                mView.changePhoneSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                //onError
+                mView.closeProgressDialog();
+                throwable.printStackTrace();
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                //onComplete
+            }
+        });
+        mCompositeDisposable.add(disposable);
+
     }
 
 //    @Override

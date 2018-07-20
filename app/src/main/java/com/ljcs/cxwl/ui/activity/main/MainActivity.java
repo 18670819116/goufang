@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -26,9 +28,12 @@ import com.ljcs.cxwl.ui.activity.other.FamilyRegisterStatusActivity;
 import com.ljcs.cxwl.ui.activity.other.QualificationExaminationActivity;
 import com.ljcs.cxwl.ui.activity.web.WebSatisficingActivity;
 import com.ljcs.cxwl.util.AppManager;
+import com.ljcs.cxwl.util.PhoneUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.ljcs.cxwl.view.SureDialog;
+import com.orhanobut.logger.Logger;
+import com.vondear.rxtool.RxDeviceTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
 
@@ -79,7 +84,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     protected void initData() {
-
+        initALPush();
     }
 
     @Override
@@ -122,14 +127,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                     tv1.setText("未进行实名认证");
                     if (!isFirst) {
                         showDialog();
-                        isFirst=true;
+                        isFirst = true;
                     }
                 } else {
                     if (Contains.sAllInfo.getData().getSmyz().getZt().equals("1")) {
                         tv1.setText("未进行实名认证");
                         if (!isFirst) {
                             showDialog();
-                            isFirst=true;
+                            isFirst = true;
                         }
                     }
                     if (Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
@@ -331,4 +336,46 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         });
         dialog.show();
     }
+
+    private void initALPush() {
+        PushServiceFactory.getCloudPushService().addAlias(PhoneUtils.getDeviceId(this), new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+
+                Logger.i("阿里云绑定别名成功  imei" + PhoneUtils.getDeviceId(MainActivity.this));
+            }
+
+            @Override
+            public void onFailed(String s, String s1) {
+                Logger.e("阿里云绑定别名失败 s" + s + "s1" + s1);
+
+            }
+        });
+        PushServiceFactory.getCloudPushService().listAliases(new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Logger.i("阿里云查询别名成功" + s);
+            }
+
+            @Override
+            public void onFailed(String s, String s1) {
+
+            }
+        });
+        PushServiceFactory.getCloudPushService().bindAccount(RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM),
+                new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Logger.i("阿里云绑定账号成功" + RxSPTool.getString(MainActivity.this, ShareStatic.APP_LOGIN_SJHM));
+            }
+
+            @Override
+            public void onFailed(String s, String s1) {
+                Logger.e("阿里云绑定账号失败 s" + s + "s1" + s1);
+            }
+        });
+
+    }
+
+
 }

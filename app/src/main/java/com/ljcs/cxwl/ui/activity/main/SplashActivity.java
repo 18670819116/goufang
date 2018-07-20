@@ -30,8 +30,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Inject
     SplashPresenter mPresenter;
     public static int LOCATION_FINISH = 65;
-    @BindView(R.id.img_bg)
-    ImageView mImgBg;
     private CountDownTimer countDownTimer;
 
     @Override

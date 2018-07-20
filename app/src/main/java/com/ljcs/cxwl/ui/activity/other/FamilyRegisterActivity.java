@@ -457,7 +457,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 opt3=options3;
                 String tx = options1Items.get(options1).getPickerViewText() + options2Items.get(options1).get
                         (options2) + options3Items.get(options1).get(options2).get(options3);
-                etSuozaidi.setText(tx);
+                etSuozaidi.setText(tx.trim());
             }
         }).setSelectOptions(opt1, opt2, opt3).setTitleText("请选择户籍所在地").build();
 

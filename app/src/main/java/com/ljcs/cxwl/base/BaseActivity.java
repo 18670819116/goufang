@@ -17,14 +17,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.main.LoginActivity;
 import com.ljcs.cxwl.util.AppManager;
+import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.ljcs.cxwl.view.ProgressDialog;
+import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxDataTool;
 import com.vondear.rxtool.RxSPTool;
 
@@ -43,6 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
     public boolean needFront = false;   //toolBar 是否需要显示在最上层的标识
     public ProgressDialog progressDialog;
     public TextView toolbarTitle;
+    public TextView toolbarMenu;
     protected BGASwipeBackHelper mSwipeBackHelper;
 
     @Override
@@ -66,20 +71,23 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         initView();
         initData();
     }
+
     private void initWindows() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams
+                    .FLAG_TRANSLUCENT_NAVIGATION);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View
+                    .SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
             window.setNavigationBarColor(Color.BLACK);
         }
     }
+
     private void initToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbarBusiness);
+        toolbarMenu = (TextView) findViewById(R.id.tv_menu);
         autolayout = (LinearLayout) findViewById(R.id.toolbar_autolayout);
         mToolbar.setTitle("");
         toolbarTitle = (TextView) findViewById(R.id.tv_toolbar_title);
@@ -237,8 +245,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         }
         if (code == 104) {
             //token失效
-            AppManager.getInstance().finishAllActivity();
+            ClearUtils.clearRxSp(this);
             startActivty(LoginActivity.class);
+            AppManager.getInstance().finishAllActivity();
         }
 
     }
@@ -253,11 +262,4 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         }
     }
 
-    public void clearRxSp() {
-        RxSPTool.remove(this, ShareStatic.APP_LOGIN_SJHM);
-        RxSPTool.remove(this, ShareStatic.APP_LOGIN_TOKEN);
-        RxSPTool.remove(this, ShareStatic.APP_LOGIN_MM);
-        RxSPTool.remove(this, ShareStatic.APP_LOGIN_BH);
-        RxSPTool.remove(this, ShareStatic.APP_LOGIN_ZT);
-    }
 }

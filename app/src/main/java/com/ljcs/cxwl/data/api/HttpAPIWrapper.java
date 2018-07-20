@@ -1,5 +1,7 @@
 package com.ljcs.cxwl.data.api;
 
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.ljcs.cxwl.entity.AllInfo;
@@ -60,9 +62,15 @@ public class HttpAPIWrapper {
     public Observable<CommonBean> getCode(Map data) {
         return wrapper(mHttpAPI.getCode(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     //验证码
     public Observable<CommonBean> getRegisterCode(Map data) {
         return wrapper(mHttpAPI.getRegisterCode(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    //验证码
+    public Observable<CommonBean> getChangeCode(Map data) {
+        return wrapper(mHttpAPI.getChangeCode(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
 
     //注册
@@ -144,10 +152,32 @@ public class HttpAPIWrapper {
     public Observable<HujiInfo> hukouInfo(Map data) {
         return wrapper(mHttpAPI.hukouInfo(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     //获取七牛token
     public Observable<CommonBean> uploadFile(MultipartBody.Part file) {
         return wrapper(mHttpAPI.uploadFile(file)).compose(SCHEDULERS_TRANSFORMER);
     }
+
+    public Observable<CommonBean> aboutMe(Map data) {
+        return wrapper(mHttpAPI.aboutMe(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    public Observable<CommonBean> commitSuggest(Map data) {
+        return wrapper(mHttpAPI.commitSuggest(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    public Observable<BaseEntity> commitShSuggest(Map data) {
+        return wrapper(mHttpAPI.commitShSuggest(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    public Observable<BaseEntity> scan(Map data) {
+        return wrapper(mHttpAPI.scan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
+    public Observable<BaseEntity> changePhone(Map data) {
+        return wrapper(mHttpAPI.changePhone(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
+
     /**
      * 给任何Http的Observable加上通用的线程调度器
      */
@@ -273,9 +303,9 @@ public class HttpAPIWrapper {
     public static Map addParams(Map<String, String> data) {
         //添加统一的参数的地方
         //// TODO: 2018/7/11 打印传的参数
-//        for (Map.Entry<String, String> entry : data.entrySet()) {
-//           Log.w("map","Key = " + entry.getKey() + ", Value = " + entry.getValue());
-//        }
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            Log.w("map", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
         return data;
     }
 

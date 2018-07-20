@@ -2,19 +2,30 @@ package com.ljcs.cxwl.ui.activity.scan;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Message;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
+import com.ljcs.cxwl.contain.Contains;
+import com.ljcs.cxwl.contain.ShareStatic;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity;
 import com.ljcs.cxwl.ui.activity.scan.component.DaggerScanComponent;
 import com.ljcs.cxwl.ui.activity.scan.contract.ScanContract;
 import com.ljcs.cxwl.ui.activity.scan.module.ScanModule;
 import com.ljcs.cxwl.ui.activity.scan.presenter.ScanPresenter;
 import com.ljcs.cxwl.util.ToastUtil;
+import com.ljcs.cxwl.view.SureDialog;
 import com.orhanobut.logger.Logger;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.vondear.rxtool.RxSPTool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -38,6 +49,8 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     private CaptureFragment captureFragment;
     private int REQUEST_IMAGE = 160;//相册
     private boolean isLight;
+    private SureDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +58,7 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
 
     @Override
     protected void initView() {
-        needFront=true;
+        needFront = true;
         setContentView(R.layout.activity_scan);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -62,6 +75,7 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     protected void initData() {
 
     }
+
     /**
      * 手电筒开关点击事件
      */
@@ -84,9 +98,18 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-            ToastUtil.showCenterShort(result);
+            Logger.i("result" + result);
+            if (dialog == null || !dialog.isShowing()) {
+                showDialog(result);
+            }
+
+            //开启重新扫码
+            Message obtain = Message.obtain();
+            obtain.what = R.id.restart_preview;
+            captureFragment.getHandler().sendMessageDelayed(obtain, 1500);
 
         }
+
         @Override
         public void onAnalyzeFailed() {
             Logger.e("解析失败");
@@ -94,27 +117,34 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
         }
     };
 
+    private void showDialog(final String result) {
+        dialog = new SureDialog(this);
+        dialog.getContentView().setText("正在读取您的购房资格审查数据，\n是否同意");
+        dialog.getCancelView().setText("不同意");
+        dialog.getCancelView().setTextColor(getResources().getColor(R.color.color_333333));
+        dialog.getSureView().setText("同意");
+        dialog.setCancelListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                finish();
 
+            }
+        });
+        dialog.setSureListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                dialog.dismiss();
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", RxSPTool.getString(ScanActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+                map.put("sfzhm", Contains.sAllInfo.getData().getSmyz().getSfzhm());
+                map.put("smnr", result);
+                mPresenter.scan(map);
+            }
+        });
+        dialog.show();
+    }
 
 
     @Override
@@ -137,11 +167,26 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     public void closeProgressDialog() {
         progressDialog.hide();
     }
+
+    @Override
+    public void scanSuccess(BaseEntity baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            ToastUtil.showCenterShort("数据提交成功");
+            finish();
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (isLight) {
             CodeUtils.isLightEnable(false);//关闪光灯
+        }
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
         }
     }
 }

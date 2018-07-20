@@ -1,7 +1,13 @@
 package com.ljcs.cxwl.ui.activity.main.contract;
 
+import com.ljcs.cxwl.callback.UploadFileCallBack;
+import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author xlei
  * @Package The contract for ComplainActivity
@@ -19,12 +25,17 @@ public interface ComplainContract {
          *
          */
         void closeProgressDialog();
+
+        void commitShSuggestSuccess(BaseEntity baseEntity);
     }
 
     interface ComplainContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+        void uploadPic(List<String> list, UploadFileCallBack callBack);
+
+        void commitShSuggest(Map map);
     }
 }

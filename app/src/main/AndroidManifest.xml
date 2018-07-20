@@ -21,6 +21,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
+    <!--位置信息-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <uses-feature android:name="android.hardware.camera2.full"/>
     <uses-feature android:name="android.hardware.camera"/>
@@ -130,6 +133,13 @@
         <!--修改手机号码-->
         <activity
             android:name="com.ljcs.cxwl.ui.activity.changephone.ChangePhoneThirdActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <!--修改手机号码-->
+        <activity
+            android:name="com.ljcs.cxwl.ui.activity.changephone.ChangePhoneFourActivity"
             android:configChanges="screenLayout|screenSize"
             android:screenOrientation="portrait">
 

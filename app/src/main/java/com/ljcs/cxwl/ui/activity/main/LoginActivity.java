@@ -19,11 +19,13 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerLoginComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.LoginContract;
 import com.ljcs.cxwl.ui.activity.main.module.LoginModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.LoginPresenter;
+import com.ljcs.cxwl.util.PhoneUtils;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxConstTool;
 import com.vondear.rxtool.RxDataTool;
+import com.vondear.rxtool.RxDeviceTool;
 import com.vondear.rxtool.RxEncryptTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
@@ -69,8 +71,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-
     }
 
     @Override
@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mPassWord);
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
                 RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
-             //   ToastUtil.showCenterShort("登录成功");
+                //   ToastUtil.showCenterShort("登录成功");
                 startActivty(MainActivity.class);
                 finish();
             }
@@ -175,8 +175,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     return;
                 }
                 Map<String, String> map = new HashMap<>();
-                map.put("sjhm", mAccount);
-                map.put("mm", RxEncryptTool.encryptSHA1ToString(mPassWord + mAccount));
+                map.put("sjxh", PhoneUtils.getDeviceBrand() + PhoneUtils.getSystemModel());//手机型号
+                map.put("czxtbb", PhoneUtils.getSystemVersion());//操作系统版本
+                map.put("scwl", PhoneUtils.getCurrentNetType(this));//所处网络
+                map.put("jzxx", PhoneUtils.getjizhaninfo(this));//基站信息
+                map.put("uuid", PhoneUtils.getDeviceId(this));//手机唯一标识
+                map.put("yys", PhoneUtils.getOperators(this));//移动运营商
+                map.put("gps", PhoneUtils.getLngAndLat(this));//GPS
+                map.put("sjhm", mAccount);//手机号
+                map.put("mm", RxEncryptTool.encryptSHA1ToString(mPassWord + mAccount));//密码
                 mPresenter.login(map);
                 break;
             default:
@@ -190,5 +197,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
 
 }

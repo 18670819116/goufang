@@ -11,6 +11,7 @@ import com.ljcs.cxwl.entity.AppInfo;
 import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.SplashActivity;
 import com.ljcs.cxwl.ui.activity.main.contract.SplashContract;
+import com.ljcs.cxwl.util.PhoneUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UpdateManager;
 import com.orhanobut.logger.Logger;
@@ -83,7 +84,13 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
 
     public void getPermission() {
         AndPermission.with(mActivity).requestCode(101).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA).rationale(new RationaleListener() {
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission
+                        .ACCESS_FINE_LOCATION,
+//                Manifest.permission.CALL_PHONE,
+//                Manifest.permission.GET_ACCOUNTS,
+//                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.CAMERA).rationale(new RationaleListener() {
             @Override
             public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
                 AndPermission.rationaleDialog(mActivity, rationale).setNegativeButton("关闭", new DialogInterface
@@ -238,6 +245,13 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
 //            AndPermission.with(mActivity).requestCode(100).permission(Manifest.permission.READ_PHONE_STATE).callback
 //                   (permissionListener).start();
             Map<String, String> map = new HashMap<>();
+            map.put("sjxh", PhoneUtils.getDeviceBrand() + PhoneUtils.getSystemModel());//手机型号
+            map.put("czxtbb", PhoneUtils.getSystemVersion());//操作系统版本
+            map.put("scwl", PhoneUtils.getCurrentNetType(mActivity));//所处网络
+            map.put("jzxx", PhoneUtils.getjizhaninfo(mActivity));//基站信息
+            map.put("yys", PhoneUtils.getOperators(mActivity));//移动运营商
+            map.put("gps", PhoneUtils.getLngAndLat(mActivity));//GPS
+            map.put("uuid", PhoneUtils.getDeviceId(mActivity));//手机唯一标识
             map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
             map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM) +
                     RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));

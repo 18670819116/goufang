@@ -17,6 +17,7 @@ import com.ljcs.cxwl.ui.activity.main.contract.PersonCenterContract;
 import com.ljcs.cxwl.ui.activity.main.module.PersonCenterModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.PersonCenterPresenter;
 import com.ljcs.cxwl.util.AppManager;
+import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.StringUitl;
 import com.ljcs.cxwl.util.UIUtils;
 import com.ljcs.cxwl.view.SureDialog;
@@ -97,12 +98,9 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
     @Override
     public void loginOutSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == REQUEST_SUCCESS) {
-
-            clearRxSp();
+            ClearUtils.clearRxSp(this);
             startActivty(LoginActivity.class);
             AppManager.getInstance().finishAllActivity();
-
-
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
         }

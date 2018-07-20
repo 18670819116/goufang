@@ -1,7 +1,11 @@
 package com.ljcs.cxwl.ui.activity.main.contract;
 
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
+import java.util.Map;
+
 /**
  * @author xlei
  * @Package The contract for SuggestActivity
@@ -19,6 +23,8 @@ public interface SuggestContract {
          *
          */
         void closeProgressDialog();
+
+        void commitSuggestSuccess(CommonBean commonBean);
     }
 
     interface SuggestContractPresenter extends BasePresenter {
@@ -26,5 +32,7 @@ public interface SuggestContract {
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+
+        void commitSuggest(Map map);
     }
 }

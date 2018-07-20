@@ -3,12 +3,20 @@ package com.ljcs.cxwl.ui.activity.changephone.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.changephone.ChangePhoneOneActivity;
 import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneOneContract;
+import com.orhanobut.logger.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
@@ -16,7 +24,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of ChangePhoneOneActivity
  * @date 2018/07/09 16:38:08
  */
-public class ChangePhoneOnePresenter implements ChangePhoneOneContract.ChangePhoneOneContractPresenter{
+public class ChangePhoneOnePresenter implements ChangePhoneOneContract.ChangePhoneOneContractPresenter {
 
     HttpAPIWrapper httpAPIWrapper;
     private final ChangePhoneOneContract.View mView;
@@ -24,12 +32,14 @@ public class ChangePhoneOnePresenter implements ChangePhoneOneContract.ChangePho
     private ChangePhoneOneActivity mActivity;
 
     @Inject
-    public ChangePhoneOnePresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ChangePhoneOneContract.View view, ChangePhoneOneActivity activity) {
+    public ChangePhoneOnePresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ChangePhoneOneContract.View view,
+                                   ChangePhoneOneActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,9 +48,11 @@ public class ChangePhoneOnePresenter implements ChangePhoneOneContract.ChangePho
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
+
+
 
 //    @Override
 //    public void getUser(HashMap map) {
