@@ -61,4 +61,10 @@
         <item name="android:windowBackground">@drawable/shape_bg_20</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+    <style name="dialog_translucent" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--<item name="android:windowAnimationStyle">@style/dialog_animation</item>&lt;!&ndash; 弹出或者进入时的动画效果 &ndash;&gt;-->
+    </style>
 </resources>

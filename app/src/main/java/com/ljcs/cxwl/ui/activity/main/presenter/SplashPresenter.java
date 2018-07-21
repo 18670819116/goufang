@@ -156,6 +156,8 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
         UpdateManager mUpdateManager = new UpdateManager(mActivity, mVersion.getData().getVersionDownloadUrl());
         mUpdateManager.checkUpdateInfo(mVersion.getData().getVersionUid(), mVersion.getData().getVersionExplain(),
                 mVersion.getData().getVersionIsCompulsory());
+//        UpdateManager mUpdateManager = new UpdateManager(mActivity,"");
+//        mUpdateManager.checkUpdateInfo("","",1);
         mUpdateManager.setOnYiHouOnClickListener(new UpdateManager.OnYiHouOnClickListener() {
             @Override
             public void onYihouClick() {
@@ -324,8 +326,16 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
                 Logger.i("onSuccesse");
                 if (version.code == Contains.REQUEST_SUCCESS) {
                     mVersion = version;
-                    if (Float.valueOf(version.getData().getVersionUid().replace(".", "")) > Float.valueOf
+                    AppInfo.Data data = new AppInfo.Data();
+                    data.setVersionExplain("1.修复一些bug等\\n2测试下修复app的一些bug修复a");
+//                    data.setVersionExplain("1.修复一些bug等\n2测试下修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新wfsf sfasfdddddddd围殴佛山东方扫福建省的咖啡机快乐圣诞节疯狂拉升经典款拉圣诞节快乐撒大家快来打手机疯狂拉升的反馈附近发的手机爱卡发送的即可浪费是考虑到富士达房间卡萨反馈都是埃里克森放假了地方");
+                    data.setVersionDownloadUrl("http://img0.hnchxwl.com/loadGf/gofang.apk");
+                    data.setVersionIsCompulsory(2);
+                    data.setVersionUid("1.0.4");
+                    mVersion.setData(data);
+                    if (version.getData()!=null&&Float.valueOf(version.getData().getVersionUid().replace(".", "")) > Float.valueOf
                             (RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {
+//                    if (104f > Float.valueOf(RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {
                         getLastVersionBack = true;
                         hasUpdate = true;
                         getUpdatePermission();

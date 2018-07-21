@@ -12,7 +12,6 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity;
 import com.ljcs.cxwl.ui.activity.scan.component.DaggerScanComponent;
 import com.ljcs.cxwl.ui.activity.scan.contract.ScanContract;
 import com.ljcs.cxwl.ui.activity.scan.module.ScanModule;
@@ -171,7 +170,7 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     @Override
     public void scanSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort("数据提交成功");
+            ToastUtil.showCenterShort(baseEntity.msg);
             finish();
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);

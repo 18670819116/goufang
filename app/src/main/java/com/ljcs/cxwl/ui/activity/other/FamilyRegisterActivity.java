@@ -145,8 +145,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         list2.add("家庭户口");
         list3.add("已婚");
         list3.add("未婚");
-        list3.add("离异(2年内有离异史)");
-        list3.add("离异(2年以上)");
+        list3.add("离异");
         list3.add("丧偶");
         initJsonData();
         if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
@@ -263,17 +262,11 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             //重新赋值
             Contains.sAllInfo = baseEntity;
-            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶") ||
-                    tvLeixing3.getText().toString().equals("离异(2年以上)")) {
+            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶") ) {
                 startActivty(FamilyRegisterThirdActivity.class);
             } else if (tvLeixing3.getText().toString().equals("已婚")) {
-//                if (Contains.ENTERTYPE_CHANGE == 1) {
-//                    startActivty(MatesInfoTwoActivity.class);
-//                } else {
-//                    startActivty(MatesInfoOneActivity.class);
-//                }
                 startActivty(FamilyRegisterTwo1Activity.class);
-            } else if (tvLeixing3.getText().toString().equals("离异(2年内有离异史)")) {
+            } else if (tvLeixing3.getText().toString().equals("离异")) {
                 startActivty(FamilyRegisterTwo2Activity.class);
             }
         } else {

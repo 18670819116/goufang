@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -16,7 +14,9 @@ import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.ui.activity.main.SplashActivity;
+import com.ljcs.cxwl.view.UpdateDialog;
 import com.vondear.rxtool.RxAppTool;
+import com.vondear.rxui.view.RxProgressBar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -51,6 +51,7 @@ public class UpdateManager {
 
 	/* 进度条与通知ui刷新的handler和msg常量 */
 	private ProgressBar mProgress;
+	private RxProgressBar progressBar;
 
 	private TextView curProgress ,totalProgress,cancel;
 
@@ -72,15 +73,25 @@ public class UpdateManager {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case DOWN_UPDATE:
-				mProgress.setProgress(progress);
-				Log.d("geek","progress"+progress);
-				curProgress.setText(progress+"%");
-				totalProgress.setText(progress+"/100");
+//				mProgress.setProgress(progress);
+//				Log.d("geek","progress"+progress);
+//				curProgress.setText(progress+"%");
+//				totalProgress.setText(progress+"/100");
+                progressBar.setProgress(progress);
 				break;
 			case DOWN_OVER:
-				curProgress.setText("100%");
-				totalProgress.setText("100/100");
+                progressBar.setProgress(100);
+//				curProgress.setText("100%");
+//				totalProgress.setText("100/100");
 				installApk();
+				if (progressBar.isFinish()){
+					progressBar.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							installApk();
+						}
+					});
+				}
 				break;
 			default:
 				break;
@@ -104,44 +115,89 @@ public class UpdateManager {
 	public void checkUpdateInfo(String versionCode,String versionMsg,Integer versionIsCompulsory) {
 		showNoticeDialog(versionCode,versionMsg,versionIsCompulsory);
 	}
-
+    private UpdateDialog updateDialog;
 	private void showNoticeDialog(String versionCode,String versionMsg,Integer versionIsCompulsory) {
-		Builder builder = new Builder(mContext);
-		builder.setTitle("版本更新"+versionCode);
-		builder.setMessage(updateMsg+"\n"+"版本号:"+versionCode+"\n"+"版本描述:"+versionMsg);
-		builder.setCancelable(false);
-		//强制更新
-		if(versionIsCompulsory == 1){
-			builder.setPositiveButton("立即更新", new OnClickListener() {
+		 updateDialog = new UpdateDialog(mContext);
+		updateDialog.setCancelable(false);
+        progressBar=updateDialog.getProgressBar();
+		updateDialog.setVersionText("发现新版本：V"+versionCode);
+		updateDialog.setContentText(versionMsg);
+		if (versionIsCompulsory==1){
+			//强制更新
+			updateDialog.getConfirm().setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-					showDownloadDialog(true);
+				public void onClick(View v) {
+
 				}
 			});
-		}else{
-			builder.setPositiveButton("立即更新", new OnClickListener() {
+			updateDialog.getCancel().setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-					showDownloadDialog(false);
+				public void onClick(View v) {
+
 				}
 			});
-			builder.setNegativeButton("以后再说", new OnClickListener() {
+		}else {
+			//非强制更新
+			updateDialog.getConfirm().setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (onYiHouOnClickListener != null) {
-						onYiHouOnClickListener.onYihouClick();
-					}
-					dialog.dismiss();
-					if(mhander != null){
-						mhander.sendEmptyMessage(SplashActivity.LOCATION_FINISH);
-					}
+				public void onClick(View v) {
+                    v.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    downloadApk();
+				}
+			});
+			updateDialog.getCancel().setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					interceptFlag = true;
+                    if(updateDialog != null){
+                        updateDialog.dismiss();
+                    }
+                    if(mhander != null){
+                        mhander.sendEmptyMessage(SplashActivity.LOCATION_FINISH);
+                    }
+                    onYiHouOnClickListener.onYihouClick();
+
 				}
 			});
 		}
-		noticeDialog = builder.create();
-		noticeDialog.show();
+		updateDialog.show();
+//		Builder builder = new Builder(mContext);
+//		builder.setTitle("版本更新"+versionCode);
+//		builder.setMessage(updateMsg+"\n"+"版本号:"+versionCode+"\n"+"版本描述:"+versionMsg);
+//		builder.setCancelable(false);
+//		//强制更新
+//		if(versionIsCompulsory == 1){
+//			builder.setPositiveButton("立即更新", new OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					dialog.dismiss();
+//					showDownloadDialog(true);
+//				}
+//			});
+//		}else{
+//			builder.setPositiveButton("立即更新", new OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					dialog.dismiss();
+//					showDownloadDialog(false);
+//				}
+//			});
+//			builder.setNegativeButton("以后再说", new OnClickListener() {
+//				@Override
+//				public void onClick(DialogInterface dialog, int which) {
+//					if (onYiHouOnClickListener != null) {
+//						onYiHouOnClickListener.onYihouClick();
+//					}
+//					dialog.dismiss();
+//					if(mhander != null){
+//						mhander.sendEmptyMessage(SplashActivity.LOCATION_FINISH);
+//					}
+//				}
+//			});
+//		}
+//		noticeDialog = builder.create();
+//		noticeDialog.show();
 	}
 
 	private void showDownloadDialog(boolean type) {

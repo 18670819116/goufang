@@ -122,7 +122,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x17"
-                            android:text="审核通过"
+                            android:text="预审通过"
                             android:textColor="@color/white"
                             android:textSize="22sp"
                             android:textStyle="bold"/>
