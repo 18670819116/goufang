@@ -120,6 +120,7 @@
         android:id="@+id/btn_login"
         style="@style/btn_login"
         android:layout_above="@+id/tv_tishi"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y40"
         android:text="确认修改"
         />
@@ -131,6 +132,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y40"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <TextView

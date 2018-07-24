@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GO房</string>
+    <string name="app_name">欣居</string>
     <string name="login_account">请输入账号</string>
     <string name="login_password">请输入密码</string>
     <string name="login_login">登录</string>

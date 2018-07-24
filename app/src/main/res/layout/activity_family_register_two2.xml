@@ -53,7 +53,7 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="如果您在两年以内有离异情况，请在该页面中添加前配偶信息，如2年内有多次离异，请添加最近一次离异前配偶信息"/>
+                    android:text="请在该页面中添加前配偶信息；如有多次离异，请添加最近一次离异的前配偶信息。"/>
             </LinearLayout>
 
             <LinearLayout
@@ -123,7 +123,35 @@
                 </LinearLayout>
 
                 <View style="@style/line_hor"/>
+                <LinearLayout
+                    android:id="@+id/layout_select5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y94"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="户籍所在地："/>
+
+                    <TextView
+                        android:id="@+id/tv_hjszd"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:layout_weight="1"
+                        android:hint="请选择户籍所在地"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_rock_right"/>
+                </LinearLayout>
+
+                <View style="@style/line_hor"/>
                 <LinearLayout
                     android:id="@+id/layout_select3"
                     android:layout_width="match_parent"
@@ -152,6 +180,35 @@
 
                 <View style="@style/line_hor"/>
 
+                <LinearLayout
+                    android:id="@+id/layout_select4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y94"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="前配偶手机号码："/>
+
+                    <EditText
+                        android:id="@+id/tv_phone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:maxLength="11"
+                        android:inputType="phone"
+                        android:hint="请输入前配偶手机号码"
+                        android:singleLine="true"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <View style="@style/line_hor"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

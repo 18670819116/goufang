@@ -49,18 +49,11 @@
                         android:id="@+id/tv_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x20"
+                        android:layout_marginLeft="@dimen/x30"
                         android:text=""
                         android:textColor="@color/main_color"
-                        android:textSize="14sp"/>
+                        android:textSize="18sp"/>
 
-                    <ImageView
-                        android:id="@+id/img_status2"
-
-                        android:layout_width="@dimen/x187"
-                        android:layout_height="@dimen/y48"
-                        android:layout_marginLeft="@dimen/x20"
-                        android:src="@mipmap/ic_cer_status2"/>
                 </LinearLayout>
 
 
@@ -235,8 +228,8 @@
 
             <ImageView
                 android:id="@+id/img_status1"
-                android:layout_width="@dimen/x130"
-                android:layout_height="@dimen/y130"
+                android:layout_width="@dimen/x124"
+                android:layout_height="@dimen/y124"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/x71"
                 android:layout_marginTop="@dimen/y24"

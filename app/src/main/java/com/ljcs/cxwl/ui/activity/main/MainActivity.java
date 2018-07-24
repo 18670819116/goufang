@@ -31,6 +31,7 @@ import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.PhoneUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
+import com.ljcs.cxwl.view.ShPassDialog;
 import com.ljcs.cxwl.view.SureDialog;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxDeviceTool;
@@ -80,6 +81,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         ButterKnife.bind(this);
         autolayout.setVisibility(View.GONE);
         relayouHead.setPadding(0, UIUtils.getStatusBarHeight(this), 0, 0);
+//        ShPassDialog dialog = new ShPassDialog(this);
+//        dialog.show();
     }
 
     @Override
@@ -123,54 +126,41 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             //购房资格申请
             Contains.sAllInfo = baseEntity;
             if (Contains.sAllInfo.getData() != null) {
-                if (Contains.sAllInfo.getData().getSmyz() == null) {
+                if (Contains.sAllInfo.getData().getZcyh() == null || Contains.sAllInfo.getData().getZcyh().getRzzt()
+                        == null) {
                     tv1.setText("未进行实名认证");
                     if (!isFirst) {
                         showDialog();
                         isFirst = true;
                     }
                 } else {
-                    if (Contains.sAllInfo.getData().getSmyz().getZt().equals("1")) {
-                        tv1.setText("未进行实名认证");
-                        if (!isFirst) {
-                            showDialog();
-                            isFirst = true;
-                        }
-                    }
-                    if (Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
+                    if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 0) {
                         tv1.setText("已提交，待审核");
-                    }
-                    if (Contains.sAllInfo.getData().getSmyz().getZt().equals("3")) {
+                    } else if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 1) {
+                        tv1.setText("已提交，待人工审核");
+                    } else if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 2) {
                         tv1.setText("已实名认证");
-                    }
-                    if (Contains.sAllInfo.getData().getSmyz().getZt().equals("4")) {
+                    } else if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 3) {
                         tv1.setText("审核未通过");
                     }
                 }
-                if (Contains.sAllInfo.getData().getHjxx() == null) {
+                if (Contains.sAllInfo.getData().getGrxx() != null || Contains.sAllInfo.getData().getGrxx().getJtcy()
+                        != null || Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() != null) {
                     tv3.setText("待申请");
                     // tv2.setText("未添加");
-                } else {
-                    if (Contains.sAllInfo.getData().getHjxx().getZt().equals("1")) {
-                        tv3.setText("待申请");
-                        //   tv2.setText("未添加");
-                    }
-                    if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
+                    if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt()==0) {
+                        //审核中
                         tv3.setText("待审核");
-                        //  tv2.setText("已保存");
-                    }
-                    if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
-                        tv3.setText("审核通过");
-                        // tv2.setText("已保存");
-                    }
-                    if (Contains.sAllInfo.getData().getHjxx().getZt().equals("4")) {
+                    } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt()==1) {
+                        //审完成
+                        tv3.setText("预审通过");
+                    } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt()==2) {
+                        //未通过
                         tv3.setText("审核未通过");
-                        //  tv2.setText("已保存");
+
                     }
-                    if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
-                        //   tv2.setText("已添加");
-                        tv3.setText("待申请");
-                    }
+                } else {
+                    tv3.setText("待申请");
 
                 }
             }
@@ -195,13 +185,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (Contains.sAllInfo.getData() == null) {
                     return;
                 }
-                if (Contains.sAllInfo.getData().getSmyz() == null || Contains.sAllInfo.getData().getSmyz().getZt()
-                        .equals("1")) {
+                if (Contains.sAllInfo.getData().getZcyh() == null || Contains.sAllInfo.getData().getZcyh().getRzzt()
+                        == null) {
                     startActivty(AboutCertificationActivity.class);
 
                 } else {
                     startActivty(CertificationStatusInfoActivity.class);
-
                 }
                 break;
             case R.id.relayout_item2:
@@ -241,27 +230,30 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 if (Contains.sAllInfo.getData() == null) {
                     return;
                 }
-                //实名认证状态1没认证2审核中3通过4未通过
-                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
-                        .sAllInfo.getData().getSmyz().getZt().equals("3")) {
-                    if (Contains.sAllInfo.getData().getHjxx() == null || Contains.sAllInfo.getData().getHjxx().getZt
-                            ().equals("1") || Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
-                        startActivty(QualificationExaminationActivity.class);
-                    } else {
-                        startActivty(FamilyRegisterStatusActivity.class);
-
-                    }
-
-                } else if (Contains.sAllInfo.getData().getSmyz() == null || Contains.sAllInfo.getData() != null &&
-                        Contains.sAllInfo.getData().getSmyz() != null && Contains.sAllInfo.getData().getSmyz().getZt
-                        ().equals("1")) {
+                //实名认证状态0-待审核，1,待人工审核，2-审核通过，3-审核未通过）
+                if (Contains.sAllInfo.getData().getZcyh() == null || Contains.sAllInfo.getData().getZcyh().getRzzt()
+                        == null) {
+                    //没有实名认证
                     showDialog();
-                } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
-                        Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
-                    ToastUtil.showCenterShort("实名认证信息审核中，请耐心等待");
-                } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null &&
-                        Contains.sAllInfo.getData().getSmyz().getZt().equals("4")) {
+                } else if (Contains.sAllInfo.getData().getZcyh() != null && Contains.sAllInfo.getData().getZcyh()
+                        .getRzzt() != null && Contains.sAllInfo.getData().getZcyh().getRzzt() == 1) {
+                    ToastUtil.showCenterShort("实名认证信息人工审核中，请耐心等待");
+                } else if (Contains.sAllInfo.getData().getZcyh() != null && Contains.sAllInfo.getData().getZcyh()
+                        .getRzzt() != null && Contains.sAllInfo.getData().getZcyh().getRzzt() == 3) {
                     ToastUtil.showCenterShort("实名认证未通过审核");
+                } else if (Contains.sAllInfo.getData().getZcyh() != null && Contains.sAllInfo.getData().getZcyh()
+                        .getRzzt() != null && Contains.sAllInfo.getData().getZcyh().getRzzt() == 0 || Contains
+                        .sAllInfo.getData().getZcyh().getRzzt() == 2) {
+                    //认证通过 认证审核中
+                    if (Contains.sAllInfo.getData().getGrxx() != null && Contains.sAllInfo.getData().getGrxx()
+                            .getJtcy()!=null&&Contains.sAllInfo.getData().getGrxx()
+                            .getJtcy().getRzzt() != null) {
+                        startActivty(FamilyRegisterStatusActivity.class);
+                    } else {
+                        startActivty(QualificationExaminationActivity.class);
+                    }
+//
+
                 }
                 break;
             default:
@@ -280,7 +272,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                ToastUtil.showCenterShort("再按一次退出GO房");
+                ToastUtil.showCenterShort("再按一次退出欣居APP");
                 mExitTime = System.currentTimeMillis();
             } else {
                 finish();

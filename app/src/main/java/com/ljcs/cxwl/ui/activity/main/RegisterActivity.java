@@ -170,8 +170,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             if (baseEntity.getData() != null) {
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_SJHM, baseEntity.getData().getSjhm());
                 RxSPTool.putString(this, ShareStatic.APP_LOGIN_MM, mEt3.getText().toString());
-                RxSPTool.putString(this, ShareStatic.APP_LOGIN_ZT, baseEntity.getData().getZt());
-                RxSPTool.putInt(this, ShareStatic.APP_LOGIN_BH, baseEntity.getData().getBh());
                 startActivty(MainActivity.class);
                 finish();
             }
@@ -227,8 +225,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 map.put("yys", PhoneUtils.getOperators(this));//移动运营商
                 map.put("gps", PhoneUtils.getLngAndLat(this));//GPS
                 Logger.i( RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
+                map.put("yhsjhm", mEt1.getText().toString().trim());
                 map.put("sjhm", mEt1.getText().toString().trim());
-                map.put("mm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
+                map.put("yhmm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
                 mPresenter.register(map);
                 break;
             case R.id.tv_xieyi:

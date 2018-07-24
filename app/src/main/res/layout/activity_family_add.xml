@@ -109,7 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -132,7 +133,9 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"/>
+                <View
+                    style="@style/line_hor"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:id="@+id/layout_select3"
@@ -163,14 +166,42 @@
                 </LinearLayout>
 
                 <View style="@style/line_hor"/>
+                <LinearLayout
+                    android:id="@+id/layout_select6"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y94"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="户 籍 所 在 地："/>
+
+                    <TextView
+                        android:id="@+id/tv_leixing6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
+                        android:hint="请选择户籍所在地"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_rock_right"/>
+                </LinearLayout>
+
+                <View style="@style/line_hor"/>
                 <LinearLayout
                     android:id="@+id/layout_select4"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -193,7 +224,8 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"
+                <View
+                    style="@style/line_hor"
                     android:visibility="gone"/>
 
                 <LinearLayout
@@ -210,13 +242,13 @@
                     <EditText
                         android:id="@+id/tv_idcard"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
                         android:background="@null"
                         android:hint="请输入身份证号码"
-                        android:singleLine="true"
                         android:maxLength="18"
+                        android:singleLine="true"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -227,6 +259,7 @@
                     android:id="@+id/layout_select5"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -251,7 +284,8 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"/>
+                <View style="@style/line_hor"
+                    android:visibility="gone"/>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -288,22 +322,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
 
         <TextView
             android:id="@+id/tv_delete"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@mipmap/bg_btn_red"
             android:gravity="center"
             android:text="删除此信息"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/next"

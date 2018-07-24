@@ -153,7 +153,7 @@
                             android:layout_marginLeft="@dimen/x22"
                             android:background="@mipmap/ic_btn_bg_lv"
                             android:gravity="center"
-                            android:text="提交购房资格"
+                            android:text="项目认购申请"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -175,8 +175,8 @@
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/y28"
-                    android:paddingLeft="@dimen/x30"
-                    android:paddingRight="@dimen/x30"
+                    android:paddingLeft="@dimen/x20"
+                    android:paddingRight="@dimen/x20"
             >
 
                     <LinearLayout
@@ -222,7 +222,7 @@
                             android:id="@+id/tv_name1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -244,7 +244,7 @@
                             android:id="@+id/tv_sex1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -257,6 +257,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"
                         android:gravity="center_vertical"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <TextView
@@ -268,7 +269,7 @@
                             android:id="@+id/tv_hklx1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -293,7 +294,7 @@
                             android:id="@+id/tv_hkxz1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -318,7 +319,7 @@
                             android:id="@+id/tv_hyzk1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -339,7 +340,7 @@
                             android:id="@+id/tv_hjszd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -360,7 +361,7 @@
                             android:id="@+id/tv_card1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -444,8 +445,9 @@
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/y28"
-                    android:paddingLeft="@dimen/x30"
-                    android:paddingRight="@dimen/x30"
+                    android:visibility="gone"
+                    android:paddingLeft="@dimen/x20"
+                    android:paddingRight="@dimen/x20"
                     android:paddingTop="@dimen/y28">
 
                     <LinearLayout
@@ -491,7 +493,7 @@
                             android:id="@+id/tv_name2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -513,7 +515,7 @@
                             android:id="@+id/tv_sex2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -526,6 +528,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"
                         android:gravity="center_vertical"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <TextView
@@ -537,7 +540,7 @@
                             android:id="@+id/tv_hklx2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -562,7 +565,7 @@
                             android:id="@+id/tv_hkxz2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -570,7 +573,52 @@
 
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y70"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="户 籍 所 在 地："/>
+
+                        <TextView
+                            android:id="@+id/tv_hjszd2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y70"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="手  机  号  码  ："/>
+
+                        <TextView
+                            android:id="@+id/tv_phone2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -588,7 +636,7 @@
                             android:id="@+id/tv_hyzk2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -610,7 +658,7 @@
                             android:id="@+id/tv_card2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -633,7 +681,7 @@
                             android:id="@+id/tv_gx"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text="某某某"
                             android:textColor="@color/black"
@@ -736,9 +784,10 @@
                     android:layout_marginTop="@dimen/y26"
                     android:background="@color/white"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     android:paddingBottom="@dimen/y28"
-                    android:paddingLeft="@dimen/x30"
-                    android:paddingRight="@dimen/x30"
+                    android:paddingLeft="@dimen/x20"
+                    android:paddingRight="@dimen/x20"
                     android:paddingTop="@dimen/y28">
 
                     <LinearLayout
@@ -784,7 +833,7 @@
                             android:id="@+id/tv_name3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:text=""
                             android:textColor="@color/black"
                             android:textSize="14sp"/>
@@ -806,7 +855,7 @@
                             android:id="@+id/tv_lysj"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"
@@ -814,6 +863,52 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y70"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="户 籍 所 在 地："/>
+
+                        <TextView
+                            android:id="@+id/tv_hjszd3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y70"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="手  机  号  码  ："/>
+
+                        <TextView
+                            android:id="@+id/tv_phone3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="14sp"/>
+
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -830,7 +925,7 @@
                             android:id="@+id/tv_card3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
                             android:text=""
                             android:textColor="@color/black"

@@ -52,7 +52,7 @@ public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPr
     @Override
     public void getCode(String phone) {
         Map<String, String> map = new HashMap<>();
-        map.put("sjhm", phone);
+        map.put("yhsjhm", phone);
         Disposable disposable = httpAPIWrapper.getCode(map).subscribe(new Consumer<CommonBean>() {
             @Override
             public void accept(CommonBean user) throws Exception {

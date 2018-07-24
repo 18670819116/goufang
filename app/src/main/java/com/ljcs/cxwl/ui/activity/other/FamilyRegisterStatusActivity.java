@@ -17,12 +17,15 @@ import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.ScanBean;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterStatusComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterStatusContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyRegisterStatusModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyRegisterStatusPresenter;
 import com.ljcs.cxwl.ui.activity.scan.ScanActivity;
 import com.ljcs.cxwl.view.CertificationDialog;
+import com.ljcs.cxwl.view.ShPassDialog;
 import com.ljcs.cxwl.view.ZinvInfoLayout;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxSPTool;
@@ -124,6 +127,14 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     RelativeLayout bgHead;
     @BindView(R.id.scrollView)
     NestedScrollView scrollView;
+    @BindView(R.id.tv_hjszd2)
+    TextView tvHjszd2;
+    @BindView(R.id.tv_phone2)
+    TextView tvPhone2;
+    @BindView(R.id.tv_hjszd3)
+    TextView tvHjszd3;
+    @BindView(R.id.tv_phone3)
+    TextView tvPhone3;
     private CertificationDialog dialog;
 
     @Override
@@ -147,7 +158,7 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         mPresenter.allInfo(map1);
         initDialog();
         final int height = 63;
-        Logger.e("height"+height);
+        Logger.e("height" + height);
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -155,7 +166,7 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                 int alpha = 0;
                 int count = 0;
                 float scale = 0;
-                Logger.e("scrollY"+scrollY+"oldScrollY"+oldScrollY);
+                Logger.e("scrollY" + scrollY + "oldScrollY" + oldScrollY);
                 if (scrollY >= height) {
                     scale = (float) scrollY / height;
                     alpha = (int) (255 * scale);
@@ -181,18 +192,18 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
 
     @Override
     public void intiViews() {
-        if (Contains.sAllInfo.getData().getHjxx() != null) {
-            if (Contains.sAllInfo.getData().getHjxx().getZt().equals("2")) {
+        if (Contains.sAllInfo.getData().getGrxx() != null) {
+            if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() == 0) {
                 //审核中
                 bgHead1.setVisibility(View.VISIBLE);
                 bgHead2.setVisibility(View.GONE);
                 bgHead3.setVisibility(View.GONE);
-            } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("3")) {
+            } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() == 1) {
                 //审完成
                 bgHead1.setVisibility(View.GONE);
                 bgHead2.setVisibility(View.GONE);
                 bgHead3.setVisibility(View.VISIBLE);
-            } else if (Contains.sAllInfo.getData().getHjxx().getZt().equals("4")) {
+            } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() == 2) {
                 //未通过
                 bgHead1.setVisibility(View.GONE);
                 bgHead2.setVisibility(View.VISIBLE);
@@ -200,120 +211,154 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
 
             }
         }
-        tvName1.setText(Contains.sAllInfo.getData().getSmyz().getXm());
-        tvSex1.setText(Contains.sAllInfo.getData().getSmyz().getXb());
-        tvCard1.setText(Contains.sAllInfo.getData().getSmyz().getSfzhm());
-        tvHklx1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
-        tvHkxz1.setText(Contains.sAllInfo.getData().getHjxx().getHkxz());
-        tvHyzk1.setText(Contains.sAllInfo.getData().getHjxx().getHyzt());
-        tvHjszd.setText(Contains.sAllInfo.getData().getHjxx().getHjszd());
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(img1);
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(img2);
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(img3);
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getJhzzp()).into(img4);
+        tvName1.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXm());
+        tvSex1.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXb());
+        tvCard1.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getZjhm());
+//        tvHklx1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
+        tvHkxz1.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHjfl());
+        tvHyzk1.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk());
+        tvHjszd.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHjszd());
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzzm()).into(img1);
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzfm()).into(img2);
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb()).into(img3);
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getJhz()).into(img4);
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
-                        .getSfzzm());
+                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx()
+                        .getZzxx().getSfzzm());
             }
         });
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
-                        .getSfzfm());
+                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx()
+                        .getZzxx().getSfzfm());
             }
         });
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getHjxx()
-                        .getHkzp());
+                startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx()
+                        .getZzxx().getHkb());
             }
         });
 
-        if (Contains.sAllInfo.getData().getPoxx() != null) {
-            if (Contains.sAllInfo.getData().getHjxx().getHyzt().equals("已婚")) {
+        if (Contains.sAllInfo.getData().getPoxx() != null && Contains.sAllInfo.getData().getPoxx().getJtcy() != null) {
+            if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("已婚")) {
                 //表示已婚 现配偶
                 layout4.setVisibility(View.GONE);
                 layout3.setVisibility(View.VISIBLE);
-                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-                tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
-                tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-                tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
-                tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
-                tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
-                tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getXm());
+                tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getXb());
+                tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getZjhm());
+//                tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+                tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getHjfl());
+                tvHjszd2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getHjszd());
+                tvPhone2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getLxdh());
+//                tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+//                tvGx.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().geh);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getSfzzm()).into
+                        (img1Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getSfzfm()).into
+                        (img2Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getHkb()).into
+                        (img3Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getJhz()).into
+                        (img4Peiou);
                 img1Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getSfzzm());
+                                .getPoxx().getZzxx().getSfzzm());
                     }
                 });
                 img2Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getSfzfm());
+                                .getPoxx().getZzxx().getSfzfm());
                     }
                 });
                 img3Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getHkzp());
+                                .getPoxx().getZzxx().getHkb());
                     }
                 });
                 img4Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getJhzzp());
+                                .getPoxx().getZzxx().getJhz());
                     }
                 });
-            } else {
+
+            } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("离异")) {
                 //表示离异 前配偶
                 layout4.setVisibility(View.VISIBLE);
                 layout3.setVisibility(View.GONE);
-                tvName3.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-                tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getLhrq());
-                tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img5Peiou);
+                tvName3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getXm());
+                tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getLysj());
+                tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getZjhm());
+                tvHjszd3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getHjszd());
+                tvPhone3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getLxdh());
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getLhz()).into
+                        (img5Peiou);
                 img5Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getJhzzp());
+                                .getPoxx().getZzxx().getLhz());
                     }
                 });
             }
+
         } else {
             layout3.setVisibility(View.GONE);
             layout4.setVisibility(View.GONE);
         }
         layoutZinvContent.removeAllViews();
-        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
-            for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
-                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
+        if (Contains.sAllInfo.getData().getZnxxlist() != null && Contains.sAllInfo.getData().getZnxxlist().size() > 0) {
+            for (int i = 0; i < Contains.sAllInfo.getData().getZnxxlist().size(); i++) {
+                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getZnxxlist()
                         .get(i));
                 final int finalI = i;
                 zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterStatusActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getJtcyList().get(finalI).getHkzp());
+                                .getZnxxlist().get(finalI).getZzxx().getHkb());
                     }
                 });
                 layoutZinvContent.addView(zinvInfoLayout);
             }
 
         }
+    }
+
+    @Override
+    public void isScanSuccess(ScanBean baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            if (baseEntity.getData() == null) {
+                startActivty(ScanActivity.class);
+            } else {
+                final ShPassDialog dialog = new ShPassDialog(this);
+                dialog.setCancelable(false);
+                dialog.setData(baseEntity.getData());
+                dialog.getBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+        }
+
     }
 
     @Override
@@ -385,7 +430,8 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                 dialog.show();
                 break;
             case R.id.tv_tijiaozige:
-                startActivty(ScanActivity.class);
+                mPresenter.isScan();
+//
                 break;
         }
     }

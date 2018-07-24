@@ -86,12 +86,12 @@
 
     <LinearLayout
         android:id="@+id/layout_item2"
-
         android:layout_width="match_parent"
         android:layout_height="@dimen/y114"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -117,6 +117,7 @@
 
     <View
         style="@style/line_hor"
+        android:visibility="gone"
         android:layout_marginLeft="@dimen/x14"
         android:layout_marginRight="@dimen/x14"/>
 

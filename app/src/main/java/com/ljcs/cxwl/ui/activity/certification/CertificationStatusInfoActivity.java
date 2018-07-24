@@ -1,6 +1,8 @@
 package com.ljcs.cxwl.ui.activity.certification;
 
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,8 +42,6 @@ public class CertificationStatusInfoActivity extends BaseActivity implements Cer
     TextView tvName;
     @BindView(R.id.tv_status)
     TextView tvStatus;
-    @BindView(R.id.img_status2)
-    ImageView imgStatus2;
     @BindView(R.id.tv_sex)
     TextView tvSex;
     @BindView(R.id.tv_ethnic)
@@ -82,52 +82,86 @@ public class CertificationStatusInfoActivity extends BaseActivity implements Cer
 //        Map<String, String> map = new HashMap<>();
 //        map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
 //        mPresenter.cerInfoDetail(map);
-        //1保存2发起申请,审核中3审核通过4审核未通过
-        if (Contains.sAllInfo.getData().getSmyz() != null && Contains.sAllInfo.getData().getSmyz() != null &&
-                Contains.sAllInfo.getData().getSmyz().getZt().equals("2")) {
-            //审核中
-            imgStatus1.setVisibility(View.GONE);
-            imgStatus2.setVisibility(View.GONE);
-            tvStatus.setVisibility(View.VISIBLE);
-            tvStatus.setText("信息审核中");
+        //0-待审核，1,待人工审核，2-审核通过，3-审核未通过）
+        if (Contains.sAllInfo.getData().getZcyh() != null && Contains.sAllInfo.getData().getZcyh().getRzzt() != null) {
+            if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 0) {
+                //审核中
+                imgStatus1.setVisibility(View.GONE);
+                tvStatus.setVisibility(View.VISIBLE);
+                tvStatus.setText("待审核...");
+                Drawable nav_up = getResources().getDrawable(R.mipmap.ic_tvstatus1);
+                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                tvStatus.setCompoundDrawables(nav_up, null, null, null);
+                tvStatus.setCompoundDrawablePadding(10);
 
-        } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
-                .sAllInfo.getData().getSmyz().getZt().equals("3")) {
-            imgStatus1.setVisibility(View.VISIBLE);
-            imgStatus2.setVisibility(View.GONE);
-            tvStatus.setVisibility(View.GONE);
-        } else if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null && Contains
-                .sAllInfo.getData().getSmyz().getZt().equals("4")) {
-            imgStatus1.setVisibility(View.GONE);
-            imgStatus2.setVisibility(View.VISIBLE);
-            tvStatus.setVisibility(View.GONE);
-            final CerstatusDialog dialog = new CerstatusDialog(CertificationStatusInfoActivity.this);
-            dialog.setCancelable(false);
-            dialog.getBtn().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
+            } else if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 1) {
+                //审核中
+                imgStatus1.setVisibility(View.GONE);
+                tvStatus.setVisibility(View.VISIBLE);
+                tvStatus.setText("待人工审核...");
+                Drawable nav_up = getResources().getDrawable(R.mipmap.ic_tvstatus2);
+                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                tvStatus.setCompoundDrawables(nav_up, null, null, null);
+                tvStatus.setCompoundDrawablePadding(10);
 
-                }
-            });
-            dialog.show();
+            } else if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 2) {
+                //通过
+                imgStatus1.setImageResource(R.mipmap.ic_cer_status1);
+                tvStatus.setText("审核通过");
+                tvStatus.setTextColor(getResources().getColor(R.color.color_2aba90));
+                Drawable nav_up = getResources().getDrawable(R.mipmap.ic_tvstatus4);
+                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                tvStatus.setCompoundDrawables(nav_up, null, null, null);
+                tvStatus.setCompoundDrawablePadding(10);
+            } else if (Contains.sAllInfo.getData().getZcyh().getRzzt() == 3) {
+                //未通过
+                imgStatus1.setImageResource(R.mipmap.ic_cer_status11);
+                tvStatus.setText("审核未通过");
+                tvStatus.setTextColor(getResources().getColor(R.color.color_fa6268));
+                tvStatus.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+                tvStatus.getPaint().setAntiAlias(true);//抗锯齿
+                Drawable nav_up = getResources().getDrawable(R.mipmap.ic_tvstatus3);
+                nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
+                tvStatus.setCompoundDrawables(nav_up, null, null, null);
+                tvStatus.setCompoundDrawablePadding(10);
+                tvStatus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final CerstatusDialog dialog = new CerstatusDialog(CertificationStatusInfoActivity.this);
+                        dialog.setCancelable(false);
+                        dialog.getBtn().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
+            }
         }
-        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
-            tvName.setText(Contains.sAllInfo.getData().getSmyz().getXm());
-            tvSex.setText(Contains.sAllInfo.getData().getSmyz().getXb());
-            tvAdress.setText(Contains.sAllInfo.getData().getSmyz().getDz());
-            tvBirthday.setText(Contains.sAllInfo.getData().getSmyz().getCsrq());
-            tvEthnic.setText(Contains.sAllInfo.getData().getSmyz().getMz());
-            tvIdcard.setText(Contains.sAllInfo.getData().getSmyz().getSfzhm());
-            tvIssueAuthority.setText(Contains.sAllInfo.getData().getSmyz().getQfjg());
-            tvData.setText(Contains.sAllInfo.getData().getSmyz().getYxq());
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(imageView);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(imageView1);
+        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null && Contains.sAllInfo
+                .getData().getGrxx().getSfz() != null) {
+            tvName.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXm());
+            tvSex.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXb());
+            tvAdress.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getZz());
+            tvBirthday.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getCsrq());
+            tvEthnic.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getMz());
+            tvIdcard.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getZjhm());
+            tvIssueAuthority.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getQfjg());
+            tvData.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getYxq());
+        }
+        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null && Contains.sAllInfo
+                .getData().getGrxx().getZzxx() != null) {
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzzm()).into(imageView);
+            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzfm()).into
+                    (imageView1);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(CertificationStatusInfoActivity.this, ShowImgActivity.class);
-                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm());
+                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzzm());
                     startActivity(intent);
                 }
             });
@@ -135,7 +169,7 @@ public class CertificationStatusInfoActivity extends BaseActivity implements Cer
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(CertificationStatusInfoActivity.this, ShowImgActivity.class);
-                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm());
+                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzfm());
                     startActivity(intent);
                 }
             });

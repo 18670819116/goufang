@@ -43,6 +43,7 @@
                 android:paddingRight="@dimen/x30">
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/layout_select1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
@@ -70,7 +71,8 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"/>
+                <View style="@style/line_hor"
+                    android:visibility="gone"/>
 
 
                 <LinearLayout

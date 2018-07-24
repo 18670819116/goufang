@@ -26,11 +26,12 @@ public class ZinvInfoLayout extends LinearLayout {
     private TextView tv5;
     private TextView tv6;
     private TextView tv7;
+    private TextView tvHjszd;
     private TextView tv_change;
     private ImageView img1;
     private ImageView img2;
 
-    public ZinvInfoLayout(Context context, AllInfo.Data.JtcyBean bean) {
+    public ZinvInfoLayout(Context context, AllInfo.Data.ZinvBean bean) {
         super(context);
         initViews(context,bean);
 
@@ -38,7 +39,7 @@ public class ZinvInfoLayout extends LinearLayout {
 
     }
 
-    private void initViews(Context context, AllInfo.Data.JtcyBean bean) {
+    private void initViews(Context context, AllInfo.Data.ZinvBean bean) {
         LayoutInflater.from(context).inflate(R.layout.layout_zinv_info, this, true);
         tv1 = (TextView) findViewById(R.id.tv_name);
         tv2 = (TextView) findViewById(R.id.tv_sex);
@@ -47,17 +48,19 @@ public class ZinvInfoLayout extends LinearLayout {
         tv5 = (TextView) findViewById(R.id.tv_hyzk);
         tv6 = (TextView) findViewById(R.id.tv_card);
         tv7 = (TextView) findViewById(R.id.tv_gx);
+        tvHjszd = (TextView) findViewById(R.id.tv_hjszd);
         tv_change = (TextView) findViewById(R.id.tv_change);
         img1 = (ImageView) findViewById(R.id.img1);
         img2 = (ImageView) findViewById(R.id.img2);
-        tv1.setText(bean.getXm());
-        tv2.setText(bean.getXb());
-        tv3.setText(bean.getHklx());
-        tv4.setText(bean.getHkxz());
-        tv5.setText(bean.getHyzt());
-        tv6.setText(bean.getSfzhm());
-        tv7.setText(bean.getGx());
-        Glide.with(context).load(API.PIC+bean.getHkzp()).into(img1);
+        tv1.setText(bean.getJtcy().getXm());
+        tv2.setText(bean.getJtcy().getXb());
+//        tv3.setText(bean.getJtcy().getHklx());
+        tv4.setText(bean.getJtcy().getHjfl());
+//        tv5.setText(bean.getJtcy().getHyzt());
+        tv6.setText(bean.getJtcy().getZjhm());
+//        tv7.setText(bean.getJtcy().getGx());
+        tvHjszd.setText(bean.getJtcy().getHjszd());
+        Glide.with(context).load(API.PIC+bean.getZzxx().getHkb()).into(img1);
 
        // Glide.with(context).load(API.PIC+bean.getSfzfm()).into(img2);
     }

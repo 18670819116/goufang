@@ -182,8 +182,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 map.put("uuid", PhoneUtils.getDeviceId(this));//手机唯一标识
                 map.put("yys", PhoneUtils.getOperators(this));//移动运营商
                 map.put("gps", PhoneUtils.getLngAndLat(this));//GPS
+                map.put("yhsjhm", mAccount);//手机号
                 map.put("sjhm", mAccount);//手机号
-                map.put("mm", RxEncryptTool.encryptSHA1ToString(mPassWord + mAccount));//密码
+                map.put("yhmm", RxEncryptTool.encryptSHA1ToString(mPassWord + mAccount));//密码
                 mPresenter.login(map);
                 break;
             default:

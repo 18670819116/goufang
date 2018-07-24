@@ -2,6 +2,7 @@ package com.ljcs.cxwl.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
@@ -43,14 +44,14 @@ public class AppConfig extends Application {
         BGASwipeBackHelper.init(this, null);
         RxTool.init(this);
         //bugly
-        CrashReport.initCrashReport(this, "cada4dc780", true);
+        CrashReport.initCrashReport(this, "cada4dc780", false);
         //扫码
         ZXingLibrary.initDisplayOpinion(this);
         //阿里云推送
         initCloudChannel(this);
         //友盟
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
-        UMConfigure.setLogEnabled(true);
+        UMConfigure.setLogEnabled(false);
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
     }
@@ -61,7 +62,11 @@ public class AppConfig extends Application {
         }
         return instance;
     }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     protected void setupApplicationComponent() {
         mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).aPIModule(new APIModule(this))

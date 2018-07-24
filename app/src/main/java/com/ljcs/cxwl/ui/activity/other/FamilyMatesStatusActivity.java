@@ -119,108 +119,108 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
             }
         }
 
-        if (Contains.sAllInfo.getData().getPoxx() != null) {
-            tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-            tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
-            tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-            tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
-            tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
-            tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
-            tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
-            img1Peiou.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
-                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm());
-                    startActivity(intent);
-                }
-            });
-            img2Peiou.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
-                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm());
-                    startActivity(intent);
-                }
-            });
-            img3Peiou.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
-                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp());
-                    startActivity(intent);
-                }
-            });
-            img4Peiou.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
-                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp());
-                    startActivity(intent);
-                }
-            });
-            if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
-                tvChangePeiou.setVisibility(View.VISIBLE);
-                tvChangePeiou.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Contains.sCertificationInfo.setName_peiou(Contains.sAllInfo.getData().getPoxx().getXm());
-                        Contains.sCertificationInfo.setAddress_peiou(Contains.sAllInfo.getData().getPoxx().getDz());
-                        Contains.sCertificationInfo.setIdcard_peiou(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-                        Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq());
-                        Contains.sCertificationInfo.setEthnic_peiou(Contains.sAllInfo.getData().getPoxx().getMz());
-                        Contains.sCertificationInfo.setSex_peiou(Contains.sAllInfo.getData().getPoxx().getXb());
-                        if (Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")){
-                            Contains.sCertificationInfo.setSignDate_peiou( Contains.sAllInfo.getData().getPoxx().getYxq().split("-")[0]);
-                            Contains.sCertificationInfo.setExpiryDate_peiou( Contains.sAllInfo.getData().getPoxx().getYxq().split("-")[1]);
-                        }
-                        Contains.sCertificationInfo.setIssueAuthority_peiou(Contains.sAllInfo.getData().getPoxx().getQfjg());
-                        Contains.sCertificationInfo.setPic_path_zheng_peiou(API.PIC+Contains.sAllInfo.getData().getPoxx().getSfzzm());
-                        Contains.sCertificationInfo.setPic_path_fan_peiou(API.PIC+Contains.sAllInfo.getData().getPoxx().getSfzfm());
-                        Contains.ENTERTYPE_CHANGE=1;
-                        startActivty(MatesInfoTwoActivity.class);
-                    }
-                });
-            }
-        } else {
-            layout3.setVisibility(View.GONE);
-        }
+//        if (Contains.sAllInfo.getData().getPoxx() != null) {
+//            tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+//            tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
+//            tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+//            tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+//            tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
+//            tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+//            tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
+//            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
+//            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
+//            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
+//            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+//            img1Peiou.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
+//                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm());
+//                    startActivity(intent);
+//                }
+//            });
+//            img2Peiou.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
+//                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm());
+//                    startActivity(intent);
+//                }
+//            });
+//            img3Peiou.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
+//                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp());
+//                    startActivity(intent);
+//                }
+//            });
+//            img4Peiou.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
+//                    intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp());
+//                    startActivity(intent);
+//                }
+//            });
+//            if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
+//                tvChangePeiou.setVisibility(View.VISIBLE);
+//                tvChangePeiou.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Contains.sCertificationInfo.setName_peiou(Contains.sAllInfo.getData().getPoxx().getXm());
+//                        Contains.sCertificationInfo.setAddress_peiou(Contains.sAllInfo.getData().getPoxx().getDz());
+//                        Contains.sCertificationInfo.setIdcard_peiou(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+//                        Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq());
+//                        Contains.sCertificationInfo.setEthnic_peiou(Contains.sAllInfo.getData().getPoxx().getMz());
+//                        Contains.sCertificationInfo.setSex_peiou(Contains.sAllInfo.getData().getPoxx().getXb());
+//                        if (Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")){
+//                            Contains.sCertificationInfo.setSignDate_peiou( Contains.sAllInfo.getData().getPoxx().getYxq().split("-")[0]);
+//                            Contains.sCertificationInfo.setExpiryDate_peiou( Contains.sAllInfo.getData().getPoxx().getYxq().split("-")[1]);
+//                        }
+//                        Contains.sCertificationInfo.setIssueAuthority_peiou(Contains.sAllInfo.getData().getPoxx().getQfjg());
+//                        Contains.sCertificationInfo.setPic_path_zheng_peiou(API.PIC+Contains.sAllInfo.getData().getPoxx().getSfzzm());
+//                        Contains.sCertificationInfo.setPic_path_fan_peiou(API.PIC+Contains.sAllInfo.getData().getPoxx().getSfzfm());
+//                        Contains.ENTERTYPE_CHANGE=1;
+//                        startActivty(MatesInfoTwoActivity.class);
+//                    }
+//                });
+//            }
+//        } else {
+//            layout3.setVisibility(View.GONE);
+//        }
         layoutZinvContent.removeAllViews();
-        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
-
-            for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
-                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
-                        .get(i));
-                final int finalI = i;
-                if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
-                    zinvInfoLayout.getTv_change().setVisibility(View.VISIBLE);
-                    zinvInfoLayout.getTv_change().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(FamilyMatesStatusActivity.this, FamilyAddActivity.class);
-                            intent.putExtra("type", 2);
-                            intent.putExtra("position", finalI);
-                            startActivityForResult(intent, 101);
-                        }
-                    });
-                }
-                zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
-                        intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getJtcyList().get(finalI)
-                                .getHkzp());
-                        startActivity(intent);
-                    }
-                });
-                layoutZinvContent.addView(zinvInfoLayout);
-            }
-
-        }
+//        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
+//
+//            for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
+//                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
+//                        .get(i));
+//                final int finalI = i;
+//                if (Contains.sAllInfo.getData().getHjxx().getZt().equals("5")) {
+//                    zinvInfoLayout.getTv_change().setVisibility(View.VISIBLE);
+//                    zinvInfoLayout.getTv_change().setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent intent = new Intent(FamilyMatesStatusActivity.this, FamilyAddActivity.class);
+//                            intent.putExtra("type", 2);
+//                            intent.putExtra("position", finalI);
+//                            startActivityForResult(intent, 101);
+//                        }
+//                    });
+//                }
+//                zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(FamilyMatesStatusActivity.this, ShowImgActivity.class);
+//                        intent.putExtra("img_path", API.PIC + Contains.sAllInfo.getData().getJtcyList().get(finalI)
+//                                .getHkzp());
+//                        startActivity(intent);
+//                    }
+//                });
+//                layoutZinvContent.addView(zinvInfoLayout);
+//            }
+//
+//        }
     }
 
     @Override

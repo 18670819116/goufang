@@ -16,4 +16,8 @@ public class GlideUtils {
     public static void loadImgNoCach(Context context, String path, ImageView imageView, RequestOptions options) {
         Glide.with(context).load(path).apply(options).into(imageView);
     }
+
+    public static void loadImgNoCach(Context context, String path, ImageView imageView) {
+        Glide.with(context).load(path).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)).into(imageView);
+    }
 }

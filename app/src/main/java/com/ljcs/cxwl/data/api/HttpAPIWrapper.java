@@ -13,6 +13,7 @@ import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.entity.RegisterBean;
+import com.ljcs.cxwl.entity.ScanBean;
 import com.ljcs.cxwl.util.MD5Util;
 import com.ljcs.cxwl.util.RSAUtil;
 import com.ljcs.cxwl.util.ToastUtil;
@@ -173,7 +174,9 @@ public class HttpAPIWrapper {
     public Observable<BaseEntity> scan(Map data) {
         return wrapper(mHttpAPI.scan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
-
+    public Observable<ScanBean> isScan(Map data) {
+        return wrapper(mHttpAPI.isScan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
     public Observable<BaseEntity> changePhone(Map data) {
         return wrapper(mHttpAPI.changePhone(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }

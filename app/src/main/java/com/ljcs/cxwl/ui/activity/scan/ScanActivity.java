@@ -137,7 +137,6 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
                 dialog.dismiss();
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("token", RxSPTool.getString(ScanActivity.this, ShareStatic.APP_LOGIN_TOKEN));
-                map.put("sfzhm", Contains.sAllInfo.getData().getSmyz().getSfzhm());
                 map.put("smnr", result);
                 mPresenter.scan(map);
             }

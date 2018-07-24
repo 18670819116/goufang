@@ -56,7 +56,7 @@ public class ChangePhoneTwoPresenter implements ChangePhoneTwoContract.ChangePho
     @Override
     public void getChangeCode(String phone) {
         Map<String, String> map = new HashMap<>();
-        map.put("sjhm", phone);
+        map.put("yhsjhm", phone);
         Disposable disposable = httpAPIWrapper.getChangeCode(map).subscribe(new Consumer<CommonBean>() {
             @Override
             public void accept(CommonBean user) throws Exception {

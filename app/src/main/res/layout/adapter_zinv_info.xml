@@ -25,7 +25,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="某某某"
+                android:text=""
                 android:textColor="@color/main_color"
                 android:textSize="18sp"/>
 
@@ -71,32 +71,6 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y70"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="户  籍  类  型  ："/>
-
-            <TextView
-                android:id="@+id/tv_leixing2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_weight="1"
-                android:text=""
-                android:textColor="@color/color_333333"
-                android:textSize="14sp"/>
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@mipmap/ic_rock_right"/>-->
-        </LinearLayout>
 
 
         <LinearLayout
@@ -125,6 +99,33 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:src="@mipmap/ic_rock_right"/>-->
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y70"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="户 籍 所 在 地："/>
+
+            <TextView
+                android:id="@+id/tv_leixing5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/color_333333"
+                android:textSize="14sp"/>
+
+            <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/ic_rock_right"/>-->
+        </LinearLayout>
+
 
 
         <LinearLayout
@@ -178,32 +179,6 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y70"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="与申请人关系："/>
-
-            <TextView
-                android:id="@+id/tv_leixing5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x30"
-                android:layout_weight="1"
-                android:text=""
-                android:textColor="@color/color_333333"
-                android:textSize="14sp"/>
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@mipmap/ic_rock_right"/>-->
-        </LinearLayout>
 
 
         <RelativeLayout

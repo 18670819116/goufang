@@ -134,35 +134,35 @@ public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyReg
 //        list3.add("未婚");
         list3.add("离异");
         list3.add("丧偶");
-        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null) {
-            //身份证等信息
-            tvName.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-            tvSex.setText(Contains.sAllInfo.getData().getPoxx().getXb());
-            tvEthnic.setText(Contains.sAllInfo.getData().getPoxx().getMz());
-            tvBirthday.setText(Contains.sAllInfo.getData().getPoxx().getCsrq());
-            tvAdress.setText(Contains.sAllInfo.getData().getPoxx().getDz());
-            tvIdcard.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-            tvIssueAuthority.setText(Contains.sAllInfo.getData().getPoxx().getQfjg());
-            tvData.setText(Contains.sAllInfo.getData().getPoxx().getYxq());
-            //户籍等信息
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(imageViewZheng);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(imageViewFan);
-            tvLeixing1.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
-            tvLeixing2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
-            tvLeixing3.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
-            //表示有图片 不需要七牛在上传了
-            if (!RxDataTool.isNullString(Contains.sAllInfo.getData().getPoxx().getHkzp())) {
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(imgUpload1);
-                imageView5.setVisibility(View.VISIBLE);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(imgUpload2);
-                imageView6.setVisibility(View.VISIBLE);
-                imgPath1 = API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp();
-                imgPath2 = API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp();
-                isHavePic1 = true;
-                isHavePic2 = true;
-            }
-
-        }
+//        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null) {
+//            //身份证等信息
+//            tvName.setText(Contains.sAllInfo.getData().getPoxx().getXm());
+//            tvSex.setText(Contains.sAllInfo.getData().getPoxx().getXb());
+//            tvEthnic.setText(Contains.sAllInfo.getData().getPoxx().getMz());
+//            tvBirthday.setText(Contains.sAllInfo.getData().getPoxx().getCsrq());
+//            tvAdress.setText(Contains.sAllInfo.getData().getPoxx().getDz());
+//            tvIdcard.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
+//            tvIssueAuthority.setText(Contains.sAllInfo.getData().getPoxx().getQfjg());
+//            tvData.setText(Contains.sAllInfo.getData().getPoxx().getYxq());
+//            //户籍等信息
+//            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(imageViewZheng);
+//            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(imageViewFan);
+//            tvLeixing1.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+//            tvLeixing2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
+//            tvLeixing3.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+//            //表示有图片 不需要七牛在上传了
+//            if (!RxDataTool.isNullString(Contains.sAllInfo.getData().getPoxx().getHkzp())) {
+//                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(imgUpload1);
+//                imageView5.setVisibility(View.VISIBLE);
+//                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(imgUpload2);
+//                imageView6.setVisibility(View.VISIBLE);
+//                imgPath1 = API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp();
+//                imgPath2 = API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp();
+//                isHavePic1 = true;
+//                isHavePic2 = true;
+//            }
+//
+//        }
     }
 
     @Override

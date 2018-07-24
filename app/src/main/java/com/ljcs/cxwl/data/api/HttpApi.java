@@ -10,6 +10,7 @@ import com.ljcs.cxwl.entity.HujiInfo;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.entity.RegisterBean;
+import com.ljcs.cxwl.entity.ScanBean;
 
 import java.util.Map;
 
@@ -41,6 +42,7 @@ import static com.ljcs.cxwl.data.api.API.URL_POST_GET_CHANGE_CODE;
 import static com.ljcs.cxwl.data.api.API.URL_POST_GET_CODE;
 import static com.ljcs.cxwl.data.api.API.URL_POST_GET_REGISTER_CODE;
 import static com.ljcs.cxwl.data.api.API.URL_POST_HUKOU;
+import static com.ljcs.cxwl.data.api.API.URL_POST_IS_SCAN;
 import static com.ljcs.cxwl.data.api.API.URL_POST_LOGIN;
 import static com.ljcs.cxwl.data.api.API.URL_POST_LOGINOUT;
 import static com.ljcs.cxwl.data.api.API.URL_POST_MATESINFO;
@@ -153,6 +155,10 @@ public interface HttpApi {
     @POST(URL_POST_SCAN)
     @FormUrlEncoded
     Observable<BaseEntity> scan(@FieldMap Map<String, RequestBody> params);
+
+    @POST(URL_POST_IS_SCAN)
+    @FormUrlEncoded
+    Observable<ScanBean> isScan(@FieldMap Map<String, RequestBody> params);
 
     @POST(URL_POST_CHANGE_PHONE)
     @FormUrlEncoded

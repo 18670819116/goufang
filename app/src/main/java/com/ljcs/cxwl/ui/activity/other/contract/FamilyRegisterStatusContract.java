@@ -1,6 +1,8 @@
 package com.ljcs.cxwl.ui.activity.other.contract;
 
 import com.ljcs.cxwl.entity.AllInfo;
+import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.ScanBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 
@@ -27,6 +29,8 @@ public interface FamilyRegisterStatusContract {
         void allInfoSuccess(AllInfo baseEntity);
         void intiViews();
 
+        void isScanSuccess(ScanBean baseEntity);
+
     }
 
     interface FamilyRegisterStatusContractPresenter extends BasePresenter {
@@ -36,5 +40,6 @@ public interface FamilyRegisterStatusContract {
 //        void getBusinessInfo(Map map);
         void allInfo(Map map);
 
+        void isScan();
     }
 }

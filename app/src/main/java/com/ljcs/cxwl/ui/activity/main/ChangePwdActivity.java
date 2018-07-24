@@ -94,10 +94,10 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     et2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    et2.setSelection(et1.getText().length());
+                    et2.setSelection(et2.getText().length());
                 } else {
                     et2.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    et2.setSelection(et1.getText().length());
+                    et2.setSelection(et2.getText().length());
                 }
             }
         });
@@ -151,8 +151,9 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
             return;
         }
         Map<String, String> map = new HashMap<>();
+        map.put("yhsjhm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
         map.put("sjhm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
-        map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM) + RxSPTool
+        map.put("yhmm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM) + RxSPTool
                 .getString(this, ShareStatic.APP_LOGIN_SJHM)));
         map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
         map.put("newmm", RxEncryptTool.encryptSHA1ToString(et2.getText().toString().trim() + RxSPTool.getString(this,

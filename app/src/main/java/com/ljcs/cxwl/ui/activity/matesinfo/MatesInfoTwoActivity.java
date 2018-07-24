@@ -157,12 +157,12 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
                     map.put("xb", Contains.sCertificationInfo.getSex_peiou());
                     map.put("sfzzm", url);
                     map.put("dz", Contains.sCertificationInfo.getAddress_peiou());
-                    if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null &&
-                            Contains.sAllInfo.getData().getPoxx().getBh() != 0) {
-                        map.put("bh", Contains.sAllInfo.getData().getPoxx().getBh() + "");
-                    } else {
-                        map.put("bh", "");
-                    }
+//                    if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null &&
+//                            Contains.sAllInfo.getData().getPoxx().getBh() != 0) {
+//                        map.put("bh", Contains.sAllInfo.getData().getPoxx().getBh() + "");
+//                    } else {
+//                        map.put("bh", "");
+//                    }
 
                     mPresenter.matesInfo(map);
                 }
@@ -210,12 +210,12 @@ public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoCo
                         map.put("xm", Contains.sCertificationInfo.getName_peiou());
                         map.put("xb", Contains.sCertificationInfo.getSex_peiou());
                         map.put("dz", Contains.sCertificationInfo.getAddress_peiou());
-                        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null &&
-                                Contains.sAllInfo.getData().getPoxx().getBh() != 0) {
-                            map.put("bh", Contains.sAllInfo.getData().getPoxx().getBh() + "");
-                        } else {
-                            map.put("bh", "");
-                        }
+//                        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null &&
+//                                Contains.sAllInfo.getData().getPoxx().getBh() != 0) {
+//                            map.put("bh", Contains.sAllInfo.getData().getPoxx().getBh() + "");
+//                        } else {
+//                            map.put("bh", "");
+//                        }
 
                         mPresenter.matesInfo(map);
 

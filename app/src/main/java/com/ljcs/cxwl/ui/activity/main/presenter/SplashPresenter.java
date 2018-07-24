@@ -254,8 +254,9 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
             map.put("yys", PhoneUtils.getOperators(mActivity));//移动运营商
             map.put("gps", PhoneUtils.getLngAndLat(mActivity));//GPS
             map.put("uuid", PhoneUtils.getDeviceId(mActivity));//手机唯一标识
+            map.put("yhsjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
             map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
-            map.put("mm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM) +
+            map.put("yhmm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM) +
                     RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));
             login(map);
 
@@ -326,13 +327,13 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
                 Logger.i("onSuccesse");
                 if (version.code == Contains.REQUEST_SUCCESS) {
                     mVersion = version;
-                    AppInfo.Data data = new AppInfo.Data();
-                    data.setVersionExplain("1.修复一些bug等\\n2测试下修复app的一些bug修复a");
-//                    data.setVersionExplain("1.修复一些bug等\n2测试下修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新wfsf sfasfdddddddd围殴佛山东方扫福建省的咖啡机快乐圣诞节疯狂拉升经典款拉圣诞节快乐撒大家快来打手机疯狂拉升的反馈附近发的手机爱卡发送的即可浪费是考虑到富士达房间卡萨反馈都是埃里克森放假了地方");
-                    data.setVersionDownloadUrl("http://img0.hnchxwl.com/loadGf/gofang.apk");
-                    data.setVersionIsCompulsory(2);
-                    data.setVersionUid("1.0.4");
-                    mVersion.setData(data);
+//                    AppInfo.Data data = new AppInfo.Data();
+//                    data.setVersionExplain("1.修复一些bug等\\n2测试下修复app的一些bug修复a");
+////                    data.setVersionExplain("1.修复一些bug等\n2测试下修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新wfsf sfasfdddddddd围殴佛山东方扫福建省的咖啡机快乐圣诞节疯狂拉升经典款拉圣诞节快乐撒大家快来打手机疯狂拉升的反馈附近发的手机爱卡发送的即可浪费是考虑到富士达房间卡萨反馈都是埃里克森放假了地方");
+//                    data.setVersionDownloadUrl("http://img0.hnchxwl.com/loadGf/gofang.apk");
+//                    data.setVersionIsCompulsory(2);
+//                    data.setVersionUid("1.0.4");
+//                    mVersion.setData(data);
                     if (version.getData()!=null&&Float.valueOf(version.getData().getVersionUid().replace(".", "")) > Float.valueOf
                             (RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {
 //                    if (104f > Float.valueOf(RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {

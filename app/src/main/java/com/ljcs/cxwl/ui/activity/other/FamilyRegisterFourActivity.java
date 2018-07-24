@@ -113,6 +113,14 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
     ImageView img5Peiou;
     @BindView(R.id.layout4)
     LinearLayout layout4;
+    @BindView(R.id.tv_hjszd2)
+    TextView tvHjszd2;
+    @BindView(R.id.tv_phone2)
+    TextView tvPhone2;
+    @BindView(R.id.tv_hjszd3)
+    TextView tvHjszd3;
+    @BindView(R.id.tv_phone3)
+    TextView tvPhone3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,97 +146,106 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
     }
 
     private void intiViews() {
-        tvName1.setText(Contains.sAllInfo.getData().getSmyz().getXm());
-        tvSex1.setText(Contains.sAllInfo.getData().getSmyz().getXb());
-        tvCard1.setText(Contains.sAllInfo.getData().getSmyz().getSfzhm());
-        tvHklx1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
-        tvHkxz1.setText(Contains.sAllInfo.getData().getHjxx().getHkxz());
-        tvHyzk1.setText(Contains.sAllInfo.getData().getHjxx().getHyzt());
-        tvHjszd.setText(Contains.sAllInfo.getData().getHjxx().getHjszd());
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(img1);
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(img2);
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(img3);
-        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getJhzzp()).into(img4);
+        tvName1.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXm());
+        tvSex1.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXb());
+        tvCard1.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getZjhm());
+//        tvHklx1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
+        tvHkxz1.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHjfl());
+        tvHyzk1.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk());
+        tvHjszd.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHjszd());
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzzm()).into(img1);
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzfm()).into(img2);
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb()).into(img3);
+        Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getJhz()).into(img4);
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
-                        .getSfzzm());
+                startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx()
+                        .getZzxx().getSfzzm());
             }
         });
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
-                        .getSfzfm());
+                startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx()
+                        .getZzxx().getSfzfm());
             }
         });
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData().getHjxx()
-                        .getHkzp());
+                startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx()
+                        .getZzxx().getHkb());
             }
         });
 
-        if (Contains.sAllInfo.getData().getPoxx() != null) {
-            if (Contains.sAllInfo.getData().getHjxx().getHyzt().equals("已婚")) {
+        if (Contains.sAllInfo.getData().getPoxx() != null&&Contains.sAllInfo.getData().getPoxx().getJtcy()!=null) {
+            if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("已婚")) {
                 //表示已婚 现配偶
                 layout4.setVisibility(View.GONE);
                 layout3.setVisibility(View.VISIBLE);
-                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-                tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getXb());
-                tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-                tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
-                tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getHkxz());
-                tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
-                tvGx.setText(Contains.sAllInfo.getData().getPoxx().getGx());
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzzm()).into(img1Peiou);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getSfzfm()).into(img2Peiou);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getHkzp()).into(img3Peiou);
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img4Peiou);
+                tvName2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getXm());
+                tvSex2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getXb());
+                tvCard2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getZjhm());
+//                tvHklx2.setText(Contains.sAllInfo.getData().getPoxx().getHklx());
+                tvHkxz2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getHjfl());
+                tvHjszd2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getHjszd());
+                tvPhone2.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getLxdh());
+//                tvHyzk2.setText(Contains.sAllInfo.getData().getPoxx().getHyzt());
+//                tvGx.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().geh);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getSfzzm()).into
+                        (img1Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getSfzfm()).into
+                        (img2Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getHkb()).into
+                        (img3Peiou);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getJhz()).into
+                        (img4Peiou);
                 img1Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getSfzzm());
+                                .getPoxx().getZzxx().getSfzzm());
                     }
                 });
                 img2Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getSfzfm());
+                                .getPoxx().getZzxx().getSfzfm());
                     }
                 });
                 img3Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getHkzp());
+                                .getPoxx().getZzxx().getHkb());
                     }
                 });
                 img4Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getJhzzp());
+                                .getPoxx().getZzxx().getJhz());
                     }
                 });
 
-            } else {
+            } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("离异")){
                 //表示离异 前配偶
                 layout4.setVisibility(View.VISIBLE);
                 layout3.setVisibility(View.GONE);
-                tvName3.setText(Contains.sAllInfo.getData().getPoxx().getXm());
-                tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getLhrq());
-                tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getJhzzp()).into(img5Peiou);
+                tvName3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getXm());
+                tvLysj.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getLysj());
+                tvCard3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getZjhm());
+                tvHjszd3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getHjszd());
+                tvPhone3.setText(Contains.sAllInfo.getData().getPoxx().getJtcy().getLxdh());
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getPoxx().getZzxx().getLhz()).into
+                        (img5Peiou);
                 img5Peiou.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getPoxx().getJhzzp());
+                                .getPoxx().getZzxx().getLhz());
                     }
                 });
             }
@@ -238,16 +255,16 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
             layout4.setVisibility(View.GONE);
         }
         layoutZinvContent.removeAllViews();
-        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
-            for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
-                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()
+        if (Contains.sAllInfo.getData().getZnxxlist() != null && Contains.sAllInfo.getData().getZnxxlist().size() > 0) {
+            for (int i = 0; i < Contains.sAllInfo.getData().getZnxxlist().size(); i++) {
+                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getZnxxlist()
                         .get(i));
                 final int finalI = i;
                 zinvInfoLayout.getImg1().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startToImgActivity(FamilyRegisterFourActivity.this, API.PIC + Contains.sAllInfo.getData()
-                                .getJtcyList().get(finalI).getHkzp());
+                                .getZnxxlist().get(finalI).getZzxx().getHkb());
                     }
                 });
                 layoutZinvContent.addView(zinvInfoLayout);

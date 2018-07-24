@@ -152,8 +152,9 @@ public class PersonCenterActivity extends BaseActivity implements PersonCenterCo
                     @Override
                     public void onClick(View v) {
                         Map<String, String> map = new HashMap<>();
-                        map.put("sjhm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_SJHM));
-                        map.put("mm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_MM));
+//                        map.put("sjhm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_SJHM));
+//                        map.put("sjhm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_SJHM));
+//                        map.put("mm", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_MM));
                         map.put("token", RxSPTool.getString(PersonCenterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
                         mPresenter.loginOut(map);
                         dialog.dismiss();

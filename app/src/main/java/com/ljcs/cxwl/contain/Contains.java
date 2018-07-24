@@ -10,7 +10,6 @@ import com.ljcs.cxwl.entity.CertificationInfo;
 
 public class Contains {
     public static CertificationInfo sCertificationInfo = new CertificationInfo(); //实名认证本地保存信息
-    public static int ENTERTYPE = 1;//1表示家庭成员进入  2 表示申购进入
     public static int ENTERTYPE_CHANGE = 1;//2从正常进入1从修改进入添加添加配偶
     public static AllInfo sAllInfo = new AllInfo();
     public static final int REQUEST_CODE_GENERAL_BASIC = 103;//户口本

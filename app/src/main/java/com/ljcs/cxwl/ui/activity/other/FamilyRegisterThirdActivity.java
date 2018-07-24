@@ -52,7 +52,7 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
     @BindView(R.id.next)
     TextView next;
     private ZinvInfoAdapter mAdapter;
-    private List<AllInfo.Data.JtcyBean> list;
+    private List<AllInfo.Data.ZinvBean> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +79,14 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                AllInfo.Data.JtcyBean bean = (AllInfo.Data.JtcyBean) adapter.getData().get(position);
+                AllInfo.Data.ZinvBean bean = (AllInfo.Data.ZinvBean) adapter.getData().get(position);
                 if (view.getId() == R.id.img_change) {
                     Intent intent = new Intent(FamilyRegisterThirdActivity.this, FamilyAddActivity.class);
                     intent.putExtra("type", 2);
                     intent.putExtra("position", position);
                     startActivityForResult(intent, 101);
                 } else if (view.getId() == R.id.img_upload) {
-                    startToImgActivity(FamilyRegisterThirdActivity.this, API.PIC + bean.getHkzp());
+                    startToImgActivity(FamilyRegisterThirdActivity.this, API.PIC + bean.getZzxx().getHkb());
                 }
             }
         });
@@ -152,11 +152,11 @@ public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyR
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             //购房资格申请
             Contains.sAllInfo = baseEntity;
-            if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size()
+            if (Contains.sAllInfo.getData().getZnxxlist() != null && Contains.sAllInfo.getData().getZnxxlist().size()
                     > 0) {
                 layoutEmpty.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                mAdapter.setNewData(Contains.sAllInfo.getData().getJtcyList());
+                mAdapter.setNewData(Contains.sAllInfo.getData().getZnxxlist());
                 next.setText("下一步");
             } else {
                 recyclerView.setVisibility(View.GONE);

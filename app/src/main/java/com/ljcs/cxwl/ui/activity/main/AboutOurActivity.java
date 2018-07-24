@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.ui.activity.main;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
@@ -10,9 +11,11 @@ import com.ljcs.cxwl.ui.activity.main.component.DaggerAboutOurComponent;
 import com.ljcs.cxwl.ui.activity.main.contract.AboutOurContract;
 import com.ljcs.cxwl.ui.activity.main.module.AboutOurModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.AboutOurPresenter;
+import com.vondear.rxtool.RxDeviceTool;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -26,6 +29,8 @@ public class AboutOurActivity extends BaseActivity implements AboutOurContract.V
 
     @Inject
     AboutOurPresenter mPresenter;
+    @BindView(R.id.tv_version)
+    TextView tvVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class AboutOurActivity extends BaseActivity implements AboutOurContract.V
 
     @Override
     protected void initData() {
+        tvVersion.setText("欣居 V"+ RxDeviceTool.getAppVersionName(this));
         mPresenter.aboutMe();
     }
 

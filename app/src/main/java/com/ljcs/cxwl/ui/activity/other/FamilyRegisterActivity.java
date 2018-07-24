@@ -147,45 +147,59 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         list3.add("未婚");
         list3.add("离异");
         list3.add("丧偶");
-        initJsonData();
-        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getSmyz() != null) {
-            tvName.setText(Contains.sAllInfo.getData().getSmyz().getXm());
-            tvSex.setText(Contains.sAllInfo.getData().getSmyz().getXb());
-            tvEthnic.setText(Contains.sAllInfo.getData().getSmyz().getMz());
-            tvBirthday.setText(Contains.sAllInfo.getData().getSmyz().getCsrq());
-            tvAdress.setText(Contains.sAllInfo.getData().getSmyz().getDz());
-            tvIdcard.setText(Contains.sAllInfo.getData().getSmyz().getSfzhm());
-            tvIssueAuthority.setText(Contains.sAllInfo.getData().getSmyz().getQfjg());
-            tvData.setText(Contains.sAllInfo.getData().getSmyz().getYxq());
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzzm()).into(imageViewZheng);
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getSmyz().getSfzfm()).into(imageViewFan);
-            imageViewZheng.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startToImgActivity(FamilyRegisterActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
-                            .getSfzzm());
-                }
-            });
-            imageViewFan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startToImgActivity(FamilyRegisterActivity.this, API.PIC + Contains.sAllInfo.getData().getSmyz()
-                            .getSfzfm());
-                }
-            });
-        }
-        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getHjxx() != null) {
-            tvLeixing1.setText(Contains.sAllInfo.getData().getHjxx().getHklx());
-            etSuozaidi.setText(Contains.sAllInfo.getData().getHjxx().getHjszd());
-            tvLeixing2.setText(Contains.sAllInfo.getData().getHjxx().getHkxz());
-            tvLeixing3.setText(Contains.sAllInfo.getData().getHjxx().getHyzt());
-            //表示有图片 不需要七牛在上传了
-            Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp()).into(imgUpload);
-            imageView5.setVisibility(View.VISIBLE);
-            imgPath = API.PIC + Contains.sAllInfo.getData().getHjxx().getHkzp();
-            isHavePic = true;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initJsonData();
+            }
+        }).start();
 
+        if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null) {
+            if (Contains.sAllInfo.getData().getGrxx().getSfz() != null) {
+                tvName.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXm());
+                tvSex.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getXb());
+                tvEthnic.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getMz());
+                tvBirthday.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getCsrq());
+                tvAdress.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getZz());
+                tvIdcard.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getZjhm());
+                tvIssueAuthority.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getQfjg());
+                tvData.setText(Contains.sAllInfo.getData().getGrxx().getSfz().getYxq());
+            }
+            if (Contains.sAllInfo.getData().getGrxx().getZzxx() != null) {
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzzm()).into
+                        (imageViewZheng);
+                Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getSfzfm()).into
+                        (imageViewFan);
+                imageViewZheng.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx
+                                ().getZzxx().getSfzzm());
+                    }
+                });
+                imageViewFan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startToImgActivity(FamilyRegisterActivity.this, API.PIC + Contains.sAllInfo.getData().getGrxx
+                                ().getZzxx().getSfzfm());
+                    }
+                });
+                if (Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb() != null) {
+                    //表示有图片 不需要七牛在上传了
+                    Glide.with(this).load(API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb()).into
+                            (imgUpload);
+                    imageView5.setVisibility(View.VISIBLE);
+                    imgPath = API.PIC + Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb();
+                    isHavePic = true;
+                }
+            }
+            if (Contains.sAllInfo.getData().getGrxx().getJtcy() != null) {
+                etSuozaidi.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHjszd());
+                tvLeixing2.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHjfl());
+                tvLeixing3.setText(Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk());
+            }
         }
+
     }
 
     @Override
@@ -220,12 +234,12 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 @Override
                 public void sucess(String url) {
                     Map<String, String> map = new HashMap<>();
-                    map.put("hklx", tvLeixing1.getText().toString());
+//                    map.put("hklx", tvLeixing1.getText().toString());
                     map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
-                    map.put("hkxz", tvLeixing2.getText().toString());
-                    map.put("hyzt", tvLeixing3.getText().toString());
+                    map.put("hjfl", tvLeixing2.getText().toString());
+                    map.put("hyzk", tvLeixing3.getText().toString());
                     map.put("hjszd", etSuozaidi.getText().toString());
-                    map.put("hkzp", url);
+                    map.put("hkb", url);
                     mPresenter.hukouInfo(map);
                 }
 
@@ -262,7 +276,7 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             //重新赋值
             Contains.sAllInfo = baseEntity;
-            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶") ) {
+            if (tvLeixing3.getText().toString().equals("未婚") || tvLeixing3.getText().toString().equals("丧偶")) {
                 startActivty(FamilyRegisterThirdActivity.class);
             } else if (tvLeixing3.getText().toString().equals("已婚")) {
                 startActivty(FamilyRegisterTwo1Activity.class);
@@ -283,10 +297,10 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                 if (RxTool.isFastClick(Contains.FAST_CLICK)) {
                     return;
                 }
-                if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
-                    ToastUtil.showCenterShort("请选择户籍类型");
-                    return;
-                }
+//                if (RxDataTool.isNullString(tvLeixing1.getText().toString())) {
+//                    ToastUtil.showCenterShort("请选择户籍类型");
+//                    return;
+//                }
 
                 if (RxDataTool.isNullString(tvLeixing2.getText().toString())) {
                     ToastUtil.showCenterShort("请选择家庭户口类型");
@@ -305,29 +319,39 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                     return;
                 }
                 if (isHavePic) {
-                    //表示不需要上传图片了
                     Map<String, String> map = new HashMap<>();
-                    map.put("hklx", tvLeixing1.getText().toString());
                     map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic.APP_LOGIN_TOKEN));
-                    map.put("hkxz", tvLeixing2.getText().toString());
-                    map.put("hyzt", tvLeixing3.getText().toString());
+                    map.put("hjfl", tvLeixing2.getText().toString());
+                    map.put("hyzk", tvLeixing3.getText().toString());
                     map.put("hjszd", etSuozaidi.getText().toString());
+                    map.put("hkb", Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb());
+                    if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null
+                            && Contains.sAllInfo.getData().getGrxx().getZzxx() != null && Contains.sAllInfo
+                            .getData().getGrxx().getZzxx().getYhbh() != null) {
+                        map.put("yhbh", Contains.sAllInfo.getData().getGrxx().getZzxx().getYhbh());
+                    }
                     showProgressDialog();
                     mPresenter.hukouInfo(map);
                 } else {
                     List<String> list = new ArrayList<>();
                     list.add(imgPath);
+                    showProgressDialog();
                     mPresenter.uploadPic(list, new UploadFileCallBack() {
                         @Override
                         public void sucess(List<String> url) {
                             Map<String, String> map = new HashMap<>();
-                            map.put("hklx", tvLeixing1.getText().toString());
+
                             map.put("token", RxSPTool.getString(FamilyRegisterActivity.this, ShareStatic
                                     .APP_LOGIN_TOKEN));
-                            map.put("hkxz", tvLeixing2.getText().toString());
-                            map.put("hyzt", tvLeixing3.getText().toString());
+                            map.put("hjfl", tvLeixing2.getText().toString());
+                            map.put("hyzk", tvLeixing3.getText().toString());
                             map.put("hjszd", etSuozaidi.getText().toString());
-                            map.put("hkzp", url.get(0));
+                            map.put("hkb", url.get(0));
+                            if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null
+                                    && Contains.sAllInfo.getData().getGrxx().getZzxx() != null && Contains.sAllInfo
+                                    .getData().getGrxx().getZzxx().getYhbh() != null) {
+                                map.put("yhbh", Contains.sAllInfo.getData().getGrxx().getZzxx().getYhbh());
+                            }
                             mPresenter.hukouInfo(map);
                         }
 
@@ -440,14 +464,16 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     private int opt1, opt2, opt3;
 
     private void showPickerView() {// 弹出选择器
-
+        if (options1Items.size() <= 0 || options2Items.size() <= 0 || options3Items.size() <= 0) {
+            return;
+        }
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-                opt1=options1;
-                opt2=options2;
-                opt3=options3;
+                opt1 = options1;
+                opt2 = options2;
+                opt3 = options3;
                 String tx = options1Items.get(options1).getPickerViewText() + options2Items.get(options1).get
                         (options2) + options3Items.get(options1).get(options2).get(options3);
                 etSuozaidi.setText(tx.trim());

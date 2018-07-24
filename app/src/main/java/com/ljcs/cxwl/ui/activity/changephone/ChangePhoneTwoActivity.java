@@ -105,8 +105,9 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
 
     @Override
     protected void initData() {
-        showProgressDialog();
-        initAccessTokenWithAkSk();
+        // TODO: 2018/7/23 暂时去掉身份证更换手机号码
+//        showProgressDialog();
+//        initAccessTokenWithAkSk();
         countDownTimer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

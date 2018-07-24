@@ -311,7 +311,7 @@ public class CertificationActivity extends BaseActivity implements Certification
                             Map<String, String> map = new HashMap<>();
                             map.put("token", RxSPTool.getString(CertificationActivity.this, ShareStatic
                                     .APP_LOGIN_TOKEN));
-                            map.put("sfzhm", tvIdcard.getText().toString());
+                            map.put("zjhm", tvIdcard.getText().toString());
                             map.put("mz", tvEthnic.getText().toString());
                             map.put("csrq", tvBirthday.getText().toString());
                             map.put("xm", tvName.getText().toString());
@@ -320,13 +320,13 @@ public class CertificationActivity extends BaseActivity implements Certification
                             map.put("qfjg", tvIssueAuthority.getText().toString());
                             map.put("yxq", tvData1.getText().toString() + "-" + tvData2.getText().toString());
                             map.put("sfzfm", url.get(1));
-                            map.put("dz", tvAdress.getText().toString());
+                            map.put("zz", tvAdress.getText().toString());
                             if (isChange()) {
-                                //1是修改过，2是没修改的
+                                //1是修改过，0是没修改的
                                 Logger.i("手动修改过");
                                 map.put("rgsh", "1");
                             } else {
-                                map.put("rgsh", "2");
+                                map.put("rgsh", "0");
                             }
                             mPresenter.postInfo(map);
 

@@ -219,6 +219,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                         mEt1.getText().toString().trim()));
                 Map<String, String> map = new HashMap<>();
                 map.put("sjhm", mEt1.getText().toString().trim());
+                map.put("yhsjhm", mEt1.getText().toString().trim());
                 map.put("newmm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim() + mEt1.getText()
                         .toString().trim()));
                 mPresenter.forgetPwd(map);
