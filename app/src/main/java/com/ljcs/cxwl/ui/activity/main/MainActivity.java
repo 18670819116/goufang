@@ -269,7 +269,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                ToastUtil.showCenterShort("再按一次退出欣居APP");
+                ToastUtil.showCenterShort("再按一次退出APP");
                 mExitTime = System.currentTimeMillis();
             } else {
                 finish();

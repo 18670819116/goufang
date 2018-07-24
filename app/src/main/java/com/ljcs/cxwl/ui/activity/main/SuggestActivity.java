@@ -106,7 +106,7 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
     @Override
     public void commitSuggestSuccess(CommonBean commonBean) {
         if (commonBean.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(commonBean.msg);
+            ToastUtil.showCenterShort("反馈信息提交成功");
             finish();
         } else {
             onErrorMsg(commonBean.code, commonBean.msg);
