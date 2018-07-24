@@ -6,12 +6,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.entity.ScanBean;
 
-import butterknife.BindView;
 
 
 /**
@@ -28,6 +28,8 @@ public class ShPassDialog extends Dialog {
     TextView tvDizhi;
     TextView tvTaoshu;
     TextView tvXuhao;
+    TextView tvTishi;
+    ImageView imgTishi;
     Button  btn;
 
     public ShPassDialog(Context context, int themeResId) {
@@ -61,6 +63,8 @@ public class ShPassDialog extends Dialog {
         tvXuhao = dialogView.findViewById(R.id.tv_xuhao);
         tvTaoshu = dialogView.findViewById(R.id.tv_taoshu);
         btn = dialogView.findViewById(R.id.btn);
+        tvTishi = dialogView.findViewById(R.id.tv_tishi);
+        imgTishi = dialogView.findViewById(R.id.img_tishi);
 
         setContentView(dialogView);
     }
@@ -80,5 +84,21 @@ public class ShPassDialog extends Dialog {
 
     public void setBtn(Button btn) {
         this.btn = btn;
+    }
+
+    public TextView getTvTishi() {
+        return tvTishi;
+    }
+
+    public void setTvTishi(TextView tvTishi) {
+        this.tvTishi = tvTishi;
+    }
+
+    public ImageView getImgTishi() {
+        return imgTishi;
+    }
+
+    public void setImgTishi(ImageView imgTishi) {
+        this.imgTishi = imgTishi;
     }
 }

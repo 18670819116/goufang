@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.scan.ScanActivity;
 import com.ljcs.cxwl.ui.activity.scan.contract.ScanContract;
 
@@ -64,6 +65,27 @@ public class ScanPresenter implements ScanContract.ScanContractPresenter {
             public void accept(Throwable throwable) throws Exception {
                 mView.closeProgressDialog();
                 //onError
+                throwable.printStackTrace();
+            }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+                //onComplete
+            }
+        });
+        mCompositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void scanGet(Map map) {
+        Disposable disposable = httpAPIWrapper.scanGet(map).subscribe(new Consumer<CommonBean>() {
+            @Override
+            public void accept(CommonBean user) throws Exception {
+                mView.scanGetSuccess(user);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
                 throwable.printStackTrace();
             }
         }, new Action() {

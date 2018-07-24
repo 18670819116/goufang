@@ -1,6 +1,7 @@
 package com.ljcs.cxwl.ui.activity.scan.contract;
 
 import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 
@@ -25,6 +26,8 @@ public interface ScanContract {
         void closeProgressDialog();
 
         void scanSuccess(BaseEntity baseEntity);
+
+        void scanGetSuccess(CommonBean baseEntity);
     }
 
     interface ScanContractPresenter extends BasePresenter {
@@ -34,5 +37,7 @@ public interface ScanContract {
 //        void getBusinessInfo(Map map);
 
         void scan(Map map);
+
+        void scanGet(Map map);
     }
 }

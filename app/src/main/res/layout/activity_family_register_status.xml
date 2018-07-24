@@ -25,13 +25,13 @@
                 >
 
                 <LinearLayout
-                    android:visibility="invisible"
                     android:id="@+id/bg_head1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y289"
                     android:background="@mipmap/ic_sh_bg1"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
+                    android:visibility="invisible"
                     >
 
                     <ImageView
@@ -144,6 +144,7 @@
                             android:gravity="center"
                             android:text="查看审核反馈"
                             android:textColor="@color/white"
+                            android:visibility="gone"
                             />
 
                         <TextView
@@ -177,7 +178,7 @@
                     android:paddingBottom="@dimen/y28"
                     android:paddingLeft="@dimen/x20"
                     android:paddingRight="@dimen/x20"
-            >
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -257,8 +258,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"
                         android:gravity="center_vertical"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -445,10 +446,10 @@
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/y28"
-                    android:visibility="gone"
                     android:paddingLeft="@dimen/x20"
                     android:paddingRight="@dimen/x20"
-                    android:paddingTop="@dimen/y28">
+                    android:paddingTop="@dimen/y28"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -528,8 +529,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"
                         android:gravity="center_vertical"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -573,6 +574,7 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"
@@ -596,6 +598,7 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"
@@ -784,11 +787,11 @@
                     android:layout_marginTop="@dimen/y26"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:visibility="gone"
                     android:paddingBottom="@dimen/y28"
                     android:paddingLeft="@dimen/x20"
                     android:paddingRight="@dimen/x20"
-                    android:paddingTop="@dimen/y28">
+                    android:paddingTop="@dimen/y28"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -886,6 +889,7 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/y70"

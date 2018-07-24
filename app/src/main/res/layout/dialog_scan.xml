@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/img_tishi"
                 android:layout_width="@dimen/x112"
                 android:layout_height="@dimen/y137"
                 android:layout_marginTop="@dimen/y31"
@@ -26,9 +27,10 @@
                 />
 
             <TextView
+                android:id="@+id/tv_tishi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="您已存在认购项目！无法多次申请"
+                android:text="您已存在认购项目！请勿重复申请"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
         </LinearLayout>

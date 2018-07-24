@@ -52,6 +52,7 @@ import static com.ljcs.cxwl.data.api.API.URL_POST_MATESINFO_SAVE;
 import static com.ljcs.cxwl.data.api.API.URL_POST_MATESINFO_ZINV;
 import static com.ljcs.cxwl.data.api.API.URL_POST_REGISTER;
 import static com.ljcs.cxwl.data.api.API.URL_POST_SCAN;
+import static com.ljcs.cxwl.data.api.API.URL_POST_SCAN_GET;
 
 
 /**
@@ -155,6 +156,10 @@ public interface HttpApi {
     @POST(URL_POST_SCAN)
     @FormUrlEncoded
     Observable<BaseEntity> scan(@FieldMap Map<String, RequestBody> params);
+
+    @POST(URL_POST_SCAN_GET)
+    @FormUrlEncoded
+    Observable<CommonBean> scanGet(@FieldMap Map<String, RequestBody> params);
 
     @POST(URL_POST_IS_SCAN)
     @FormUrlEncoded

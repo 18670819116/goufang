@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/y34"
-                        android:text="关于长沙购买首套刚需房政策"
+                        android:text="长沙市住房和城乡建设委员会"
                         />
                 </LinearLayout>
 

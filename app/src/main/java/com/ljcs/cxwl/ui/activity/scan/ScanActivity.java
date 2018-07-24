@@ -12,6 +12,7 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
+import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.scan.component.DaggerScanComponent;
 import com.ljcs.cxwl.ui.activity.scan.contract.ScanContract;
 import com.ljcs.cxwl.ui.activity.scan.module.ScanModule;
@@ -49,6 +50,7 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     private int REQUEST_IMAGE = 160;//相册
     private boolean isLight;
     private SureDialog dialog;
+    private String content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,14 +100,16 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
             Logger.i("result" + result);
-            if (dialog == null || !dialog.isShowing()) {
-                showDialog(result);
-            }
+            content = result;
+            Map<String, String> map = new HashMap<>();
+            map.put("token", RxSPTool.getString(ScanActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+            map.put("smnr", result);
+            mPresenter.scanGet(map);
 
             //开启重新扫码
-            Message obtain = Message.obtain();
-            obtain.what = R.id.restart_preview;
-            captureFragment.getHandler().sendMessageDelayed(obtain, 1500);
+//            Message obtain = Message.obtain();
+//            obtain.what = R.id.restart_preview;
+//            captureFragment.getHandler().sendMessageDelayed(obtain, 2000);
 
         }
 
@@ -118,7 +122,7 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
 
     private void showDialog(final String result) {
         dialog = new SureDialog(this);
-        dialog.getContentView().setText("正在读取您的购房资格审查数据，\n是否同意");
+        dialog.getContentView().setText(result+"正在读取您的购房资格审查数据,是否同意");
         dialog.getCancelView().setText("不同意");
         dialog.getCancelView().setTextColor(getResources().getColor(R.color.color_333333));
         dialog.getSureView().setText("同意");
@@ -137,7 +141,7 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
                 dialog.dismiss();
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("token", RxSPTool.getString(ScanActivity.this, ShareStatic.APP_LOGIN_TOKEN));
-                map.put("smnr", result);
+                map.put("smnr", content);
                 mPresenter.scan(map);
             }
         });
@@ -169,10 +173,25 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
     @Override
     public void scanSuccess(BaseEntity baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
-            ToastUtil.showCenterShort(baseEntity.msg);
+//            ToastUtil.showCenterShort(baseEntity.msg);
+            setResult(100);
             finish();
         } else {
             onErrorMsg(baseEntity.code, baseEntity.msg);
+            finish();
+        }
+
+    }
+
+    @Override
+    public void scanGetSuccess(CommonBean baseEntity) {
+        if (baseEntity.code == Contains.REQUEST_SUCCESS) {
+            if (dialog == null || !dialog.isShowing()) {
+                showDialog(baseEntity.getData());
+            }
+        } else {
+            onErrorMsg(baseEntity.code, baseEntity.msg);
+            finish();
         }
 
     }

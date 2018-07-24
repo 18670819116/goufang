@@ -31,10 +31,8 @@ import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.PhoneUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
-import com.ljcs.cxwl.view.ShPassDialog;
 import com.ljcs.cxwl.view.SureDialog;
 import com.orhanobut.logger.Logger;
-import com.vondear.rxtool.RxDeviceTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
 
@@ -81,8 +79,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         ButterKnife.bind(this);
         autolayout.setVisibility(View.GONE);
         relayouHead.setPadding(0, UIUtils.getStatusBarHeight(this), 0, 0);
-//        ShPassDialog dialog = new ShPassDialog(this);
-//        dialog.show();
+
     }
 
     @Override

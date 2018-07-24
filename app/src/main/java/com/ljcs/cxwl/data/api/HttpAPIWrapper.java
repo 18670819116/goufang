@@ -174,6 +174,9 @@ public class HttpAPIWrapper {
     public Observable<BaseEntity> scan(Map data) {
         return wrapper(mHttpAPI.scan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+    public Observable<CommonBean> scanGet(Map data) {
+        return wrapper(mHttpAPI.scanGet(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
+    }
     public Observable<ScanBean> isScan(Map data) {
         return wrapper(mHttpAPI.isScan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
@@ -306,9 +309,9 @@ public class HttpAPIWrapper {
     public static Map addParams(Map<String, String> data) {
         //添加统一的参数的地方
         //// TODO: 2018/7/11 打印传的参数
-        for (Map.Entry<String, String> entry : data.entrySet()) {
-            Log.w("map", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
-        }
+//        for (Map.Entry<String, String> entry : data.entrySet()) {
+//            Log.w("map", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//        }
         return data;
     }
 

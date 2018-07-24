@@ -1,5 +1,6 @@
 package com.ljcs.cxwl.ui.activity.other;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
@@ -342,7 +343,9 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     public void isScanSuccess(ScanBean baseEntity) {
         if (baseEntity.code == Contains.REQUEST_SUCCESS) {
             if (baseEntity.getData() == null) {
-                startActivty(ScanActivity.class);
+                Intent intent = new Intent(this, ScanActivity.class);
+                startActivityForResult(intent, 100);
+//                startActivty(ScanActivity.class);
             } else {
                 final ShPassDialog dialog = new ShPassDialog(this);
                 dialog.setCancelable(false);
@@ -353,6 +356,13 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                         dialog.dismiss();
                     }
                 });
+                if (flag==1){
+                    dialog.getTvTishi().setText("恭喜您 已成功认购该项目！");
+                    dialog.getImgTishi().setImageResource(R.mipmap.ic_sh_pass11);
+                }else {
+                    dialog.getTvTishi().setText("您已存在认购项目！请勿重复申请");
+                    dialog.getImgTishi().setImageResource(R.mipmap.ic_sh_pass);
+                }
                 dialog.show();
             }
         } else {
@@ -448,5 +458,16 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         });
 
 
+    }
+
+    private int flag = 0;//弹框提示类型
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == 100) {
+            mPresenter.isScan();
+            flag = 1;
+        }
     }
 }

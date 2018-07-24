@@ -508,6 +508,7 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
     private int opt1, opt2, opt3;
 
     private void showPickerView() {// 弹出选择器
+        RxKeyboardTool.hideSoftInput(this);
         if (options1Items.size() <= 0 || options2Items.size() <= 0 || options3Items.size() <= 0) {
             return;
         }

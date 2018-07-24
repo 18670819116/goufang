@@ -54,6 +54,7 @@ public interface API {
     String URL_POST_COMMIT_SUGGEST = "login/zjw/user/addfeedback";//提交意见
     String URL_POST_COMMIT_SHSUGGEST = "login/zjw/user/addappeals";//提交审核意见
     String URL_POST_SCAN = "login/zjw/scan/save";//提交二维码扫描信息
+    String URL_POST_SCAN_GET = "login/zjw/scan/get";//获取二维码项目名称
     String URL_POST_IS_SCAN = "login/zjw/scan/kprg";//查询是否提交二维码扫描信息
     String URL_POST_CHANGE_PHONE = "login/zjw/user/updsjhm";//修改手机号码
 

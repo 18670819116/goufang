@@ -217,7 +217,8 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
-        if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, tvPhone.getText().toString())) {
+        if (!RxDataTool.isNullString(tvPhone.getText().toString()) && !StringUitl.isMatch(RxConstTool
+                .REGEX_MOBILE_EXACT, tvPhone.getText().toString())) {
             ToastUtil.showCenterShort("手机号码不正确");
             return false;
         }
@@ -386,9 +387,9 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
                                 map.put("hjszd", tvHjszd.getText().toString());
                                 map.put("lxdh", tvPhone.getText().toString());
                                 map.put("lhz", url.get(0));
-                                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() != null &&
-                                        Contains.sAllInfo.getData().getPoxx().getJtcy() != null && Contains.sAllInfo.getData
-                                        ().getPoxx().getJtcy().getYhbh() != null) {
+                                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getPoxx() !=
+                                        null && Contains.sAllInfo.getData().getPoxx().getJtcy() != null && Contains
+                                        .sAllInfo.getData().getPoxx().getJtcy().getYhbh() != null) {
                                     map.put("yhbh", Contains.sAllInfo.getData().getPoxx().getJtcy().getYhbh());
                                 }
                                 mPresenter.matesInfo(map);

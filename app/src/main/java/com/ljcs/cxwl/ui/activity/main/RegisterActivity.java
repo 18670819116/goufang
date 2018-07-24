@@ -223,7 +223,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 map.put("jzxx", PhoneUtils.getjizhaninfo(this));//基站信息
                 map.put("uuid", PhoneUtils.getDeviceId(this));//手机唯一标识
                 map.put("yys", PhoneUtils.getOperators(this));//移动运营商
-                map.put("gps", PhoneUtils.getLngAndLat(this));//GPS
+                map.put("gps", PhoneUtils.getLocation(this));//GPS
                 Logger.i( RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
                 map.put("yhsjhm", mEt1.getText().toString().trim());
                 map.put("sjhm", mEt1.getText().toString().trim());

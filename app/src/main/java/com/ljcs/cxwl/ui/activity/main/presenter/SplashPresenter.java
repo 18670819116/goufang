@@ -252,7 +252,7 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
             map.put("scwl", PhoneUtils.getCurrentNetType(mActivity));//所处网络
             map.put("jzxx", PhoneUtils.getjizhaninfo(mActivity));//基站信息
             map.put("yys", PhoneUtils.getOperators(mActivity));//移动运营商
-            map.put("gps", PhoneUtils.getLngAndLat(mActivity));//GPS
+            map.put("gps", PhoneUtils.getLocation(mActivity));//GPS
             map.put("uuid", PhoneUtils.getDeviceId(mActivity));//手机唯一标识
             map.put("yhsjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
             map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
