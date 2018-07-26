@@ -23,9 +23,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#百度ocr
 -keep class com.baidu.ocr.sdk.**{*;}
 -dontwarn com.baidu.ocr.**
+#权限
 -dontwarn com.yanzhenjie.permission.**
+#bugly
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
 -keep class android.support.**{*;}
@@ -75,3 +78,12 @@
         -keep public class com.ljcs.cxwl.R$*{
         public static final int *;
         }
+#万能适配器
+-keep class com.chad.library.adapter.** {
+*;
+}
+-keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
+-keep public class * extends com.chad.library.adapter.base.BaseViewHolder
+-keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
+     <init>(...);
+}

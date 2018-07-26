@@ -1064,4 +1064,10 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
         }
         return detail;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeProgressDialog();
+    }
 }

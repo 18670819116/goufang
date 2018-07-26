@@ -52,21 +52,17 @@ public class PersonCenterPresenter implements PersonCenterContract.PersonCenterC
 
     @Override
     public void loginOut(Map map) {
-        mView.showProgressDialog();
         Disposable disposable = httpAPIWrapper.loginOut(map).subscribe(new Consumer<BaseEntity>() {
             @Override
             public void accept(BaseEntity user) throws Exception {
                 //isSuccesse
                 mView.loginOutSuccess(user);
-                mView.closeProgressDialog();
             }
         }, new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
                 //onError
                 throwable.printStackTrace();
-                mView.closeProgressDialog();
-                //ToastUtil.show(mActivity, mActivity.getString(R.string.loading_failed_1));
             }
         }, new Action() {
             @Override

@@ -440,6 +440,7 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                 dialog.show();
                 break;
             case R.id.tv_tijiaozige:
+                flag=0;
                 mPresenter.isScan();
 //
                 break;
@@ -466,8 +467,9 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == 100) {
-            mPresenter.isScan();
             flag = 1;
+            mPresenter.isScan();
+
         }
     }
 }
