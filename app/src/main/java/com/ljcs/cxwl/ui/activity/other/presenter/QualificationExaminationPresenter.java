@@ -16,20 +16,23 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of QualificationExaminationActivity
  * @date 2018/06/27 16:49:13
  */
-public class QualificationExaminationPresenter implements QualificationExaminationContract.QualificationExaminationContractPresenter{
+public class QualificationExaminationPresenter implements QualificationExaminationContract
+        .QualificationExaminationContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final QualificationExaminationContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private QualificationExaminationActivity mActivity;
 
     @Inject
-    public QualificationExaminationPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull QualificationExaminationContract.View view, QualificationExaminationActivity activity) {
+    public QualificationExaminationPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull
+            QualificationExaminationContract.View view, QualificationExaminationActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +41,7 @@ public class QualificationExaminationPresenter implements QualificationExaminati
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

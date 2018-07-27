@@ -26,8 +26,7 @@ import butterknife.OnClick;
 
 public class AboutCertificationActivity extends BaseActivity implements AboutCertificationContract.View {
 
-    @Inject
-    AboutCertificationPresenter mPresenter;
+    @Inject AboutCertificationPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class AboutCertificationActivity extends BaseActivity implements AboutCer
 
     @Override
     protected void initView() {
-        needFront=true;
+        needFront = true;
         setContentView(R.layout.activity_about_certification);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,7 +71,7 @@ public class AboutCertificationActivity extends BaseActivity implements AboutCer
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
-        if (RxTool.isFastClick(Contains.FAST_CLICK)){
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             return;
         }
         startActivty(CertificationActivity.class);

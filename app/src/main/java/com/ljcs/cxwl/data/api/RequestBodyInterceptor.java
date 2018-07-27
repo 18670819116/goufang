@@ -38,8 +38,7 @@ public final class RequestBodyInterceptor implements Interceptor {
 
         Request.Builder orgRequestBuilder = orgRequest.newBuilder()
                 //请求定制：添加请求头
-                .addHeader("Accept", "*/*").addHeader
-                        ("content-type", "application/json;charset=UTF-8");
+                .addHeader("Accept", "*/*").addHeader("content-type", "application/json;charset=UTF-8");
 
         if (orgRequest.body() == null) {
             return chain.proceed(orgRequest);

@@ -22,6 +22,7 @@ public interface SplashContract {
          *
          */
         void closeProgressDialog();
+
         /**
          * 登录成功，跳转到主页面
          */
@@ -43,6 +44,7 @@ public interface SplashContract {
 //         *
 //         */
 //        void getBusinessInfo(Map map);
+
         /**
          * 查询是否已经记录了用户信息
          */
@@ -50,6 +52,7 @@ public interface SplashContract {
 
         /**
          * 登录请求
+         *
          * @param map
          */
         void login(Map map);

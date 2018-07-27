@@ -26,7 +26,8 @@ public class ChangePhoneOneModule {
 
     @Provides
     @ActivityScope
-    public ChangePhoneOnePresenter provideChangePhoneOnePresenter(HttpAPIWrapper httpAPIWrapper, ChangePhoneOneActivity mActivity) {
+    public ChangePhoneOnePresenter provideChangePhoneOnePresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                  ChangePhoneOneActivity mActivity) {
         return new ChangePhoneOnePresenter(httpAPIWrapper, mView, mActivity);
     }
 

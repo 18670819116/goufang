@@ -3,6 +3,7 @@ package com.ljcs.cxwl.ui.activity.main.contract;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
 /**
  * @author xlei
  * @Package The contract for AboutOurActivity
@@ -30,6 +31,6 @@ public interface AboutOurContract {
 //         */
 //        void getBusinessInfo(Map map);
 
-        void  aboutMe();
+        void aboutMe();
     }
 }

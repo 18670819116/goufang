@@ -117,6 +117,8 @@ android {
         compile 'com.tencent.bugly:nativecrashreport:latest.release'
         //二维码扫描
         compile 'cn.yipianfengye.android:zxing-library:2.2'
+        //banner
+        compile 'com.youth.banner:banner:1.4.10'  //最新版本
         //rxtools
         compile 'com.github.vondear.RxTool:RxKit:v2.0.4'
 //        //UI库

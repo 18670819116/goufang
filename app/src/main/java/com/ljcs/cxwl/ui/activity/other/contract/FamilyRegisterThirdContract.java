@@ -28,10 +28,10 @@ public interface FamilyRegisterThirdContract {
     }
 
     interface FamilyRegisterThirdContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
-void allInfo(Map map);
+        void allInfo(Map map);
     }
 }

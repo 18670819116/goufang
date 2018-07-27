@@ -24,8 +24,8 @@ import io.reactivex.functions.Consumer;
  */
 public class PersonCenterPresenter implements PersonCenterContract.PersonCenterContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final PersonCenterContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private PersonCenterActivity mActivity;
 

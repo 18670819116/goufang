@@ -10,7 +10,6 @@ import com.ljcs.cxwl.ui.activity.other.component.DaggerQualificationExaminationC
 import com.ljcs.cxwl.ui.activity.other.contract.QualificationExaminationContract;
 import com.ljcs.cxwl.ui.activity.other.module.QualificationExaminationModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.QualificationExaminationPresenter;
-import com.vondear.rxtool.RxDataTool;
 import com.vondear.rxtool.RxTool;
 
 import javax.inject.Inject;
@@ -27,8 +26,7 @@ import butterknife.OnClick;
 
 public class QualificationExaminationActivity extends BaseActivity implements QualificationExaminationContract.View {
 
-    @Inject
-    QualificationExaminationPresenter mPresenter;
+    @Inject QualificationExaminationPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

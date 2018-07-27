@@ -12,7 +12,6 @@ import com.ljcs.cxwl.ui.activity.other.FamilyRegisterStatusActivity;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.ToastUtil;
-import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxDataTool;
 
 import org.json.JSONObject;

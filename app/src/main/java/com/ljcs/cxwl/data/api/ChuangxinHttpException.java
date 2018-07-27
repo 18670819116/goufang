@@ -11,14 +11,14 @@ public class ChuangxinHttpException extends Exception {
     private String mRetCode;
     private String mRetMsg;
 
-    public ChuangxinHttpException(long userCode , String retCode , String retMsg){
+    public ChuangxinHttpException(long userCode, String retCode, String retMsg) {
         super("HitaoHttpException => userCode: " + userCode + ",retCode: " + retCode + ",retMsg: " + retMsg);
         mUserCode = userCode;
         mRetCode = retCode;
         mRetMsg = retMsg;
     }
 
-    public ChuangxinHttpException(){
+    public ChuangxinHttpException() {
         super("HitaoHttpException => response is null");
     }
 

@@ -6,9 +6,7 @@ import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.SuggestActivity;
 import com.ljcs.cxwl.ui.activity.main.contract.SuggestContract;
-import com.orhanobut.logger.Logger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -24,20 +22,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of SuggestActivity
  * @date 2018/07/06 15:46:33
  */
-public class SuggestPresenter implements SuggestContract.SuggestContractPresenter{
+public class SuggestPresenter implements SuggestContract.SuggestContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final SuggestContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private SuggestActivity mActivity;
 
     @Inject
-    public SuggestPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull SuggestContract.View view, SuggestActivity activity) {
+    public SuggestPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull SuggestContract.View view,
+                            SuggestActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -46,7 +46,7 @@ public class SuggestPresenter implements SuggestContract.SuggestContractPresente
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

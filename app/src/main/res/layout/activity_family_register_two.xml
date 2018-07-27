@@ -150,7 +150,7 @@
                             android:layout_marginTop="@dimen/y45"
                             android:scaleType="fitXY"
                             android:src="@mipmap/ic_img2"
-                           />
+                            />
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -436,9 +436,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
 
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">

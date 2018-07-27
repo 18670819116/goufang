@@ -26,7 +26,8 @@ public class CertificationOneModule {
 
     @Provides
     @ActivityScope
-    public CertificationOnePresenter provideCertificationOnePresenter(HttpAPIWrapper httpAPIWrapper, CertificationOneActivity mActivity) {
+    public CertificationOnePresenter provideCertificationOnePresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                      CertificationOneActivity mActivity) {
         return new CertificationOnePresenter(httpAPIWrapper, mView, mActivity);
     }
 

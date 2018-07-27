@@ -26,7 +26,9 @@ public class CertificationStatusInfoModule {
 
     @Provides
     @ActivityScope
-    public CertificationStatusInfoPresenter provideCertificationStatusInfoPresenter(HttpAPIWrapper httpAPIWrapper, CertificationStatusInfoActivity mActivity) {
+    public CertificationStatusInfoPresenter provideCertificationStatusInfoPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                                    CertificationStatusInfoActivity
+                                                                                            mActivity) {
         return new CertificationStatusInfoPresenter(httpAPIWrapper, mView, mActivity);
     }
 

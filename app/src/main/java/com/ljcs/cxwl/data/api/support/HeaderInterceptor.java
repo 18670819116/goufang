@@ -35,20 +35,17 @@ public final class HeaderInterceptor implements Interceptor {
         Request original = chain.request();
 
         String url = original.url().toString();
-        if (url.contains("book/") ||
-                url.contains("book-list/") ||
-                url.contains("toc/") ||
-                url.contains("post/") ||
+        if (url.contains("book/") || url.contains("book-list/") || url.contains("toc/") || url.contains("post/") ||
                 url.contains("user/")) {
-            Request request = original.newBuilder()
-                    .addHeader("User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]") // 不能转UTF-8
-                    .addHeader("X-User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
+            Request request = original.newBuilder().addHeader("User-Agent", "ZhuiShuShenQi/3.40[preload=false;" +
+                    "locale=zh_CN;clientidbase=android-nvidia]") // 不能转UTF-8
+                    .addHeader("X-User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;" +
+                            "clientidbase=android-nvidia]")
 //                    .addHeader("X-Device-Id", DeviceUtils.getIMEI(xmcxApplication.applicationContext))
 
-                    .addHeader("Connection", "Keep-Alive")
-                    .addHeader("If-None-Match", "W/\"2a04-4nguJ+XAaA1yAeFHyxVImg\"")
-                    .addHeader("If-Modified-Since", "Tue, 02 Aug 2016 03:20:06 UTC")
-                    .build();
+                    .addHeader("Connection", "Keep-Alive").addHeader("If-None-Match",
+                            "W/\"2a04-4nguJ+XAaA1yAeFHyxVImg\"").addHeader("If-Modified-Since", "Tue, 02 Aug 2016 " +
+                            "03:20:06 UTC").build();
             return chain.proceed(request);
         }
         return chain.proceed(original);

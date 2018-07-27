@@ -27,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class CertificationPresenter implements CertificationContract.CertificationContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final CertificationContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private CertificationActivity mActivity;
 
@@ -55,7 +55,7 @@ public class CertificationPresenter implements CertificationContract.Certificati
 
     @Override
     public void uploadPic(List<String> list, UploadFileCallBack callBack) {
-        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper, list, callBack);
 //        RequestBody fileRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), new File(filePath));
 //        MultipartBody.Part body = MultipartBody.Part.createFormData("uploadFile", new File(filePath).getName(),
 //                fileRequestBody);

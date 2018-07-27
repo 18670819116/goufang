@@ -1,6 +1,5 @@
 package com.ljcs.cxwl.adapter;
 
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 

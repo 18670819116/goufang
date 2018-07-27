@@ -41,78 +41,8 @@ import okio.BufferedSource;
  */
 public final class LoggingInterceptor implements Interceptor {
     private static final Charset UTF8 = Charset.forName("UTF-8");
-
-    public enum Level {
-        /**
-         * No logs.
-         */
-        NONE,
-        /**
-         * Logs request and response lines.
-         * <p/>
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting HTTP/1.1 (3-byte body)
-         * <p/>
-         * <-- HTTP/1.1 200 OK (22ms, 6-byte body)
-         * }</pre>
-         */
-        BASIC,
-        /**
-         * Logs request and response lines and their respective headers.
-         * <p/>
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting HTTP/1.1
-         * Host: example.com
-         * Content-Type: plain/text
-         * Content-Length: 3
-         * --> END POST
-         * <p/>
-         * <-- HTTP/1.1 200 OK (22ms)
-         * Content-Type: plain/text
-         * Content-Length: 6
-         * <-- END HTTP
-         * }</pre>
-         */
-        HEADERS,
-        /**
-         * Logs request and response lines and their respective headers and bodies (if present).
-         * <p/>
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting HTTP/1.1
-         * Host: example.com
-         * Content-Type: plain/text
-         * Content-Length: 3
-         * <p/>
-         * Hi?
-         * --> END GET
-         * <p/>
-         * <-- HTTP/1.1 200 OK (22ms)
-         * Content-Type: plain/text
-         * Content-Length: 6
-         * <p/>
-         * Hello!
-         * <-- END HTTP
-         * }</pre>
-         */
-        BODY
-    }
-
-    public interface Logger {
-        void log(String message);
-
-        /**
-         * A {@link Logger} defaults output appropriate for the current platform.
-         */
-        Logger DEFAULT = new Logger() {
-            @Override
-            public void log(String message) {
-                //Platform.get().log(4, message, null);
-            }
-        };
-    }
+    private final Logger logger;
+    private volatile Level level = Level.NONE;
 
     public LoggingInterceptor() {
         this(Logger.DEFAULT);
@@ -122,9 +52,13 @@ public final class LoggingInterceptor implements Interceptor {
         this.logger = logger;
     }
 
-    private final Logger logger;
+    private static String protocol(Protocol protocol) {
+        return protocol == Protocol.HTTP_1_0 ? "HTTP/1.0" : "HTTP/1.1";
+    }
 
-    private volatile Level level = Level.NONE;
+    public Level getLevel() {
+        return level;
+    }
 
     /**
      * Change the level at which this interceptor logs.
@@ -133,10 +67,6 @@ public final class LoggingInterceptor implements Interceptor {
         if (level == null) throw new NullPointerException("level == null. Use Level.NONE instead.");
         this.level = level;
         return this;
-    }
-
-    public Level getLevel() {
-        return level;
     }
 
     @Override
@@ -156,8 +86,7 @@ public final class LoggingInterceptor implements Interceptor {
 
         Connection connection = chain.connection();
         Protocol protocol = connection != null ? connection.protocol() : Protocol.HTTP_1_1;
-        String requestStartMessage =
-                "--> " + request.method() + ' ' + request.url() + ' ' + protocol(protocol);
+        String requestStartMessage = "--> " + request.method() + ' ' + request.url() + ' ' + protocol(protocol);
         if (!logHeaders && hasRequestBody) {
             requestStartMessage += " (" + requestBody.contentLength() + "-byte body)";
         }
@@ -201,8 +130,7 @@ public final class LoggingInterceptor implements Interceptor {
                 logger.log("");
                 logger.log(buffer.readString(charset));
 
-                logger.log(
-                        "--> END " + request.method() + " (" + requestBody.contentLength() + "-byte body)");
+                logger.log("--> END " + request.method() + " (" + requestBody.contentLength() + "-byte body)");
             }
         }
 
@@ -213,17 +141,8 @@ public final class LoggingInterceptor implements Interceptor {
         ResponseBody responseBody = response.body();
         long contentLength = responseBody.contentLength();
         String bodySize = contentLength != -1 ? contentLength + "-byte" : "unknown-length";
-        logger.log("<-- "
-                + response.code()
-                + ' '
-                + response.message()
-                + ' '
-                + response.request().url()
-                + " ("
-                + tookMs
-                + "ms"
-                + (!logHeaders ? ", " + bodySize + " body" : "")
-                + ')');
+        logger.log("<-- " + response.code() + ' ' + response.message() + ' ' + response.request().url() + " (" +
+                tookMs + "ms" + (!logHeaders ? ", " + bodySize + " body" : "") + ')');
 
         if (logHeaders) {
             Headers headers = response.headers();
@@ -263,7 +182,72 @@ public final class LoggingInterceptor implements Interceptor {
         return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity");
     }
 
-    private static String protocol(Protocol protocol) {
-        return protocol == Protocol.HTTP_1_0 ? "HTTP/1.0" : "HTTP/1.1";
+    public enum Level {
+        /**
+         * No logs.
+         */
+        NONE, /**
+         * Logs request and response lines.
+         * <p/>
+         * <p>Example:
+         * <pre>{@code
+         * --> POST /greeting HTTP/1.1 (3-byte body)
+         * <p/>
+         * <-- HTTP/1.1 200 OK (22ms, 6-byte body)
+         * }</pre>
+         */
+        BASIC, /**
+         * Logs request and response lines and their respective headers.
+         * <p/>
+         * <p>Example:
+         * <pre>{@code
+         * --> POST /greeting HTTP/1.1
+         * Host: example.com
+         * Content-Type: plain/text
+         * Content-Length: 3
+         * --> END POST
+         * <p/>
+         * <-- HTTP/1.1 200 OK (22ms)
+         * Content-Type: plain/text
+         * Content-Length: 6
+         * <-- END HTTP
+         * }</pre>
+         */
+        HEADERS, /**
+         * Logs request and response lines and their respective headers and bodies (if present).
+         * <p/>
+         * <p>Example:
+         * <pre>{@code
+         * --> POST /greeting HTTP/1.1
+         * Host: example.com
+         * Content-Type: plain/text
+         * Content-Length: 3
+         * <p/>
+         * Hi?
+         * --> END GET
+         * <p/>
+         * <-- HTTP/1.1 200 OK (22ms)
+         * Content-Type: plain/text
+         * Content-Length: 6
+         * <p/>
+         * Hello!
+         * <-- END HTTP
+         * }</pre>
+         */
+        BODY
+    }
+
+    public interface Logger {
+        /**
+         * A {@link Logger} defaults output appropriate for the current platform.
+         */
+        Logger DEFAULT = new Logger() {
+            @Override
+            public void log(String message) {
+                //Platform.get().log(4, message, null);
+            }
+        };
+
+        void log(String message);
     }
 }

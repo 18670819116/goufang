@@ -1,7 +1,5 @@
 package com.ljcs.cxwl.data.api;
 
-import android.util.Log;
-
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.ljcs.cxwl.entity.AllInfo;
@@ -47,11 +45,68 @@ import okhttp3.MultipartBody;
  */
 public class HttpAPIWrapper {
 
+    /**
+     * 给任何Http的Observable加上通用的线程调度器
+     */
+    private static final ObservableTransformer SCHEDULERS_TRANSFORMER = new ObservableTransformer() {
+        @Override
+        public ObservableSource apply(@NonNull Observable upstream) {
+            return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
+    };
     private HttpApi mHttpAPI;
 
     @Inject
     public HttpAPIWrapper(HttpApi mHttpAPI) {
         this.mHttpAPI = mHttpAPI;
+    }
+
+    /**
+     * 给任何Http的Observable加上在Service中运行的线程调度器
+     */
+    public static <T> ObservableTransformer<T, T> getSchedulerstransFormerToService() {
+        return new ObservableTransformer<T, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
+    //需要额外的添加其他的参数进去，所以把原有的参数和额外的参数通过这个方法一起添加进去.
+    public static Map addParams(Map<String, String> data) {
+        //添加统一的参数的地方
+        //// TODO: 2018/7/11 打印传的参数
+//        for (Map.Entry<String, String> entry : data.entrySet()) {
+//            Log.w("map", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//        }
+        return data;
+    }
+
+    //需要额外的添加其他的参数进去，所以把原有的参数和额外的参数通过这个方法一起添加进去.
+    public static String addParams2String(Map<String, String> data) {
+        //添加统一的参数的地方
+        JsonObject js = new JsonObject();
+        LinkedHashMap<String, String> stampData = (LinkedHashMap<String, String>) MD5Util.getStamp();
+        Iterator<Map.Entry<String, String>> itStamp = stampData.entrySet().iterator();
+        while (itStamp.hasNext()) {
+            Map.Entry<String, String> entry = itStamp.next();
+            js.addProperty(entry.getKey(), entry.getValue());
+        }
+        Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, String> entry = it.next();
+            js.addProperty(entry.getKey(), entry.getValue());
+        }
+        String temp = js.toString();
+        byte[] encryptBytes = new byte[0];
+        try {
+            encryptBytes = RSAUtil.encryptByPublicKey(temp.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String encryStr = new String(encryptBytes);
+        return encryStr;
     }
 
     //登陆
@@ -174,25 +229,18 @@ public class HttpAPIWrapper {
     public Observable<BaseEntity> scan(Map data) {
         return wrapper(mHttpAPI.scan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     public Observable<CommonBean> scanGet(Map data) {
         return wrapper(mHttpAPI.scanGet(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     public Observable<ScanBean> isScan(Map data) {
         return wrapper(mHttpAPI.isScan(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
+
     public Observable<BaseEntity> changePhone(Map data) {
         return wrapper(mHttpAPI.changePhone(addParams(data))).compose(SCHEDULERS_TRANSFORMER);
     }
-
-    /**
-     * 给任何Http的Observable加上通用的线程调度器
-     */
-    private static final ObservableTransformer SCHEDULERS_TRANSFORMER = new ObservableTransformer() {
-        @Override
-        public ObservableSource apply(@NonNull Observable upstream) {
-            return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-        }
-    };
 
     /**
      * 根据Http的response中关于状态码的描述，自定义生成本地的Exception
@@ -291,54 +339,6 @@ public class HttpAPIWrapper {
                 ToastUtil.displayShortToast(errorText);
             }
         });
-    }
-
-    /**
-     * 给任何Http的Observable加上在Service中运行的线程调度器
-     */
-    public static <T> ObservableTransformer<T, T> getSchedulerstransFormerToService() {
-        return new ObservableTransformer<T, T>() {
-            @Override
-            public ObservableSource<T> apply(Observable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
-
-    //需要额外的添加其他的参数进去，所以把原有的参数和额外的参数通过这个方法一起添加进去.
-    public static Map addParams(Map<String, String> data) {
-        //添加统一的参数的地方
-        //// TODO: 2018/7/11 打印传的参数
-//        for (Map.Entry<String, String> entry : data.entrySet()) {
-//            Log.w("map", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
-//        }
-        return data;
-    }
-
-    //需要额外的添加其他的参数进去，所以把原有的参数和额外的参数通过这个方法一起添加进去.
-    public static String addParams2String(Map<String, String> data) {
-        //添加统一的参数的地方
-        JsonObject js = new JsonObject();
-        LinkedHashMap<String, String> stampData = (LinkedHashMap<String, String>) MD5Util.getStamp();
-        Iterator<Map.Entry<String, String>> itStamp = stampData.entrySet().iterator();
-        while (itStamp.hasNext()) {
-            Map.Entry<String, String> entry = itStamp.next();
-            js.addProperty(entry.getKey(), entry.getValue());
-        }
-        Iterator<Map.Entry<String, String>> it = data.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, String> entry = it.next();
-            js.addProperty(entry.getKey(), entry.getValue());
-        }
-        String temp = js.toString();
-        byte[] encryptBytes = new byte[0];
-        try {
-            encryptBytes = RSAUtil.encryptByPublicKey(temp.getBytes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String encryStr = new String(encryptBytes);
-        return encryStr;
     }
 
 }

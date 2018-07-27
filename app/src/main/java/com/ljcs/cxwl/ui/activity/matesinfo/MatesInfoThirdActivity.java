@@ -48,8 +48,8 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_CAMERA_FAN;
 
 public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThirdContract.View {
 
-    @Inject
-    MatesInfoThirdPresenter mPresenter;
+    @Inject MatesInfoThirdPresenter mPresenter;
+    private String fileRealPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +71,10 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
 
     @Override
     protected void setupActivityComponent() {
-       DaggerMatesInfoThirdComponent
-               .builder()
-               .appComponent(((AppConfig) getApplication()).getApplicationComponent())
-               .matesInfoThirdModule(new MatesInfoThirdModule(this))
-               .build()
-               .inject(this);
+        DaggerMatesInfoThirdComponent.builder().appComponent(((AppConfig) getApplication()).getApplicationComponent()
+        ).matesInfoThirdModule(new MatesInfoThirdModule(this)).build().inject(this);
     }
+
     @Override
     public void setPresenter(MatesInfoThirdContract.MatesInfoThirdContractPresenter presenter) {
         mPresenter = (MatesInfoThirdPresenter) presenter;
@@ -92,6 +89,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
     public void closeProgressDialog() {
         progressDialog.hide();
     }
+
     @OnClick(R.id.button)
     public void onViewClicked() {
         Intent intent = new Intent(MatesInfoThirdActivity.this, CameraActivity.class);
@@ -104,6 +102,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
         intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
         startActivityForResult(intent, REQUEST_CODE_CAMERA_FAN);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -117,7 +116,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
                 ImageUtil.resize(new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath())
                         .getAbsolutePath(), tempImage.getAbsolutePath(), 1280, 1280);
                 fileRealPath = tempImage.getAbsolutePath();
-                Logger.i(tempImage.getAbsolutePath()+"-------"+tempImage.length());
+                Logger.i(tempImage.getAbsolutePath() + "-------" + tempImage.length());
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
@@ -128,8 +127,6 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
             }
         }
     }
-
-    private String fileRealPath;
 
     private void recIDCard(String idCardSide, String filePath) {
         IDCardParams param = new IDCardParams();
@@ -148,16 +145,16 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
                 if (result != null) {
                     Logger.e(Contains.sCertificationInfo.getPic_path_fan_peiou());
                     Logger.i(result.toString());
-                    Contains.sCertificationInfo.setSignDate_peiou(result.getSignDate() == null ? "" : result.getSignDate()
-                            .toString());
+                    Contains.sCertificationInfo.setSignDate_peiou(result.getSignDate() == null ? "" : result
+                            .getSignDate().toString());
                     Contains.sCertificationInfo.setExpiryDate_peiou(result.getExpiryDate() == null ? "" : result
                             .getExpiryDate().toString());
-                    Contains.sCertificationInfo.setIssueAuthority_peiou(result.getIssueAuthority() == null ? "" : result
-                            .getIssueAuthority().toString());
+                    Contains.sCertificationInfo.setIssueAuthority_peiou(result.getIssueAuthority() == null ? "" :
+                            result.getIssueAuthority().toString());
                     Contains.sCertificationInfo.setPic_path_fan_peiou(fileRealPath);
                     startActivty(MatesInfoFourActivity.class);
                     AppManager.getInstance().finishActivity(MatesInfoFourActivity.class);
-                    if (ENTERTYPE_CHANGE==1){
+                    if (ENTERTYPE_CHANGE == 1) {
                         finish();
                     }
                 } else {
@@ -173,6 +170,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
             }
         });
     }
+
     private void initAccessTokenWithAkSk() {
         OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
             @Override
@@ -210,6 +208,7 @@ public class MatesInfoThirdActivity extends BaseActivity implements MatesInfoThi
             }
         }, getApplicationContext(), "gPFYMZ1xIUMZP8C44xdPVbso", "O3ADFGC344Wvrc94gmX9d5gK779P1O9A");
     }
+
     @Override
     protected void onDestroy() {
         // 释放本地质量控制模型

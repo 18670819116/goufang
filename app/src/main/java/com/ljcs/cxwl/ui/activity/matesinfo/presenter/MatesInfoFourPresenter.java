@@ -25,20 +25,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of MatesInfoFourActivity
  * @date 2018/06/27 16:35:11
  */
-public class MatesInfoFourPresenter implements MatesInfoFourContract.MatesInfoFourContractPresenter{
+public class MatesInfoFourPresenter implements MatesInfoFourContract.MatesInfoFourContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final MatesInfoFourContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private MatesInfoFourActivity mActivity;
 
     @Inject
-    public MatesInfoFourPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MatesInfoFourContract.View view, MatesInfoFourActivity activity) {
+    public MatesInfoFourPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MatesInfoFourContract.View view,
+                                  MatesInfoFourActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -47,9 +49,10 @@ public class MatesInfoFourPresenter implements MatesInfoFourContract.MatesInfoFo
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
+
     @Override
     public void getQiniuToken() {
         Map<String, String> map = new HashMap<>();
@@ -67,6 +70,7 @@ public class MatesInfoFourPresenter implements MatesInfoFourContract.MatesInfoFo
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void matesInfo(Map map) {
 //        mView.showProgressDialog();
@@ -86,6 +90,7 @@ public class MatesInfoFourPresenter implements MatesInfoFourContract.MatesInfoFo
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void allInfo(Map map) {
         Disposable disposable = httpAPIWrapper.allInfo(map).subscribe(new Consumer<AllInfo>() {

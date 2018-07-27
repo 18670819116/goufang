@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.CommonBean;
-import com.ljcs.cxwl.entity.RegisterBean;
 import com.ljcs.cxwl.ui.activity.main.AboutOurActivity;
 import com.ljcs.cxwl.ui.activity.main.contract.AboutOurContract;
 import com.orhanobut.logger.Logger;
@@ -27,20 +26,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of AboutOurActivity
  * @date 2018/07/09 11:07:19
  */
-public class AboutOurPresenter implements AboutOurContract.AboutOurContractPresenter{
+public class AboutOurPresenter implements AboutOurContract.AboutOurContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final AboutOurContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private AboutOurActivity mActivity;
 
     @Inject
-    public AboutOurPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull AboutOurContract.View view, AboutOurActivity activity) {
+    public AboutOurPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull AboutOurContract.View view,
+                             AboutOurActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -49,7 +50,7 @@ public class AboutOurPresenter implements AboutOurContract.AboutOurContractPrese
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

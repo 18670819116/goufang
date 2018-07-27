@@ -5,10 +5,6 @@ package com.ljcs.cxwl.data.api.support;
  */
 
 
-
-
-import com.orhanobut.logger.Logger;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -29,6 +25,26 @@ import okio.BufferedSource;
  */
 public class ErrorHandlerInterceptor implements Interceptor {
     private static final Charset UTF8 = Charset.forName("UTF-8");
+
+    static boolean isPlaintext(Buffer buffer) throws EOFException {
+        try {
+            Buffer prefix = new Buffer();
+            long byteCount = buffer.size() < 64 ? buffer.size() : 64;
+            buffer.copyTo(prefix, 0, byteCount);
+            for (int i = 0; i < 16; i++) {
+                if (prefix.exhausted()) {
+                    break;
+                }
+                int codePoint = prefix.readUtf8CodePoint();
+                if (Character.isISOControl(codePoint) && !Character.isWhitespace(codePoint)) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (EOFException e) {
+            return false; // Truncated UTF-8 sequence.
+        }
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -79,26 +95,6 @@ public class ErrorHandlerInterceptor implements Interceptor {
 //            com.orhanobut.logger.Logger..i("<-- END HTTP (" + buffer.size() + "-byte body)");
         }
         return response;
-    }
-
-    static boolean isPlaintext(Buffer buffer) throws EOFException {
-        try {
-            Buffer prefix = new Buffer();
-            long byteCount = buffer.size() < 64 ? buffer.size() : 64;
-            buffer.copyTo(prefix, 0, byteCount);
-            for (int i = 0; i < 16; i++) {
-                if (prefix.exhausted()) {
-                    break;
-                }
-                int codePoint = prefix.readUtf8CodePoint();
-                if (Character.isISOControl(codePoint) && !Character.isWhitespace(codePoint)) {
-                    return false;
-                }
-            }
-            return true;
-        } catch (EOFException e) {
-            return false; // Truncated UTF-8 sequence.
-        }
     }
 
     private boolean bodyEncoded(Headers headers) {

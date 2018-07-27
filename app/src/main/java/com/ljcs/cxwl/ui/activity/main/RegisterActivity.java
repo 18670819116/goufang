@@ -53,22 +53,14 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.View, TextWatcher {
 
-    @Inject
-    RegisterPresenter mPresenter;
-    @BindView(R.id.et1)
-    EditText mEt1;
-    @BindView(R.id.et2)
-    EditText mEt2;
-    @BindView(R.id.tv_get_yzm)
-    TextView mTvGetYzm;
-    @BindView(R.id.et3)
-    EditText mEt3;
-    @BindView(R.id.tv_xieyi)
-    TextView mTvXieyi;
-    @BindView(R.id.btn_register)
-    Button mBtnRegister;
-    @BindView(R.id.checkbox_eye)
-    CheckBox mCheckboxEye;
+    @Inject RegisterPresenter mPresenter;
+    @BindView(R.id.et1) EditText mEt1;
+    @BindView(R.id.et2) EditText mEt2;
+    @BindView(R.id.tv_get_yzm) TextView mTvGetYzm;
+    @BindView(R.id.et3) EditText mEt3;
+    @BindView(R.id.tv_xieyi) TextView mTvXieyi;
+    @BindView(R.id.btn_register) Button mBtnRegister;
+    @BindView(R.id.checkbox_eye) CheckBox mCheckboxEye;
 
 
     private CountDownTimer countDownTimer;
@@ -98,7 +90,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
             @Override
             public void onTick(long millisUntilFinished) {
                 //  Logger.i("倒计时" + millisUntilFinished);
-                mTvGetYzm.setText( millisUntilFinished / 1000 + "s");
+                mTvGetYzm.setText(millisUntilFinished / 1000 + "s");
             }
 
             @Override
@@ -224,10 +216,12 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 map.put("uuid", PhoneUtils.getDeviceId(this));//手机唯一标识
                 map.put("yys", PhoneUtils.getOperators(this));//移动运营商
                 map.put("gps", PhoneUtils.getLocation(this));//GPS
-                Logger.i( RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
+                Logger.i(RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim() + mEt1.getText().toString
+                        ().trim()));
                 map.put("yhsjhm", mEt1.getText().toString().trim());
                 map.put("sjhm", mEt1.getText().toString().trim());
-                map.put("yhmm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim()+mEt1.getText().toString().trim()));
+                map.put("yhmm", RxEncryptTool.encryptSHA1ToString(mEt3.getText().toString().trim() + mEt1.getText()
+                        .toString().trim()));
                 mPresenter.register(map);
                 break;
             case R.id.tv_xieyi:

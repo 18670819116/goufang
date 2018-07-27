@@ -28,7 +28,7 @@ public interface PersonCenterContract {
     }
 
     interface PersonCenterContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
         void loginOut(Map map);

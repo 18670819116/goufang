@@ -19,30 +19,13 @@ public class ToastUtil {
 
     private static Toast longToast;
     private static Toast shortToast;
-    private Toast customDurationToast;
     private static Toast toast;
     private static Runnable run = new Runnable() {
         public void run() {
             toast.cancel();
         }
     };
-
-
-    public Toast displayLongToast(final String text) {
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                if (longToast != null) {
-                    longToast.cancel();
-                }
-                longToast = Toast.makeText(AppConfig.instance, text, Toast.LENGTH_LONG);
-                longToast.show();
-                Looper.loop();
-            }
-        }.start();
-        return longToast;
-    }
+    private Toast customDurationToast;
 
     public static Toast displayShortToast(final String text) {
         new Thread() {
@@ -53,28 +36,12 @@ public class ToastUtil {
                     shortToast.cancel();
                 }
                 shortToast = Toast.makeText(AppConfig.instance, text, Toast.LENGTH_SHORT);
-                shortToast.setGravity(Gravity.CENTER,0,0);
+                shortToast.setGravity(Gravity.CENTER, 0, 0);
                 shortToast.show();
                 Looper.loop();
             }
         }.start();
         return shortToast;
-    }
-
-    public Toast displayCustomDurationToast(final String text, final int duration) {
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                if (customDurationToast != null) {
-                    customDurationToast.cancel();
-                }
-                customDurationToast = Toast.makeText(AppConfig.instance, text, duration);
-                customDurationToast.show();
-                Looper.loop();
-            }
-        }.start();
-        return customDurationToast;
     }
 
     public static void showShort(String info) {
@@ -111,6 +78,38 @@ public class ToastUtil {
         }
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    public Toast displayLongToast(final String text) {
+        new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                if (longToast != null) {
+                    longToast.cancel();
+                }
+                longToast = Toast.makeText(AppConfig.instance, text, Toast.LENGTH_LONG);
+                longToast.show();
+                Looper.loop();
+            }
+        }.start();
+        return longToast;
+    }
+
+    public Toast displayCustomDurationToast(final String text, final int duration) {
+        new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                if (customDurationToast != null) {
+                    customDurationToast.cancel();
+                }
+                customDurationToast = Toast.makeText(AppConfig.instance, text, duration);
+                customDurationToast.show();
+                Looper.loop();
+            }
+        }.start();
+        return customDurationToast;
     }
 //    public static void
 }

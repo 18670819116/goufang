@@ -7,31 +7,37 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="colorPrimary">@color/main_color</item>
         <item name="colorPrimaryDark">@color/main_color</item>
         <item name="colorAccent">@color/main_color</item>
     </style>
+
     <style name="SplashTheme" parent="AppTheme.Base">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@mipmap/ic_welcome</item>
     </style>
+
     <style name="translucent" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground" >@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
     <style name="line_hor">
         <item name="android:layout_height">@dimen/y1</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/color_dddddd</item>
     </style>
+
     <style name="line_var">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">@dimen/x1</item>
         <item name="android:background">@color/color_dddddd</item>
     </style>
+
     <style name="btn_login">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginLeft">@dimen/x68</item>
@@ -41,6 +47,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
     <style name="btn_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -56,14 +63,17 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
     <style name="dialog_animation" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_center_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_center_out</item>
     </style>
+
     <style name="BaseDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@drawable/shape_bg_20</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="dialog_translucent" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>

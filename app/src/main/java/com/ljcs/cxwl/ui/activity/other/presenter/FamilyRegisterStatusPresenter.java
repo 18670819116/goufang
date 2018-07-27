@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.ScanBean;
 import com.ljcs.cxwl.ui.activity.other.FamilyRegisterStatusActivity;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterStatusContract;
@@ -30,8 +29,8 @@ import io.reactivex.functions.Consumer;
 public class FamilyRegisterStatusPresenter implements FamilyRegisterStatusContract
         .FamilyRegisterStatusContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterStatusContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyRegisterStatusActivity mActivity;
 

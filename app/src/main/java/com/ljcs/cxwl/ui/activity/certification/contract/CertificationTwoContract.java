@@ -44,6 +44,6 @@ public interface CertificationTwoContract {
 
         void allInfo(Map map);
 
-        void uploadFile(Map map,String file);
+        void uploadFile(Map map, String file);
     }
 }

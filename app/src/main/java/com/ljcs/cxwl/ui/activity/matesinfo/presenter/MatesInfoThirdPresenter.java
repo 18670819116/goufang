@@ -16,20 +16,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of MatesInfoThirdActivity
  * @date 2018/06/27 16:33:53
  */
-public class MatesInfoThirdPresenter implements MatesInfoThirdContract.MatesInfoThirdContractPresenter{
+public class MatesInfoThirdPresenter implements MatesInfoThirdContract.MatesInfoThirdContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final MatesInfoThirdContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private MatesInfoThirdActivity mActivity;
 
     @Inject
-    public MatesInfoThirdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MatesInfoThirdContract.View view, MatesInfoThirdActivity activity) {
+    public MatesInfoThirdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull MatesInfoThirdContract.View view,
+                                   MatesInfoThirdActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +40,7 @@ public class MatesInfoThirdPresenter implements MatesInfoThirdContract.MatesInfo
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

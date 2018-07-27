@@ -27,20 +27,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of FamilyRegisterTwo2Activity
  * @date 2018/07/10 10:43:02
  */
-public class FamilyRegisterTwo2Presenter implements FamilyRegisterTwo2Contract.FamilyRegisterTwo2ContractPresenter{
+public class FamilyRegisterTwo2Presenter implements FamilyRegisterTwo2Contract.FamilyRegisterTwo2ContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterTwo2Contract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyRegisterTwo2Activity mActivity;
 
     @Inject
-    public FamilyRegisterTwo2Presenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterTwo2Contract.View view, FamilyRegisterTwo2Activity activity) {
+    public FamilyRegisterTwo2Presenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterTwo2Contract
+            .View view, FamilyRegisterTwo2Activity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -49,9 +51,10 @@ public class FamilyRegisterTwo2Presenter implements FamilyRegisterTwo2Contract.F
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
+
     @Override
     public void getQiniuToken() {
         Map<String, String> map = new HashMap<>();
@@ -69,6 +72,7 @@ public class FamilyRegisterTwo2Presenter implements FamilyRegisterTwo2Contract.F
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void matesInfo(Map map) {
 //        mView.showProgressDialog();
@@ -88,9 +92,10 @@ public class FamilyRegisterTwo2Presenter implements FamilyRegisterTwo2Contract.F
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void uploadPic(List<String> list, UploadFileCallBack callBack) {
-        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper, list, callBack);
     }
 
 //    @Override

@@ -45,12 +45,9 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_SUCCESS;
 
 public class PersonCenterActivity extends BaseActivity implements PersonCenterContract.View {
 
-    @Inject
-    PersonCenterPresenter mPresenter;
-    @BindView(R.id.layout_head)
-    LinearLayout layoutHead;
-    @BindView(R.id.tv_account)
-    TextView tvAccount;
+    @Inject PersonCenterPresenter mPresenter;
+    @BindView(R.id.layout_head) LinearLayout layoutHead;
+    @BindView(R.id.tv_account) TextView tvAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

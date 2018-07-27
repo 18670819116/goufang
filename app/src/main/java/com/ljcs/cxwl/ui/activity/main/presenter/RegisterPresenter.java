@@ -27,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class RegisterPresenter implements RegisterContract.RegisterContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final RegisterContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private RegisterActivity mActivity;
 

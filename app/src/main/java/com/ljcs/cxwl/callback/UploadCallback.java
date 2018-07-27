@@ -13,12 +13,14 @@ import java.util.List;
 public interface UploadCallback {
     /**
      * 单图上传返回上传照片路劲
+     *
      * @param url
      */
     void sucess(String url);
 
     /**
      * 单图上传返回上传照片路劲
+     *
      * @param url
      */
     void sucess(List<String> url);

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
-import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxSPTool;

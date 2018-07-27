@@ -26,7 +26,8 @@ public class MatesInfoThirdModule {
 
     @Provides
     @ActivityScope
-    public MatesInfoThirdPresenter provideMatesInfoThirdPresenter(HttpAPIWrapper httpAPIWrapper, MatesInfoThirdActivity mActivity) {
+    public MatesInfoThirdPresenter provideMatesInfoThirdPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                  MatesInfoThirdActivity mActivity) {
         return new MatesInfoThirdPresenter(httpAPIWrapper, mView, mActivity);
     }
 

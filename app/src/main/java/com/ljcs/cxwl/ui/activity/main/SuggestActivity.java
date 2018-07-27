@@ -39,12 +39,9 @@ import butterknife.OnClick;
 
 public class SuggestActivity extends BaseActivity implements SuggestContract.View {
 
-    @Inject
-    SuggestPresenter mPresenter;
-    @BindView(R.id.et_content)
-    EditText etContent;
-    @BindView(R.id.tv_count)
-    TextView tvCount;
+    @Inject SuggestPresenter mPresenter;
+    @BindView(R.id.et_content) EditText etContent;
+    @BindView(R.id.tv_count) TextView tvCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +63,7 @@ public class SuggestActivity extends BaseActivity implements SuggestContract.Vie
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 tvCount.setText(s.length() + "/300");
-                if (s.length() >=300) {
+                if (s.length() >= 300) {
                     ToastUtil.showCenterShort("反馈信息不能超过300个字符");
                 }
             }

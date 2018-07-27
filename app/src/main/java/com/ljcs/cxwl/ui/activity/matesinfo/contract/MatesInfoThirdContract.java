@@ -2,6 +2,7 @@ package com.ljcs.cxwl.ui.activity.matesinfo.contract;
 
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
 /**
  * @author xlei
  * @Package The contract for MatesInfoThirdActivity

@@ -73,40 +73,23 @@ import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
 public class CertificationActivity extends BaseActivity implements CertificationContract.View {
 
-    @Inject
-    CertificationPresenter mPresenter;
-    @BindView(R.id.tv_name)
-    EditText tvName;
-    @BindView(R.id.tv_sex)
-    EditText tvSex;
-    @BindView(R.id.tv_ethnic)
-    EditText tvEthnic;
-    @BindView(R.id.tv_birthday)
-    EditText tvBirthday;
-    @BindView(R.id.tv_adress)
-    EditText tvAdress;
-    @BindView(R.id.tv_idcard)
-    EditText tvIdcard;
-    @BindView(R.id.tv_issueAuthority)
-    EditText tvIssueAuthority;
-    @BindView(R.id.tv_data1)
-    EditText tvData1;
-    @BindView(R.id.tv_data2)
-    EditText tvData2;
-    @BindView(R.id.imageView_zheng)
-    ImageView imageViewZheng;
-    @BindView(R.id.imageView_fan)
-    ImageView imageViewFan;
-    @BindView(R.id.layout_content1)
-    LinearLayout layoutContent1;
-    @BindView(R.id.layout_content2)
-    LinearLayout layoutContent2;
-    @BindView(R.id.img_chongpai1)
-    ImageView imgChongpai1;
-    @BindView(R.id.img_chongpai2)
-    ImageView imgChongpai2;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+    @Inject CertificationPresenter mPresenter;
+    @BindView(R.id.tv_name) EditText tvName;
+    @BindView(R.id.tv_sex) EditText tvSex;
+    @BindView(R.id.tv_ethnic) EditText tvEthnic;
+    @BindView(R.id.tv_birthday) EditText tvBirthday;
+    @BindView(R.id.tv_adress) EditText tvAdress;
+    @BindView(R.id.tv_idcard) EditText tvIdcard;
+    @BindView(R.id.tv_issueAuthority) EditText tvIssueAuthority;
+    @BindView(R.id.tv_data1) EditText tvData1;
+    @BindView(R.id.tv_data2) EditText tvData2;
+    @BindView(R.id.imageView_zheng) ImageView imageViewZheng;
+    @BindView(R.id.imageView_fan) ImageView imageViewFan;
+    @BindView(R.id.layout_content1) LinearLayout layoutContent1;
+    @BindView(R.id.layout_content2) LinearLayout layoutContent2;
+    @BindView(R.id.img_chongpai1) ImageView imgChongpai1;
+    @BindView(R.id.img_chongpai2) ImageView imgChongpai2;
+    @BindView(R.id.btn_login) Button btnLogin;
     private boolean hasGotToken = false;
     private String fileRealPath1;
     private String fileRealPath2;
@@ -540,7 +523,8 @@ public class CertificationActivity extends BaseActivity implements Certification
                         tvAdress.setText(Contains.sCertificationInfo.getAddress());
                         tvIdcard.setText(Contains.sCertificationInfo.getIdcard());
                         GlideUtils.loadImgNoCach(CertificationActivity.this, Contains.sCertificationInfo
-                                .getPic_path_zheng(), imageViewZheng,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true));
+                                .getPic_path_zheng(), imageViewZheng, new RequestOptions().diskCacheStrategy
+                                (DiskCacheStrategy.NONE).skipMemoryCache(true));
                         // imageView.setImageBitmap(BitmapFactory.decodeFile(Contains.sCertificationInfo
                         // .getPic_path_zheng()));
                     } else if (idCardSide.equals(IDCardParams.ID_CARD_SIDE_BACK)) {
@@ -562,7 +546,8 @@ public class CertificationActivity extends BaseActivity implements Certification
                         tvData1.setText(Contains.sCertificationInfo.getSignDate());
                         tvData2.setText(Contains.sCertificationInfo.getExpiryDate());
                         GlideUtils.loadImgNoCach(CertificationActivity.this, Contains.sCertificationInfo
-                                .getPic_path_fan(), imageViewFan,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true));
+                                .getPic_path_fan(), imageViewFan, new RequestOptions().diskCacheStrategy
+                                (DiskCacheStrategy.NONE).skipMemoryCache(true));
                     }
                 } else {
                     ToastUtil.showCenterShort("扫描识别失败 请重新扫描");

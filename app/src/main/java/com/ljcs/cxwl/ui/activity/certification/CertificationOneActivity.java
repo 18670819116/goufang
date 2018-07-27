@@ -48,11 +48,13 @@ import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
 public class CertificationOneActivity extends BaseActivity implements CertificationOneContract.View {
 
-    @Inject
-    CertificationOnePresenter mPresenter;
-
+    @Inject CertificationOnePresenter mPresenter;
+    /**
+     * 用明文ak，sk初始化
+     */
+    String token;
     private boolean hasGotToken = false;
-
+    private String fileRealPath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,7 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
 
     @OnClick(R.id.button)
     public void onViewClicked() {
-        if (RxTool.isFastClick(Contains.FAST_CLICK)){
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             Logger.i("点击过快");
             return;
         }
@@ -149,8 +151,6 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
         }
 
     }
-
-    private String fileRealPath = "";
 
     private void recIDCard(String idCardSide, final String filePath) {
         IDCardParams param = new IDCardParams();
@@ -205,11 +205,6 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
         });
     }
 
-    /**
-     * 用明文ak，sk初始化
-     */
-    String token;
-
     private void initAccessTokenWithAkSk() {
         OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
             @Override
@@ -222,8 +217,9 @@ public class CertificationOneActivity extends BaseActivity implements Certificat
                     @Override
                     public void run() {
                         closeProgressDialog();
-                        CameraNativeHelper.init(CertificationOneActivity.this, OCR.getInstance(CertificationOneActivity.this)
-                                .getLicense(), new CameraNativeHelper.CameraNativeInitCallback() {
+                        CameraNativeHelper.init(CertificationOneActivity.this, OCR.getInstance
+                                (CertificationOneActivity.this).getLicense(), new CameraNativeHelper
+                                .CameraNativeInitCallback() {
                             @Override
                             public void onError(int errorCode, Throwable e) {
                                 String msg;

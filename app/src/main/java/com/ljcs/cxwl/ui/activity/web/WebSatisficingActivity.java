@@ -32,15 +32,13 @@ import butterknife.ButterKnife;
 
 public class WebSatisficingActivity extends BaseActivity implements WebSatisficingContract.View {
 
-    @Inject
-    WebSatisficingPresenter mPresenter;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-    @BindView(R.id.webView)
-    WebView webView;
+    @Inject WebSatisficingPresenter mPresenter;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
+    @BindView(R.id.webView) WebView webView;
 
     private String name;
     private String address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +61,7 @@ public class WebSatisficingActivity extends BaseActivity implements WebSatisfici
     protected void initData() {
         init();
     }
+
     private void init() {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDefaultFontSize(16);
@@ -77,8 +76,7 @@ public class WebSatisficingActivity extends BaseActivity implements WebSatisfici
         webView.getSettings().setAppCacheEnabled(false);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setLayoutAlgorithm(
-                WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 //        WwebView.addJavascriptInterface(new PayJavaScriptInterface(), "js");
 //        WwebView.loadUrl("javascript:callFromJava('1')");
         // 覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
@@ -121,13 +119,10 @@ public class WebSatisficingActivity extends BaseActivity implements WebSatisfici
 
     @Override
     protected void setupActivityComponent() {
-       DaggerWebSatisficingComponent
-               .builder()
-               .appComponent(((AppConfig) getApplication()).getApplicationComponent())
-               .webSatisficingModule(new WebSatisficingModule(this))
-               .build()
-               .inject(this);
+        DaggerWebSatisficingComponent.builder().appComponent(((AppConfig) getApplication()).getApplicationComponent()
+        ).webSatisficingModule(new WebSatisficingModule(this)).build().inject(this);
     }
+
     @Override
     public void setPresenter(WebSatisficingContract.WebSatisficingContractPresenter presenter) {
         mPresenter = (WebSatisficingPresenter) presenter;
@@ -142,6 +137,7 @@ public class WebSatisficingActivity extends BaseActivity implements WebSatisfici
     public void closeProgressDialog() {
         progressDialog.hide();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

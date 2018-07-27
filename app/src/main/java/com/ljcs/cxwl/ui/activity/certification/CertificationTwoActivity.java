@@ -46,22 +46,14 @@ import butterknife.OnClick;
 
 public class CertificationTwoActivity extends BaseActivity implements CertificationTwoContract.View {
 
-    @Inject
-    CertificationTwoPresenter mPresenter;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.tv_name)
-    EditText tvName;
-    @BindView(R.id.tv_sex)
-    EditText tvSex;
-    @BindView(R.id.tv_ethnic)
-    EditText tvEthnic;
-    @BindView(R.id.tv_birthday)
-    EditText tvBirthday;
-    @BindView(R.id.tv_adress)
-    EditText tvAdress;
-    @BindView(R.id.tv_idcard)
-    EditText tvIdcard;
+    @Inject CertificationTwoPresenter mPresenter;
+    @BindView(R.id.imageView) ImageView imageView;
+    @BindView(R.id.tv_name) EditText tvName;
+    @BindView(R.id.tv_sex) EditText tvSex;
+    @BindView(R.id.tv_ethnic) EditText tvEthnic;
+    @BindView(R.id.tv_birthday) EditText tvBirthday;
+    @BindView(R.id.tv_adress) EditText tvAdress;
+    @BindView(R.id.tv_idcard) EditText tvIdcard;
 
 
     @Override
@@ -222,8 +214,8 @@ public class CertificationTwoActivity extends BaseActivity implements Certificat
                 .getText().toString()) && Contains.sCertificationInfo.getEthnic().equals(tvEthnic.getText().toString
                 ()) && Contains.sCertificationInfo.getSex().equals(tvSex.getText().toString())) {
             //表示没有修改
-                Contains.sCertificationInfo.setChangeZm(false);
-        }else {
+            Contains.sCertificationInfo.setChangeZm(false);
+        } else {
             //表示修改了
             Contains.sCertificationInfo.setChangeZm(true);
         }

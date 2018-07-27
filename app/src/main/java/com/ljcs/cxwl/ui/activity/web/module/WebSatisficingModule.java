@@ -26,7 +26,8 @@ public class WebSatisficingModule {
 
     @Provides
     @ActivityScope
-    public WebSatisficingPresenter provideWebSatisficingPresenter(HttpAPIWrapper httpAPIWrapper, WebSatisficingActivity mActivity) {
+    public WebSatisficingPresenter provideWebSatisficingPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                  WebSatisficingActivity mActivity) {
         return new WebSatisficingPresenter(httpAPIWrapper, mView, mActivity);
     }
 

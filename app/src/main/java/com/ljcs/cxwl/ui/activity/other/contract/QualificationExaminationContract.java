@@ -2,6 +2,7 @@ package com.ljcs.cxwl.ui.activity.other.contract;
 
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
 /**
  * @author xlei
  * @Package The contract for QualificationExaminationActivity

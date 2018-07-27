@@ -3,20 +3,12 @@ package com.ljcs.cxwl.ui.activity.changephone.presenter;
 import android.support.annotation.NonNull;
 
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
-import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.changephone.ChangePhoneOneActivity;
 import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneOneContract;
-import com.orhanobut.logger.Logger;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * @author xlei
@@ -26,8 +18,8 @@ import io.reactivex.functions.Consumer;
  */
 public class ChangePhoneOnePresenter implements ChangePhoneOneContract.ChangePhoneOneContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ChangePhoneOneContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ChangePhoneOneActivity mActivity;
 
@@ -51,7 +43,6 @@ public class ChangePhoneOnePresenter implements ChangePhoneOneContract.ChangePho
             mCompositeDisposable.dispose();
         }
     }
-
 
 
 //    @Override

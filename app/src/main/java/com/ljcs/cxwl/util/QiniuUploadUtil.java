@@ -18,6 +18,8 @@ import java.util.List;
  */
 
 public class QiniuUploadUtil {
+    private static int curUploadImgIndex = 0;
+
     public static void initQiniu() {
         Configuration config = new Configuration.Builder().chunkSize(512 * 1024)        // 分片上传时，每片的大小。 默认256K
                 .putThreshhold(1024 * 1024)   // 启用分片上传阀值。默认512K
@@ -58,8 +60,6 @@ public class QiniuUploadUtil {
         }, null);
 
     }
-
-    private static int curUploadImgIndex = 0;
 
     public static void uploadPics(final List<String> list, String _uploadToken, final UploadCallback callBack) {
         UploadManager uploadManager = new UploadManager();

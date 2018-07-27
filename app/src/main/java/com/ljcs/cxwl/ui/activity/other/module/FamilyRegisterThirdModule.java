@@ -26,7 +26,8 @@ public class FamilyRegisterThirdModule {
 
     @Provides
     @ActivityScope
-    public FamilyRegisterThirdPresenter provideFamilyRegisterThirdPresenter(HttpAPIWrapper httpAPIWrapper, FamilyRegisterThirdActivity mActivity) {
+    public FamilyRegisterThirdPresenter provideFamilyRegisterThirdPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                            FamilyRegisterThirdActivity mActivity) {
         return new FamilyRegisterThirdPresenter(httpAPIWrapper, mView, mActivity);
     }
 

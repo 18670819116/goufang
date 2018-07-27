@@ -47,18 +47,12 @@ import butterknife.OnClick;
 
 public class ChangePwdActivity extends BaseActivity implements ChangePwdContract.View, TextWatcher {
 
-    @Inject
-    ChangePwdPresenter mPresenter;
-    @BindView(R.id.et1)
-    EditText et1;
-    @BindView(R.id.et2)
-    EditText et2;
-    @BindView(R.id.checkbox_eye)
-    CheckBox checkboxEye;
-    @BindView(R.id.checkbox_eye1)
-    CheckBox checkboxEye1;
-    @BindView(R.id.btn_register)
-    Button btnRegister;
+    @Inject ChangePwdPresenter mPresenter;
+    @BindView(R.id.et1) EditText et1;
+    @BindView(R.id.et2) EditText et2;
+    @BindView(R.id.checkbox_eye) CheckBox checkboxEye;
+    @BindView(R.id.checkbox_eye1) CheckBox checkboxEye1;
+    @BindView(R.id.btn_register) Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,8 +147,8 @@ public class ChangePwdActivity extends BaseActivity implements ChangePwdContract
         Map<String, String> map = new HashMap<>();
         map.put("yhsjhm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
         map.put("sjhm", RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM));
-        map.put("yhmm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM) + RxSPTool
-                .getString(this, ShareStatic.APP_LOGIN_SJHM)));
+        map.put("yhmm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM) +
+                RxSPTool.getString(this, ShareStatic.APP_LOGIN_SJHM)));
         map.put("token", RxSPTool.getString(this, ShareStatic.APP_LOGIN_TOKEN));
         map.put("newmm", RxEncryptTool.encryptSHA1ToString(et2.getText().toString().trim() + RxSPTool.getString(this,
                 ShareStatic.APP_LOGIN_SJHM)));

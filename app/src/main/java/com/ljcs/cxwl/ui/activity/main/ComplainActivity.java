@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +22,6 @@ import com.ljcs.cxwl.ui.activity.main.contract.ComplainContract;
 import com.ljcs.cxwl.ui.activity.main.module.ComplainModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.ComplainPresenter;
 import com.ljcs.cxwl.util.ToastUtil;
-import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxDataTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
@@ -53,17 +51,12 @@ import cn.bingoogolapple.photopicker.widget.BGASortableNinePhotoLayout;
 public class ComplainActivity extends BaseActivity implements ComplainContract.View, BGASortableNinePhotoLayout
         .Delegate {
 
-    @Inject
-    ComplainPresenter mPresenter;
-    @BindView(R.id.snpl_moment_add_photos)
-    BGASortableNinePhotoLayout mPhotosSnpl;
-
     private static final int RC_CHOOSE_PHOTO = 1;
     private static final int RC_PHOTO_PREVIEW = 2;
-    @BindView(R.id.et_content)
-    EditText etContent;
-    @BindView(R.id.tv_count)
-    TextView tvCount;
+    @Inject ComplainPresenter mPresenter;
+    @BindView(R.id.snpl_moment_add_photos) BGASortableNinePhotoLayout mPhotosSnpl;
+    @BindView(R.id.et_content) EditText etContent;
+    @BindView(R.id.tv_count) TextView tvCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +81,7 @@ public class ComplainActivity extends BaseActivity implements ComplainContract.V
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 tvCount.setText(s.length() + "/300");
-                if (s.length() >=300) {
+                if (s.length() >= 300) {
                     ToastUtil.showCenterShort("申诉内容不能超过300个字符");
                 }
             }

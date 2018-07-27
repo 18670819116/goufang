@@ -43,8 +43,8 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_CAMERA_FAN;
 
 public class CertificationThirdActivity extends BaseActivity implements CertificationThirdContract.View {
 
-    @Inject
-    CertificationThirdPresenter mPresenter;
+    @Inject CertificationThirdPresenter mPresenter;
+    private String fileRealPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class CertificationThirdActivity extends BaseActivity implements Certific
 
     @OnClick(R.id.button)
     public void onViewClicked() {
-        if (RxTool.isFastClick(Contains.FAST_CLICK)){
+        if (RxTool.isFastClick(Contains.FAST_CLICK)) {
             Logger.i("点击过快");
             return;
         }
@@ -126,8 +126,6 @@ public class CertificationThirdActivity extends BaseActivity implements Certific
             }
         }
     }
-
-    private String fileRealPath;
 
     private void recIDCard(String idCardSide, String filePath) {
         IDCardParams param = new IDCardParams();

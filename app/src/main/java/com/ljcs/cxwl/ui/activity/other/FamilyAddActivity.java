@@ -74,39 +74,20 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_BASIC;
 
 public class FamilyAddActivity extends BaseActivity implements FamilyAddContract.View {
 
-    @Inject
-    FamilyAddPresenter mPresenter;
+    @Inject FamilyAddPresenter mPresenter;
 
 
-    @BindView(R.id.tv_leixing1)
-    TextView tvLeixing1;
-    @BindView(R.id.tv_leixing2)
-    TextView tvLeixing2;
-    @BindView(R.id.tv_leixing3)
-    TextView tvLeixing3;
-    @BindView(R.id.tv_leixing4)
-    TextView tvLeixing4;
-    @BindView(R.id.tv_leixing5)
-    TextView tvLeixing5;
-    @BindView(R.id.img_upload)
-    ImageView imgUpload;
-    @BindView(R.id.imageView5)
-    ImageView imageView5;
-    @BindView(R.id.tv_name)
-    EditText tvName;
-    @BindView(R.id.tv_idcard)
-    EditText tvIdcard;
-    @BindView(R.id.tv_delete)
-    TextView tvDelete;
-    @BindView(R.id.tv_leixing6)
-    TextView tvLeixing6;
-    private int position = -1;
-    private OptionsPickerView mOptionsPickerView;
-    private String imgPath;
-    private boolean isHavePic = false;
-    private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
-    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
-    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    @BindView(R.id.tv_leixing1) TextView tvLeixing1;
+    @BindView(R.id.tv_leixing2) TextView tvLeixing2;
+    @BindView(R.id.tv_leixing3) TextView tvLeixing3;
+    @BindView(R.id.tv_leixing4) TextView tvLeixing4;
+    @BindView(R.id.tv_leixing5) TextView tvLeixing5;
+    @BindView(R.id.img_upload) ImageView imgUpload;
+    @BindView(R.id.imageView5) ImageView imageView5;
+    @BindView(R.id.tv_name) EditText tvName;
+    @BindView(R.id.tv_idcard) EditText tvIdcard;
+    @BindView(R.id.tv_delete) TextView tvDelete;
+    @BindView(R.id.tv_leixing6) TextView tvLeixing6;
     List<String> list1 = new ArrayList<String>() {{
         add("男");
         add("女");
@@ -126,6 +107,14 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         add("丧偶");
     }};
     List<String> list5 = new ArrayList<String>();
+    private int position = -1;
+    private OptionsPickerView mOptionsPickerView;
+    private String imgPath;
+    private boolean isHavePic = false;
+    private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    private int opt1, opt2, opt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -359,9 +348,9 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
             case R.id.tv_delete:
                 Map<String, String> map1 = new HashMap<>();
                 map1.put("token", RxSPTool.getString(FamilyAddActivity.this, ShareStatic.APP_LOGIN_TOKEN));
-                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getZnxxlist() != null
-                        && position != -1 && Contains.sAllInfo.getData().getZnxxlist().get(position).getJtcy().getYhbh()
-                        !=null) {
+                if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getZnxxlist() != null &&
+                        position != -1 && Contains.sAllInfo.getData().getZnxxlist().get(position).getJtcy().getYhbh()
+                        != null) {
                     map1.put("yhbh", Contains.sAllInfo.getData().getZnxxlist().get(position).getJtcy().getYhbh());
                 }
                 mPresenter.matesInfoDelete(map1);
@@ -486,7 +475,6 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         mOptionsPickerView.show();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -504,8 +492,6 @@ public class FamilyAddActivity extends BaseActivity implements FamilyAddContract
         }
 
     }
-
-    private int opt1, opt2, opt3;
 
     private void showPickerView() {// 弹出选择器
         RxKeyboardTool.hideSoftInput(this);

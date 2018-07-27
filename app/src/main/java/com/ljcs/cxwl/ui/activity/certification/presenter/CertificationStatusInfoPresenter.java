@@ -25,8 +25,8 @@ import io.reactivex.functions.Consumer;
 public class CertificationStatusInfoPresenter implements CertificationStatusInfoContract
         .CertificationStatusInfoContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final CertificationStatusInfoContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private CertificationStatusInfoActivity mActivity;
 

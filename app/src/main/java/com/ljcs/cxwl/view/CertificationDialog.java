@@ -40,9 +40,8 @@ public class CertificationDialog extends Dialog {
     }
 
 
-
     public CertificationDialog(Activity context) {
-        super(context,R.style.BaseDialog);
+        super(context, R.style.BaseDialog);
         initView();
     }
 

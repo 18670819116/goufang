@@ -12,14 +12,13 @@ import java.util.Stack;
 public class AppManager {
 
 
-    public static Stack<Activity> getActivityStack() {
-        return activityStack;
-    }
-
     private static Stack<Activity> activityStack;
     private static AppManager instance;
-
     private AppManager() {
+    }
+
+    public static Stack<Activity> getActivityStack() {
+        return activityStack;
     }
 
     /**
@@ -56,6 +55,7 @@ public class AppManager {
         Activity activity = activityStack.lastElement();
         finishActivity(activity);
     }
+
     /**
      * 结束所有Activity除了指定Activity外
      */
@@ -69,6 +69,7 @@ public class AppManager {
         activityStack.clear();
         activityStack.add(act);
     }
+
     /**
      * 结束指定类名的Activity
      *

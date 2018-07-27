@@ -166,6 +166,7 @@
                 </LinearLayout>
 
                 <View style="@style/line_hor"/>
+
                 <LinearLayout
                     android:id="@+id/layout_select6"
                     android:layout_width="match_parent"
@@ -195,6 +196,7 @@
                 </LinearLayout>
 
                 <View style="@style/line_hor"/>
+
                 <LinearLayout
                     android:id="@+id/layout_select4"
                     android:layout_width="match_parent"
@@ -259,9 +261,9 @@
                     android:id="@+id/layout_select5"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
-                    android:visibility="gone"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -284,7 +286,8 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"
+                <View
+                    style="@style/line_hor"
                     android:visibility="gone"/>
 
                 <RelativeLayout

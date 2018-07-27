@@ -26,7 +26,8 @@ public class PersonCenterModule {
 
     @Provides
     @ActivityScope
-    public PersonCenterPresenter providePersonCenterPresenter(HttpAPIWrapper httpAPIWrapper, PersonCenterActivity mActivity) {
+    public PersonCenterPresenter providePersonCenterPresenter(HttpAPIWrapper httpAPIWrapper, PersonCenterActivity
+            mActivity) {
         return new PersonCenterPresenter(httpAPIWrapper, mView, mActivity);
     }
 

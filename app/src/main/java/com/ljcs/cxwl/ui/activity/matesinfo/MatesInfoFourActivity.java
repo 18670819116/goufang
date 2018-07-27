@@ -6,7 +6,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -49,16 +48,11 @@ import static com.ljcs.cxwl.contain.Contains.ENTERTYPE_CHANGE;
 
 public class MatesInfoFourActivity extends BaseActivity implements MatesInfoFourContract.View {
 
-    @Inject
-    MatesInfoFourPresenter mPresenter;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.tv_issueAuthority)
-    EditText tvIssueAuthority;
-    @BindView(R.id.tv_data1)
-    EditText tvData1;
-    @BindView(R.id.tv_data2)
-    EditText tvData2;
+    @Inject MatesInfoFourPresenter mPresenter;
+    @BindView(R.id.imageView) ImageView imageView;
+    @BindView(R.id.tv_issueAuthority) EditText tvIssueAuthority;
+    @BindView(R.id.tv_data1) EditText tvData1;
+    @BindView(R.id.tv_data2) EditText tvData2;
 
 
     @Override
@@ -121,7 +115,8 @@ public class MatesInfoFourActivity extends BaseActivity implements MatesInfoFour
                     Contains.sCertificationInfo.setIssueAuthority_peiou(tvIssueAuthority.getText().toString().trim());
                     Contains.sCertificationInfo.setSignDate_peiou(tvData1.getText().toString().trim());
                     Contains.sCertificationInfo.setExpiryDate_peiou(tvData2.getText().toString().trim());
-                    if (ENTERTYPE_CHANGE == 1 && Contains.sCertificationInfo.getPic_path_fan_peiou().startsWith("http")) {
+                    if (ENTERTYPE_CHANGE == 1 && Contains.sCertificationInfo.getPic_path_fan_peiou().startsWith
+                            ("http")) {
                         //配偶过来取消上传图片
                         Map<String, String> map = new HashMap<String, String>();
                         map.put("token", RxSPTool.getString(MatesInfoFourActivity.this, ShareStatic.APP_LOGIN_TOKEN));
@@ -139,7 +134,8 @@ public class MatesInfoFourActivity extends BaseActivity implements MatesInfoFour
                     } else {
                         mPresenter.getQiniuToken();
                     }
-                } break;
+                }
+                break;
             default:
                 break;
         }

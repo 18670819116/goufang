@@ -31,7 +31,7 @@ public class SureDialog extends Dialog {
     }
 
     public SureDialog(Context context) {
-        super(context,R.style.BaseDialog);
+        super(context, R.style.BaseDialog);
         initView();
     }
 
@@ -85,8 +85,7 @@ public class SureDialog extends Dialog {
     }
 
     private void initView() {
-        View dialog_view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_sure,
-                null);
+        View dialog_view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_sure, null);
         mTvSure = (TextView) dialog_view.findViewById(R.id.tv_sure);
         mTvCancel = (TextView) dialog_view.findViewById(R.id.tv_cancel);
         mTvContent = (TextView) dialog_view.findViewById(R.id.tv_content);

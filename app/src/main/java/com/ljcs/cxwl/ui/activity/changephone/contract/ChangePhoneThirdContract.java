@@ -2,6 +2,7 @@ package com.ljcs.cxwl.ui.activity.changephone.contract;
 
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
+
 /**
  * @author xlei
  * @Package The contract for ChangePhoneThirdActivity

@@ -19,8 +19,6 @@ import android.util.Log;
 
 import com.orhanobut.logger.Logger;
 
-import java.util.List;
-
 import static com.ljcs.cxwl.util.StringUitl.hasEmptyItem;
 
 /**
@@ -29,6 +27,61 @@ import static com.ljcs.cxwl.util.StringUitl.hasEmptyItem;
  */
 
 public class PhoneUtils {
+    public static LocationListener locationListener = new LocationListener() {
+
+        // Provider的状态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        // Provider被enable时触发此函数，比如GPS被打开
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        // Provider被disable时触发此函数，比如GPS被关闭
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+
+        //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
+        @Override
+        public void onLocationChanged(Location location) {
+        }
+    };
+    /**
+     * LocationListern监听器
+     * 参数：地理位置提供器、监听位置变化的时间间隔、位置变化的距离间隔、LocationListener监听器
+     */
+
+    public static LocationListener locationListener1 = new LocationListener() {
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle arg2) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            //如果位置发生变化,重新显示
+            showLocation(location);
+
+        }
+    };
+
     /**
      * deviceID的组成为：渠道标志+识别符来源标志+hash后的终端识别符
      * <p>
@@ -154,17 +207,6 @@ public class PhoneUtils {
             }
         }
         return "";
-    }
-
-    enum NetState {
-        WIFI("WIFI", 1), CDMA("2G", 2), UMTS("3G", 3), LTE("4G", 4), UNKOWN("unkonw", 5);
-        private int state;
-        private String type;
-
-        NetState(String type, int state) {
-            this.state = state;
-            this.type = type;
-        }
     }
 
     /**
@@ -332,33 +374,6 @@ public class PhoneUtils {
         return longitude + "," + latitude;
     }
 
-
-    public static LocationListener locationListener = new LocationListener() {
-
-        // Provider的状态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        // Provider被enable时触发此函数，比如GPS被打开
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        // Provider被disable时触发此函数，比如GPS被关闭
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-
-        //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
-        @Override
-        public void onLocationChanged(Location location) {
-        }
-    };
-
     public static String getLocation(Context context) {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         //获取所有可用的位置提供器
@@ -381,13 +396,13 @@ public class PhoneUtils {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             Logger.e("经纬度未授权权限------------------0,0");
-            return"0,0";
+            return "0,0";
         }
         Location location = locationManager.getLastKnownLocation(locationProvider);
 
         if (location != null) {
             //不为空,显示地理位置经纬度
-            Logger.e("------------------"+location.getLatitude() + "," + location.getLongitude());
+            Logger.e("------------------" + location.getLatitude() + "," + location.getLongitude());
             return location.getLatitude() + "," + location.getLongitude();
         }
         //监视地理位置变化
@@ -406,33 +421,14 @@ public class PhoneUtils {
 
     }
 
-    /**
-     * LocationListern监听器
-     * 参数：地理位置提供器、监听位置变化的时间间隔、位置变化的距离间隔、LocationListener监听器
-     */
+    enum NetState {
+        WIFI("WIFI", 1), CDMA("2G", 2), UMTS("3G", 3), LTE("4G", 4), UNKOWN("unkonw", 5);
+        private int state;
+        private String type;
 
-    public static LocationListener locationListener1 = new LocationListener() {
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle arg2) {
-
+        NetState(String type, int state) {
+            this.state = state;
+            this.type = type;
         }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-
-        @Override
-        public void onLocationChanged(Location location) {
-            //如果位置发生变化,重新显示
-            showLocation(location);
-
-        }
-    };
+    }
 }

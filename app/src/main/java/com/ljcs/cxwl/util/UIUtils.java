@@ -130,8 +130,7 @@ public class UIUtils {
      * @param recyclerView
      * @param layoutManager
      */
-    public static void configRecycleView(final RecyclerView recyclerView
-            , RecyclerView.LayoutManager layoutManager) {
+    public static void configRecycleView(final RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager) {
         recyclerView.setLayoutManager(layoutManager);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         recyclerView.setHasFixedSize(true);
@@ -139,9 +138,8 @@ public class UIUtils {
     }
 
     public static void configSwipeRefreshLayoutColors(SwipeRefreshLayout layout) {
-        layout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light, android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        layout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R
+                .color.holo_orange_light, android.R.color.holo_red_light);
     }
 
     public static View getRecyclerBottomView(Context context) {
@@ -150,14 +148,16 @@ public class UIUtils {
 
     public static View getRecyclerBottomView(Context context, int height) {
         View view = new View(context);
-        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                height);
         view.setLayoutParams(layoutParams);
         return view;
     }
 
     public static View getRecyclerTopView(Context context, int height) {
         View view = new View(context);
-        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                height);
         view.setLayoutParams(layoutParams);
         return view;
     }
@@ -173,15 +173,14 @@ public class UIUtils {
                 //拿到id
                 String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                 //根据id查找电话
-                Cursor phone = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null);
+                Cursor phone = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null);
                 //有可能有多个号码，选择第一个，这里有点粗暴了
                 if (phone.moveToFirst()) {
-                    strNumber = phone
-                            .getString(phone
-                                    .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    strNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     strNumber = strNumber.replace(" ", "").replace("-", "");
-                    strName = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    strName = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone
+                            .DISPLAY_NAME));
                     //记得释放资源
                     phone.close();
                     cursor.close();

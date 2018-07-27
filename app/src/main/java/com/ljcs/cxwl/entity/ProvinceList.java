@@ -8,9 +8,9 @@ import java.util.List;
  */
 
 public class ProvinceList {
-    private List<ProvinceJson> options1Items ;
-    private List<List<String>> options2Items ;
-    private List<List<List<String>>> options3Items ;
+    private List<ProvinceJson> options1Items;
+    private List<List<String>> options2Items;
+    private List<List<List<String>>> options3Items;
 
     public List<ProvinceJson> getOptions1Items() {
         return options1Items;

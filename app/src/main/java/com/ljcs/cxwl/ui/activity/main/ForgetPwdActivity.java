@@ -50,20 +50,13 @@ import butterknife.OnClick;
 
 public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract.View, TextWatcher {
 
-    @Inject
-    ForgetPwdPresenter mPresenter;
-    @BindView(R.id.et1)
-    EditText mEt1;
-    @BindView(R.id.et2)
-    EditText mEt2;
-    @BindView(R.id.tv_get_yzm)
-    TextView mTvGetYzm;
-    @BindView(R.id.et3)
-    EditText mEt3;
-    @BindView(R.id.checkbox_eye)
-    CheckBox mCheckboxEye;
-    @BindView(R.id.btn_register)
-    Button mBtnRegister;
+    @Inject ForgetPwdPresenter mPresenter;
+    @BindView(R.id.et1) EditText mEt1;
+    @BindView(R.id.et2) EditText mEt2;
+    @BindView(R.id.tv_get_yzm) TextView mTvGetYzm;
+    @BindView(R.id.et3) EditText mEt3;
+    @BindView(R.id.checkbox_eye) CheckBox mCheckboxEye;
+    @BindView(R.id.btn_register) Button mBtnRegister;
 
     private CountDownTimer countDownTimer;
     private String code = "";
@@ -134,8 +127,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                 countDownTimer.start();
             }
 
-        }
-        else {
+        } else {
             onErrorMsg(baseEntity.code, baseEntity.getMsg());
         }
     }

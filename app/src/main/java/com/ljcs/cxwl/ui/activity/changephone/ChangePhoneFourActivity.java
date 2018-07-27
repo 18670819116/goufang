@@ -46,18 +46,14 @@ import butterknife.OnClick;
 
 public class ChangePhoneFourActivity extends BaseActivity implements ChangePhoneFourContract.View {
 
-    @Inject
-    ChangePhoneFourPresenter mPresenter;
-    @BindView(R.id.et1)
-    EditText et1;
-    @BindView(R.id.et2)
-    EditText et2;
-    @BindView(R.id.tv_get_yzm)
-    TextView tvGetYzm;
+    @Inject ChangePhoneFourPresenter mPresenter;
+    @BindView(R.id.et1) EditText et1;
+    @BindView(R.id.et2) EditText et2;
+    @BindView(R.id.tv_get_yzm) TextView tvGetYzm;
     private CountDownTimer countDownTimer;
     private String code = "";
     private String phone = "";
-    private String sfzhm="";
+    private String sfzhm = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

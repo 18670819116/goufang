@@ -27,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class CertificationFourPresenter implements CertificationFourContract.CertificationFourContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final CertificationFourContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private CertificationFourActivity mActivity;
 

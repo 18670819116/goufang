@@ -105,9 +105,9 @@ public class IDcardUtil2 {
                 this.day = currentDay.get(Calendar.DAY_OF_MONTH);
 
                 //获取年龄
-                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy");
-                String year=simpleDateFormat.format(new Date());
-                this.age=Integer.parseInt(year)-this.year;
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+                String year = simpleDateFormat.format(new Date());
+                this.age = Integer.parseInt(year) - this.year;
 
             }
         } catch (Exception e) {
@@ -173,7 +173,7 @@ public class IDcardUtil2 {
 
     @Override
     public String toString() {
-        return "省份：" + this.province + ",性别：" + this.gender + ",出生日期："+ this.birthday;
+        return "省份：" + this.province + ",性别：" + this.gender + ",出生日期：" + this.birthday;
     }
 
     public int getAge() {

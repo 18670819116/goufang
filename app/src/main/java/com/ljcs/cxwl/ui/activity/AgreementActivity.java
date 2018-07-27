@@ -22,7 +22,6 @@ public class AgreementActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-
     }
 
     @Override

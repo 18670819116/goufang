@@ -40,6 +40,7 @@ public interface FamilyRegisterTwo2Contract {
         void getQiniuToken();
 
         void matesInfo(Map map);
+
         void uploadPic(List<String> list, UploadFileCallBack callBack);
     }
 }

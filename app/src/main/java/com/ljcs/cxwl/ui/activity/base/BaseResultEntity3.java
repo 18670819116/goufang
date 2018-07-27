@@ -50,10 +50,6 @@ public class BaseResultEntity3<T> {
 
     @Override
     public String toString() {
-        return "BaseResultEntity{" +
-                "MSG='" + MSG + '\'' +
-                ", status=" + status +
-                ", row=" + row +
-                '}';
+        return "BaseResultEntity{" + "MSG='" + MSG + '\'' + ", status=" + status + ", row=" + row + '}';
     }
 }

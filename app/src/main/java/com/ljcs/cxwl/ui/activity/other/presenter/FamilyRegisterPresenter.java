@@ -31,8 +31,8 @@ import io.reactivex.functions.Consumer;
  */
 public class FamilyRegisterPresenter implements FamilyRegisterContract.FamilyRegisterContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyRegisterActivity mActivity;
 
@@ -115,9 +115,10 @@ public class FamilyRegisterPresenter implements FamilyRegisterContract.FamilyReg
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void uploadPic(List<String> list, UploadFileCallBack callBack) {
-        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper, list, callBack);
     }
 //    @Override
 //    public void getUser(HashMap map) {

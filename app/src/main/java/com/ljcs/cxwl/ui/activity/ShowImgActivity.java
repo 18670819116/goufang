@@ -25,10 +25,8 @@ import butterknife.OnClick;
 public class ShowImgActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.layout)
-    LinearLayout layout;
-    @BindView(R.id.imageView)
-    ImageView imageView;
+    @BindView(R.id.layout) LinearLayout layout;
+    @BindView(R.id.imageView) ImageView imageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +37,8 @@ public class ShowImgActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         setContentView(R.layout.activity_showimg);
         ButterKnife.bind(this);
-        GlideUtils.loadImgNoCach(this,getIntent().getStringExtra("img_path"), imageView,new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true));
+        GlideUtils.loadImgNoCach(this, getIntent().getStringExtra("img_path"), imageView, new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true));
 
     }
 

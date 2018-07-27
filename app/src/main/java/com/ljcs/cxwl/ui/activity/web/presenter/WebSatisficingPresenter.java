@@ -16,20 +16,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of WebSatisficingActivity
  * @date 2018/07/12 11:56:05
  */
-public class WebSatisficingPresenter implements WebSatisficingContract.WebSatisficingContractPresenter{
+public class WebSatisficingPresenter implements WebSatisficingContract.WebSatisficingContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final WebSatisficingContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private WebSatisficingActivity mActivity;
 
     @Inject
-    public WebSatisficingPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull WebSatisficingContract.View view, WebSatisficingActivity activity) {
+    public WebSatisficingPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull WebSatisficingContract.View view,
+                                   WebSatisficingActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +40,7 @@ public class WebSatisficingPresenter implements WebSatisficingContract.WebSatisf
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

@@ -1,7 +1,6 @@
 package com.ljcs.cxwl.ui.activity.other.contract;
 
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.ScanBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
@@ -27,6 +26,7 @@ public interface FamilyRegisterStatusContract {
         void closeProgressDialog();
 
         void allInfoSuccess(AllInfo baseEntity);
+
         void intiViews();
 
         void isScanSuccess(ScanBean baseEntity);

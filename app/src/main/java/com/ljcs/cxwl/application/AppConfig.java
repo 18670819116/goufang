@@ -24,16 +24,22 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
  */
 
 public class AppConfig extends Application {
-    private AppComponent mAppComponent;
     /**
      * 为了实现每次使用该类时不创建新的对象而创建的静�?对象
      */
     public static AppConfig instance;
+    private AppComponent mAppComponent;
 
     public AppConfig() {
 
     }
 
+    public static synchronized AppConfig getInstance() {
+        if (null == instance) {
+            instance = new AppConfig();
+        }
+        return instance;
+    }
 
     @Override
     public void onCreate() {
@@ -56,12 +62,6 @@ public class AppConfig extends Application {
 
     }
 
-    public static synchronized AppConfig getInstance() {
-        if (null == instance) {
-            instance = new AppConfig();
-        }
-        return instance;
-    }
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

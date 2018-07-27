@@ -68,9 +68,9 @@
         android:layout_marginRight="@dimen/x55"/>
 
     <LinearLayout
-        android:layout_marginTop="@dimen/y20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
         android:orientation="horizontal"
         >
 
@@ -113,7 +113,7 @@
 
         android:id="@+id/btn_register"
         style="@style/btn_style"
-        android:enabled="false"
         android:layout_marginTop="@dimen/y120"
+        android:enabled="false"
         android:text="确认重置"/>
 </LinearLayout>

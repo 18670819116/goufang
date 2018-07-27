@@ -31,13 +31,11 @@ import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CommonBean;
-import com.ljcs.cxwl.ui.activity.certification.AboutCertificationActivity;
 import com.ljcs.cxwl.ui.activity.changephone.component.DaggerChangePhoneTwoComponent;
 import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneTwoContract;
 import com.ljcs.cxwl.ui.activity.changephone.module.ChangePhoneTwoModule;
 import com.ljcs.cxwl.ui.activity.changephone.presenter.ChangePhoneTwoPresenter;
 import com.ljcs.cxwl.ui.activity.main.LoginActivity;
-import com.ljcs.cxwl.ui.activity.scan.ScanActivity;
 import com.ljcs.cxwl.util.AppManager;
 import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.FileUtil;
@@ -73,21 +71,21 @@ import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
 public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneTwoContract.View {
 
-    @Inject
-    ChangePhoneTwoPresenter mPresenter;
-    @BindView(R.id.et3)
-    EditText et3;
-    @BindView(R.id.checkbox_eye)
-    CheckBox checkboxEye;
-    @BindView(R.id.et1)
-    EditText et1;
-    @BindView(R.id.et2)
-    EditText et2;
-    @BindView(R.id.tv_get_yzm)
-    TextView tvGetYzm;
+    @Inject ChangePhoneTwoPresenter mPresenter;
+    @BindView(R.id.et3) EditText et3;
+    @BindView(R.id.checkbox_eye) CheckBox checkboxEye;
+    @BindView(R.id.et1) EditText et1;
+    @BindView(R.id.et2) EditText et2;
+    @BindView(R.id.tv_get_yzm) TextView tvGetYzm;
+    /**
+     * 用明文ak，sk初始化
+     */
+    String token;
     private CountDownTimer countDownTimer;
     private String code = "";
     private String phone = "";
+    private String fileRealPath = "";
+    private boolean hasGotToken = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,10 +163,10 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
         }
         switch (view.getId()) {
             case R.id.btn_login:
-               if (RxDataTool.isNullString(et3.getText().toString())){
-                   ToastUtil.showCenterShort("登录密码不能为空");
-                   return;
-               }
+                if (RxDataTool.isNullString(et3.getText().toString())) {
+                    ToastUtil.showCenterShort("登录密码不能为空");
+                    return;
+                }
                 if (!et3.getText().toString().equals(RxSPTool.getString(this, ShareStatic.APP_LOGIN_MM))) {
                     ToastUtil.showCenterShort("登录密码错误");
                     return;
@@ -240,8 +238,6 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
         }
     }
 
-    private String fileRealPath = "";
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -306,12 +302,6 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
             }
         });
     }
-
-    /**
-     * 用明文ak，sk初始化
-     */
-    String token;
-    private boolean hasGotToken = false;
 
     private boolean checkTokenStatus() {
         if (!hasGotToken) {

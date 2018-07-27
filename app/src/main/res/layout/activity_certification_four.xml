@@ -85,9 +85,9 @@
                     <EditText
                         android:id="@+id/tv_issueAuthority"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/x30"
+                        android:layout_weight="1"
                         android:background="@null"
                         android:singleLine="true"
 
@@ -110,7 +110,6 @@
                         android:text="有效期限："/>
 
                     <EditText
-                        android:minWidth="@dimen/x100"
                         android:id="@+id/tv_data1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -118,6 +117,7 @@
                         android:background="@null"
                         android:inputType="number"
                         android:maxLength="8"
+                        android:minWidth="@dimen/x100"
                         android:singleLine="true"
                         android:text=""
                         android:textColor="@color/color_333333"
@@ -130,12 +130,12 @@
 
                     <EditText
                         android:id="@+id/tv_data2"
-                        android:minWidth="@dimen/x100"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:inputType="number"
                         android:maxLength="8"
+                        android:minWidth="@dimen/x100"
                         android:singleLine="true"
                         android:text=""
                         android:textColor="@color/color_333333"
@@ -155,9 +155,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
 

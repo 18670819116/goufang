@@ -7,7 +7,6 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.changephone.component.DaggerChangePhoneOneComponent;
 import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneOneContract;
 import com.ljcs.cxwl.ui.activity.changephone.module.ChangePhoneOneModule;
@@ -30,10 +29,8 @@ import butterknife.OnClick;
 
 public class ChangePhoneOneActivity extends BaseActivity implements ChangePhoneOneContract.View {
 
-    @Inject
-    ChangePhoneOnePresenter mPresenter;
-    @BindView(R.id.tv_phone)
-    TextView tvPhone;
+    @Inject ChangePhoneOnePresenter mPresenter;
+    @BindView(R.id.tv_phone) TextView tvPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

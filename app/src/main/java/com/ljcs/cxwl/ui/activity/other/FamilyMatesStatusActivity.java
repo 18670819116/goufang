@@ -2,7 +2,6 @@ package com.ljcs.cxwl.ui.activity.other;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,15 +12,11 @@ import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.ui.activity.ShowImgActivity;
-import com.ljcs.cxwl.ui.activity.matesinfo.MatesInfoTwoActivity;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyMatesStatusComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyMatesStatusContract;
 import com.ljcs.cxwl.ui.activity.other.module.FamilyMatesStatusModule;
 import com.ljcs.cxwl.ui.activity.other.presenter.FamilyMatesStatusPresenter;
-import com.ljcs.cxwl.view.ZinvInfoLayout;
 import com.vondear.rxtool.RxSPTool;
 
 import java.util.HashMap;
@@ -41,40 +36,23 @@ import butterknife.ButterKnife;
 
 public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMatesStatusContract.View {
 
-    @Inject
-    FamilyMatesStatusPresenter mPresenter;
-    @BindView(R.id.ic_family_status)
-    ImageView icFamilyStatus;
-    @BindView(R.id.tv_head_stutus1)
-    TextView tvHeadStutus1;
-    @BindView(R.id.tv_name2)
-    TextView tvName2;
-    @BindView(R.id.tv_sex2)
-    TextView tvSex2;
-    @BindView(R.id.tv_hklx2)
-    TextView tvHklx2;
-    @BindView(R.id.tv_hkxz2)
-    TextView tvHkxz2;
-    @BindView(R.id.tv_hyzk2)
-    TextView tvHyzk2;
-    @BindView(R.id.tv_card2)
-    TextView tvCard2;
-    @BindView(R.id.tv_gx)
-    TextView tvGx;
-    @BindView(R.id.img1_peiou)
-    ImageView img1Peiou;
-    @BindView(R.id.img2_peiou)
-    ImageView img2Peiou;
-    @BindView(R.id.img3_peiou)
-    ImageView img3Peiou;
-    @BindView(R.id.img4_peiou)
-    ImageView img4Peiou;
-    @BindView(R.id.layout3)
-    LinearLayout layout3;
-    @BindView(R.id.layout_zinv_content)
-    LinearLayout layoutZinvContent;
-    @BindView(R.id.tv_change_peiou)
-    TextView tvChangePeiou;
+    @Inject FamilyMatesStatusPresenter mPresenter;
+    @BindView(R.id.ic_family_status) ImageView icFamilyStatus;
+    @BindView(R.id.tv_head_stutus1) TextView tvHeadStutus1;
+    @BindView(R.id.tv_name2) TextView tvName2;
+    @BindView(R.id.tv_sex2) TextView tvSex2;
+    @BindView(R.id.tv_hklx2) TextView tvHklx2;
+    @BindView(R.id.tv_hkxz2) TextView tvHkxz2;
+    @BindView(R.id.tv_hyzk2) TextView tvHyzk2;
+    @BindView(R.id.tv_card2) TextView tvCard2;
+    @BindView(R.id.tv_gx) TextView tvGx;
+    @BindView(R.id.img1_peiou) ImageView img1Peiou;
+    @BindView(R.id.img2_peiou) ImageView img2Peiou;
+    @BindView(R.id.img3_peiou) ImageView img3Peiou;
+    @BindView(R.id.img4_peiou) ImageView img4Peiou;
+    @BindView(R.id.layout3) LinearLayout layout3;
+    @BindView(R.id.layout_zinv_content) LinearLayout layoutZinvContent;
+    @BindView(R.id.tv_change_peiou) TextView tvChangePeiou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +72,7 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
     protected void initData() {
 
     }
+
     @Override
     public void intiViews() {
         if (Contains.sAllInfo.getData().getHjxx() != null) {
@@ -171,16 +150,22 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
 //                        Contains.sCertificationInfo.setName_peiou(Contains.sAllInfo.getData().getPoxx().getXm());
 //                        Contains.sCertificationInfo.setAddress_peiou(Contains.sAllInfo.getData().getPoxx().getDz());
 //                        Contains.sCertificationInfo.setIdcard_peiou(Contains.sAllInfo.getData().getPoxx().getSfzhm());
-//                        Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq());
+//                        Contains.sCertificationInfo.setBirthday_peiou(Contains.sAllInfo.getData().getPoxx().getCsrq
+// ());
 //                        Contains.sCertificationInfo.setEthnic_peiou(Contains.sAllInfo.getData().getPoxx().getMz());
 //                        Contains.sCertificationInfo.setSex_peiou(Contains.sAllInfo.getData().getPoxx().getXb());
 //                        if (Contains.sAllInfo.getData().getPoxx().getYxq().contains("-")){
-//                            Contains.sCertificationInfo.setSignDate_peiou( Contains.sAllInfo.getData().getPoxx().getYxq().split("-")[0]);
-//                            Contains.sCertificationInfo.setExpiryDate_peiou( Contains.sAllInfo.getData().getPoxx().getYxq().split("-")[1]);
+//                            Contains.sCertificationInfo.setSignDate_peiou( Contains.sAllInfo.getData().getPoxx()
+// .getYxq().split("-")[0]);
+//                            Contains.sCertificationInfo.setExpiryDate_peiou( Contains.sAllInfo.getData().getPoxx()
+// .getYxq().split("-")[1]);
 //                        }
-//                        Contains.sCertificationInfo.setIssueAuthority_peiou(Contains.sAllInfo.getData().getPoxx().getQfjg());
-//                        Contains.sCertificationInfo.setPic_path_zheng_peiou(API.PIC+Contains.sAllInfo.getData().getPoxx().getSfzzm());
-//                        Contains.sCertificationInfo.setPic_path_fan_peiou(API.PIC+Contains.sAllInfo.getData().getPoxx().getSfzfm());
+//                        Contains.sCertificationInfo.setIssueAuthority_peiou(Contains.sAllInfo.getData().getPoxx()
+// .getQfjg());
+//                        Contains.sCertificationInfo.setPic_path_zheng_peiou(API.PIC+Contains.sAllInfo.getData()
+// .getPoxx().getSfzzm());
+//                        Contains.sCertificationInfo.setPic_path_fan_peiou(API.PIC+Contains.sAllInfo.getData()
+// .getPoxx().getSfzfm());
 //                        Contains.ENTERTYPE_CHANGE=1;
 //                        startActivty(MatesInfoTwoActivity.class);
 //                    }
@@ -190,7 +175,8 @@ public class FamilyMatesStatusActivity extends BaseActivity implements FamilyMat
 //            layout3.setVisibility(View.GONE);
 //        }
         layoutZinvContent.removeAllViews();
-//        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() > 0) {
+//        if (Contains.sAllInfo.getData().getJtcyList() != null && Contains.sAllInfo.getData().getJtcyList().size() >
+// 0) {
 //
 //            for (int i = 0; i < Contains.sAllInfo.getData().getJtcyList().size(); i++) {
 //                ZinvInfoLayout zinvInfoLayout = new ZinvInfoLayout(this, Contains.sAllInfo.getData().getJtcyList()

@@ -1,6 +1,5 @@
 package com.ljcs.cxwl.ui.activity.changephone.contract;
 
-import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.base.BasePresenter;
 import com.ljcs.cxwl.ui.activity.base.BaseView;
 

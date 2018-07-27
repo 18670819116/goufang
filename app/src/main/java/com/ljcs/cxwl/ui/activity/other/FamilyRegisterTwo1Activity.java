@@ -27,8 +27,6 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
@@ -53,7 +51,6 @@ import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxConstTool;
 import com.vondear.rxtool.RxDataTool;
 import com.vondear.rxtool.RxKeyboardTool;
-import com.vondear.rxtool.RxRegTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
 
@@ -91,57 +88,34 @@ import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
 public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRegisterTwo1Contract.View {
 
-    @Inject
-    FamilyRegisterTwo1Presenter mPresenter;
-    @BindView(R.id.tv_leixing1)
-    TextView tvLeixing1;
-    @BindView(R.id.tv_leixing2)
-    TextView tvLeixing2;
-    @BindView(R.id.tv_name)
-    EditText tvName;
-    @BindView(R.id.tv_sex)
-    EditText tvSex;
-    @BindView(R.id.tv_ethnic)
-    EditText tvEthnic;
-    @BindView(R.id.tv_birthday)
-    EditText tvBirthday;
-    @BindView(R.id.tv_adress)
-    EditText tvAdress;
-    @BindView(R.id.tv_idcard)
-    EditText tvIdcard;
-    @BindView(R.id.tv_issueAuthority)
-    EditText tvIssueAuthority;
-    @BindView(R.id.tv_data1)
-    EditText tvData1;
-    @BindView(R.id.tv_data2)
-    EditText tvData2;
-    @BindView(R.id.layout_content1)
-    LinearLayout layoutContent1;
-    @BindView(R.id.layout_content2)
-    LinearLayout layoutContent2;
-    @BindView(R.id.layout_bottom)
-    LinearLayout layoutBottom;
-    @BindView(R.id.img_chongpai1)
-    ImageView imgChongpai1;
-    @BindView(R.id.img_chongpai2)
-    ImageView imgChongpai2;
-    @BindView(R.id.imageView_zheng)
-    ImageView imageViewZheng;
-    @BindView(R.id.imageView_fan)
-    ImageView imageViewFan;
-    @BindView(R.id.img_upload1)
-    ImageView imgUpload1;
-    @BindView(R.id.img_upload2)
-    ImageView imgUpload2;
-    @BindView(R.id.imageView5)
-    ImageView imageView5;
-    @BindView(R.id.imageView6)
-    ImageView imageView6;
-    @BindView(R.id.tv_hjszd)
-    TextView tvHjszd;
-    @BindView(R.id.tv_phone)
-    EditText tvPhone;
-
+    @Inject FamilyRegisterTwo1Presenter mPresenter;
+    @BindView(R.id.tv_leixing1) TextView tvLeixing1;
+    @BindView(R.id.tv_leixing2) TextView tvLeixing2;
+    @BindView(R.id.tv_name) EditText tvName;
+    @BindView(R.id.tv_sex) EditText tvSex;
+    @BindView(R.id.tv_ethnic) EditText tvEthnic;
+    @BindView(R.id.tv_birthday) EditText tvBirthday;
+    @BindView(R.id.tv_adress) EditText tvAdress;
+    @BindView(R.id.tv_idcard) EditText tvIdcard;
+    @BindView(R.id.tv_issueAuthority) EditText tvIssueAuthority;
+    @BindView(R.id.tv_data1) EditText tvData1;
+    @BindView(R.id.tv_data2) EditText tvData2;
+    @BindView(R.id.layout_content1) LinearLayout layoutContent1;
+    @BindView(R.id.layout_content2) LinearLayout layoutContent2;
+    @BindView(R.id.layout_bottom) LinearLayout layoutBottom;
+    @BindView(R.id.img_chongpai1) ImageView imgChongpai1;
+    @BindView(R.id.img_chongpai2) ImageView imgChongpai2;
+    @BindView(R.id.imageView_zheng) ImageView imageViewZheng;
+    @BindView(R.id.imageView_fan) ImageView imageViewFan;
+    @BindView(R.id.img_upload1) ImageView imgUpload1;
+    @BindView(R.id.img_upload2) ImageView imgUpload2;
+    @BindView(R.id.imageView5) ImageView imageView5;
+    @BindView(R.id.imageView6) ImageView imageView6;
+    @BindView(R.id.tv_hjszd) TextView tvHjszd;
+    @BindView(R.id.tv_phone) EditText tvPhone;
+    List<String> list = new ArrayList<>();
+    List<String> listUrl = new ArrayList<>();
+    Map<String, String> map = new HashMap<String, String>();
     private TimePickerView pvTime;
     private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -157,9 +131,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
     private boolean isHavePic2 = false;
     private boolean isHavePic3 = false;
     private boolean isHavePic4 = false;
-    List<String> list = new ArrayList<>();
-    List<String> listUrl = new ArrayList<>();
-    Map<String, String> map = new HashMap<String, String>();
+    private int opt1, opt2, opt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -436,7 +408,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
                         map.put("yxq", tvData1.getText().toString() + "-" + tvData2.getText().toString());
                         map.put("hjfl", tvLeixing2.getText().toString());
                         map.put("hjszd", tvHjszd.getText().toString());
-                        map.put("hkb",Contains.sAllInfo.getData().getPoxx().getZzxx().getHkb());
+                        map.put("hkb", Contains.sAllInfo.getData().getPoxx().getZzxx().getHkb());
                         map.put("jhz", Contains.sAllInfo.getData().getPoxx().getZzxx().getJhz());
                         map.put("sfzzm", Contains.sAllInfo.getData().getPoxx().getZzxx().getSfzzm());
                         map.put("sfzfm", Contains.sAllInfo.getData().getPoxx().getZzxx().getSfzfm());
@@ -823,7 +795,6 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
 
     }
 
-
     private void recIDCard(final String idCardSide, String filePath) {
         showProgressDialog();
         IDCardParams param = new IDCardParams();
@@ -957,9 +928,6 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             }
         }, getApplicationContext(), OCR_AK, OCR_SK);
     }
-
-
-    private int opt1, opt2, opt3;
 
     private void showPickerView() {// 弹出选择器
         RxKeyboardTool.hideSoftInput(this);

@@ -25,8 +25,8 @@ import io.reactivex.functions.Consumer;
  */
 public class ScanPresenter implements ScanContract.ScanContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ScanContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ScanActivity mActivity;
 

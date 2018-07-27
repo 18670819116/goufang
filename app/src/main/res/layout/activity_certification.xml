@@ -38,8 +38,8 @@
                     android:layout_width="@dimen/x90"
                     android:layout_height="@dimen/y90"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/y56"
                     android:layout_marginRight="@dimen/x60"
+                    android:layout_marginTop="@dimen/y56"
                     android:src="@mipmap/ic_cer_chongpai1"
                     android:visibility="invisible"/>
             </RelativeLayout>
@@ -60,12 +60,14 @@
                     android:background="@color/color_background"
                     android:gravity="center"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="*"
                         android:textColor="#fd0101"/>
+
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
@@ -141,8 +143,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/x20"
                             android:layout_weight="1"
-                            android:maxLength="5"
                             android:background="@null"
+                            android:maxLength="5"
                             android:singleLine="true"
                             android:text=""
 
@@ -257,8 +259,8 @@
                     android:layout_width="@dimen/x90"
                     android:layout_height="@dimen/y90"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/y56"
                     android:layout_marginRight="@dimen/x60"
+                    android:layout_marginTop="@dimen/y56"
                     android:src="@mipmap/ic_cer_chongpai1"
                     android:visibility="invisible"/>
             </RelativeLayout>
@@ -398,6 +400,7 @@
             android:layout_below="@+id/layout"
             android:enabled="false"
             android:text="确认提交"/>
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"

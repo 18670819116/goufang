@@ -8,8 +8,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_above="@+id/layout_bottom">
+        android:layout_above="@+id/layout_bottom"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,18 +34,17 @@
             </LinearLayout>
 
 
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <LinearLayout
+                android:id="@+id/layout_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:id="@+id/layout_empty"
                 android:orientation="vertical">
 
                 <ImageView
@@ -54,9 +53,9 @@
                     android:src="@mipmap/ic_empty_zinv"/>
 
                 <TextView
-                    android:layout_marginTop="@dimen/y24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y24"
                     android:gravity="center"
                     android:text="请添加您的未成年（未满18岁）子女信息\n如无子女或子女已成年请直接跳过"/>
             </LinearLayout>
@@ -64,14 +63,14 @@
     </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
-        android:background="@color/white"
-
         android:id="@+id/layout_bottom"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:background="@color/white"
         android:gravity="center"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">
 

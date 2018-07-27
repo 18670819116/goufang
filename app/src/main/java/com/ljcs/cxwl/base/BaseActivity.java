@@ -17,10 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.sdk.android.push.CommonCallback;
-import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.ljcs.cxwl.R;
-import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
 import com.ljcs.cxwl.ui.activity.main.LoginActivity;
 import com.ljcs.cxwl.util.AppManager;
@@ -28,11 +25,8 @@ import com.ljcs.cxwl.util.ClearUtils;
 import com.ljcs.cxwl.util.ToastUtil;
 import com.ljcs.cxwl.util.UIUtils;
 import com.ljcs.cxwl.view.ProgressDialog;
-import com.orhanobut.logger.Logger;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
 import com.vondear.rxtool.RxDataTool;
-import com.vondear.rxtool.RxSPTool;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
@@ -44,13 +38,13 @@ import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
 public abstract class BaseActivity extends AppCompatActivity implements BGASwipeBackHelper.Delegate {
     public Toolbar mToolbar;
-    private RelativeLayout rootLayout;
     public LinearLayout autolayout;
     public boolean needFront = false;   //toolBar 是否需要显示在最上层的标识
     public ProgressDialog progressDialog;
     public TextView toolbarTitle;
     public TextView toolbarMenu;
     protected BGASwipeBackHelper mSwipeBackHelper;
+    private RelativeLayout rootLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,9 +74,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
         //4.4版本及以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
-            window.setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams
+                    .FLAG_TRANSLUCENT_STATUS);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();

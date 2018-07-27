@@ -54,18 +54,15 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
-    @Inject
-    MainPresenter mPresenter;
-    @BindView(R.id.relayou_head)
-    RelativeLayout relayouHead;
-    @BindView(R.id.tv1)
-    TextView tv1;
+    @Inject MainPresenter mPresenter;
+    @BindView(R.id.relayou_head) RelativeLayout relayouHead;
+    @BindView(R.id.tv1) TextView tv1;
     //    @BindView(R.id.tv2)
 //    TextView tv2;
-    @BindView(R.id.tv3)
-    TextView tv3;
+    @BindView(R.id.tv3) TextView tv3;
 
     private boolean isFirst;//登录进来未实名认证
+    private long mExitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,13 +142,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         != null || Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() != null) {
                     tv3.setText("待申请");
                     // tv2.setText("未添加");
-                    if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt()==0) {
+                    if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() == 0) {
                         //审核中
                         tv3.setText("待审核");
-                    } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt()==1) {
+                    } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() == 1) {
                         //审完成
                         tv3.setText("预审通过");
-                    } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt()==2) {
+                    } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() == 2) {
                         //未通过
                         tv3.setText("审核未通过");
 
@@ -243,8 +240,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         .sAllInfo.getData().getZcyh().getRzzt() == 2) {
                     //认证通过 认证审核中
                     if (Contains.sAllInfo.getData().getGrxx() != null && Contains.sAllInfo.getData().getGrxx()
-                            .getJtcy()!=null&&Contains.sAllInfo.getData().getGrxx()
-                            .getJtcy().getRzzt() != null) {
+                            .getJtcy() != null && Contains.sAllInfo.getData().getGrxx().getJtcy().getRzzt() != null) {
                         startActivty(FamilyRegisterStatusActivity.class);
                     } else {
                         startActivty(QualificationExaminationActivity.class);
@@ -262,8 +258,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public boolean isSupportSwipeBack() {
         return false;
     }
-
-    private long mExitTime;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

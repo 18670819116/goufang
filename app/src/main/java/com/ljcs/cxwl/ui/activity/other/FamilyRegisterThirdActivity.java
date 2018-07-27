@@ -43,14 +43,10 @@ import butterknife.OnClick;
 
 public class FamilyRegisterThirdActivity extends BaseActivity implements FamilyRegisterThirdContract.View {
 
-    @Inject
-    FamilyRegisterThirdPresenter mPresenter;
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
-    @BindView(R.id.layout_empty)
-    LinearLayout layoutEmpty;
-    @BindView(R.id.next)
-    TextView next;
+    @Inject FamilyRegisterThirdPresenter mPresenter;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.layout_empty) LinearLayout layoutEmpty;
+    @BindView(R.id.next) TextView next;
     private ZinvInfoAdapter mAdapter;
     private List<AllInfo.Data.ZinvBean> list;
 

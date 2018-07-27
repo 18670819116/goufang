@@ -20,7 +20,6 @@ import com.ljcs.cxwl.base.BaseActivity;
 import com.ljcs.cxwl.callback.UploadCallback;
 import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
-import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.MatesInfo;
 import com.ljcs.cxwl.entity.QiniuToken;
 import com.ljcs.cxwl.ui.activity.ShowImgActivity;
@@ -62,44 +61,25 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_JHZ;
 
 public class FamilyRegisterTwoActivity extends BaseActivity implements FamilyRegisterTwoContract.View {
 
-    @Inject
-    FamilyRegisterTwoPresenter mPresenter;
-    @BindView(R.id.tv_leixing1)
-    TextView tvLeixing1;
-    @BindView(R.id.tv_leixing2)
-    TextView tvLeixing2;
-    @BindView(R.id.tv_leixing3)
-    TextView tvLeixing3;
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_sex)
-    TextView tvSex;
-    @BindView(R.id.tv_ethnic)
-    TextView tvEthnic;
-    @BindView(R.id.tv_adress)
-    TextView tvAdress;
-    @BindView(R.id.tv_idcard)
-    TextView tvIdcard;
-    @BindView(R.id.tv_issueAuthority)
-    TextView tvIssueAuthority;
-    @BindView(R.id.tv_data)
-    TextView tvData;
-    @BindView(R.id.imageView_zheng)
-    ImageView imageViewZheng;
-    @BindView(R.id.imageView_fan)
-    ImageView imageViewFan;
-    @BindView(R.id.img_upload1)
-    ImageView imgUpload1;
-    @BindView(R.id.img_upload2)
-    ImageView imgUpload2;
-    @BindView(R.id.imageView5)
-    ImageView imageView5;
-    @BindView(R.id.imageView6)
-    ImageView imageView6;
-    @BindView(R.id.tv_birthday)
-    TextView tvBirthday;
+    @Inject FamilyRegisterTwoPresenter mPresenter;
+    @BindView(R.id.tv_leixing1) TextView tvLeixing1;
+    @BindView(R.id.tv_leixing2) TextView tvLeixing2;
+    @BindView(R.id.tv_leixing3) TextView tvLeixing3;
+    @BindView(R.id.textView) TextView textView;
+    @BindView(R.id.tv_name) TextView tvName;
+    @BindView(R.id.tv_sex) TextView tvSex;
+    @BindView(R.id.tv_ethnic) TextView tvEthnic;
+    @BindView(R.id.tv_adress) TextView tvAdress;
+    @BindView(R.id.tv_idcard) TextView tvIdcard;
+    @BindView(R.id.tv_issueAuthority) TextView tvIssueAuthority;
+    @BindView(R.id.tv_data) TextView tvData;
+    @BindView(R.id.imageView_zheng) ImageView imageViewZheng;
+    @BindView(R.id.imageView_fan) ImageView imageViewFan;
+    @BindView(R.id.img_upload1) ImageView imgUpload1;
+    @BindView(R.id.img_upload2) ImageView imgUpload2;
+    @BindView(R.id.imageView5) ImageView imageView5;
+    @BindView(R.id.imageView6) ImageView imageView6;
+    @BindView(R.id.tv_birthday) TextView tvBirthday;
 
 
     private String imgPath1;

@@ -42,8 +42,8 @@
             android:layout_height="@dimen/y52"
             android:layout_marginTop="@dimen/y40"
             android:background="@drawable/shape_dialog_btn"
-            android:text="确定"
             android:gravity="center"
+            android:text="确定"
             android:textColor="@color/white"/>
     </LinearLayout>
 </LinearLayout>

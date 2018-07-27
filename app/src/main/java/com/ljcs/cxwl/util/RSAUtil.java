@@ -13,47 +13,43 @@ import javax.crypto.Cipher;
 
 /**
  * @author 胡智鹏 E-mail:
- * @version v1.0 
- * 创建时间：2016-10-20 上午9:29:08
- * 类说明   rsa加密的类
+ * @version v1.0
+ *          创建时间：2016-10-20 上午9:29:08
+ *          类说明   rsa加密的类
  */
- 
+
 public class RSAUtil {
-    private static final String RSA_PUBLICE =
-    		"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDl2qoaYKFH5a64rOtOb00KzTvY"
-    		+"/98YNbvSfjMNTiF//u7JZcm9/2HtV/hc1uwuGf0yRumVyPhfyjBgSz8E/f+JtnJK"
-    		+"3ZRf0iE39PN+jEuQ2qJjTz6wveB1i6xKm045/Q+N6xzhwCVQSM8IJQw5Rk91fxtT"
-    		+"hWUGGcwTJZ2HNdiuVwIDAQAB";
-    private static final String ALGORITHM = "RSA";
- 
     public static final String RSA = "RSA";// 非对称加密密钥算法
     public static final String ECB_PKCS1_PADDING = "RSA/ECB/PKCS1Padding";//加密填充方式
     public static final int DEFAULT_KEY_SIZE = 1024;//秘钥默认长度
     public static final byte[] DEFAULT_SPLIT = "#PART#".getBytes();    // 当要加密的内容超过bufferSize，则采用partSplit进行分块加密
     public static final int DEFAULT_BUFFERSIZE = (DEFAULT_KEY_SIZE / 8) - 11;// 当前秘钥支持加密的最大字节数
+    private static final String RSA_PUBLICE = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDl2qoaYKFH5a64rOtOb00KzTvY" +
+            "/98YNbvSfjMNTiF//u7JZcm9/2HtV/hc1uwuGf0yRumVyPhfyjBgSz8E/f+JtnJK" +
+            "3ZRf0iE39PN+jEuQ2qJjTz6wveB1i6xKm045/Q+N6xzhwCVQSM8IJQw5Rk91fxtT" + "hWUGGcwTJZ2HNdiuVwIDAQAB";
+    private static final String ALGORITHM = "RSA";
     /**
      * RSA最大加密明文大小
      */
     private static final int MAX_ENCRYPT_BLOCK = 117;
-    
+
     /**
      * 得到公钥
+     *
      * @param algorithm
      * @param bysKey
      * @return
      */
-    private static PublicKey getPublicKeyFromX509(String algorithm,
-            String bysKey) throws NoSuchAlgorithmException, Exception {
-        byte[] decodedKey = Base64.decode(bysKey,Base64.DEFAULT);
+    private static PublicKey getPublicKeyFromX509(String algorithm, String bysKey) throws NoSuchAlgorithmException,
+            Exception {
+        byte[] decodedKey = Base64.decode(bysKey, Base64.DEFAULT);
         X509EncodedKeySpec x509 = new X509EncodedKeySpec(decodedKey);
- 
+
         KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
         return keyFactory.generatePublic(x509);
     }
- 
- 
-    
-    
+
+
 //    /**
 //     * 用公钥对字符串进行加密
 //     *
@@ -69,7 +65,7 @@ public class RSAUtil {
 //        cp.init(Cipher.ENCRYPT_MODE, keyPublic);
 //        return cp.doFinal(data);
 //    }
- 
+
 //    /**
 //     * 使用公钥加密
 //     * @param content
@@ -95,7 +91,7 @@ public class RSAUtil {
 //    		return null;
 //    	}
 //    }
-    
+
 //    /**
 //     * 使用公钥加密
 //     * @param content
@@ -121,7 +117,7 @@ public class RSAUtil {
 //    		return null;
 //    	}
 //    }
-    
+
 //    /**
 //     * 用公钥对字符串进行分段加密
 //     *
@@ -180,7 +176,8 @@ public class RSAUtil {
 //    		content.append(encryptByPublic(data));
 //		} else {
 //			List<String> datas = new ArrayList<>();
-//			int temp = dataLen % DEFAULT_BUFFERSIZE == 0 ? dataLen / DEFAULT_BUFFERSIZE : dataLen / DEFAULT_BUFFERSIZE + 1;
+//			int temp = dataLen % DEFAULT_BUFFERSIZE == 0 ? dataLen / DEFAULT_BUFFERSIZE : dataLen / DEFAULT_BUFFERSIZE
+// + 1;
 //			for (int i = 0; i < temp; i++) {
 //				if(((i + 1)*DEFAULT_BUFFERSIZE) < dataLen) {
 //					datas.add(data.substring(i*DEFAULT_BUFFERSIZE, (i + 1)*DEFAULT_BUFFERSIZE));
@@ -201,7 +198,7 @@ public class RSAUtil {
 //		return new String(Base64.encode(out.toByteArray(), Base64.DEFAULT));
 //    	
 //    }
-    
+
 //    /**
 //     * 用公钥对字符串进行加密
 //     *
@@ -218,7 +215,7 @@ public class RSAUtil {
 //        cp.init(Cipher.ENCRYPT_MODE, pubkey);
 //        return cp.doFinal(data);
 //    }
-    
+
 //    /**
 //     * 用公钥对字符串进行分段加密
 //     *
@@ -262,19 +259,18 @@ public class RSAUtil {
 //        }
 //        return bytes;
 //    }
-    
+
     /**
      * <p>
      * 公钥加密
      * </p>
-     * 
+     *
      * @param data 源数据
      * @return
      * @throws Exception
      */
-    public static byte[] encryptByPublicKey(byte[] data)
-            throws Exception {
-    	PublicKey pubkey = getPublicKeyFromX509(ALGORITHM, RSA_PUBLICE);
+    public static byte[] encryptByPublicKey(byte[] data) throws Exception {
+        PublicKey pubkey = getPublicKeyFromX509(ALGORITHM, RSA_PUBLICE);
 //        byte[] keyBytes = Base64.decodeBase64(publicKey);
 //        X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
 //        KeyFactory keyFactory = KeyFactory.getInstance(ECB_PKCS1_PADDING);

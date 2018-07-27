@@ -30,8 +30,8 @@ import io.reactivex.functions.Consumer;
  */
 public class FamilyAddPresenter implements FamilyAddContract.FamilyAddContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyAddContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyAddActivity mActivity;
 
@@ -73,10 +73,12 @@ public class FamilyAddPresenter implements FamilyAddContract.FamilyAddContractPr
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void uploadPic(List<String> list, UploadFileCallBack callBack) {
-        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper, list, callBack);
     }
+
     @Override
     public void matesInfoZinv(Map map) {
         Disposable disposable = httpAPIWrapper.matesInfoZinv(map).subscribe(new Consumer<MatesInfo>() {

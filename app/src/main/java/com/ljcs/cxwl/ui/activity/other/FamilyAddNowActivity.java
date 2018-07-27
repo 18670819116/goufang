@@ -24,8 +24,7 @@ import butterknife.OnClick;
 
 public class FamilyAddNowActivity extends BaseActivity implements FamilyAddNowContract.View {
 
-    @Inject
-    FamilyAddNowPresenter mPresenter;
+    @Inject FamilyAddNowPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

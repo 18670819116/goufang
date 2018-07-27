@@ -18,12 +18,12 @@ import javax.inject.Inject;
 
 public class ThirdFragment extends BaseFragment implements ThirdContract.View {
 
-    @Inject
-    ThirdPresenter mPresenter;
+    @Inject ThirdPresenter mPresenter;
 
 //   @Nullable
 //   @Override
-//   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+// savedInstanceState) {
 //       View view = inflater.inflate(R.layout.fragment_third, null);
 //       ButterKnife.bind(this, view);
 //       Bundle mBundle = getArguments();
@@ -33,13 +33,10 @@ public class ThirdFragment extends BaseFragment implements ThirdContract.View {
 
     @Override
     protected void setupFragmentComponent() {
-       DaggerThirdComponent
-               .builder()
-               .appComponent(((AppConfig) getActivity().getApplication()).getApplicationComponent())
-               .thirdModule(new ThirdModule(this))
-               .build()
-               .inject(this);
+        DaggerThirdComponent.builder().appComponent(((AppConfig) getActivity().getApplication())
+                .getApplicationComponent()).thirdModule(new ThirdModule(this)).build().inject(this);
     }
+
     @Override
     public void setPresenter(ThirdContract.ThirdContractPresenter presenter) {
         mPresenter = (ThirdPresenter) presenter;

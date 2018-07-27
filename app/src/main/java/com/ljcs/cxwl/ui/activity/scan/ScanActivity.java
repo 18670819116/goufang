@@ -2,7 +2,6 @@ package com.ljcs.cxwl.ui.activity.scan;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -42,15 +41,39 @@ import butterknife.OnClick;
 
 public class ScanActivity extends BaseActivity implements ScanContract.View {
 
-    @Inject
-    ScanPresenter mPresenter;
-    @BindView(R.id.iv_shoudiantong)
-    ImageView mIvShoudiantong;
+    @Inject ScanPresenter mPresenter;
+    @BindView(R.id.iv_shoudiantong) ImageView mIvShoudiantong;
     private CaptureFragment captureFragment;
     private int REQUEST_IMAGE = 160;//相册
     private boolean isLight;
     private SureDialog dialog;
     private String content;
+    /**
+     * 二维码解析回调函数
+     */
+    CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
+        @Override
+        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+            Logger.i("result" + result);
+            content = result;
+            Map<String, String> map = new HashMap<>();
+            map.put("token", RxSPTool.getString(ScanActivity.this, ShareStatic.APP_LOGIN_TOKEN));
+            map.put("smnr", result);
+            mPresenter.scanGet(map);
+
+            //开启重新扫码
+//            Message obtain = Message.obtain();
+//            obtain.what = R.id.restart_preview;
+//            captureFragment.getHandler().sendMessageDelayed(obtain, 2000);
+
+        }
+
+        @Override
+        public void onAnalyzeFailed() {
+            Logger.e("解析失败");
+            ToastUtil.showCenterShort("解析二维码失败");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,36 +116,9 @@ public class ScanActivity extends BaseActivity implements ScanContract.View {
         }
     }
 
-    /**
-     * 二维码解析回调函数
-     */
-    CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
-        @Override
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-            Logger.i("result" + result);
-            content = result;
-            Map<String, String> map = new HashMap<>();
-            map.put("token", RxSPTool.getString(ScanActivity.this, ShareStatic.APP_LOGIN_TOKEN));
-            map.put("smnr", result);
-            mPresenter.scanGet(map);
-
-            //开启重新扫码
-//            Message obtain = Message.obtain();
-//            obtain.what = R.id.restart_preview;
-//            captureFragment.getHandler().sendMessageDelayed(obtain, 2000);
-
-        }
-
-        @Override
-        public void onAnalyzeFailed() {
-            Logger.e("解析失败");
-            ToastUtil.showCenterShort("解析二维码失败");
-        }
-    };
-
     private void showDialog(final String result) {
         dialog = new SureDialog(this);
-        dialog.getContentView().setText(result+"正在读取您的购房资格审查数据,是否同意");
+        dialog.getContentView().setText(result + "正在读取您的购房资格审查数据,是否同意");
         dialog.getCancelView().setText("不同意");
         dialog.getCancelView().setTextColor(getResources().getColor(R.color.color_333333));
         dialog.getSureView().setText("同意");

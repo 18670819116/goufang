@@ -26,7 +26,8 @@ public class AboutCertificationModule {
 
     @Provides
     @ActivityScope
-    public AboutCertificationPresenter provideAboutCertificationPresenter(HttpAPIWrapper httpAPIWrapper, AboutCertificationActivity mActivity) {
+    public AboutCertificationPresenter provideAboutCertificationPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                          AboutCertificationActivity mActivity) {
         return new AboutCertificationPresenter(httpAPIWrapper, mView, mActivity);
     }
 

@@ -121,7 +121,7 @@ public class GsonUtils {
      * @return
      */
 
-    public  static <S> Disposable getData(DisposableObserver<S> consumer, final Context context) {
+    public static <S> Disposable getData(DisposableObserver<S> consumer, final Context context) {
         return Observable.create(new ObservableOnSubscribe<S>() {
             @Override
             public void subscribe(ObservableEmitter<S> e) throws Exception {
@@ -133,7 +133,7 @@ public class GsonUtils {
                 List<List<String>> list2 = new ArrayList<>();
                 List<List<List<String>>> list3 = new ArrayList<>();
                 for (int i = 0; i < provinceJsons.size(); i++) {//遍历省份
-                   List<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
+                    List<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
                     List<List<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
 
                     for (int c = 0; c < provinceJsons.get(i).getCity().size(); c++) {//遍历该省份的所有城市
@@ -142,7 +142,8 @@ public class GsonUtils {
                         ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
 
                         //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                        if (provinceJsons.get(i).getCity().get(c).getArea() == null || provinceJsons.get(i).getCity().get(c).getArea().size() == 0) {
+                        if (provinceJsons.get(i).getCity().get(c).getArea() == null || provinceJsons.get(i).getCity()
+                                .get(c).getArea().size() == 0) {
                             City_AreaList.add("");
                         } else {
                             City_AreaList.addAll(provinceJsons.get(i).getCity().get(c).getArea());

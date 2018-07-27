@@ -235,9 +235,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
-                    android:visibility="gone"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -303,6 +303,7 @@
                         android:textColor="@color/black"
                         android:textSize="14sp"/>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
@@ -422,11 +423,11 @@
                 android:layout_marginTop="@dimen/y26"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:visibility="gone"
                 android:paddingBottom="@dimen/y28"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:paddingTop="@dimen/y28">
+                android:paddingTop="@dimen/y28"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -506,8 +507,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -551,6 +552,7 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
@@ -574,6 +576,7 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
@@ -597,12 +600,13 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -764,8 +768,8 @@
                 android:paddingBottom="@dimen/y28"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:visibility="gone"
-                android:paddingTop="@dimen/y28">
+                android:paddingTop="@dimen/y28"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -863,6 +867,7 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y70"
@@ -951,7 +956,6 @@
                 </LinearLayout>
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -968,6 +972,7 @@
 
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/layout_zinv_content"
                 android:layout_width="match_parent"
@@ -1253,9 +1258,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
 
         android:paddingBottom="@dimen/y20"
         android:paddingTop="@dimen/y20">

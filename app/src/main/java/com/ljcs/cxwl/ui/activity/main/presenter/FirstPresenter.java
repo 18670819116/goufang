@@ -16,20 +16,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of FirstFragment
  * @date 2017/10/18 11:56:00
  */
-public class FirstPresenter implements FirstContract.FirstContractPresenter{
+public class FirstPresenter implements FirstContract.FirstContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FirstContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FirstFragment mFragment;
 
     @Inject
-    public FirstPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FirstContract.View view, FirstFragment fragment) {
+    public FirstPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FirstContract.View view, FirstFragment
+            fragment) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mFragment = fragment;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +40,7 @@ public class FirstPresenter implements FirstContract.FirstContractPresenter{
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

@@ -598,9 +598,9 @@
                     android:id="@+id/layout_select1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y94"
-                    android:visibility="gone"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -623,7 +623,8 @@
                         android:src="@mipmap/ic_rock_right"/>
                 </LinearLayout>
 
-                <View style="@style/line_hor"
+                <View
+                    style="@style/line_hor"
                     android:visibility="gone"/>
 
                 <LinearLayout
@@ -656,6 +657,7 @@
 
 
                 <View style="@style/line_hor"/>
+
                 <LinearLayout
                     android:id="@+id/layout_select5"
                     android:layout_width="match_parent"
@@ -705,9 +707,9 @@
                         android:layout_marginLeft="@dimen/x30"
                         android:layout_weight="1"
                         android:background="@null"
-                        android:maxLength="11"
-                        android:inputType="phone"
                         android:hint="请输入手机号码"
+                        android:inputType="phone"
+                        android:maxLength="11"
                         android:singleLine="true"
                         android:textColor="@color/color_333333"
                         android:textSize="14sp"/>
@@ -715,6 +717,7 @@
                 </LinearLayout>
 
                 <View style="@style/line_hor"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

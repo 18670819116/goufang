@@ -16,20 +16,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of AboutCertificationActivity
  * @date 2018/07/10 10:26:14
  */
-public class AboutCertificationPresenter implements AboutCertificationContract.AboutCertificationContractPresenter{
+public class AboutCertificationPresenter implements AboutCertificationContract.AboutCertificationContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final AboutCertificationContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private AboutCertificationActivity mActivity;
 
     @Inject
-    public AboutCertificationPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull AboutCertificationContract.View view, AboutCertificationActivity activity) {
+    public AboutCertificationPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull AboutCertificationContract
+            .View view, AboutCertificationActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +40,7 @@ public class AboutCertificationPresenter implements AboutCertificationContract.A
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

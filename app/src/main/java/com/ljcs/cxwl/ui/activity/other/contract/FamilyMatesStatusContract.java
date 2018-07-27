@@ -25,6 +25,7 @@ public interface FamilyMatesStatusContract {
         void closeProgressDialog();
 
         void allInfoSuccess(AllInfo baseEntity);
+
         void intiViews();
     }
 

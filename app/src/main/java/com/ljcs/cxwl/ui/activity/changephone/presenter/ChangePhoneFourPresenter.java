@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.CommonBean;
-import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneFourContract;
 import com.ljcs.cxwl.ui.activity.changephone.ChangePhoneFourActivity;
+import com.ljcs.cxwl.ui.activity.changephone.contract.ChangePhoneFourContract;
 import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
@@ -27,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class ChangePhoneFourPresenter implements ChangePhoneFourContract.ChangePhoneFourContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ChangePhoneFourContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ChangePhoneFourActivity mActivity;
 

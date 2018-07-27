@@ -27,9 +27,11 @@ public interface FamilyRegisterContract {
          *
          */
         void closeProgressDialog();
+
         void getQiniuTokenSuccess(QiniuToken qiniuToken);
 
         void hukouInfoSuccess(HujiInfo baseEntity);
+
         void allInfoSuccess(AllInfo baseEntity);
     }
 
@@ -38,8 +40,11 @@ public interface FamilyRegisterContract {
 //         *
 //         */
         void hukouInfo(Map map);
+
         void getQiniuToken();
+
         void allInfo(Map map);
+
         void uploadPic(List<String> list, UploadFileCallBack callBack);
 
     }

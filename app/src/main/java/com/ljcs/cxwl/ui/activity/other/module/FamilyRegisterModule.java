@@ -26,7 +26,8 @@ public class FamilyRegisterModule {
 
     @Provides
     @ActivityScope
-    public FamilyRegisterPresenter provideFamilyRegisterPresenter(HttpAPIWrapper httpAPIWrapper, FamilyRegisterActivity mActivity) {
+    public FamilyRegisterPresenter provideFamilyRegisterPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                  FamilyRegisterActivity mActivity) {
         return new FamilyRegisterPresenter(httpAPIWrapper, mView, mActivity);
     }
 

@@ -26,7 +26,8 @@ public class MatesInfoOneModule {
 
     @Provides
     @ActivityScope
-    public MatesInfoOnePresenter provideMatesInfoOnePresenter(HttpAPIWrapper httpAPIWrapper, MatesInfoOneActivity mActivity) {
+    public MatesInfoOnePresenter provideMatesInfoOnePresenter(HttpAPIWrapper httpAPIWrapper, MatesInfoOneActivity
+            mActivity) {
         return new MatesInfoOnePresenter(httpAPIWrapper, mView, mActivity);
     }
 

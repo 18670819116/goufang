@@ -25,20 +25,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of FamilyRegisterTwo1Activity
  * @date 2018/07/11 15:00:45
  */
-public class FamilyRegisterTwo1Presenter implements FamilyRegisterTwo1Contract.FamilyRegisterTwo1ContractPresenter{
+public class FamilyRegisterTwo1Presenter implements FamilyRegisterTwo1Contract.FamilyRegisterTwo1ContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterTwo1Contract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyRegisterTwo1Activity mActivity;
 
     @Inject
-    public FamilyRegisterTwo1Presenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterTwo1Contract.View view, FamilyRegisterTwo1Activity activity) {
+    public FamilyRegisterTwo1Presenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterTwo1Contract
+            .View view, FamilyRegisterTwo1Activity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -47,7 +49,7 @@ public class FamilyRegisterTwo1Presenter implements FamilyRegisterTwo1Contract.F
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 
@@ -72,7 +74,7 @@ public class FamilyRegisterTwo1Presenter implements FamilyRegisterTwo1Contract.F
 
     @Override
     public void uploadPic(List<String> list, UploadFileCallBack callBack) {
-        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper, list, callBack);
     }
 
 //    @Override

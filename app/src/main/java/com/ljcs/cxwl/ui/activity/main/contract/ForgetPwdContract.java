@@ -35,6 +35,7 @@ public interface ForgetPwdContract {
 //         */
 //        void getBusinessInfo(Map map);
         void getCode(String phone);
+
         void forgetPwd(Map map);
     }
 }

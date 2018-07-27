@@ -110,6 +110,10 @@ public class AllInfo extends BaseEntity {
             return gfzgyj;
         }
 
+        public void setGfzgyj(String gfzgyj) {
+            this.gfzgyj = gfzgyj;
+        }
+
         public static class ZinvBean {
 
             /**
@@ -921,11 +925,6 @@ public class AllInfo extends BaseEntity {
                 }
             }
         }
-
-        public void setGfzgyj(String gfzgyj) {
-            this.gfzgyj = gfzgyj;
-        }
-
 
         public static class ZcyhBean {
 

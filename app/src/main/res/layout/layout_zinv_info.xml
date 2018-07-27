@@ -39,10 +39,10 @@
 
             <TextView
                 android:id="@+id/tv_change"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/bg_btn_grenn2"
+                android:visibility="gone"
                 />
         </LinearLayout>
 
@@ -95,9 +95,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y70"
-            android:visibility="gone"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,6 +165,7 @@
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y70"
@@ -214,8 +215,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y70"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"

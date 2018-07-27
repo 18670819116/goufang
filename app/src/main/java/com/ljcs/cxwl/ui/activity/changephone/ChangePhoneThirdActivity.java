@@ -3,7 +3,6 @@ package com.ljcs.cxwl.ui.activity.changephone;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,22 +34,14 @@ import butterknife.OnClick;
 
 public class ChangePhoneThirdActivity extends BaseActivity implements ChangePhoneThirdContract.View {
 
-    @Inject
-    ChangePhoneThirdPresenter mPresenter;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_sex)
-    TextView tvSex;
-    @BindView(R.id.tv_ethnic)
-    TextView tvEthnic;
-    @BindView(R.id.tv_birthday)
-    TextView tvBirthday;
-    @BindView(R.id.tv_adress)
-    TextView tvAdress;
-    @BindView(R.id.tv_idcard)
-    TextView tvIdcard;
+    @Inject ChangePhoneThirdPresenter mPresenter;
+    @BindView(R.id.imageView) ImageView imageView;
+    @BindView(R.id.tv_name) TextView tvName;
+    @BindView(R.id.tv_sex) TextView tvSex;
+    @BindView(R.id.tv_ethnic) TextView tvEthnic;
+    @BindView(R.id.tv_birthday) TextView tvBirthday;
+    @BindView(R.id.tv_adress) TextView tvAdress;
+    @BindView(R.id.tv_idcard) TextView tvIdcard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

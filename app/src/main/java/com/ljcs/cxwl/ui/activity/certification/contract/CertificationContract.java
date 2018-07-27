@@ -25,6 +25,7 @@ public interface CertificationContract {
          *
          */
         void closeProgressDialog();
+
         void postInfoSuccess(CerInfo baseEntity);
 
     }
@@ -35,6 +36,7 @@ public interface CertificationContract {
 //         */
 //        void getBusinessInfo(Map map);
         void uploadPic(List<String> list, UploadFileCallBack callBack);
+
         void postInfo(Map map);
     }
 }

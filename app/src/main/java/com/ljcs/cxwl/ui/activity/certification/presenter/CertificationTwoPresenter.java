@@ -32,8 +32,8 @@ import okhttp3.RequestBody;
  */
 public class CertificationTwoPresenter implements CertificationTwoContract.CertificationTwoContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final CertificationTwoContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private CertificationTwoActivity mActivity;
 
@@ -118,9 +118,10 @@ public class CertificationTwoPresenter implements CertificationTwoContract.Certi
     }
 
     @Override
-    public void uploadFile(Map map,String file) {
-        RequestBody fileRequestBody=RequestBody.create(MediaType.parse("multipart/form-data"), new File(file));
-        MultipartBody.Part body = MultipartBody.Part.createFormData("uploadFile",  new File(file).getName(), fileRequestBody);
+    public void uploadFile(Map map, String file) {
+        RequestBody fileRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), new File(file));
+        MultipartBody.Part body = MultipartBody.Part.createFormData("uploadFile", new File(file).getName(),
+                fileRequestBody);
         Disposable disposable = httpAPIWrapper.uploadFile(body).subscribe(new Consumer<BaseEntity>() {
             @Override
             public void accept(@io.reactivex.annotations.NonNull BaseEntity appLogin) throws Exception {

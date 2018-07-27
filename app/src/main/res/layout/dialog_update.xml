@@ -44,19 +44,17 @@
                 />
 
 
-
-                    <TextView
-                        android:id="@+id/tv_content"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/y200"
-                        android:layout_marginLeft="@dimen/x40"
-                        android:layout_marginRight="@dimen/x40"
-                        android:layout_marginTop="@dimen/y15"
-                        android:scrollbars="vertical"
-                        android:textColor="@color/color_939393"
-                        android:text="1.修复app的一些bug\n1.修复app的一些bug\n1.修复app的一些bug\n1.修复app的一些b修复app的一些bug\n1.修复app的一些"
-                        />
-
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y200"
+                android:layout_marginLeft="@dimen/x40"
+                android:layout_marginRight="@dimen/x40"
+                android:layout_marginTop="@dimen/y15"
+                android:scrollbars="vertical"
+                android:text="1.修复app的一些bug\n1.修复app的一些bug\n1.修复app的一些bug\n1.修复app的一些b修复app的一些bug\n1.修复app的一些"
+                android:textColor="@color/color_939393"
+                />
 
 
             <LinearLayout

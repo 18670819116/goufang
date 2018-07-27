@@ -22,37 +22,36 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginLeft="@dimen/y127"
                     android:id="@+id/ic_family_status"
                     android:layout_width="@dimen/x92"
                     android:layout_height="@dimen/y82"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/y127"
                     android:src="@mipmap/ic_mates_status1"
                     />
 
 
                 <TextView
-                    android:layout_marginLeft="@dimen/x22"
                     android:id="@+id/tv_head_stutus1"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/color_333333"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x22"
                     android:layout_toRightOf="@+id/ic_family_status"
-                    android:text=""/>
+                    android:text=""
+                    android:textColor="@color/color_333333"/>
 
                 <!--<TextView-->
-                    <!--android:id="@+id/tv_head_stutus2"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_marginLeft="@dimen/x20"-->
-                    <!--android:layout_toRightOf="@+id/tv_head_stutus1"-->
-                    <!--android:text="dsf"-->
-                    <!--android:textColor="@color/main_color"/>-->
+                <!--android:id="@+id/tv_head_stutus2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="@dimen/x20"-->
+                <!--android:layout_toRightOf="@+id/tv_head_stutus1"-->
+                <!--android:text="dsf"-->
+                <!--android:textColor="@color/main_color"/>-->
 
             </RelativeLayout>
-
 
 
             <LinearLayout
@@ -91,11 +90,11 @@
 
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/tv_change_peiou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@mipmap/bg_btn_grenn2"
+                        android:visibility="gone"
                         />
                 </LinearLayout>
 

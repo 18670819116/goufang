@@ -2,7 +2,6 @@ package com.ljcs.cxwl.ui.activity.main;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.widget.ImageView;
 
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
@@ -15,7 +14,6 @@ import com.orhanobut.logger.Logger;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -27,9 +25,8 @@ import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
 
-    @Inject
-    SplashPresenter mPresenter;
     public static int LOCATION_FINISH = 65;
+    @Inject SplashPresenter mPresenter;
     private CountDownTimer countDownTimer;
 
     @Override

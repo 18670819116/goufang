@@ -27,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class ChangePhoneTwoPresenter implements ChangePhoneTwoContract.ChangePhoneTwoContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ChangePhoneTwoContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ChangePhoneTwoActivity mActivity;
 

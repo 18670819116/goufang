@@ -32,9 +32,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y40"
         android:gravity="center"
-        android:textSize="18sp"
+        android:text="请拿出配偶身份证准备拍摄\n并保持网络良好"
         android:textColor="@color/color_333333"
-        android:text="请拿出配偶身份证准备拍摄\n并保持网络良好"/>
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/button"
@@ -46,10 +46,10 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/y35"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/y35"
+        android:layout_marginTop="@dimen/y35"
         android:drawableLeft="@mipmap/ic_jiami"
         android:drawablePadding="@dimen/x5"
         android:text="信息已加密仅用于身份证认证"/>

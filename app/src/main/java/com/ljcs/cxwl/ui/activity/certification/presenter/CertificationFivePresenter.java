@@ -26,8 +26,8 @@ import io.reactivex.functions.Consumer;
  */
 public class CertificationFivePresenter implements CertificationFiveContract.CertificationFiveContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final CertificationFiveContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private CertificationFiveActivity mActivity;
 
@@ -44,6 +44,7 @@ public class CertificationFivePresenter implements CertificationFiveContract.Cer
     public void subscribe() {
 
     }
+
     @Override
     public void allInfo(Map map) {
         Disposable disposable = httpAPIWrapper.allInfo(map).subscribe(new Consumer<AllInfo>() {
@@ -62,6 +63,7 @@ public class CertificationFivePresenter implements CertificationFiveContract.Cer
         });
         mCompositeDisposable.add(disposable);
     }
+
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {

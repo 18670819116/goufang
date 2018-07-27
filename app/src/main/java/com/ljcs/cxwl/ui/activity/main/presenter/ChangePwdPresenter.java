@@ -25,8 +25,8 @@ import io.reactivex.functions.Consumer;
  */
 public class ChangePwdPresenter implements ChangePwdContract.ChangePwdContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ChangePwdContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ChangePwdActivity mActivity;
 

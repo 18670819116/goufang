@@ -8,11 +8,11 @@
     <LinearLayout
         android:layout_width="@dimen/x589"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/y40"
-        android:paddingBottom="@dimen/y40"
         android:background="@drawable/shape_bg_20"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/y40"
+        android:paddingTop="@dimen/y40">
 
         <ImageView
             android:id="@+id/imageView"
@@ -25,9 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y15"
-            android:text="您的认证信息已提交"
             android:paddingLeft="@dimen/x22"
             android:paddingRight="@dimen/x22"
+            android:text="您的认证信息已提交"
             android:textColor="#333333"
             android:textSize="20sp"/>
 
@@ -48,8 +48,8 @@
             android:layout_height="@dimen/y52"
             android:layout_marginTop="@dimen/y40"
             android:background="@drawable/shape_dialog_btn"
-            android:text="好的"
             android:gravity="center"
+            android:text="好的"
             android:textColor="@color/white"/>
     </LinearLayout>
 </LinearLayout>

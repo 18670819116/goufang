@@ -18,7 +18,6 @@ import com.ljcs.cxwl.contain.Contains;
 import com.ljcs.cxwl.contain.ShareStatic;
 import com.ljcs.cxwl.data.api.API;
 import com.ljcs.cxwl.entity.AllInfo;
-import com.ljcs.cxwl.entity.BaseEntity;
 import com.ljcs.cxwl.entity.ScanBean;
 import com.ljcs.cxwl.ui.activity.other.component.DaggerFamilyRegisterStatusComponent;
 import com.ljcs.cxwl.ui.activity.other.contract.FamilyRegisterStatusContract;
@@ -50,93 +49,51 @@ import butterknife.OnClick;
 
 public class FamilyRegisterStatusActivity extends BaseActivity implements FamilyRegisterStatusContract.View {
 
-    @Inject
-    FamilyRegisterStatusPresenter mPresenter;
-    @BindView(R.id.layout_zinv_content)
-    LinearLayout layoutZinvContent;
-    @BindView(R.id.tv_name1)
-    TextView tvName1;
-    @BindView(R.id.tv_sex1)
-    TextView tvSex1;
-    @BindView(R.id.tv_hklx1)
-    TextView tvHklx1;
-    @BindView(R.id.tv_hkxz1)
-    TextView tvHkxz1;
-    @BindView(R.id.tv_hyzk1)
-    TextView tvHyzk1;
-    @BindView(R.id.tv_card1)
-    TextView tvCard1;
-    @BindView(R.id.img1)
-    ImageView img1;
-    @BindView(R.id.img2)
-    ImageView img2;
-    @BindView(R.id.img3)
-    ImageView img3;
-    @BindView(R.id.img4)
-    ImageView img4;
-    @BindView(R.id.layout1)
-    LinearLayout layout1;
-    @BindView(R.id.tv_name2)
-    TextView tvName2;
-    @BindView(R.id.tv_sex2)
-    TextView tvSex2;
-    @BindView(R.id.tv_hklx2)
-    TextView tvHklx2;
-    @BindView(R.id.tv_hkxz2)
-    TextView tvHkxz2;
-    @BindView(R.id.tv_hyzk2)
-    TextView tvHyzk2;
-    @BindView(R.id.tv_card2)
-    TextView tvCard2;
-    @BindView(R.id.tv_gx)
-    TextView tvGx;
-    @BindView(R.id.img1_peiou)
-    ImageView img1Peiou;
-    @BindView(R.id.img2_peiou)
-    ImageView img2Peiou;
-    @BindView(R.id.img3_peiou)
-    ImageView img3Peiou;
-    @BindView(R.id.img4_peiou)
-    ImageView img4Peiou;
-    @BindView(R.id.layout3)
-    LinearLayout layout3;
-    @BindView(R.id.tv_hjszd)
-    TextView tvHjszd;
-    @BindView(R.id.tv_name3)
-    TextView tvName3;
-    @BindView(R.id.tv_lysj)
-    TextView tvLysj;
-    @BindView(R.id.tv_card3)
-    TextView tvCard3;
-    @BindView(R.id.img5_peiou)
-    ImageView img5Peiou;
-    @BindView(R.id.layout4)
-    LinearLayout layout4;
-    @BindView(R.id.bg_head1)
-    LinearLayout bgHead1;
-    @BindView(R.id.tv_yuanyin)
-    TextView tvYuanyin;
-    @BindView(R.id.bg_head2)
-    LinearLayout bgHead2;
-    @BindView(R.id.tv_fankui)
-    TextView tvFankui;
-    @BindView(R.id.tv_tijiaozige)
-    TextView tvTijiaozige;
-    @BindView(R.id.bg_head3)
-    LinearLayout bgHead3;
-    @BindView(R.id.bg_head)
-    RelativeLayout bgHead;
-    @BindView(R.id.scrollView)
-    NestedScrollView scrollView;
-    @BindView(R.id.tv_hjszd2)
-    TextView tvHjszd2;
-    @BindView(R.id.tv_phone2)
-    TextView tvPhone2;
-    @BindView(R.id.tv_hjszd3)
-    TextView tvHjszd3;
-    @BindView(R.id.tv_phone3)
-    TextView tvPhone3;
+    @Inject FamilyRegisterStatusPresenter mPresenter;
+    @BindView(R.id.layout_zinv_content) LinearLayout layoutZinvContent;
+    @BindView(R.id.tv_name1) TextView tvName1;
+    @BindView(R.id.tv_sex1) TextView tvSex1;
+    @BindView(R.id.tv_hklx1) TextView tvHklx1;
+    @BindView(R.id.tv_hkxz1) TextView tvHkxz1;
+    @BindView(R.id.tv_hyzk1) TextView tvHyzk1;
+    @BindView(R.id.tv_card1) TextView tvCard1;
+    @BindView(R.id.img1) ImageView img1;
+    @BindView(R.id.img2) ImageView img2;
+    @BindView(R.id.img3) ImageView img3;
+    @BindView(R.id.img4) ImageView img4;
+    @BindView(R.id.layout1) LinearLayout layout1;
+    @BindView(R.id.tv_name2) TextView tvName2;
+    @BindView(R.id.tv_sex2) TextView tvSex2;
+    @BindView(R.id.tv_hklx2) TextView tvHklx2;
+    @BindView(R.id.tv_hkxz2) TextView tvHkxz2;
+    @BindView(R.id.tv_hyzk2) TextView tvHyzk2;
+    @BindView(R.id.tv_card2) TextView tvCard2;
+    @BindView(R.id.tv_gx) TextView tvGx;
+    @BindView(R.id.img1_peiou) ImageView img1Peiou;
+    @BindView(R.id.img2_peiou) ImageView img2Peiou;
+    @BindView(R.id.img3_peiou) ImageView img3Peiou;
+    @BindView(R.id.img4_peiou) ImageView img4Peiou;
+    @BindView(R.id.layout3) LinearLayout layout3;
+    @BindView(R.id.tv_hjszd) TextView tvHjszd;
+    @BindView(R.id.tv_name3) TextView tvName3;
+    @BindView(R.id.tv_lysj) TextView tvLysj;
+    @BindView(R.id.tv_card3) TextView tvCard3;
+    @BindView(R.id.img5_peiou) ImageView img5Peiou;
+    @BindView(R.id.layout4) LinearLayout layout4;
+    @BindView(R.id.bg_head1) LinearLayout bgHead1;
+    @BindView(R.id.tv_yuanyin) TextView tvYuanyin;
+    @BindView(R.id.bg_head2) LinearLayout bgHead2;
+    @BindView(R.id.tv_fankui) TextView tvFankui;
+    @BindView(R.id.tv_tijiaozige) TextView tvTijiaozige;
+    @BindView(R.id.bg_head3) LinearLayout bgHead3;
+    @BindView(R.id.bg_head) RelativeLayout bgHead;
+    @BindView(R.id.scrollView) NestedScrollView scrollView;
+    @BindView(R.id.tv_hjszd2) TextView tvHjszd2;
+    @BindView(R.id.tv_phone2) TextView tvPhone2;
+    @BindView(R.id.tv_hjszd3) TextView tvHjszd3;
+    @BindView(R.id.tv_phone3) TextView tvPhone3;
     private CertificationDialog dialog;
+    private int flag = 0;//弹框提示类型
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -356,10 +313,10 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                         dialog.dismiss();
                     }
                 });
-                if (flag==1){
+                if (flag == 1) {
                     dialog.getTvTishi().setText("恭喜您 已成功认购该项目！");
                     dialog.getImgTishi().setImageResource(R.mipmap.ic_sh_pass11);
-                }else {
+                } else {
                     dialog.getTvTishi().setText("您已存在认购项目！请勿重复申请");
                     dialog.getImgTishi().setImageResource(R.mipmap.ic_sh_pass);
                 }
@@ -405,7 +362,6 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
         progressDialog.hide();
     }
 
-
     @OnClick({R.id.tv_yuanyin, R.id.tv_fankui, R.id.tv_tijiaozige})
     public void onViewClicked(View view) {
         if (RxTool.isFastClick(Contains.FAST_CLICK)) {
@@ -440,7 +396,7 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
                 dialog.show();
                 break;
             case R.id.tv_tijiaozige:
-                flag=0;
+                flag = 0;
                 mPresenter.isScan();
 //
                 break;
@@ -460,8 +416,6 @@ public class FamilyRegisterStatusActivity extends BaseActivity implements Family
 
 
     }
-
-    private int flag = 0;//弹框提示类型
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

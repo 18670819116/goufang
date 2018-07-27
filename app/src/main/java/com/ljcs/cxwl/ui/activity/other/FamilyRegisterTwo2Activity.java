@@ -89,32 +89,19 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_LHZ;
 
 public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRegisterTwo2Contract.View {
 
-    @Inject
-    FamilyRegisterTwo2Presenter mPresenter;
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.et_name)
-    EditText etName;
-    @BindView(R.id.layout_select1)
-    LinearLayout layoutSelect1;
-    @BindView(R.id.tv_leixing2)
-    TextView tvLeixing2;
-    @BindView(R.id.tv_idcard)
-    EditText tvIdcard;
-    @BindView(R.id.layout_select3)
-    LinearLayout layoutSelect3;
-    @BindView(R.id.img_upload1)
-    ImageView imgUpload1;
-    @BindView(R.id.imageView5)
-    ImageView imageView5;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
-    @BindView(R.id.layout_select2)
-    LinearLayout layoutSelect2;
-    @BindView(R.id.tv_hjszd)
-    TextView tvHjszd;
-    @BindView(R.id.tv_phone)
-    EditText tvPhone;
+    @Inject FamilyRegisterTwo2Presenter mPresenter;
+    @BindView(R.id.textView) TextView textView;
+    @BindView(R.id.et_name) EditText etName;
+    @BindView(R.id.layout_select1) LinearLayout layoutSelect1;
+    @BindView(R.id.tv_leixing2) TextView tvLeixing2;
+    @BindView(R.id.tv_idcard) EditText tvIdcard;
+    @BindView(R.id.layout_select3) LinearLayout layoutSelect3;
+    @BindView(R.id.img_upload1) ImageView imgUpload1;
+    @BindView(R.id.imageView5) ImageView imageView5;
+    @BindView(R.id.btn_login) Button btnLogin;
+    @BindView(R.id.layout_select2) LinearLayout layoutSelect2;
+    @BindView(R.id.tv_hjszd) TextView tvHjszd;
+    @BindView(R.id.tv_phone) EditText tvPhone;
     private TimePickerView pvTime;
 
     private boolean isHavePic1;
@@ -122,6 +109,7 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
     private ArrayList<ProvinceBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
+    private int opt1, opt2, opt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,7 +178,6 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
     public void closeProgressDialog() {
         progressDialog.hide();
     }
-
 
     private boolean checkText() {
         if (RxTool.isFastClick(Contains.FAST_CLICK)) {
@@ -428,8 +415,6 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
         }
 
     }
-
-    private int opt1, opt2, opt3;
 
     private void showPickerView() {// 弹出选择器
         RxKeyboardTool.hideSoftInput(this);

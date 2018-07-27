@@ -16,20 +16,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of ChangePhoneThirdActivity
  * @date 2018/07/09 16:39:43
  */
-public class ChangePhoneThirdPresenter implements ChangePhoneThirdContract.ChangePhoneThirdContractPresenter{
+public class ChangePhoneThirdPresenter implements ChangePhoneThirdContract.ChangePhoneThirdContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ChangePhoneThirdContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ChangePhoneThirdActivity mActivity;
 
     @Inject
-    public ChangePhoneThirdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ChangePhoneThirdContract.View view, ChangePhoneThirdActivity activity) {
+    public ChangePhoneThirdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ChangePhoneThirdContract.View
+            view, ChangePhoneThirdActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +40,7 @@ public class ChangePhoneThirdPresenter implements ChangePhoneThirdContract.Chang
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

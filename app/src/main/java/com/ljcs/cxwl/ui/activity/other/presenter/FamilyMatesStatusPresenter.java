@@ -22,20 +22,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of FamilyMatesStatusActivity
  * @date 2018/07/05 13:56:02
  */
-public class FamilyMatesStatusPresenter implements FamilyMatesStatusContract.FamilyMatesStatusContractPresenter{
+public class FamilyMatesStatusPresenter implements FamilyMatesStatusContract.FamilyMatesStatusContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyMatesStatusContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyMatesStatusActivity mActivity;
 
     @Inject
-    public FamilyMatesStatusPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyMatesStatusContract.View view, FamilyMatesStatusActivity activity) {
+    public FamilyMatesStatusPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyMatesStatusContract.View
+            view, FamilyMatesStatusActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -44,7 +46,7 @@ public class FamilyMatesStatusPresenter implements FamilyMatesStatusContract.Fam
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

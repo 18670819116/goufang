@@ -13,7 +13,6 @@ import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.entity.ScanBean;
 
 
-
 /**
  * @author xlei
  * @Date 2018/6/27.
@@ -30,7 +29,7 @@ public class ShPassDialog extends Dialog {
     TextView tvXuhao;
     TextView tvTishi;
     ImageView imgTishi;
-    Button  btn;
+    Button btn;
 
     public ShPassDialog(Context context, int themeResId) {
         super(context, themeResId);
@@ -56,7 +55,7 @@ public class ShPassDialog extends Dialog {
 
     private void initView() {
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_scan, null);
-        tvMingcheng=dialogView.findViewById(R.id.tv_mingcheng);
+        tvMingcheng = dialogView.findViewById(R.id.tv_mingcheng);
         tvRiqi = dialogView.findViewById(R.id.tv_riqi);
         tvDizhi = dialogView.findViewById(R.id.tv_dizhi);
         tvKaifa = dialogView.findViewById(R.id.tv_kaifa);
@@ -68,13 +67,14 @@ public class ShPassDialog extends Dialog {
 
         setContentView(dialogView);
     }
-    public void setData(ScanBean.ScanData data){
+
+    public void setData(ScanBean.ScanData data) {
         tvMingcheng.setText(data.getXmmc());
-        tvRiqi.setText(data.getKprq()+"至"+data.getJsrq());
-        tvXuhao.setText(data.getRgxh()+"");
+        tvRiqi.setText(data.getKprq() + "至" + data.getJsrq());
+        tvXuhao.setText(data.getRgxh() + "");
         tvDizhi.setText(data.getXmdz());
         tvKaifa.setText(data.getKfgsmc());
-        tvTaoshu.setText(data.getKsts()+"套/"+data.getGxts()+"套");
+        tvTaoshu.setText(data.getKsts() + "套/" + data.getGxts() + "套");
 
     }
 

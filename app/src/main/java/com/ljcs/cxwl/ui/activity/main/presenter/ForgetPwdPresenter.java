@@ -24,20 +24,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of ForgetPwdActivity
  * @date 2018/06/26 16:39:54
  */
-public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPresenter{
+public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ForgetPwdContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ForgetPwdActivity mActivity;
 
     @Inject
-    public ForgetPwdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ForgetPwdContract.View view, ForgetPwdActivity activity) {
+    public ForgetPwdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull ForgetPwdContract.View view,
+                              ForgetPwdActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -46,9 +48,10 @@ public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPr
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
+
     @Override
     public void getCode(String phone) {
         Map<String, String> map = new HashMap<>();
@@ -87,12 +90,12 @@ public class ForgetPwdPresenter implements ForgetPwdContract.ForgetPwdContractPr
             public void accept(Throwable throwable) throws Exception {
                 mView.closeProgressDialog();
                 throwable.printStackTrace();
-                Logger.e("throwable="+throwable.toString());
+                Logger.e("throwable=" + throwable.toString());
             }
         }, new Action() {
             @Override
             public void run() throws Exception {
-               Logger.i("onComplete");
+                Logger.i("onComplete");
             }
         });
         mCompositeDisposable.add(disposable);

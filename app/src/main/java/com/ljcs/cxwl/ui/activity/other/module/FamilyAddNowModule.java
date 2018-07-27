@@ -26,7 +26,8 @@ public class FamilyAddNowModule {
 
     @Provides
     @ActivityScope
-    public FamilyAddNowPresenter provideFamilyAddNowPresenter(HttpAPIWrapper httpAPIWrapper, FamilyAddNowActivity mActivity) {
+    public FamilyAddNowPresenter provideFamilyAddNowPresenter(HttpAPIWrapper httpAPIWrapper, FamilyAddNowActivity
+            mActivity) {
         return new FamilyAddNowPresenter(httpAPIWrapper, mView, mActivity);
     }
 

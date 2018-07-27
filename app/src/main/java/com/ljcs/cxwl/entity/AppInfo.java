@@ -25,7 +25,7 @@ public class AppInfo extends BaseEntity {
         this.rows = rows;
     }
 
-    public static class Data{
+    public static class Data {
 
         /**
          * versionUid : 1.0.0

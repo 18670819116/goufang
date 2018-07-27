@@ -15,14 +15,14 @@
     <com.uuzuche.lib_zxing.view.ViewfinderView
         android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         app:inner_corner_color="@color/main_color"
         app:inner_corner_length="@dimen/x30"
         app:inner_corner_width="@dimen/x5"
         app:inner_height="230dp"
-        app:inner_scan_speed="12"
         app:inner_scan_iscircle="false"
+        app:inner_scan_speed="12"
         app:inner_width="230dp"
         />
 

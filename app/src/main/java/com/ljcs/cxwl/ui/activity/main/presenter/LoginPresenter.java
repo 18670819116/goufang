@@ -25,8 +25,8 @@ import io.reactivex.functions.Consumer;
  */
 public class LoginPresenter implements LoginContract.LoginContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final LoginContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private LoginActivity mActivity;
 

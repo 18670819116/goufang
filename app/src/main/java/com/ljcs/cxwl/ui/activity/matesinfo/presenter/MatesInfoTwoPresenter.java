@@ -27,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class MatesInfoTwoPresenter implements MatesInfoTwoContract.MatesInfoTwoContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final MatesInfoTwoContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private MatesInfoTwoActivity mActivity;
 

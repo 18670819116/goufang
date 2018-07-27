@@ -45,16 +45,11 @@ import butterknife.OnClick;
 
 public class CertificationFourActivity extends BaseActivity implements CertificationFourContract.View {
 
-    @Inject
-    CertificationFourPresenter mPresenter;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.tv_issueAuthority)
-    EditText tvIssueAuthority;
-    @BindView(R.id.tv_data1)
-    EditText tvData1;
-    @BindView(R.id.tv_data2)
-    EditText tvData2;
+    @Inject CertificationFourPresenter mPresenter;
+    @BindView(R.id.imageView) ImageView imageView;
+    @BindView(R.id.tv_issueAuthority) EditText tvIssueAuthority;
+    @BindView(R.id.tv_data1) EditText tvData1;
+    @BindView(R.id.tv_data2) EditText tvData2;
 
 
     @Override

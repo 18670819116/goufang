@@ -25,7 +25,6 @@ import com.ljcs.cxwl.util.ToastUtil;
 import com.orhanobut.logger.Logger;
 import com.vondear.rxtool.RxConstTool;
 import com.vondear.rxtool.RxDataTool;
-import com.vondear.rxtool.RxDeviceTool;
 import com.vondear.rxtool.RxEncryptTool;
 import com.vondear.rxtool.RxSPTool;
 import com.vondear.rxtool.RxTool;
@@ -49,16 +48,11 @@ import tyrantgit.explosionfield.ExplosionField;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
-    @Inject
-    LoginPresenter mPresenter;
-    @BindView(R.id.btn_login)
-    Button mBtnLogin;
-    @BindView(R.id.login_tel)
-    EditText mLoginTel;
-    @BindView(R.id.login_pwd)
-    EditText mLoginPwd;
-    @BindView(R.id.iv_show_password)
-    CheckBox mIvShowPassword;
+    @Inject LoginPresenter mPresenter;
+    @BindView(R.id.btn_login) Button mBtnLogin;
+    @BindView(R.id.login_tel) EditText mLoginTel;
+    @BindView(R.id.login_pwd) EditText mLoginPwd;
+    @BindView(R.id.iv_show_password) CheckBox mIvShowPassword;
 
     private String mAccount;
     private String mPassWord;

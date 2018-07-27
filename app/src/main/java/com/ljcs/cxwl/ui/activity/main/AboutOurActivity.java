@@ -32,12 +32,9 @@ import butterknife.OnClick;
 
 public class AboutOurActivity extends BaseActivity implements AboutOurContract.View {
 
-    @Inject
-    AboutOurPresenter mPresenter;
-    @BindView(R.id.tv_version)
-    TextView tvVersion;
-    @BindView(R.id.tv_content)
-    TextView tvContent;
+    @Inject AboutOurPresenter mPresenter;
+    @BindView(R.id.tv_version) TextView tvVersion;
+    @BindView(R.id.tv_content) TextView tvContent;
 
     private int count;
 

@@ -36,32 +36,19 @@ import butterknife.ButterKnife;
 
 public class CertificationStatusInfoActivity extends BaseActivity implements CertificationStatusInfoContract.View {
 
-    @Inject
-    CertificationStatusInfoPresenter mPresenter;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_status)
-    TextView tvStatus;
-    @BindView(R.id.tv_sex)
-    TextView tvSex;
-    @BindView(R.id.tv_ethnic)
-    TextView tvEthnic;
-    @BindView(R.id.tv_birthday)
-    TextView tvBirthday;
-    @BindView(R.id.tv_adress)
-    TextView tvAdress;
-    @BindView(R.id.tv_idcard)
-    TextView tvIdcard;
-    @BindView(R.id.tv_issueAuthority)
-    TextView tvIssueAuthority;
-    @BindView(R.id.tv_data)
-    TextView tvData;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.imageView1)
-    ImageView imageView1;
-    @BindView(R.id.img_status1)
-    ImageView imgStatus1;
+    @Inject CertificationStatusInfoPresenter mPresenter;
+    @BindView(R.id.tv_name) TextView tvName;
+    @BindView(R.id.tv_status) TextView tvStatus;
+    @BindView(R.id.tv_sex) TextView tvSex;
+    @BindView(R.id.tv_ethnic) TextView tvEthnic;
+    @BindView(R.id.tv_birthday) TextView tvBirthday;
+    @BindView(R.id.tv_adress) TextView tvAdress;
+    @BindView(R.id.tv_idcard) TextView tvIdcard;
+    @BindView(R.id.tv_issueAuthority) TextView tvIssueAuthority;
+    @BindView(R.id.tv_data) TextView tvData;
+    @BindView(R.id.imageView) ImageView imageView;
+    @BindView(R.id.imageView1) ImageView imageView1;
+    @BindView(R.id.img_status1) ImageView imgStatus1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,12 +18,12 @@
 
         <ImageView
             android:id="@+id/img_ca"
-            android:layout_marginTop="@dimen/y20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_gif"
-            android:src="@mipmap/ic_abou_ca"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y20"
+            android:src="@mipmap/ic_abou_ca"
             />
     </RelativeLayout>
 </RelativeLayout>

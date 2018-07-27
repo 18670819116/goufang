@@ -24,17 +24,18 @@ public interface ChangePhoneFourContract {
          *
          */
         void closeProgressDialog();
+
         void getChangeCodeSuccess(CommonBean commonBean);
 
         void changePhoneSuccess(BaseEntity baseEntity);
     }
 
     interface ChangePhoneFourContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
-void getChangeCode(String phone);
+        void getChangeCode(String phone);
 
         void changePhone(Map map);
     }

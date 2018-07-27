@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.ocr.sdk.utils.ImageUtil;
 import com.baidu.ocr.ui.camera.CameraActivity;
@@ -77,42 +74,24 @@ import static com.ljcs.cxwl.contain.Contains.REQUEST_SUCCESS;
 
 public class FamilyRegisterActivity extends BaseActivity implements FamilyRegisterContract.View {
 
-    @Inject
-    FamilyRegisterPresenter mPresenter;
-    @BindView(R.id.tv_leixing1)
-    TextView tvLeixing1;
-    @BindView(R.id.tv_leixing2)
-    TextView tvLeixing2;
-    @BindView(R.id.tv_leixing3)
-    TextView tvLeixing3;
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.tv_name)
-    TextView tvName;
-    @BindView(R.id.tv_sex)
-    TextView tvSex;
-    @BindView(R.id.tv_ethnic)
-    TextView tvEthnic;
-    @BindView(R.id.tv_birthday)
-    TextView tvBirthday;
-    @BindView(R.id.tv_adress)
-    TextView tvAdress;
-    @BindView(R.id.tv_idcard)
-    TextView tvIdcard;
-    @BindView(R.id.tv_issueAuthority)
-    TextView tvIssueAuthority;
-    @BindView(R.id.tv_data)
-    TextView tvData;
-    @BindView(R.id.img_upload)
-    ImageView imgUpload;
-    @BindView(R.id.imageView_zheng)
-    ImageView imageViewZheng;
-    @BindView(R.id.imageView_fan)
-    ImageView imageViewFan;
-    @BindView(R.id.imageView5)
-    ImageView imageView5;
-    @BindView(R.id.et_suozaidi)
-    TextView etSuozaidi;
+    @Inject FamilyRegisterPresenter mPresenter;
+    @BindView(R.id.tv_leixing1) TextView tvLeixing1;
+    @BindView(R.id.tv_leixing2) TextView tvLeixing2;
+    @BindView(R.id.tv_leixing3) TextView tvLeixing3;
+    @BindView(R.id.textView) TextView textView;
+    @BindView(R.id.tv_name) TextView tvName;
+    @BindView(R.id.tv_sex) TextView tvSex;
+    @BindView(R.id.tv_ethnic) TextView tvEthnic;
+    @BindView(R.id.tv_birthday) TextView tvBirthday;
+    @BindView(R.id.tv_adress) TextView tvAdress;
+    @BindView(R.id.tv_idcard) TextView tvIdcard;
+    @BindView(R.id.tv_issueAuthority) TextView tvIssueAuthority;
+    @BindView(R.id.tv_data) TextView tvData;
+    @BindView(R.id.img_upload) ImageView imgUpload;
+    @BindView(R.id.imageView_zheng) ImageView imageViewZheng;
+    @BindView(R.id.imageView_fan) ImageView imageViewFan;
+    @BindView(R.id.imageView5) ImageView imageView5;
+    @BindView(R.id.et_suozaidi) TextView etSuozaidi;
     private OptionsPickerView mOptionsPickerView;
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
@@ -122,6 +101,8 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private boolean isHavePic = false;//七牛上是否存在图片
+    private String imgPath;
+    private int opt1, opt2, opt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,7 +205,6 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         progressDialog.hide();
     }
 
-
     @Override
     public void getQiniuTokenSuccess(QiniuToken qiniuToken) {
         if (qiniuToken.getUptoken() != null) {
@@ -325,9 +305,9 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
                     map.put("hyzk", tvLeixing3.getText().toString());
                     map.put("hjszd", etSuozaidi.getText().toString());
                     map.put("hkb", Contains.sAllInfo.getData().getGrxx().getZzxx().getHkb());
-                    if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null
-                            && Contains.sAllInfo.getData().getGrxx().getZzxx() != null && Contains.sAllInfo
-                            .getData().getGrxx().getZzxx().getYhbh() != null) {
+                    if (Contains.sAllInfo.getData() != null && Contains.sAllInfo.getData().getGrxx() != null &&
+                            Contains.sAllInfo.getData().getGrxx().getZzxx() != null && Contains.sAllInfo.getData()
+                            .getGrxx().getZzxx().getYhbh() != null) {
                         map.put("yhbh", Contains.sAllInfo.getData().getGrxx().getZzxx().getYhbh());
                     }
                     showProgressDialog();
@@ -398,8 +378,6 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
 
     }
 
-    private String imgPath;
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -460,8 +438,6 @@ public class FamilyRegisterActivity extends BaseActivity implements FamilyRegist
         }
         mOptionsPickerView.show();
     }
-
-    private int opt1, opt2, opt3;
 
     private void showPickerView() {// 弹出选择器
         if (options1Items.size() <= 0 || options2Items.size() <= 0 || options3Items.size() <= 0) {

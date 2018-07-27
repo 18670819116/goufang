@@ -47,10 +47,15 @@ import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
 public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneContract.View {
 
-    @Inject
-    MatesInfoOnePresenter mPresenter;
     private static final int REQUEST_CODE_CAMERA = 101;
+    @Inject MatesInfoOnePresenter mPresenter;
+    /**
+     * 用明文ak，sk初始化
+     */
+    String token;
     private boolean hasGotToken = false;
+    private String fileRealPath = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +76,10 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
 
     @Override
     protected void setupActivityComponent() {
-       DaggerMatesInfoOneComponent
-               .builder()
-               .appComponent(((AppConfig) getApplication()).getApplicationComponent())
-               .matesInfoOneModule(new MatesInfoOneModule(this))
-               .build()
-               .inject(this);
+        DaggerMatesInfoOneComponent.builder().appComponent(((AppConfig) getApplication()).getApplicationComponent())
+                .matesInfoOneModule(new MatesInfoOneModule(this)).build().inject(this);
     }
+
     @Override
     public void setPresenter(MatesInfoOneContract.MatesInfoOneContractPresenter presenter) {
         mPresenter = (MatesInfoOnePresenter) presenter;
@@ -92,6 +94,7 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
     public void closeProgressDialog() {
         progressDialog.hide();
     }
+
     @OnClick(R.id.button)
     public void onViewClicked() {
         if (!checkTokenStatus()) {
@@ -108,6 +111,7 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
         intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
         startActivityForResult(intent, REQUEST_CODE_CAMERA);
     }
+
     private boolean checkTokenStatus() {
         if (!hasGotToken) {
             //Toast.makeText(getApplicationContext(), "token还未成功获取", Toast.LENGTH_LONG).show();
@@ -128,7 +132,7 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
                 ImageUtil.resize(new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath())
                         .getAbsolutePath(), tempImage.getAbsolutePath(), 1280, 1280);
                 fileRealPath = tempImage.getAbsolutePath();
-                Logger.e(tempImage.getAbsolutePath()+"-----"+tempImage.length());
+                Logger.e(tempImage.getAbsolutePath() + "-----" + tempImage.length());
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
@@ -140,8 +144,6 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
         }
 
     }
-
-    private String fileRealPath = "";
 
     private void recIDCard(String idCardSide, final String filePath) {
         IDCardParams param = new IDCardParams();
@@ -162,13 +164,16 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
                     sCertificationInfo.setName_peiou(result.getName() == null ? "" : result.getName().toString());
                     sCertificationInfo.setSex_peiou(result.getGender() == null ? "" : result.getGender().toString());
                     sCertificationInfo.setEthnic_peiou(result.getEthnic() == null ? "" : result.getEthnic().toString());
-                    sCertificationInfo.setAddress_peiou(result.getAddress() == null ? "" : result.getAddress().toString());
-                    sCertificationInfo.setBirthday_peiou(result.getBirthday() == null ? "" : result.getBirthday().toString());
-                    sCertificationInfo.setIdcard_peiou(result.getIdNumber() == null ? "" : result.getIdNumber().toString());
+                    sCertificationInfo.setAddress_peiou(result.getAddress() == null ? "" : result.getAddress()
+                            .toString());
+                    sCertificationInfo.setBirthday_peiou(result.getBirthday() == null ? "" : result.getBirthday()
+                            .toString());
+                    sCertificationInfo.setIdcard_peiou(result.getIdNumber() == null ? "" : result.getIdNumber()
+                            .toString());
                     sCertificationInfo.setPic_path_zheng_peiou(fileRealPath);
                     AppManager.getInstance().finishActivity(MatesInfoTwoActivity.class);
                     startActivty(MatesInfoTwoActivity.class);
-                    if (ENTERTYPE_CHANGE==1){
+                    if (ENTERTYPE_CHANGE == 1) {
                         finish();
                     }
 
@@ -186,11 +191,6 @@ public class MatesInfoOneActivity extends BaseActivity implements MatesInfoOneCo
             }
         });
     }
-
-    /**
-     * 用明文ak，sk初始化
-     */
-    String token;
 
     private void initAccessTokenWithAkSk() {
         OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {

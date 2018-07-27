@@ -25,8 +25,8 @@ import io.reactivex.functions.Consumer;
  */
 public class FamilyRegisterFourPresenter implements FamilyRegisterFourContract.FamilyRegisterFourContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterFourContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyRegisterFourActivity mActivity;
 

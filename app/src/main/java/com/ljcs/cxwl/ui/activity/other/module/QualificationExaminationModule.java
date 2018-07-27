@@ -26,7 +26,8 @@ public class QualificationExaminationModule {
 
     @Provides
     @ActivityScope
-    public QualificationExaminationPresenter provideQualificationExaminationPresenter(HttpAPIWrapper httpAPIWrapper, QualificationExaminationActivity mActivity) {
+    public QualificationExaminationPresenter provideQualificationExaminationPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                                      QualificationExaminationActivity mActivity) {
         return new QualificationExaminationPresenter(httpAPIWrapper, mView, mActivity);
     }
 

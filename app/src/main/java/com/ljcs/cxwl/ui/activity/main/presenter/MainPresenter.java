@@ -26,8 +26,8 @@ import io.reactivex.functions.Consumer;
  */
 public class MainPresenter implements MainContract.MainContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final MainContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private MainActivity mActivity;
 

@@ -92,10 +92,10 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="@dimen/y8"
                 android:id="@+id/relayout_item1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y233"
+                android:layout_marginTop="@dimen/y8"
                 android:background="@mipmap/ic_main_item">
 
                 <ImageView

@@ -46,81 +46,44 @@ import butterknife.OnClick;
 
 public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRegisterFourContract.View {
 
-    @Inject
-    FamilyRegisterFourPresenter mPresenter;
-    @BindView(R.id.layout_zinv_content)
-    LinearLayout layoutZinvContent;
-    @BindView(R.id.tv_name1)
-    TextView tvName1;
-    @BindView(R.id.tv_sex1)
-    TextView tvSex1;
-    @BindView(R.id.tv_hklx1)
-    TextView tvHklx1;
-    @BindView(R.id.tv_hkxz1)
-    TextView tvHkxz1;
-    @BindView(R.id.tv_hyzk1)
-    TextView tvHyzk1;
-    @BindView(R.id.tv_card1)
-    TextView tvCard1;
-    @BindView(R.id.img1)
-    ImageView img1;
-    @BindView(R.id.img2)
-    ImageView img2;
-    @BindView(R.id.img3)
-    ImageView img3;
-    @BindView(R.id.img4)
-    ImageView img4;
+    @Inject FamilyRegisterFourPresenter mPresenter;
+    @BindView(R.id.layout_zinv_content) LinearLayout layoutZinvContent;
+    @BindView(R.id.tv_name1) TextView tvName1;
+    @BindView(R.id.tv_sex1) TextView tvSex1;
+    @BindView(R.id.tv_hklx1) TextView tvHklx1;
+    @BindView(R.id.tv_hkxz1) TextView tvHkxz1;
+    @BindView(R.id.tv_hyzk1) TextView tvHyzk1;
+    @BindView(R.id.tv_card1) TextView tvCard1;
+    @BindView(R.id.img1) ImageView img1;
+    @BindView(R.id.img2) ImageView img2;
+    @BindView(R.id.img3) ImageView img3;
+    @BindView(R.id.img4) ImageView img4;
 
-    @BindView(R.id.tv_idcard)
-    TextView tvIdcard;
-    @BindView(R.id.tv_name2)
-    TextView tvName2;
-    @BindView(R.id.tv_sex2)
-    TextView tvSex2;
-    @BindView(R.id.tv_hklx2)
-    TextView tvHklx2;
-    @BindView(R.id.tv_hkxz2)
-    TextView tvHkxz2;
-    @BindView(R.id.tv_hyzk2)
-    TextView tvHyzk2;
-    @BindView(R.id.tv_card2)
-    TextView tvCard2;
-    @BindView(R.id.tv_gx)
-    TextView tvGx;
-    @BindView(R.id.img1_peiou)
-    ImageView img1Peiou;
-    @BindView(R.id.img2_peiou)
-    ImageView img2Peiou;
-    @BindView(R.id.img3_peiou)
-    ImageView img3Peiou;
-    @BindView(R.id.img4_peiou)
-    ImageView img4Peiou;
-    @BindView(R.id.layout1)
-    LinearLayout layout1;
-    @BindView(R.id.layout3)
-    LinearLayout layout3;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
-    @BindView(R.id.tv_hjszd)
-    TextView tvHjszd;
-    @BindView(R.id.tv_name3)
-    TextView tvName3;
-    @BindView(R.id.tv_lysj)
-    TextView tvLysj;
-    @BindView(R.id.tv_card3)
-    TextView tvCard3;
-    @BindView(R.id.img5_peiou)
-    ImageView img5Peiou;
-    @BindView(R.id.layout4)
-    LinearLayout layout4;
-    @BindView(R.id.tv_hjszd2)
-    TextView tvHjszd2;
-    @BindView(R.id.tv_phone2)
-    TextView tvPhone2;
-    @BindView(R.id.tv_hjszd3)
-    TextView tvHjszd3;
-    @BindView(R.id.tv_phone3)
-    TextView tvPhone3;
+    @BindView(R.id.tv_idcard) TextView tvIdcard;
+    @BindView(R.id.tv_name2) TextView tvName2;
+    @BindView(R.id.tv_sex2) TextView tvSex2;
+    @BindView(R.id.tv_hklx2) TextView tvHklx2;
+    @BindView(R.id.tv_hkxz2) TextView tvHkxz2;
+    @BindView(R.id.tv_hyzk2) TextView tvHyzk2;
+    @BindView(R.id.tv_card2) TextView tvCard2;
+    @BindView(R.id.tv_gx) TextView tvGx;
+    @BindView(R.id.img1_peiou) ImageView img1Peiou;
+    @BindView(R.id.img2_peiou) ImageView img2Peiou;
+    @BindView(R.id.img3_peiou) ImageView img3Peiou;
+    @BindView(R.id.img4_peiou) ImageView img4Peiou;
+    @BindView(R.id.layout1) LinearLayout layout1;
+    @BindView(R.id.layout3) LinearLayout layout3;
+    @BindView(R.id.btn_login) Button btnLogin;
+    @BindView(R.id.tv_hjszd) TextView tvHjszd;
+    @BindView(R.id.tv_name3) TextView tvName3;
+    @BindView(R.id.tv_lysj) TextView tvLysj;
+    @BindView(R.id.tv_card3) TextView tvCard3;
+    @BindView(R.id.img5_peiou) ImageView img5Peiou;
+    @BindView(R.id.layout4) LinearLayout layout4;
+    @BindView(R.id.tv_hjszd2) TextView tvHjszd2;
+    @BindView(R.id.tv_phone2) TextView tvPhone2;
+    @BindView(R.id.tv_hjszd3) TextView tvHjszd3;
+    @BindView(R.id.tv_phone3) TextView tvPhone3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +142,7 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
             }
         });
 
-        if (Contains.sAllInfo.getData().getPoxx() != null&&Contains.sAllInfo.getData().getPoxx().getJtcy()!=null) {
+        if (Contains.sAllInfo.getData().getPoxx() != null && Contains.sAllInfo.getData().getPoxx().getJtcy() != null) {
             if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("已婚")) {
                 //表示已婚 现配偶
                 layout4.setVisibility(View.GONE);
@@ -230,7 +193,7 @@ public class FamilyRegisterFourActivity extends BaseActivity implements FamilyRe
                     }
                 });
 
-            } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("离异")){
+            } else if (Contains.sAllInfo.getData().getGrxx().getJtcy().getHyzk().equals("离异")) {
                 //表示离异 前配偶
                 layout4.setVisibility(View.VISIBLE);
                 layout3.setVisibility(View.GONE);

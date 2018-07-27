@@ -24,17 +24,18 @@ public interface FamilyRegisterTwoContract {
          *
          */
         void closeProgressDialog();
+
         void matesInfoSuccess(MatesInfo baseEntity);
 
         void getQiniuTokenSuccess(QiniuToken qiniuToken);
     }
 
     interface FamilyRegisterTwoContractPresenter extends BasePresenter {
-//        /**
+        //        /**
 //         *
 //         */
 //        void getBusinessInfo(Map map);
-void getQiniuToken();
+        void getQiniuToken();
 
         void matesInfo(Map map);
     }

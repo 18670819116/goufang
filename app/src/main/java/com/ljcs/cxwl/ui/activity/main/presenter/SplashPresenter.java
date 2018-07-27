@@ -48,70 +48,18 @@ import io.reactivex.functions.Function;
  */
 public class SplashPresenter implements SplashContract.SplashContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
-    private final SplashContract.View mView;
-    private CompositeDisposable mCompositeDisposable;
-    private SplashActivity mActivity;
-    private boolean timeOver = false;
-    private static int permissionState = -1;    //-1表示原始状态,0表示允许,1表示拒绝.
-
     private static final int JUMPTOMAIN = 0;
     private static final int JUMPTOLOGIN = 1;
     private static final int JUMPTOGUEST = 2;    //跳到欢迎页面
     private static final int HASPUDATE = 3;     //表示是否有更新
+    private static int permissionState = -1;    //-1表示原始状态,0表示允许,1表示拒绝.
+    private final SplashContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
+    AppInfo mVersion;
+    private CompositeDisposable mCompositeDisposable;
+    private SplashActivity mActivity;
+    private boolean timeOver = false;
     private int jump = JUMPTOLOGIN;
-
-    @Inject
-    public SplashPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull SplashContract.View view, SplashActivity
-            activity) {
-        mView = view;
-        this.httpAPIWrapper = httpAPIWrapper;
-        mCompositeDisposable = new CompositeDisposable();
-        this.mActivity = activity;
-    }
-
-    @Override
-    public void subscribe() {
-
-    }
-
-    @Override
-    public void unsubscribe() {
-        if (!mCompositeDisposable.isDisposed()) {
-            mCompositeDisposable.dispose();
-        }
-    }
-
-    public void getPermission() {
-        AndPermission.with(mActivity).requestCode(101).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission
-                        .ACCESS_FINE_LOCATION,
-//                Manifest.permission.CALL_PHONE,
-//                Manifest.permission.GET_ACCOUNTS,
-//                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.CAMERA).rationale(new RationaleListener() {
-            @Override
-            public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
-                AndPermission.rationaleDialog(mActivity, rationale).setNegativeButton("关闭", new DialogInterface
-                        .OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.show(mActivity, "权限申请失败,app部分功能将无法使用!!!");
-                        if (jump == JUMPTOMAIN) {
-                            mView.loginSuccees();
-                        } else if (jump == JUMPTOLOGIN) {
-                            mView.jumpToLogin();
-                        } else {
-                            mView.jumpToGuest();
-                        }
-                    }
-                }).show();
-            }
-        }).callback(permission).start();
-
-    }
-
     private PermissionListener permission = new PermissionListener() {
         @Override
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
@@ -147,6 +95,102 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
             }
         }
     };
+    private PermissionListener permissionListener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            // 权限申请成功回调。
+            if (requestCode == 100) {
+                Map<String, String> map = new HashMap<>();
+                map.put("sjxh", PhoneUtils.getDeviceBrand() + PhoneUtils.getSystemModel());//手机型号
+                map.put("czxtbb", PhoneUtils.getSystemVersion());//操作系统版本
+                map.put("scwl", PhoneUtils.getCurrentNetType(mActivity));//所处网络
+                map.put("jzxx", PhoneUtils.getjizhaninfo(mActivity));//基站信息
+                map.put("yys", PhoneUtils.getOperators(mActivity));//移动运营商
+                map.put("gps", PhoneUtils.getLocation(mActivity));//GPS
+                map.put("uuid", PhoneUtils.getDeviceId(mActivity));//手机唯一标识
+                map.put("yhsjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
+                map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
+                map.put("yhmm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic
+                        .APP_LOGIN_MM) + RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));
+                login(map);
+            }
+        }
+
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // 权限申请失败回调。
+
+        }
+    };
+    private boolean getLastVersionBack = false;
+    private boolean hasUpdate = false;
+    private PermissionListener updateListener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            // 权限申请成功回调。
+            if (requestCode == 124) {
+                alertUpdate();
+            }
+        }
+
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // 权限申请失败回调。
+            if (requestCode == 124) {
+                // TODO ...
+            }
+        }
+    };
+
+    @Inject
+    public SplashPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull SplashContract.View view, SplashActivity
+            activity) {
+        mView = view;
+        this.httpAPIWrapper = httpAPIWrapper;
+        mCompositeDisposable = new CompositeDisposable();
+        this.mActivity = activity;
+    }
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unsubscribe() {
+        if (!mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+    }
+
+    public void getPermission() {
+        AndPermission.with(mActivity).requestCode(101).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission
+                        .ACCESS_FINE_LOCATION,
+//                Manifest.permission.CALL_PHONE,
+//                Manifest.permission.GET_ACCOUNTS,
+                Manifest.permission.READ_CONTACTS, Manifest.permission.CAMERA).rationale(new RationaleListener() {
+            @Override
+            public void showRequestPermissionRationale(int requestCode, Rationale rationale) {
+                AndPermission.rationaleDialog(mActivity, rationale).setNegativeButton("关闭", new DialogInterface
+                        .OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ToastUtil.show(mActivity, "权限申请失败,app部分功能将无法使用!!!");
+                        if (jump == JUMPTOMAIN) {
+                            mView.loginSuccees();
+                        } else if (jump == JUMPTOLOGIN) {
+                            mView.jumpToLogin();
+                        } else {
+                            mView.jumpToGuest();
+                        }
+                    }
+                }).show();
+            }
+        }).callback(permission).start();
+
+    }
 
     /**
      * 控制更新版本弹框
@@ -243,44 +287,13 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
             jump = JUMPTOLOGIN;
         } else {
 
-            //读取手机信息
-//            AndPermission.with(mActivity).requestCode(100).permission(Manifest.permission.READ_PHONE_STATE).callback
-//                   (permissionListener).start();
-            Map<String, String> map = new HashMap<>();
-            map.put("sjxh", PhoneUtils.getDeviceBrand() + PhoneUtils.getSystemModel());//手机型号
-            map.put("czxtbb", PhoneUtils.getSystemVersion());//操作系统版本
-            map.put("scwl", PhoneUtils.getCurrentNetType(mActivity));//所处网络
-            map.put("jzxx", PhoneUtils.getjizhaninfo(mActivity));//基站信息
-            map.put("yys", PhoneUtils.getOperators(mActivity));//移动运营商
-            map.put("gps", PhoneUtils.getLocation(mActivity));//GPS
-            map.put("uuid", PhoneUtils.getDeviceId(mActivity));//手机唯一标识
-            map.put("yhsjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
-            map.put("sjhm", RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM));
-            map.put("yhmm", RxEncryptTool.encryptSHA1ToString(RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_MM) +
-                    RxSPTool.getString(mActivity, ShareStatic.APP_LOGIN_SJHM)));
-            login(map);
+//            读取手机信息
+            AndPermission.with(mActivity).requestCode(100).permission(Manifest.permission.READ_PHONE_STATE).callback
+                    (permissionListener).start();
+
 
         }
     }
-
-    private PermissionListener permissionListener = new PermissionListener() {
-        @Override
-        public void onSucceed(int requestCode, List<String> grantedPermissions) {
-            // 权限申请成功回调。
-            if (requestCode == 100) {
-//                Map<String, String> map = new HashMap<>();
-//                map.put("sjhm", mAccount);
-//                map.put("mm", mPassWord);
-//                mPresenter.login(map);
-            }
-        }
-
-        @Override
-        public void onFailed(int requestCode, List<String> deniedPermissions) {
-            // 权限申请失败回调。
-
-        }
-    };
 
     @Override
     public void login(Map map) {
@@ -313,10 +326,6 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
 
     }
 
-    AppInfo mVersion;
-    private boolean getLastVersionBack = false;
-    private boolean hasUpdate = false;
-
     @Override
     public void updataApp() {
         Map<String, String> map = new HashMap<>();
@@ -329,13 +338,15 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
                     mVersion = version;
 //                    AppInfo.Data data = new AppInfo.Data();
 //                    data.setVersionExplain("1.修复一些bug等\\n2测试下修复app的一些bug修复a");
-////                    data.setVersionExplain("1.修复一些bug等\n2测试下修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新wfsf sfasfdddddddd围殴佛山东方扫福建省的咖啡机快乐圣诞节疯狂拉升经典款拉圣诞节快乐撒大家快来打手机疯狂拉升的反馈附近发的手机爱卡发送的即可浪费是考虑到富士达房间卡萨反馈都是埃里克森放假了地方");
+////                    data.setVersionExplain
+/// ("1.修复一些bug等\n2测试下修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug修复app的一些bug
+/// 载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新试下载测试下载更新wfsf sfasfdddddddd围殴佛山东方扫福建省的咖啡机快乐圣诞节疯狂拉升经典款拉圣诞节快乐撒大家快来打手机疯狂拉升的反馈附近发的手机爱卡发送的即可浪费是考虑到富士达房间卡萨反馈都是埃里克森放假了地方");
 //                    data.setVersionDownloadUrl("http://img0.hnchxwl.com/loadGf/gofang.apk");
 //                    data.setVersionIsCompulsory(2);
 //                    data.setVersionUid("1.0.4");
 //                    mVersion.setData(data);
-                    if (version.getData()!=null&&Float.valueOf(version.getData().getVersionUid().replace(".", "")) > Float.valueOf
-                            (RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {
+                    if (version.getData() != null && Float.valueOf(version.getData().getVersionUid().replace(".", "")
+                    ) > Float.valueOf(RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {
 //                    if (104f > Float.valueOf(RxDeviceTool.getAppVersionName(mActivity).replace(".", ""))) {
                         getLastVersionBack = true;
                         hasUpdate = true;
@@ -363,7 +374,6 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
         mCompositeDisposable.add(disposable);
     }
 
-
     public void getUpdatePermission() {
         AndPermission.with(mActivity).requestCode(124).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 //                .rationale((requestCode, rationale) -> {
@@ -372,22 +382,4 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
 //                )
                 .callback(updateListener).start();
     }
-
-    private PermissionListener updateListener = new PermissionListener() {
-        @Override
-        public void onSucceed(int requestCode, List<String> grantedPermissions) {
-            // 权限申请成功回调。
-            if (requestCode == 124) {
-                alertUpdate();
-            }
-        }
-
-        @Override
-        public void onFailed(int requestCode, List<String> deniedPermissions) {
-            // 权限申请失败回调。
-            if (requestCode == 124) {
-                // TODO ...
-            }
-        }
-    };
 }

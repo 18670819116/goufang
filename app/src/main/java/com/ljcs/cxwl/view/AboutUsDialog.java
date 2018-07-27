@@ -18,10 +18,12 @@ import com.ljcs.cxwl.R;
 public class AboutUsDialog extends Dialog {
     private ImageView gif;
     private ImageView cancel;
+
     public AboutUsDialog(@NonNull Context context) {
-        super(context,R.style.dialog_translucent);
+        super(context, R.style.dialog_translucent);
         initView();
     }
+
     public AboutUsDialog(Context context, int themeResId) {
         super(context, themeResId);
         initView();
@@ -32,10 +34,11 @@ public class AboutUsDialog extends Dialog {
         super(context, cancelable, cancelListener);
         initView();
     }
+
     private void initView() {
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_about_us, null);
-       gif= dialogView.findViewById(R.id.img_gif);
-       cancel= dialogView.findViewById(R.id.img_ca);
+        gif = dialogView.findViewById(R.id.img_gif);
+        cancel = dialogView.findViewById(R.id.img_ca);
         Glide.with(getContext()).load(R.mipmap.ic_about_us_f).into(gif);
         setContentView(dialogView);
     }

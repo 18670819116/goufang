@@ -26,7 +26,8 @@ public class FamilyRegisterStatusModule {
 
     @Provides
     @ActivityScope
-    public FamilyRegisterStatusPresenter provideFamilyRegisterStatusPresenter(HttpAPIWrapper httpAPIWrapper, FamilyRegisterStatusActivity mActivity) {
+    public FamilyRegisterStatusPresenter provideFamilyRegisterStatusPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                              FamilyRegisterStatusActivity mActivity) {
         return new FamilyRegisterStatusPresenter(httpAPIWrapper, mView, mActivity);
     }
 

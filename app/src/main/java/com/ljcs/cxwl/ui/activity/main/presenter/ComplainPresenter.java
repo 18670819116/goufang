@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.ljcs.cxwl.callback.UploadFileCallBack;
 import com.ljcs.cxwl.data.api.HttpAPIWrapper;
 import com.ljcs.cxwl.entity.BaseEntity;
-import com.ljcs.cxwl.entity.CommonBean;
 import com.ljcs.cxwl.ui.activity.main.ComplainActivity;
 import com.ljcs.cxwl.ui.activity.main.contract.ComplainContract;
 import com.ljcs.cxwl.util.UploadUtil;
@@ -28,8 +27,8 @@ import io.reactivex.functions.Consumer;
  */
 public class ComplainPresenter implements ComplainContract.ComplainContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final ComplainContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private ComplainActivity mActivity;
 
@@ -56,7 +55,7 @@ public class ComplainPresenter implements ComplainContract.ComplainContractPrese
 
     @Override
     public void uploadPic(List<String> list, UploadFileCallBack callBack) {
-        UploadUtil.uploadPicsOkhttp(httpAPIWrapper,list,callBack);
+        UploadUtil.uploadPicsOkhttp(httpAPIWrapper, list, callBack);
     }
 
     @Override

@@ -21,7 +21,7 @@
         android:id="@+id/tv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       android:layout_centerInParent="true"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/y60"
         android:gravity="center"
         android:text="认证自己的户口信息后即可添加家庭成员"
@@ -30,7 +30,7 @@
     <Button
         android:id="@+id/btn_login"
         style="@style/btn_login"
-        android:layout_marginBottom="@dimen/y40"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y40"
         android:text="马上添加户口信息"/>
 </RelativeLayout>

@@ -26,7 +26,8 @@ public class FamilyMatesStatusModule {
 
     @Provides
     @ActivityScope
-    public FamilyMatesStatusPresenter provideFamilyMatesStatusPresenter(HttpAPIWrapper httpAPIWrapper, FamilyMatesStatusActivity mActivity) {
+    public FamilyMatesStatusPresenter provideFamilyMatesStatusPresenter(HttpAPIWrapper httpAPIWrapper,
+                                                                        FamilyMatesStatusActivity mActivity) {
         return new FamilyMatesStatusPresenter(httpAPIWrapper, mView, mActivity);
     }
 

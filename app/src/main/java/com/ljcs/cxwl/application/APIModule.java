@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 /**
- * @author hu
+ * @author xlei
  * @desc 功能描述
  * @date 2017/5/31 10:04
  */
@@ -41,7 +41,7 @@ public final class APIModule {
         //if (BuildConfig.DEBUG) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-       // builder.addInterceptor(logging);
+        // builder.addInterceptor(logging);
         builder.addInterceptor(new ErrorHandlerInterceptor());
         // }
         builder.connectTimeout(API.CONNECT_TIMEOUT, TimeUnit.MILLISECONDS).readTimeout(API.IO_TIMEOUT, TimeUnit

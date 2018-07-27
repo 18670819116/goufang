@@ -7,7 +7,8 @@ package com.ljcs.cxwl.entity;
  */
 public class QiniuToken extends BaseEntity {
     /**
-     * uptoken : 5kjpxZ5oh0gc3k10Jxf7gUmXg646j04Ywl27BjC9:QNyMXPtfWVlPfbULcpKUMOhK8L8=:eyJzY29wZSI6InlheGluIiwiZGVhZGxpbmUiOjE0ODM5NTQ5Mjd9
+     * uptoken : 5kjpxZ5oh0gc3k10Jxf7gUmXg646j04Ywl27BjC9:QNyMXPtfWVlPfbULcpKUMOhK8L8
+     * =:eyJzY29wZSI6InlheGluIiwiZGVhZGxpbmUiOjE0ODM5NTQ5Mjd9
      */
 
     private String uptoken;

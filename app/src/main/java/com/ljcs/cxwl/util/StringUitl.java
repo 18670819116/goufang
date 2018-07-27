@@ -29,9 +29,6 @@ import java.util.regex.Pattern;
  * @date 2015年7月22日 下午3:03:36
  */
 public class StringUitl {
-    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
-            'E', 'F'};
-
     /**
      * 正则：身份证号码15位
      */
@@ -41,6 +38,8 @@ public class StringUitl {
      */
     public static final String REGEX_ID_CARD18 = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])" +
             "\\d{3}" + "([0-9Xx])$";
+    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
+            'E', 'F'};
 
     /**
      * @param str
@@ -180,23 +179,6 @@ public class StringUitl {
         return a.get(Calendar.YEAR);
     }
 
-    public boolean isNull(String str) {
-        return (str == null) || (str.trim().length() == 0);
-    }
-
-    public boolean isIdCard(String num) {
-        if (isNull(num)) {
-//			ToastUtil.show(this,"身份证不能为空");
-            return false;
-        }
-
-        if (num.length() == 18 || num.length() == 15) {
-            return true;
-        }
-//		ToastUtil.show(this,"身份证长度不正确");
-        return false;
-    }
-
     /**
      * 验证身份证号码15位
      *
@@ -228,7 +210,6 @@ public class StringUitl {
         return input != null && input.length() > 0 && Pattern.matches(regex, input);
     }
 
-
     public static String Md5(String plainText) {
         String result = null;
         try {
@@ -259,7 +240,6 @@ public class StringUitl {
     public static String encryptSHA256ToString(String data) {
         return encryptSHA256ToString(data.getBytes());
     }
-
 
     /**
      * SHA256加密
@@ -364,22 +344,6 @@ public class StringUitl {
         }
         return deviceId.toString();
     }
-////如果上面都没有， 则生成一个id：随机码
-//			String uuid = getUUID(context);
-//			if(!hasEmptyItem(uuid)){
-//				deviceId.append("id");
-//				deviceId.append(uuid);
-//				PALog.e("getDeviceId : ", deviceId.toString());
-//				return deviceId.toString();
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			deviceId.append("id").append(getUUID(context));
-//		}
-//
-//		Log.e("getDeviceId : ", deviceId.toString());
-//
-//		return deviceId.toString();
 
     /**
      * 得到全局唯一UUID
@@ -410,6 +374,22 @@ public class StringUitl {
     public static String getPhoneBrand() {
         return android.os.Build.BRAND;
     }
+////如果上面都没有， 则生成一个id：随机码
+//			String uuid = getUUID(context);
+//			if(!hasEmptyItem(uuid)){
+//				deviceId.append("id");
+//				deviceId.append(uuid);
+//				PALog.e("getDeviceId : ", deviceId.toString());
+//				return deviceId.toString();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			deviceId.append("id").append(getUUID(context));
+//		}
+//
+//		Log.e("getDeviceId : ", deviceId.toString());
+//
+//		return deviceId.toString();
 
     /**
      * 获取手机型号
@@ -491,12 +471,6 @@ public class StringUitl {
         editText.setFilters(new InputFilter[]{filter, lengthFilter});
     }
 
-    //[\\u4e00-\\u9fa5]+   中文过滤器
-    //[a-zA-Z /]+    英文过滤器
-    //[0-9]*         数字过滤器
-    // [`~!@#$%^&*()+=|{}':;',\[\].<>/?~！@#￥%……&*（）——+|{}【】  <>《》]|[🀀-🏿]|[🐀-🟿]|[☀-⟿]   特殊字过滤
-    //[，。？！；、‘“’”：]   中文标点
-
     /**
      * 测试用的
      *
@@ -525,6 +499,12 @@ public class StringUitl {
         }
         return string;
     }
+
+    //[\\u4e00-\\u9fa5]+   中文过滤器
+    //[a-zA-Z /]+    英文过滤器
+    //[0-9]*         数字过滤器
+    // [`~!@#$%^&*()+=|{}':;',\[\].<>/?~！@#￥%……&*（）——+|{}【】  <>《》]|[🀀-🏿]|[🐀-🟿]|[☀-⟿]   特殊字过滤
+    //[，。？！；、‘“’”：]   中文标点
 
     /**
      * 得到现在时间
@@ -574,7 +554,6 @@ public class StringUitl {
         return true;
     }
 
-
     /**
      * 手机号用****号隐藏中间数字
      *
@@ -618,6 +597,23 @@ public class StringUitl {
                 continue;
             }
         }
+        return false;
+    }
+
+    public boolean isNull(String str) {
+        return (str == null) || (str.trim().length() == 0);
+    }
+
+    public boolean isIdCard(String num) {
+        if (isNull(num)) {
+//			ToastUtil.show(this,"身份证不能为空");
+            return false;
+        }
+
+        if (num.length() == 18 || num.length() == 15) {
+            return true;
+        }
+//		ToastUtil.show(this,"身份证长度不正确");
         return false;
     }
 }

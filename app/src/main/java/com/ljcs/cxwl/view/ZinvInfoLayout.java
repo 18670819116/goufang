@@ -33,10 +33,18 @@ public class ZinvInfoLayout extends LinearLayout {
 
     public ZinvInfoLayout(Context context, AllInfo.Data.ZinvBean bean) {
         super(context);
-        initViews(context,bean);
+        initViews(context, bean);
 
 //        tv1.setText(bean.getXm());
 
+    }
+
+    public ZinvInfoLayout(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ZinvInfoLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     private void initViews(Context context, AllInfo.Data.ZinvBean bean) {
@@ -60,17 +68,9 @@ public class ZinvInfoLayout extends LinearLayout {
         tv6.setText(bean.getJtcy().getZjhm());
 //        tv7.setText(bean.getJtcy().getGx());
         tvHjszd.setText(bean.getJtcy().getHjszd());
-        Glide.with(context).load(API.PIC+bean.getZzxx().getHkb()).into(img1);
+        Glide.with(context).load(API.PIC + bean.getZzxx().getHkb()).into(img1);
 
-       // Glide.with(context).load(API.PIC+bean.getSfzfm()).into(img2);
-    }
-
-    public ZinvInfoLayout(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public ZinvInfoLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        // Glide.with(context).load(API.PIC+bean.getSfzfm()).into(img2);
     }
 
     public TextView getTv1() {

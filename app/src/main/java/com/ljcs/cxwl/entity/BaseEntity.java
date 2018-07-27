@@ -1,6 +1,6 @@
 package com.ljcs.cxwl.entity;
 
-public class BaseEntity{
+public class BaseEntity {
 
     /**
      * success : true

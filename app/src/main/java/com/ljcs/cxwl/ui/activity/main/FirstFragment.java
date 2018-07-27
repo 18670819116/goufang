@@ -29,32 +29,30 @@ import butterknife.ButterKnife;
 
 public class FirstFragment extends BaseFragment implements FirstContract.View {
 
-    @Inject
-    FirstPresenter mPresenter;
+    @Inject FirstPresenter mPresenter;
 
-   @Nullable
-   @Override
-   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_first, null);
-       ButterKnife.bind(this, view);
-       Bundle mBundle = getArguments();
-       TextView tvAndroid123 = (TextView)view.findViewById(R.id.tvCWJ);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_first, null);
+        ButterKnife.bind(this, view);
+        Bundle mBundle = getArguments();
+        TextView tvAndroid123 = (TextView) view.findViewById(R.id.tvCWJ);
 
-       tvAndroid123.setMovementMethod(ScrollingMovementMethod.getInstance());
-       tvAndroid123.setText("数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n");
-       return view;
-   }
+        tvAndroid123.setMovementMethod(ScrollingMovementMethod.getInstance());
+        tvAndroid123.setText("数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n" +
+                "数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉数据库公司的古代诗歌鉴赏大概就是的感觉歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n数据库公司的古代诗歌鉴赏大概就是的感觉\n");
+        return view;
+    }
 
 
     @Override
     protected void setupFragmentComponent() {
-       DaggerFirstComponent
-               .builder()
-               .appComponent(((AppConfig) getActivity().getApplication()).getApplicationComponent())
-               .firstModule(new FirstModule(this))
-               .build()
-               .inject(this);
+        DaggerFirstComponent.builder().appComponent(((AppConfig) getActivity().getApplication())
+                .getApplicationComponent()).firstModule(new FirstModule(this)).build().inject(this);
     }
+
     @Override
     public void setPresenter(FirstContract.FirstContractPresenter presenter) {
         mPresenter = (FirstPresenter) presenter;

@@ -22,20 +22,22 @@ import io.reactivex.functions.Consumer;
  * @Description: presenter of FamilyRegisterThirdActivity
  * @date 2018/06/27 19:46:50
  */
-public class FamilyRegisterThirdPresenter implements FamilyRegisterThirdContract.FamilyRegisterThirdContractPresenter{
+public class FamilyRegisterThirdPresenter implements FamilyRegisterThirdContract.FamilyRegisterThirdContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyRegisterThirdContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyRegisterThirdActivity mActivity;
 
     @Inject
-    public FamilyRegisterThirdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterThirdContract.View view, FamilyRegisterThirdActivity activity) {
+    public FamilyRegisterThirdPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyRegisterThirdContract
+            .View view, FamilyRegisterThirdActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -44,7 +46,7 @@ public class FamilyRegisterThirdPresenter implements FamilyRegisterThirdContract
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 

@@ -6,7 +6,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseActivity;
@@ -49,22 +48,14 @@ import static com.ljcs.cxwl.contain.Contains.ENTERTYPE_CHANGE;
 
 public class MatesInfoTwoActivity extends BaseActivity implements MatesInfoTwoContract.View {
 
-    @Inject
-    MatesInfoTwoPresenter mPresenter;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.tv_name)
-    EditText tvName;
-    @BindView(R.id.tv_sex)
-    EditText tvSex;
-    @BindView(R.id.tv_ethnic)
-    EditText tvEthnic;
-    @BindView(R.id.tv_birthday)
-    EditText tvBirthday;
-    @BindView(R.id.tv_adress)
-    EditText tvAdress;
-    @BindView(R.id.tv_idcard)
-    EditText tvIdcard;
+    @Inject MatesInfoTwoPresenter mPresenter;
+    @BindView(R.id.imageView) ImageView imageView;
+    @BindView(R.id.tv_name) EditText tvName;
+    @BindView(R.id.tv_sex) EditText tvSex;
+    @BindView(R.id.tv_ethnic) EditText tvEthnic;
+    @BindView(R.id.tv_birthday) EditText tvBirthday;
+    @BindView(R.id.tv_adress) EditText tvAdress;
+    @BindView(R.id.tv_idcard) EditText tvIdcard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

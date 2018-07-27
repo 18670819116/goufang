@@ -16,20 +16,22 @@ import io.reactivex.disposables.CompositeDisposable;
  * @Description: presenter of FamilyAddNowActivity
  * @date 2018/07/03 11:09:00
  */
-public class FamilyAddNowPresenter implements FamilyAddNowContract.FamilyAddNowContractPresenter{
+public class FamilyAddNowPresenter implements FamilyAddNowContract.FamilyAddNowContractPresenter {
 
-    HttpAPIWrapper httpAPIWrapper;
     private final FamilyAddNowContract.View mView;
+    HttpAPIWrapper httpAPIWrapper;
     private CompositeDisposable mCompositeDisposable;
     private FamilyAddNowActivity mActivity;
 
     @Inject
-    public FamilyAddNowPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyAddNowContract.View view, FamilyAddNowActivity activity) {
+    public FamilyAddNowPresenter(@NonNull HttpAPIWrapper httpAPIWrapper, @NonNull FamilyAddNowContract.View view,
+                                 FamilyAddNowActivity activity) {
         mView = view;
         this.httpAPIWrapper = httpAPIWrapper;
         mCompositeDisposable = new CompositeDisposable();
         this.mActivity = activity;
     }
+
     @Override
     public void subscribe() {
 
@@ -38,7 +40,7 @@ public class FamilyAddNowPresenter implements FamilyAddNowContract.FamilyAddNowC
     @Override
     public void unsubscribe() {
         if (!mCompositeDisposable.isDisposed()) {
-             mCompositeDisposable.dispose();
+            mCompositeDisposable.dispose();
         }
     }
 
