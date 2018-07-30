@@ -37,6 +37,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
+
 /**
  * @author xlei
  * @Package com.ljcs.cxwl.ui.activity.changephone
@@ -147,7 +149,7 @@ public class ChangePhoneFourActivity extends BaseActivity implements ChangePhone
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, et1.getText().toString())) {
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
@@ -155,7 +157,7 @@ public class ChangePhoneFourActivity extends BaseActivity implements ChangePhone
                 mPresenter.getChangeCode(et1.getText().toString().trim());
                 break;
             case R.id.btn_login:
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, et1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }

@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text="购房资格审查需要准备以下文件：申购人身份证、申购人户口本原件、申购人家庭成员户口本原件、申购人家庭成员身份证原件或扫描件、结婚证原件或扫描件（已婚）。"
+                    android:text="购房资格审查需要准备以下文件:申请人身份证原件、户口本原件或扫描件、结婚证原件或扫描件(已婚）、离婚证原件或扫描件（离异）；申请人配偶身份证原件、户口本原件或扫描件；申请人未成年子女户口本原件或扫描件。"
                     android:textColor="@color/color_333333"
                     />
 
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text="成年人（年满18周岁）购房，家庭成员指未成年子女（未满18周岁）未成年人（未满18周岁）购房，家庭成员包括父母及其未成年兄弟姐妹（未满18周岁）。"
+                    android:text="申请人家庭成员包括配偶、前配偶、未成年子女，如子女已满18岁，则无需登记。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>
@@ -103,7 +103,57 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text=" 购房资格审查信息提交后，需工作人员人工审核，审核周期为1个工作日。审核结果将推送至申请账号APP。"
+                    android:text="如申请人婚姻状况为离异，则需上传离婚证并添加前配偶以下信息，包括前配偶姓名、户籍所在地、身份证号码。如申请人离异后再婚且未再离异，则仅需上传当前配偶信息及所有未子女信息（包括里以前）。"
+                    android:textColor="@color/color_333333"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y56"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_four"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="购房资格审查信息提交后，需工作人员人工审核，审核周期为1个工作日。预审结果将通过APP、短信等方式通知申请人。"
+                    android:textColor="@color/color_333333"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x27"
+                android:layout_marginRight="@dimen/x27"
+                android:layout_marginTop="@dimen/y56"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/y5"
+                    android:src="@mipmap/ic_next_five"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x19"
+                    android:text="本APP提供身份证的OCR识别转化功能，如识别信息有误，请手动修改，务必保持提交信息与实际情况一致，并保证户口本已更新至最新状况，因信息不实造成的损失由本人承担。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>
@@ -123,16 +173,17 @@
                     android:layout_height="wrap_content"
 
                     android:layout_marginTop="@dimen/y5"
-                    android:src="@mipmap/ic_next_four"/>
+                    android:src="@mipmap/ic_next_six"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text="本APP提供身份证、户口本、结婚证的OCR识别转化功能，如识别信息有误，请手动修改，务必保持提交信息与实际情况一致，否则将影响审查结果。"
+                    android:text="资格审查的预审结果将根据政策的变动而进行调整，预审结果的最终解释权归长沙市住房和城乡建设委员会所有。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

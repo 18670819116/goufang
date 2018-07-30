@@ -59,6 +59,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_CAMERA;
 import static com.ljcs.cxwl.contain.Contains.sCertificationInfo;
 
@@ -175,7 +176,7 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
                     ToastUtil.showCenterShort("手机号码不能为空");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, et1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }
@@ -206,7 +207,7 @@ public class ChangePhoneTwoActivity extends BaseActivity implements ChangePhoneT
                     ToastUtil.showCenterShort("手机号码不能为空");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, et1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, et1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码格式错误");
                     return;
                 }

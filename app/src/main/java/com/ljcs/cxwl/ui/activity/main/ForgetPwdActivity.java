@@ -41,6 +41,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
+
 /**
  * @author xlei
  * @Package com.example.ai.ui.activity.main
@@ -178,8 +180,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
         switch (view.getId()) {
             case R.id.tv_get_yzm:
 
-                if (RxDataTool.isNullString(mEt1.getText().toString()) || !StringUitl.isMatch(RxConstTool
-                        .REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                if (RxDataTool.isNullString(mEt1.getText().toString()) || !StringUitl.isMatch(REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
@@ -187,7 +188,7 @@ public class ForgetPwdActivity extends BaseActivity implements ForgetPwdContract
                 mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }

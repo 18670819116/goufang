@@ -1,5 +1,12 @@
 package com.ljcs.cxwl.ui.activity.main;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.ljcs.cxwl.R;
 import com.ljcs.cxwl.application.AppConfig;
 import com.ljcs.cxwl.base.BaseFragment;
 import com.ljcs.cxwl.ui.activity.main.component.DaggerThirdComponent;
@@ -8,6 +15,8 @@ import com.ljcs.cxwl.ui.activity.main.module.ThirdModule;
 import com.ljcs.cxwl.ui.activity.main.presenter.ThirdPresenter;
 
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 
 /**
  * @author xlei
@@ -20,15 +29,15 @@ public class ThirdFragment extends BaseFragment implements ThirdContract.View {
 
     @Inject ThirdPresenter mPresenter;
 
-//   @Nullable
-//   @Override
-//   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
-// savedInstanceState) {
-//       View view = inflater.inflate(R.layout.fragment_third, null);
-//       ButterKnife.bind(this, view);
-//       Bundle mBundle = getArguments();
-//       return view;
-//   }
+   @Nullable
+   @Override
+   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+ savedInstanceState) {
+       View view = inflater.inflate(R.layout.activity_about_our, null);
+       ButterKnife.bind(this, view);
+       Bundle mBundle = getArguments();
+       return view;
+   }
 
 
     @Override

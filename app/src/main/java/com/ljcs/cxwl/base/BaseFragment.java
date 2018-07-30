@@ -1,8 +1,11 @@
 package com.ljcs.cxwl.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+import com.ljcs.cxwl.view.ProgressDialog;
 
 /**
  * @author Yuan.Y.Q
@@ -11,6 +14,7 @@ import android.support.v4.app.Fragment;
 
 public abstract class BaseFragment extends Fragment {
     protected boolean isVisible;
+    public ProgressDialog progressDialog;
 
     protected abstract void setupFragmentComponent();
 
@@ -30,6 +34,13 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setupFragmentComponent();
         initDataFromLocal();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        progressDialog = new ProgressDialog(activity);
+//		progressDialog.setMyCancelListener(this);
     }
 
     protected abstract void initDataFromLocal();

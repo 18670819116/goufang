@@ -39,6 +39,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tyrantgit.explosionfield.ExplosionField;
 
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
+
 /**
  * @author xlei
  * @Package com.example.ai.ui.activity.login
@@ -160,7 +162,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     ToastUtil.showCenterShort("密码不能为空");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mAccount)) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, mAccount)) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }

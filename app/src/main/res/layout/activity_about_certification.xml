@@ -103,7 +103,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text="我们将联合公安、民政等部门对您提交的实名认证信息进行审核，审核结果的最终解释权归长沙市住房和城乡建设委员会所有。"
+                    android:text="我们将联合公安、人社等部门对您提交的实名认证信息进行审核，审核结果的最终解释权归长沙市住房和城乡建设委员会所有。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>
@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text="识别过程中，OCR识别技术将帮助您输入您的信息，请您仔细核对识别后的信息，一旦识别信息错误请重新识别或手动修改。"
+                    android:text="识别过程中, OCR识别技术将帮助您输入您的信息，请您仔细核对识别后的信息，一旦识别信息错误请重新识别或手动修改。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>
@@ -153,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x19"
-                    android:text="实名认证过程中，请按照系统提示进行操作，如自动识别到的信息有误，请重新对证件进行扫描，尽量避免手动修改信息，手动修改了信息的实名认证需要进行人工审查，其审核需要更长时间。"
+                    android:text="实名认证过程中，请按照系统提示进行操作，如自动识别到的信息有误，建议重新对证件进行扫描，尽量避免手动信息，手动修改了信息的实名认证需要进行人工审查，其审核需要更长时间。"
                     android:textColor="@color/color_333333"
                     />
             </LinearLayout>

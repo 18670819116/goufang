@@ -119,6 +119,7 @@ public class SplashPresenter implements SplashContract.SplashContractPresenter {
         @Override
         public void onFailed(int requestCode, List<String> deniedPermissions) {
             // 权限申请失败回调。
+            ToastUtil.showCenterShort("请设置读取手机信息权限");
 
         }
     };

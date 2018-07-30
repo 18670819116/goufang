@@ -73,6 +73,7 @@ import butterknife.OnClick;
 
 import static com.ljcs.cxwl.contain.Contains.OCR_AK;
 import static com.ljcs.cxwl.contain.Contains.OCR_SK;
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_CAMERA;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_CAMERA_FAN;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_BASIC;
@@ -676,7 +677,7 @@ public class FamilyRegisterTwo1Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("请选择户籍所在地");
             return false;
         }
-        if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, tvPhone.getText().toString())) {
+        if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, tvPhone.getText().toString())) {
             ToastUtil.showCenterShort("手机号码不正确");
             return false;
         }

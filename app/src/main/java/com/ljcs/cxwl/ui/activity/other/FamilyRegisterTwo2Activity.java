@@ -78,6 +78,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
 import static com.ljcs.cxwl.contain.Contains.REQUEST_CODE_GENERAL_LHZ;
 
 /**
@@ -204,8 +205,7 @@ public class FamilyRegisterTwo2Activity extends BaseActivity implements FamilyRe
             ToastUtil.showCenterShort("身份证号码格式有误");
             return false;
         }
-        if (!RxDataTool.isNullString(tvPhone.getText().toString()) && !StringUitl.isMatch(RxConstTool
-                .REGEX_MOBILE_EXACT, tvPhone.getText().toString())) {
+        if (!RxDataTool.isNullString(tvPhone.getText().toString()) && !StringUitl.isMatch(REGEX_MOBILE_EXACT, tvPhone.getText().toString())) {
             ToastUtil.showCenterShort("手机号码不正确");
             return false;
         }

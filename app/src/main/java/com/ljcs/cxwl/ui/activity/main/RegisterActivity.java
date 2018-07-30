@@ -44,6 +44,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.ljcs.cxwl.contain.Contains.REGEX_MOBILE_EXACT;
+
 /**
  * @author xlei
  * @Package com.example.ai.ui.activity.main
@@ -180,7 +182,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机格式错误");
                     return;
                 }
@@ -188,7 +190,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                 mPresenter.getCode(mEt1.getText().toString().trim());
                 break;
             case R.id.btn_register:
-                if (!StringUitl.isMatch(RxConstTool.REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
+                if (!StringUitl.isMatch(REGEX_MOBILE_EXACT, mEt1.getText().toString())) {
                     ToastUtil.showCenterShort("手机号码不正确");
                     return;
                 }

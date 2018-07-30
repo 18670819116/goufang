@@ -21,5 +21,6 @@ public class Contains {
     public static CertificationInfo sCertificationInfo = new CertificationInfo(); //实名认证本地保存信息
     public static int ENTERTYPE_CHANGE = 1;//2从正常进入1从修改进入添加添加配偶
     public static AllInfo sAllInfo = new AllInfo();
+    public static final String REGEX_MOBILE_EXACT = "^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
 
 }
